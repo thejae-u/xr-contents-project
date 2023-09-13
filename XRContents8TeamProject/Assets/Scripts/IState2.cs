@@ -25,6 +25,75 @@ public interface IState2
         
         // Boss Monster Limited
     }
-    
-    public void 
+
+    #region Base Enemy State
+
+    public virtual void EnemyIdleState()
+    {
+           
+    }
+
+    public void EnemyTraceState()
+    {
+
+    }
+
+    public void EnemyNormalAttackState()
+    {
+
+    }
+
+    #endregion
+
+    // Normal Enemy Limited
+    public void EnmeyHitState()
+    {
+        
+    }
+
+    #region Elite Enemy State
+
+    public void EnemyBombWaitState()
+    {
+
+    }
+
+    public void EnemyBombAttackState()
+    {
+
+    }
+
+    public void EnemyRunWaitState()
+    {
+
+    }
+
+    public void EnemyRunAttackState()
+    {
+
+    }
+
+    public void EnemyStormWaitState()
+    {
+
+    }
+
+    public void EnemyStormAttackState()
+    {
+
+    }
+
+    #endregion
+
+    // Elite & Boss Limited
+    public void EnemyGroggyState()
+    {
+
+    }
+
+    #region Boss State
+
+    #endregion
+
+
 }
