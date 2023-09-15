@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        PlayerMousePoint();
         PlayerMove();
         if (Input.GetButton("Jump"))
         {
@@ -68,13 +69,11 @@ public class PlayerMovement : MonoBehaviour
         if (moveDir < 0)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
-            dir = moveDir * Vector3.right;
             transform.Translate(dir * -1 * moveSpeed * Time.deltaTime);
         }
         else if (moveDir > 0)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
-            dir = moveDir * Vector3.right;
             transform.Translate(dir * moveSpeed * Time.deltaTime);
         }
     }
@@ -91,6 +90,19 @@ public class PlayerMovement : MonoBehaviour
         else return;
     }
 
+    private void PlayerMousePoint()
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        if (mousePosition.x < transform.position.x)
+        {
+            transform.eulerAngles = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
+        }
+    }
 
     void OnDrawGizmos()
     {
