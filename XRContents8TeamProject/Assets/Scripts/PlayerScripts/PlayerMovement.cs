@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using EnemyScripts;
 using UnityEngine;
 
@@ -9,8 +11,11 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 5.0f;
     [SerializeField] private float jumpForce = 5.0f;
-    private bool isJumping;
 
+    private bool isJumping;
+    private bool canJumpReset;
+
+    
     public Rigidbody2D playerRigidbody;
 
     private void Awake()
@@ -27,13 +32,24 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.transform.CompareTag("Ground"))
         {
-            isJumping = false;
-            Debug.Log("JumpingState : " + isJumping);
+            print("Collision Stay in Ground");
+            if (canJumpReset)
+                isJumping = false;
         }
+            
+    }
+
+    IEnumerator PlayerJumpResetTime()
+    {
+        print("Jump Reset Coroutine Start");
+        canJumpReset = false;
+        yield return new WaitForSeconds(0.5f);
+        canJumpReset = true;
+        print("Jump Reset Coroutine Start");
     }
 
     //void PlayerShoot()
@@ -65,9 +81,10 @@ public class PlayerMovement : MonoBehaviour
 
     void PlayerJump()
     {
-        if (isJumping == false)
+        if (!isJumping)
         {
             playerRigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            StartCoroutine(PlayerJumpResetTime());
             isJumping = true;
             Debug.Log("JumpingState : " + isJumping);
         }
