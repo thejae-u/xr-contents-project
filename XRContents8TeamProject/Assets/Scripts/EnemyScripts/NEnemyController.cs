@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +14,13 @@ namespace EnemyScripts
         [SerializeField] private ReferenceValueT<float> myAttackDamage;
         [SerializeField] private ReferenceValueT<float> myTraceRange;
         [SerializeField] private ReferenceValueT<float> myAttackRange;
+        [SerializeField] private ReferenceValueT<float> myMoveSpeed;
+        
+        [Header("경직 시간을 조정합니다")]
+        [Range(0.1f,0.5f)]
+        [SerializeField] private float hitTime;
+
+        private bool isHit;
 
         void Start()
         {
@@ -23,20 +32,17 @@ namespace EnemyScripts
             b.AddData("myTraceRange", myTraceRange);
             b.AddData("myAttackRange", myAttackRange);
             b.AddData("playerTransform", GameObject.Find("Player").transform);
+            b.AddData("myMoveSpeed", myMoveSpeed);
+            
 
             var wait = new WaitNode();
             var trace = new NormalTraceNode();
             var attack = new NormalAttackNode();
-            var hit = new HitNode();
 
             wait.enterPlayer = trace;
-            wait.hitMe = hit;
             trace.playerEnter = attack;
             trace.playerExit = wait;
-            trace.hitMe = hit;
-            attack.hitMe = hit;
             attack.outOfAttackRange = trace;
-            attack.outOfTraceRange = wait;
 
             fsmLife = new FSM();
             var alive = new AliveNode();
@@ -47,11 +53,35 @@ namespace EnemyScripts
             fsm.Init(b, wait);
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
-            fsm.Update();
+            if (!isHit)
+                fsm.Update();
             fsmLife.Update();
+        }
+
+        private void OnDrawGizmos()
+        {
+            
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, myAttackRange.Value);
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, myTraceRange.Value);
+        }
+
+        public void TestHIT()
+        {
+            if (!isHit)
+                StartCoroutine(HitTime());
+        }
+
+        IEnumerator HitTime()
+        {
+            isHit = true;
+            Debug.Log("Hit From Player");
+            yield return new WaitForSeconds(0.2f);
+            isHit = false;
         }
     }
 }
