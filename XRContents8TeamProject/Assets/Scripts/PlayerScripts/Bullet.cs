@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour
 
             Debug.Log("State : Enemy Collision");
             BulletDestroy();
-            nEnemyController.DiscountHP(playerDamage);
+            nEnemyController.DiscountHp(playerDamage);
         }
     }
 
