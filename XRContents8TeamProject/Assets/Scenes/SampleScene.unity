@@ -377,10 +377,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc162aba341813342b66b52971f56f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rad: 0
+  rad: 1
   moveSpeed: 5
   jumpForce: 20
-  playerRigidbody: {fileID: 456095016}
+  playerRigidbody: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,11 +1058,11 @@ MonoBehaviour:
   myAttackDamage:
     Value: 0
   myTraceRange:
-    Value: 5
+    Value: 10
   myAttackRange:
-    Value: 0.7
-  myMoveSpeed:
     Value: 1
+  myMoveSpeed:
+    Value: 2
   hitTime: 0.5
 --- !u!61 &2085436550
 BoxCollider2D:
