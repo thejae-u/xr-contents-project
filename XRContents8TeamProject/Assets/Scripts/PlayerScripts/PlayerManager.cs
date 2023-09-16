@@ -2,13 +2,15 @@ using EnemyScripts;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
     public float MyRadius => rad;
     public float rad;
 
     [SerializeField] private float moveSpeed = 5.0f;
     [SerializeField] private float jumpForce = 5.0f;
+
+    [SerializeField] private float playerHp = 100.0f;
 
     private bool isJumping;
     private bool canJumpReset;
@@ -38,14 +40,6 @@ public class PlayerMovement : MonoBehaviour
                 isJumping = false;
         } 
     }
-
-    //void PlayerShoot()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        nEnemyController.TestHIT();
-    //    }
-    //}
 
     void PlayerMove()
     {
@@ -96,6 +90,11 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.eulerAngles = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
         }
+    }
+
+    public void DiscountHp(float damage)
+    {
+        playerHp -= damage;
     }
 
     void OnDrawGizmos()
