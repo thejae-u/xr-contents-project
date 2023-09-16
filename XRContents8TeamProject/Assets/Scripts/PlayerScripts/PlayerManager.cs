@@ -95,6 +95,7 @@ public class PlayerManager : MonoBehaviour
     public void DiscountHp(float damage)
     {
         playerHp -= damage;
+        Debug.Log("현재 플레이어의 체력 : " + playerHp + "들어온 데미지 : " + damage);
     }
 
     void OnDrawGizmos()
