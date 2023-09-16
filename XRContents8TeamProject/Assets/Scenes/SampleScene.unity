@@ -380,6 +380,7 @@ MonoBehaviour:
   rad: 1
   moveSpeed: 5
   jumpForce: 20
+  playerHp: 100
   playerRigidbody: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
@@ -1056,7 +1057,7 @@ MonoBehaviour:
   myHp:
     Value: 100
   myAttackDamage:
-    Value: 0
+    Value: 5
   myTraceRange:
     Value: 10
   myAttackRange:

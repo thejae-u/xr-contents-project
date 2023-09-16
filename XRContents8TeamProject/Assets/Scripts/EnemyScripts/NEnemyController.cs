@@ -27,7 +27,9 @@ namespace EnemyScripts
         void Start()
         {
             fsm = new FSM();
+            isAlive.Value = true;
             Blackboard b = new Blackboard();
+            
             b.AddData("myHp", myHp);
             b.AddData("myTransform", transform);
             b.AddData("myAttackDamage", myAttackDamage);
@@ -50,7 +52,6 @@ namespace EnemyScripts
             var alive = new AliveNode();
             var dead = new DeadNode();
             alive.dead = dead;
-            isAlive.Value = true;
 
             fsmLife.Init(b, alive);
             fsm.Init(b, wait);
