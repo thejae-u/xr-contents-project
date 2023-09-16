@@ -20,16 +20,19 @@ namespace EnemyScripts
         [Range(0.1f,0.5f)]
         [SerializeField] private float hitTime;
 
-        private ReferenceValueT<bool> isAlive;
+        [HideInInspector]
+        [SerializeField] private ReferenceValueT<bool> isAlive;
         
         private bool isHit;
 
         void Start()
         {
             fsm = new FSM();
-            isAlive.Value = true;
             Blackboard b = new Blackboard();
-            
+
+            isAlive.Value = true;
+
+            b.AddData("isAlive", isAlive);
             b.AddData("myHp", myHp);
             b.AddData("myTransform", transform);
             b.AddData("myAttackDamage", myAttackDamage);
@@ -37,7 +40,6 @@ namespace EnemyScripts
             b.AddData("myAttackRange", myAttackRange);
             b.AddData("playerTransform", GameObject.Find("Player").transform);
             b.AddData("myMoveSpeed", myMoveSpeed);
-            b.AddData("isAlive", isAlive);
 
             var wait = new WaitNode();
             var trace = new NormalTraceNode();
@@ -63,6 +65,7 @@ namespace EnemyScripts
                 fsm.Update();
             if (isAlive.Value)
                 fsmLife.Update();
+                
             else
                 Destroy(gameObject);
         }
