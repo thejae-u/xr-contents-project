@@ -70,7 +70,7 @@ namespace EnemyScripts
             Gizmos.DrawWireSphere(transform.position, myTraceRange.Value);
         }
 
-        public void TestHIT()
+        public void HitCall()
         {
             if (!isHit)
                 StartCoroutine(HitTime());
@@ -82,6 +82,12 @@ namespace EnemyScripts
             Debug.Log("Hit From Player");
             yield return new WaitForSeconds(0.2f);
             isHit = false;
+        }
+
+        public void DiscountHp(float damage)
+        {
+            myHp.Value -= damage;
+            HitCall();
         }
     }
 }
