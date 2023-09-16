@@ -102,7 +102,7 @@ MonoBehaviour:
   bulletSpeed: 10
   fireDistance: 50
   nEnemyController: {fileID: 0}
-  playerDamage: 5
+  playerDamage: 50
 --- !u!50 &5517597564254447212
 Rigidbody2D:
   serializedVersion: 4

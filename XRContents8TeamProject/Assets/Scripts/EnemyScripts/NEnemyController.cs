@@ -20,6 +20,8 @@ namespace EnemyScripts
         [Range(0.1f,0.5f)]
         [SerializeField] private float hitTime;
 
+        private ReferenceValueT<bool> isAlive;
+        
         private bool isHit;
 
         void Start()
@@ -33,7 +35,7 @@ namespace EnemyScripts
             b.AddData("myAttackRange", myAttackRange);
             b.AddData("playerTransform", GameObject.Find("Player").transform);
             b.AddData("myMoveSpeed", myMoveSpeed);
-            
+            b.AddData("isAlive", isAlive);
 
             var wait = new WaitNode();
             var trace = new NormalTraceNode();
@@ -48,6 +50,7 @@ namespace EnemyScripts
             var alive = new AliveNode();
             var dead = new DeadNode();
             alive.dead = dead;
+            isAlive.Value = true;
 
             fsmLife.Init(b, alive);
             fsm.Init(b, wait);
@@ -57,7 +60,10 @@ namespace EnemyScripts
         {
             if (!isHit)
                 fsm.Update();
-            fsmLife.Update();
+            if (isAlive.Value)
+                fsmLife.Update();
+            else
+                Destroy(gameObject);
         }
 
         private void OnDrawGizmos()
@@ -87,6 +93,7 @@ namespace EnemyScripts
         public void DiscountHp(float damage)
         {
             myHp.Value -= damage;
+            print($"Remain HP : {myHp.Value}");
             HitCall();
         }
     }

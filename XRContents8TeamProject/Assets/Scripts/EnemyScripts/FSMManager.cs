@@ -89,12 +89,10 @@ namespace EnemyScripts
         
         public INode Execute(Blackboard blackboard)
         {
-            if (!blackboard.TryGetDataStruct<float>("myHp", out var data)) 
-                throw new Exception();
-
-            if (data <= 0f)
-                return dead;
+            if (blackboard.GetData<ReferenceValueT<float>>("myHp").Value <= 0) return dead;
+            blackboard.GetData<ReferenceValueT<bool>>("isAlive").Value = true;
             return this;
+
         }
     }
 
@@ -102,7 +100,7 @@ namespace EnemyScripts
     {
         public INode Execute(Blackboard blackboard)
         {
-            // dead animaion -> destroy
+            blackboard.GetData<ReferenceValueT<bool>>("isAlive").Value = false;
             return this;
         }
     }
@@ -268,14 +266,15 @@ namespace EnemyScripts
         {
             // animation start
             // Damage to Player
-            
-            
             Debug.Log("Player Attack!!!");
             Transform myTransform = blackboard.GetData<Transform>("myTransform");
             Transform playerTransform = blackboard.GetData<Transform>("playerTransform");
             float d1 = playerTransform.GetComponent<PlayerMovement>().MyRadius;
             float d2 = blackboard.GetData<ReferenceValueT<float>>("myAttackRange").Value;
             float distance = (myTransform.position - playerTransform.position).magnitude;
+
+            PlayerMovement player = playerTransform.GetComponent<PlayerMovement>();
+            player.DiscountHp(blackboard.GetData<ReferenceValueT<float>>("myAttackDamage").Value);
 
             if (d1 + d2 >= distance)
                 return this;
