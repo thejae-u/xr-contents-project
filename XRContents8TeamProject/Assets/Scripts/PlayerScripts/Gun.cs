@@ -9,12 +9,10 @@ public class Gun : MonoBehaviour
     private float lastFireTime = 0f;
     [SerializeField] private float timeBetFire = 10.0f;
     [SerializeField] private float reloadTime = 2.0f;
-
-    [SerializeField] private float bulletSpeed = 5.0f;   
-
+    
     private int curAmmo = 6;
     [SerializeField] private int maxAmmo = 6;
-
+    [SerializeField] private float bulletSpeed = 5.0f;   
 
     private Camera cam;
 
@@ -76,7 +74,6 @@ public class Gun : MonoBehaviour
 
     public bool Reload()
     {
-        Debug.Log("State : " + state);
         if (state == EState.Empty || Input.GetKey(KeyCode.R) && curAmmo < maxAmmo)
         {
             StartCoroutine(ReloadRoutine());

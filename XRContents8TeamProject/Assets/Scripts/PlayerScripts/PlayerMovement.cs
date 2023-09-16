@@ -6,14 +6,12 @@ public class PlayerMovement : MonoBehaviour
 {
     public float MyRadius => rad;
     public float rad;
-    [SerializeField] private NEnemyController nEnemyController;
 
     [SerializeField] private float moveSpeed = 5.0f;
     [SerializeField] private float jumpForce = 5.0f;
 
     private bool isJumping;
     private bool canJumpReset;
-
     
     public Rigidbody2D playerRigidbody;
 
@@ -24,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        PlayerMousePoint();
+        PlayerViewMousePoint();
         PlayerMove();
         if (Input.GetButton("Jump"))
         {
@@ -36,20 +34,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.transform.CompareTag("Ground"))
         {
-            print("Collision Stay in Ground");
             if (canJumpReset)
                 isJumping = false;
-        }
-            
-    }
-
-    IEnumerator PlayerJumpResetTime()
-    {
-        print("Jump Reset Coroutine Start");
-        canJumpReset = false;
-        yield return new WaitForSeconds(0.5f);
-        canJumpReset = true;
-        print("Jump Reset Coroutine Start");
+        } 
     }
 
     //void PlayerShoot()
@@ -84,12 +71,20 @@ public class PlayerMovement : MonoBehaviour
             playerRigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             StartCoroutine(PlayerJumpResetTime());
             isJumping = true;
-            Debug.Log("JumpingState : " + isJumping);
         }
         else return;
     }
 
-    private void PlayerMousePoint()
+    IEnumerator PlayerJumpResetTime()
+    {
+        print("Jump Reset Coroutine Start");
+        canJumpReset = false;
+        yield return new WaitForSeconds(0.5f);
+        canJumpReset = true;
+        print("Jump Reset Coroutine End");
+    }
+
+    private void PlayerViewMousePoint()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 

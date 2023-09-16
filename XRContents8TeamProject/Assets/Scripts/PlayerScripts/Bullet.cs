@@ -1,12 +1,15 @@
+using EnemyScripts;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float bulletSpeed = 10.0f;
-    [SerializeField] private float damage = 5.0f;
-    [SerializeField] private float fireDistance = 50.0f;
-    
+
     private Vector3 initialPosition;
+    [SerializeField] private float fireDistance = 50.0f;
+
+    [SerializeField] private NEnemyController nEnemyController;
+    [SerializeField] private float playerDamage = 5.0f;
 
     private void Start()
     {
