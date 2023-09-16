@@ -378,7 +378,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rad: 0
-  nEnemyController: {fileID: 0}
   moveSpeed: 5
   jumpForce: 20
   playerRigidbody: {fileID: 456095016}
@@ -637,8 +636,8 @@ MonoBehaviour:
   fireTransform: {fileID: 110529410}
   timeBetFire: 0.5
   reloadTime: 3
-  bulletSpeed: 10
   maxAmmo: 6
+  bulletSpeed: 10
 --- !u!1 &1054433854
 GameObject:
   m_ObjectHideFlags: 0

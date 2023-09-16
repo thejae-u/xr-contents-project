@@ -33,9 +33,11 @@ public class Bullet : MonoBehaviour
         }
         else if(collision.gameObject.CompareTag("Enemy"))
         {
+            nEnemyController = collision.GetComponent<NEnemyController>();
+
             Debug.Log("State : Enemy Collision");
             BulletDestroy();
-            // 적의 HP를 Ammor의 damage만큼 감소 시킨다.
+            nEnemyController.DiscountHP(playerDamage);
         }
     }
 
