@@ -118,7 +118,7 @@ namespace EnemyScripts
             var myTransform = blackboard.GetData<Transform>("myTransform");
             var playerTransform = blackboard.GetData<Transform>("playerTransform");
 
-            float d1 = playerTransform.GetComponent<PlayerMovement>().MyRadius;
+            float d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
             float d2 = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
 
             float distance = (myTransform.position - playerTransform.position).magnitude;
@@ -153,7 +153,7 @@ namespace EnemyScripts
             Transform playerTransform = blackboard.GetData<Transform>("playerTransform");
             
             
-            float d1 = playerTransform.GetComponent<PlayerMovement>().MyRadius;
+            float d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
             float d2 = blackboard.GetData<ReferenceValueT<float>>("myAttackRange").Value;
             float distance = (myTransform.position - playerTransform.position).magnitude;
 
@@ -269,11 +269,11 @@ namespace EnemyScripts
             Debug.Log("Player Attack!!!");
             Transform myTransform = blackboard.GetData<Transform>("myTransform");
             Transform playerTransform = blackboard.GetData<Transform>("playerTransform");
-            float d1 = playerTransform.GetComponent<PlayerMovement>().MyRadius;
+            float d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
             float d2 = blackboard.GetData<ReferenceValueT<float>>("myAttackRange").Value;
             float distance = (myTransform.position - playerTransform.position).magnitude;
 
-            PlayerMovement player = playerTransform.GetComponent<PlayerMovement>();
+            PlayerManager player = playerTransform.GetComponent<PlayerManager>();
             player.DiscountHp(blackboard.GetData<ReferenceValueT<float>>("myAttackDamage").Value);
 
             if (d1 + d2 >= distance)
