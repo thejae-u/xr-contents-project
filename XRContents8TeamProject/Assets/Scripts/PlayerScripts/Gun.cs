@@ -5,14 +5,16 @@ public class Gun : MonoBehaviour
 {    
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform fireTransform;
-
-    [SerializeField] private float timeBetFire = 10.0f; // 발사 속도
+   
     private float lastFireTime = 0f;
-    [SerializeField] private float reloadTime = 1.0f;
-    [SerializeField] private float bulletSpeed = 5.0f;
+    [SerializeField] private float timeBetFire = 10.0f;
+    [SerializeField] private float reloadTime = 2.0f;
 
-    [SerializeField] private int maxAmmo = 6;
+    [SerializeField] private float bulletSpeed = 5.0f;   
+
     private int curAmmo = 6;
+    [SerializeField] private int maxAmmo = 6;
+
 
     private Camera cam;
 
@@ -52,10 +54,6 @@ public class Gun : MonoBehaviour
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = new Vector3(mousePosition.x, mousePosition.y, mousePosition.z);
             mousePosition.z = -cam.transform.position.z;
-
-            // 마우스 커서 위치에 맞춰 이동
-            //mousePosition = new Vector3(mousePosition.x - 50, mousePosition.y - 100, mousePosition.z);
-            //mousePosition.z = -cam.transform.position.z;
 
             Vector3 direction = (cam.ScreenToWorldPoint(mousePosition) - fireTransform.position).normalized;
 

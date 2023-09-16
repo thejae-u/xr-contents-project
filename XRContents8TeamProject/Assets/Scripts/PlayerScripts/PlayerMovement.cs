@@ -1,6 +1,5 @@
-using System;
-using System.Collections;
 using EnemyScripts;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
