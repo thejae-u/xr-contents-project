@@ -2,7 +2,7 @@ using EnemyScripts;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
     public float MyRadius => rad;
     public float rad;
