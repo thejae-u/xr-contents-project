@@ -1059,12 +1059,16 @@ MonoBehaviour:
   myAttackDamage:
     Value: 5
   myTraceRange:
-    Value: 10
+    Value: 8
   myAttackRange:
     Value: 1
   myMoveSpeed:
     Value: 2
   hitTime: 0.5
+  isAlive:
+    Value: 0
+  isNowAttack:
+    Value: 0
 --- !u!61 &2085436550
 BoxCollider2D:
   m_ObjectHideFlags: 0

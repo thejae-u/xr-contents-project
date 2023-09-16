@@ -265,19 +265,27 @@ namespace EnemyScripts
         public INode Execute(Blackboard blackboard)
         {
             // animation start
-            // Damage to Player
+            if (blackboard.GetData<ReferenceValueT<bool>>("isNowAttack").Value) return this;
             Debug.Log("Player Attack!!!");
+            
             Transform myTransform = blackboard.GetData<Transform>("myTransform");
             Transform playerTransform = blackboard.GetData<Transform>("playerTransform");
+            
+            // 플레이어와 거리를 계산 하기 위한 변수 선언
             float d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
             float d2 = blackboard.GetData<ReferenceValueT<float>>("myAttackRange").Value;
             float distance = (myTransform.position - playerTransform.position).magnitude;
 
+            // 플레이어의 Component에 접근하기 위한 변수 선언
             PlayerManager player = playerTransform.GetComponent<PlayerManager>();
+            
+            // 플레이어의 체력을 Discount
             player.DiscountHp(blackboard.GetData<ReferenceValueT<float>>("myAttackDamage").Value);
+            blackboard.GetData<ReferenceValueT<bool>>("isNowAttack").Value = true;
 
             if (d1 + d2 >= distance)
                 return this;
+            
             return outOfAttackRange;
         }
     }

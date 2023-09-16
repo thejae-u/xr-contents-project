@@ -20,10 +20,12 @@ namespace EnemyScripts
         [Range(0.1f,0.5f)]
         [SerializeField] private float hitTime;
 
-        [HideInInspector]
-        [SerializeField] private ReferenceValueT<bool> isAlive;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isAlive;
+
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isNowAttack;
         
         private bool isHit;
+        private bool canCoroutineStart = true;
 
         void Start()
         {
@@ -40,6 +42,7 @@ namespace EnemyScripts
             b.AddData("myAttackRange", myAttackRange);
             b.AddData("playerTransform", GameObject.Find("Player").transform);
             b.AddData("myMoveSpeed", myMoveSpeed);
+            b.AddData("isNowAttack", isNowAttack);
 
             var wait = new WaitNode();
             var trace = new NormalTraceNode();
@@ -65,9 +68,11 @@ namespace EnemyScripts
                 fsm.Update();
             if (isAlive.Value)
                 fsmLife.Update();
-                
             else
                 Destroy(gameObject);
+
+            if (isNowAttack.Value && canCoroutineStart)
+                StartCoroutine(AttackWaitTime());
         }
 
         private void OnDrawGizmos()
@@ -92,6 +97,14 @@ namespace EnemyScripts
             Debug.Log("Hit From Player");
             yield return new WaitForSeconds(0.2f);
             isHit = false;
+        }
+
+        IEnumerator AttackWaitTime()
+        {
+            canCoroutineStart = false;
+            yield return new WaitForSeconds(0.5f);
+            canCoroutineStart = true;
+            isNowAttack.Value = false;
         }
 
         public void DiscountHp(float damage)
