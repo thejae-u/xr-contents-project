@@ -106,6 +106,12 @@ namespace EnemyScripts
     }
     
     #endregion
+
+    public enum EEliteType
+    {
+        Bomb,
+        Run
+    }
     
 
     public class WaitNode : INode
