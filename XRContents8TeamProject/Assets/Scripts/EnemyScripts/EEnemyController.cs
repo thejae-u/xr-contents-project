@@ -56,8 +56,24 @@ namespace EnemyScripts
             var bombAttack = new EliteBombAttackNode();
             var runAttack = new EliteRunAttackNode();
 
+            var groggy = new EliteGroggyNode();
+
             // Connect Node
             wait.enterPlayer = trace;
+            
+            trace.attacks[0] = attack;
+            trace.attacks[1] = bombReady;
+            trace.attacks[2] = runAttack;
+            
+            bombReady.failedAttack = bombAttack;
+            bombReady.enterGroggy = groggy;
+            bombAttack.endAttack = wait;
+
+            runReady.failedAttack = runAttack;
+            runReady.failedAttack = groggy;
+            runAttack.endAttack = wait;
+
+            groggy.endGroggy = wait;
         }
 
         void Update()

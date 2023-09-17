@@ -94,7 +94,6 @@ namespace EnemyScripts
         IEnumerator HitTime()
         {
             isHit = true;
-            Debug.Log("Hit From Player");
             yield return new WaitForSeconds(0.2f);
             isHit = false;
         }
@@ -110,7 +109,7 @@ namespace EnemyScripts
         public void DiscountHp(float damage)
         {
             myHp.Value -= damage;
-            print($"Remain HP : {myHp.Value}");
+            LogPrintSystem.LogP().SystemLogPrint(transform, $"{damage} From Player -> remain {myHp.Value}");
             HitCall();
         }
     }
