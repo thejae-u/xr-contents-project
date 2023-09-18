@@ -7,11 +7,15 @@ public class Gun : MonoBehaviour
     [SerializeField] private Transform fireTransform;
    
     private float lastFireTime = 0f;
-    [SerializeField] private float timeBetFire = 10.0f;
+    [Header("사격 속도")]
+    [SerializeField] private float timeBetFire = 0.5f;
+    [Header("재장전 시간")]
     [SerializeField] private float reloadTime = 2.0f;
     
     private int curAmmo = 6;
+    [Header("최대 탄알")]
     [SerializeField] private int maxAmmo = 6;
+    [Header("탄알 속도")]
     [SerializeField] private float bulletSpeed = 5.0f;   
 
     private Camera cam;

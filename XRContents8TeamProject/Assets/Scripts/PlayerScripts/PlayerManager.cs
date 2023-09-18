@@ -5,17 +5,21 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public float MyRadius => rad;
+    [Header("적 추적 확인 반지름")]
     public float rad;
-
+    [Header("플레이어 이동속도")]
     [SerializeField] private float moveSpeed = 5.0f;
+    [Header("플레이어 점프힘")]
     [SerializeField] private float jumpForce = 5.0f;
-
+    [Header("플레이어 중력")]
+    [SerializeField] private float gravityForce = 5.0f;
+    [Header("플레이어 체력")]
     [SerializeField] private float playerHp = 100.0f;
 
     private bool isJumping;
     private bool canJumpReset;
     
-    public Rigidbody2D playerRigidbody;
+    private Rigidbody2D playerRigidbody;
 
     private void Awake()
     {
@@ -45,6 +49,7 @@ public class PlayerManager : MonoBehaviour
     {
         float moveDir = Input.GetAxis("Horizontal");
         Vector3 dir = moveDir * Vector3.right;
+        //transform.Translate(dir * moveSpeed * Time.deltaTime);
 
         if (moveDir < 0)
         {
