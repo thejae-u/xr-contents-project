@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace EnemyScripts
@@ -16,9 +17,11 @@ namespace EnemyScripts
         [SerializeField] private ReferenceValueT<float> myAttackRange;
         [SerializeField] private ReferenceValueT<float> myMoveSpeed;
         
-        [Header("경직 시간을 조정합니다")]
-        [Range(0.1f,0.5f)]
+        [Header("경직 시간을 조정합니다")] [Range(0.1f,0.5f)]
         [SerializeField] private float hitTime;
+
+        [Header("넉백 거리를 조절합니다")] [Range(0.0f, 3.0f)] [SerializeField]
+        private float knockbackPower;
 
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isAlive;
 
@@ -70,9 +73,6 @@ namespace EnemyScripts
                 fsmLife.Update();
             else
                 Destroy(gameObject);
-
-            if (isNowAttack.Value && canCoroutineStart)
-                StartCoroutine(AttackWaitTime());
         }
 
         private void OnDrawGizmos()
@@ -84,33 +84,36 @@ namespace EnemyScripts
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, myTraceRange.Value);
         }
-
-        public void HitCall()
-        {
-            if (!isHit)
-                StartCoroutine(HitTime());
-        }
-
-        IEnumerator HitTime()
-        {
-            isHit = true;
-            yield return new WaitForSeconds(0.2f);
-            isHit = false;
-        }
-
-        IEnumerator AttackWaitTime()
-        {
-            canCoroutineStart = false;
-            yield return new WaitForSeconds(0.5f);
-            canCoroutineStart = true;
-            isNowAttack.Value = false;
-        }
-
+        
         public void DiscountHp(float damage)
         {
             myHp.Value -= damage;
-            LogPrintSystem.LogP().SystemLogPrint(transform, $"{damage} From Player -> remain {myHp.Value}");
-            HitCall();
+            LogPrintSystem.SystemLogPrint(transform, $"{damage} From Player -> remain {myHp.Value}", ELogType.EnemyAI);
+            Sequence sequence = DOTween.Sequence();
+
+            sequence.AppendCallback(() =>
+            {
+                isHit = true;
+            });
+            // 플레이어와 자신의 포지션을 빼준다 -> 정규화 해준다 -> 속도를 곱한다
+            // 자신의 위치와 구한 벡터를 더해준다
+            var myPos = transform.position;
+            var playerPos = GameObject.Find("Player").transform.position;
+
+            var dirVector = (myPos - playerPos).normalized;
+
+            myPos += dirVector * knockbackPower;
+            
+            sequence.Append(transform.DOMoveX(myPos.x, hitTime));
+            
+            // s.Join animation call
+            
+            sequence.AppendCallback(() =>
+            {
+                isHit = false;
+            });
+            
+            sequence.Play();
         }
     }
 }

@@ -8,26 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace EnemyScripts
 {
-    public class LogPrintSystem
-    {
-        private static LogPrintSystem logP;
-
-        private DateTime dateTime;
-
-        public static LogPrintSystem LogP()
-        {
-            if (logP == null)
-                logP = new LogPrintSystem();
-            return logP;
-
-        }
-        
-        public void SystemLogPrint(Transform t, string str)
-        { 
-            dateTime = DateTime.Now;
-            Debug.Log($"[{dateTime.ToString(CultureInfo.CurrentCulture)}] {t.name} : {str}");
-        }
-    }
+    
     
     [System.Serializable]
     public class ReferenceValueT<T> where T : struct
@@ -98,6 +79,17 @@ namespace EnemyScripts
         {
             currentNode = currentNode.Execute(blackboard);
         }
+
+        static public INode GuardNullNode(INode current, INode next)
+        {
+            if (next == null)
+            {
+                Debug.LogError(current.GetType());
+                Debug.Assert(false);
+            }
+
+            return next;
+        }
     }
 
     public interface INode
@@ -105,39 +97,6 @@ namespace EnemyScripts
         public INode Execute(Blackboard blackboard);
     }
     
-    #region Life
-
-    public class AliveNode : INode
-    {
-        public INode dead;
-        
-        public INode Execute(Blackboard blackboard)
-        {
-            if (blackboard.GetData<ReferenceValueT<float>>("myHp").Value <= 0) return dead;
-            blackboard.GetData<ReferenceValueT<bool>>("isAlive").Value = true;
-            return this;
-
-        }
-    }
-
-    public class DeadNode : INode
-    {
-        public INode Execute(Blackboard blackboard)
-        {
-            blackboard.GetData<ReferenceValueT<bool>>("isAlive").Value = false;
-            return this;
-        }
-    }
-    
-    #endregion
-
-    public enum EEliteType
-    {
-        Bomb,
-        Run
-    }
-    
-
     public class WaitNode : INode
     {
         public INode enterPlayer;
@@ -155,15 +114,14 @@ namespace EnemyScripts
 
             if (d1 + d2 >= distance)
             {
-                LogPrintSystem.LogP().SystemLogPrint(myTransform, "Trace Start");
+                LogPrintSystem.SystemLogPrint(myTransform, "Trace Start", ELogType.EnemyAI);
                 return enterPlayer;
             }
 
-            LogPrintSystem.LogP().SystemLogPrint(myTransform, "Waiting");
+            LogPrintSystem.SystemLogPrint(myTransform, "Waiting", ELogType.EnemyAI);
             return this;
         }
     }
-    #region Trace
 
     public enum ETraceState
     {
@@ -200,196 +158,5 @@ namespace EnemyScripts
         }
 
         public abstract INode Execute(Blackboard blackboard);
-    }
-
-    public class NormalTraceNode : TraceNode
-    {
-        public INode playerEnter;
-        public INode playerExit;
-        
-        public override INode Execute(Blackboard blackboard)
-        {
-            var type = Trace(blackboard);
-            
-            // Trace Logic
-            Transform myTransform = blackboard.GetData<Transform>("myTransform");
-            Transform playerTransform = blackboard.GetData<Transform>("playerTransform");
-
-            myTransform.position = new Vector3(Mathf.MoveTowards(myTransform.position.x,
-                    playerTransform.position.x,
-                blackboard.GetData<ReferenceValueT<float>>("myMoveSpeed").Value * Time.deltaTime),
-                myTransform.position.y,
-                myTransform.position.z);
-            
-            LogPrintSystem.LogP().SystemLogPrint(myTransform, "Now Tracing");
-            
-            switch(type)
-            {
-                case ETraceState.PlayerEnter:
-                    return playerEnter;
-                    break;
-                case ETraceState.PlayerExit:
-                    return playerExit;
-                    break;
-                case ETraceState.PlayerTrace:
-                    return this;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-    }
-
-    public class EliteTraceNode : TraceNode
-    {
-        public INode[] attacks;
-        public INode playerExit;
-
-        public override INode Execute(Blackboard blackboard)
-        {
-            var type = Trace(blackboard);
-            var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType").Value;
-
-            // Trace Logic
-            Transform myTransform = blackboard.GetData<Transform>("myTransform");
-            Transform playerTransform = blackboard.GetData<Transform>("playerTransform");
-
-            myTransform.position = new Vector3(Mathf.MoveTowards(myTransform.position.x,
-                    playerTransform.position.x,
-                blackboard.GetData<ReferenceValueT<float>>("myMoveSpeed").Value * Time.deltaTime),
-                myTransform.position.y,
-                myTransform.position.z);
-            
-            LogPrintSystem.LogP().SystemLogPrint(myTransform, "Now Tracing");
-            
-            switch (type)
-            {
-                case ETraceState.PlayerEnter:
-                    int rNum = Random.Range(0, 2);
-                    switch (rNum)
-                    {
-                        case 0:
-                            // Normal Attack
-                            return attacks[0];
-                        case 1:
-                            // Special Attack
-                            return myType == EEliteType.Bomb ? attacks[1] : attacks[2];
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                case ETraceState.PlayerTrace:
-                    return this;
-                    break;
-                case ETraceState.PlayerExit:
-                    return playerExit;
-                default:
-                    throw new Exception("Error");
-            }
-        }
-    }
-    #endregion
-    
-    #region Elite Attack Ready
-
-    public class EliteBombAttackReadyNode : INode
-    {
-        public INode enterGroggy;
-        public INode failedAttack;
-        
-        public INode Execute(Blackboard blackboard)
-        {
-            // if Weakness Point Attack Success ->
-            //      return enterGroggy (Groggy Call)
-            // else 
-            //      return failedAttack (Special Attack Call)
-            return this;
-        }
-    }
-
-    public class EliteRunAttackReadyNode : INode
-    {
-        public INode enterGroggy;
-        public INode failedAttack;
-        
-        public INode Execute(Blackboard blackboard)
-        {
-            // if Weakness Point Attack Success ->
-            //      return enterGroggy (Groggy Call)
-            // else 
-            //      return failedAttack (Special Attack Call)
-            return this;
-        }
-    }
-    
-    #endregion
-    
-    #region Attack
-
-    public class NormalAttackNode : INode
-    {
-        public INode outOfAttackRange;
-
-        public INode Execute(Blackboard blackboard)
-        {
-            // animation start
-            if (blackboard.GetData<ReferenceValueT<bool>>("isNowAttack").Value) return this;
-            
-            Transform myTransform = blackboard.GetData<Transform>("myTransform");
-            Transform playerTransform = blackboard.GetData<Transform>("playerTransform");
-            
-            // 플레이어와 거리를 계산 하기 위한 변수 선언
-            float d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
-            float d2 = blackboard.GetData<ReferenceValueT<float>>("myAttackRange").Value;
-            float distance = (myTransform.position - playerTransform.position).magnitude;
-
-            // 플레이어의 Component에 접근하기 위한 변수 선언
-            PlayerManager player = playerTransform.GetComponent<PlayerManager>();
-            
-            // 플레이어의 체력을 Discount
-            var attackDamage = blackboard.GetData<ReferenceValueT<float>>("myAttackDamage").Value;
-            player.DiscountHp(attackDamage);
-            blackboard.GetData<ReferenceValueT<bool>>("isNowAttack").Value = true;
-            
-            LogPrintSystem.LogP().SystemLogPrint(myTransform, $"{attackDamage} Damage to Player!!");
-
-            if (d1 + d2 >= distance)
-                return this;
-            
-            return outOfAttackRange;
-        }
-    }
-
-    public class EliteBombAttackNode : INode
-    {
-        public INode endAttack;
-        
-        public INode Execute(Blackboard blackboard)
-        {
-            return this;
-        }
-    }
-
-    public class EliteRunAttackNode : INode
-    {
-        public INode endAttack;
-        
-        public INode Execute(Blackboard blackboard)
-        {
-            return this;
-        }
-    }
-    
-    #endregion
-
-
-    public class EliteGroggyNode : INode
-    {
-        public INode endGroggy;
-
-        public INode Execute(Blackboard blackboard)
-        {
-            // Spend Groggy Time and Start Animation
-            return this;
-        }
     }
 }

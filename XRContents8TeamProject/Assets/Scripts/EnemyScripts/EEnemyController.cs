@@ -24,6 +24,7 @@ namespace EnemyScripts
 
         void Start()
         {
+            // About Attack FSM
             fsm = new FSM();
             Blackboard b = new Blackboard();
 
@@ -46,6 +47,7 @@ namespace EnemyScripts
             b.AddData("mySpecialAttackRange", mySpecialAttackRange);
 
             // Node Initialize
+            
             var wait = new WaitNode();
             var trace = new EliteTraceNode();
             var attack = new NormalAttackNode();
@@ -60,10 +62,14 @@ namespace EnemyScripts
 
             // Connect Node
             wait.enterPlayer = trace;
-            
+
+            trace.attacks = new INode[3];
             trace.attacks[0] = attack;
             trace.attacks[1] = bombReady;
             trace.attacks[2] = runAttack;
+            trace.playerExit = wait;
+
+            attack.outOfAttackRange = wait;
             
             bombReady.failedAttack = bombAttack;
             bombReady.enterGroggy = groggy;
@@ -74,6 +80,17 @@ namespace EnemyScripts
             runAttack.endAttack = wait;
 
             groggy.endGroggy = wait;
+            
+            // About Life FSM
+            fsmLife = new FSM();
+            
+            var alive = new AliveNode();
+            var dead = new DeadNode();
+            
+            alive.dead = dead;
+            
+            fsm.Init(b, wait);
+            fsmLife.Init(b, alive);
         }
 
         void Update()
@@ -85,6 +102,16 @@ namespace EnemyScripts
                 fsm.Update();
                 fsmLife.Update();
             }
+        }
+
+        private void OnDrawGizmos()
+        {
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, myAttackRange.Value);
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, myTraceRange.Value);
         }
     }
 }
