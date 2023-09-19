@@ -28,14 +28,12 @@ public class Bullet : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Enemy") && !collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("State : other Collision");
             BulletDestroy();
         }
         else if(collision.gameObject.CompareTag("Enemy"))
         {
             nEnemyController = collision.GetComponent<NEnemyController>();
 
-            Debug.Log("State : Enemy Collision");
             BulletDestroy();
             nEnemyController.DiscountHp(playerDamage);
         }

@@ -65,7 +65,7 @@ public class Gun : MonoBehaviour
 
             lastFireTime = Time.time;
             curAmmo--;
-            Debug.Log("Current : " + curAmmo);
+            LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo}", ELogType.Player);
 
             if (curAmmo <= 0)
             {
@@ -81,7 +81,7 @@ public class Gun : MonoBehaviour
         if (state == EState.Empty || Input.GetKey(KeyCode.R) && curAmmo < maxAmmo)
         {
             StartCoroutine(ReloadRoutine());
-            Debug.Log("Reload Complete");
+            LogPrintSystem.SystemLogPrint(transform, "Reload Start", ELogType.Player);
             return true;
         }
         return false;
@@ -92,7 +92,8 @@ public class Gun : MonoBehaviour
         state = EState.Reloading;
 
         yield return new WaitForSeconds(reloadTime);
-        Debug.Log("reloadTime : " + reloadTime);
+
+        LogPrintSystem.SystemLogPrint(transform, $"Reload Complete!!! -> ReloadTime : {reloadTime}", ELogType.Player);
 
         curAmmo = maxAmmo;
 

@@ -76,11 +76,9 @@ public class PlayerManager : MonoBehaviour
 
     IEnumerator PlayerJumpResetTime()
     {
-        print("Jump Reset Coroutine Start");
         canJumpReset = false;
         yield return new WaitForSeconds(0.5f);
         canJumpReset = true;
-        print("Jump Reset Coroutine End");
     }
 
     private void PlayerViewMousePoint()
@@ -100,7 +98,7 @@ public class PlayerManager : MonoBehaviour
     public void DiscountHp(float damage)
     {
         playerHp -= damage;
-        Debug.Log("현재 플레이어의 체력 : " + playerHp + "들어온 데미지 : " + damage);
+        LogPrintSystem.SystemLogPrint(transform, $"{damage}From Enemy -> Remain PlayerHP{playerHp}", ELogType.Player);
     }
 
     void OnDrawGizmos()
