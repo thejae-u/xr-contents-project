@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -37,8 +38,7 @@ namespace EnemyScripts
             switch (type)
             {
                 case ETraceState.PlayerEnter:
-                    //int rNum = Random.Range(0, 2);
-                    int rNum = 0;
+                    int rNum = Random.Range(0, 2);
                     switch (rNum)
                     {
                         case 0:
@@ -72,6 +72,13 @@ namespace EnemyScripts
             //      return enterGroggy (Groggy Call)
             // else 
             //      return failedAttack (Special Attack Call)
+            if (blackboard.GetData<ReferenceValueT<bool>>("isNowReady").Value)
+            {
+                Sequence sequence = DOTween.Sequence();
+                sequence.AppendInterval(3.0f);
+                sequence.Play();
+            }
+            
             return FSM.GuardNullNode(this, this);
         }
     }

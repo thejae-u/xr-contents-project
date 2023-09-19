@@ -21,6 +21,7 @@ namespace EnemyScripts
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isGroggy;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isAlive;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isNowAttack;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isNowReady;
 
         void Start()
         {
@@ -41,6 +42,7 @@ namespace EnemyScripts
             b.AddData("playerTransform", GameObject.Find("Player").transform);
             b.AddData("myMoveSpeed", myMoveSpeed);
             b.AddData("isNowAttack", isNowAttack);
+            b.AddData("isNowReady", isNowReady);
             
             b.AddData("myType", myType);
             b.AddData("mySpecialAttackDamage", mySpecialAttackDamage);
