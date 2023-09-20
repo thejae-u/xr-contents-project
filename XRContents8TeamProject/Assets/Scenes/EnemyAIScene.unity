@@ -380,8 +380,8 @@ MonoBehaviour:
   rad: 1
   moveSpeed: 5
   jumpForce: 20
+  gravityForce: 5
   playerHp: 100
-  playerRigidbody: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,6 +978,8 @@ MonoBehaviour:
   isAlive:
     Value: 0
   isNowAttack:
+    Value: 0
+  isNowReady:
     Value: 0
 --- !u!50 &1937257976
 Rigidbody2D:

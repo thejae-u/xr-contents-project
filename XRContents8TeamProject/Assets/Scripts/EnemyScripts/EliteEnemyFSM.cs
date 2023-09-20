@@ -72,12 +72,6 @@ namespace EnemyScripts
             //      return enterGroggy (Groggy Call)
             // else 
             //      return failedAttack (Special Attack Call)
-            if (blackboard.GetData<ReferenceValueT<bool>>("isNowReady").Value)
-            {
-                Sequence sequence = DOTween.Sequence();
-                sequence.AppendInterval(3.0f);
-                sequence.Play();
-            }
             
             return FSM.GuardNullNode(this, this);
         }
