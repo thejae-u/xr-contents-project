@@ -9,19 +9,27 @@ namespace EnemyScripts
         private FSM fsmLife;
 
         // Blackboard Var initialize
+        [Header("체력을 조정")]
         [SerializeField] private ReferenceValueT<float> myHp;
+        [Header("속도를 조정")]
         [SerializeField] private ReferenceValueT<float> myMoveSpeed;
+        [Header("공격 대미지를 조정")]
         [SerializeField] private ReferenceValueT<float> myAttackDamage;
+        [Header("특수 공격 대미지를 조정")]
         [SerializeField] private ReferenceValueT<float> mySpecialAttackDamage;
+        [Header("탐지 거리를 조정")]
         [SerializeField] private ReferenceValueT<float> myTraceRange;
+        [Header("공격 사거리를 조정")]
         [SerializeField] private ReferenceValueT<float> myAttackRange;
+        [Header("특수 공격 사거리를 조정")]
         [SerializeField] private ReferenceValueT<float> mySpecialAttackRange;
         [SerializeField] private ReferenceValueT<EEliteType> myType;
         
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isGroggy;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isAlive;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isNowAttack;
-        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isNowReady;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isAttackReady;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> canSpecialAttack;
 
         void Start()
         {
@@ -42,7 +50,9 @@ namespace EnemyScripts
             b.AddData("playerTransform", GameObject.Find("Player").transform);
             b.AddData("myMoveSpeed", myMoveSpeed);
             b.AddData("isNowAttack", isNowAttack);
-            b.AddData("isNowReady", isNowReady);
+            b.AddData("isAttackReady", isAttackReady);
+            b.AddData("isGroggy", isGroggy);
+            b.AddData("canSpecialAttack", canSpecialAttack);
             
             b.AddData("myType", myType);
             b.AddData("mySpecialAttackDamage", mySpecialAttackDamage);
@@ -108,7 +118,6 @@ namespace EnemyScripts
 
         private void OnDrawGizmos()
         {
-
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, myAttackRange.Value);
 

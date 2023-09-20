@@ -68,11 +68,38 @@ namespace EnemyScripts
 
         public INode Execute(Blackboard blackboard)
         {
-            // if Weakness Point Attack Success ->
-            //      return enterGroggy (Groggy Call)
-            // else 
-            //      return failedAttack (Special Attack Call)
-            
+            if (!blackboard.GetData<ReferenceValueT<bool>>("isAttackReady").Value)
+            {
+                blackboard.GetData<ReferenceValueT<bool>>("isGroggy").Value = false;
+                blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttack").Value = false;
+                blackboard.GetData<ReferenceValueT<bool>>("isAttackReady").Value = true;
+                Sequence sequence = DOTween.Sequence();
+                sequence.SetDelay(3.0f).OnComplete(() =>
+                {
+                    LogPrintSystem.SystemLogPrint(
+                        blackboard.GetData<Transform>("myTransform"),
+                        "DOTween Callback Function Call",
+                        ELogType.EnemyAI);
+                    blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttack").Value = true;
+                });
+            }
+            else
+            {
+                if (blackboard.GetData<ReferenceValueT<bool>>("isGroggy").Value)
+                {
+                    blackboard.GetData<ReferenceValueT<bool>>("isAttackReady").Value = false;
+                    return FSM.GuardNullNode(this, enterGroggy);
+                }
+
+                if (blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttack").Value)
+                {
+                    blackboard.GetData<ReferenceValueT<bool>>("isAttackReady").Value = false;
+                    return FSM.GuardNullNode(this, failedAttack);
+                }
+
+                return FSM.GuardNullNode(this, this);
+            }
+
             return FSM.GuardNullNode(this, this);
         }
     }
@@ -98,7 +125,11 @@ namespace EnemyScripts
 
         public INode Execute(Blackboard blackboard)
         {
-            return FSM.GuardNullNode(this, this);
+            LogPrintSystem.SystemLogPrint(
+                blackboard.GetData<Transform>("myTransform"),
+                "Bomb Attack",
+                ELogType.EnemyAI);
+            return FSM.GuardNullNode(endAttack, this);
         }
     }
 
