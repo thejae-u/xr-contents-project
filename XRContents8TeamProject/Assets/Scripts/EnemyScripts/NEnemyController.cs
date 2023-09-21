@@ -11,24 +11,28 @@ namespace EnemyScripts
         private FSM fsm;
         private FSM fsmLife;
 
+        [Header("체력 조정")]
         [SerializeField] private ReferenceValueT<float> myHp;
+        [Header("공격 대미지 조정")]
         [SerializeField] private ReferenceValueT<float> myAttackDamage;
+        [Header("탐지 거리 조정")]
         [SerializeField] private ReferenceValueT<float> myTraceRange;
+        [Header("공격 거리 조정")]
         [SerializeField] private ReferenceValueT<float> myAttackRange;
+        [Header("속도 조정")]
         [SerializeField] private ReferenceValueT<float> myMoveSpeed;
         
-        [Header("경직 시간을 조정합니다")] [Range(0.1f,0.5f)]
+        [Header("경직 시간을 조정")] [Range(0.1f,0.5f)]
         [SerializeField] private float hitTime;
 
-        [Header("넉백 거리를 조절합니다")] [Range(0.0f, 3.0f)] [SerializeField]
-        private float knockbackPower;
+        [Header("넉백 거리를 조정")] [Range(0.1f, 3.0f)] 
+        [SerializeField] private float knockbackPower;
 
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isAlive;
 
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isNowAttack;
         
         private bool isHit;
-        private bool canCoroutineStart = true;
 
         void Start()
         {

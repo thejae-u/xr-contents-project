@@ -1,29 +1,14 @@
 using UnityEngine;
 using System.Collections;
 
-public class Gun : MonoBehaviour
-{    
+public class PlayerAttack : MonoBehaviour
+{
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform fireTransform;
-   
+    private GameObject playerManager;
+
     private float lastFireTime = 0f;
-    [Header("사격 속도")]
-    [SerializeField] private float timeBetFire = 0.5f;
-    [Header("재장전 시간")]
-    [SerializeField] private float reloadTime = 2.0f;
-    
-    private int curAmmo = 6;
-    [Header("최대 탄알")]
-    [SerializeField] private int maxAmmo = 6;
-    [Header("탄알 속도")]
-    [SerializeField] private float bulletSpeed = 5.0f;   
-
-    private Camera cam;
-
-    private void Start()
-    {
-        cam = Camera.main;
-    }
+    private int curAmmo = 0;
 
     public enum EState
     {
@@ -34,9 +19,14 @@ public class Gun : MonoBehaviour
 
     public EState state { get; private set; }
 
-    private void OnEnable()
+    private void Awake()
     {
-        curAmmo = maxAmmo;
+        playerManager = GameObject.Find("Player");
+    }
+
+    private void Start()
+    {
+        curAmmo = playerManager.GetComponent<PlayerManager>().maxAmmo;
         state = EState.Ready;
     }
 
@@ -51,17 +41,17 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
-        if (state == EState.Ready && Time.time >= lastFireTime + timeBetFire && curAmmo > 0)
+        if (state == EState.Ready && Time.time >= lastFireTime + playerManager.GetComponent<PlayerManager>().shootSpeed && curAmmo > 0)
         {
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = new Vector3(mousePosition.x, mousePosition.y, mousePosition.z);
-            mousePosition.z = -cam.transform.position.z;
+            mousePosition.z = -Camera.main.transform.position.z;
 
-            Vector3 direction = (cam.ScreenToWorldPoint(mousePosition) - fireTransform.position).normalized;
+            Vector3 direction = (Camera.main.ScreenToWorldPoint(mousePosition) - fireTransform.position).normalized;
 
             GameObject bullet = Instantiate(bulletPrefab, fireTransform.position, Quaternion.identity);
             Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
-            bulletRigidbody.velocity = direction * bulletSpeed; 
+            bulletRigidbody.velocity = direction * playerManager.GetComponent<PlayerManager>().bulletSpeed;
 
             lastFireTime = Time.time;
             curAmmo--;
@@ -78,7 +68,7 @@ public class Gun : MonoBehaviour
 
     public bool Reload()
     {
-        if (state == EState.Empty || Input.GetKey(KeyCode.R) && curAmmo < maxAmmo)
+        if (state == EState.Empty || Input.GetKey(KeyCode.R) && curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo)
         {
             StartCoroutine(ReloadRoutine());
             LogPrintSystem.SystemLogPrint(transform, "Reload Start", ELogType.Player);
@@ -88,14 +78,14 @@ public class Gun : MonoBehaviour
     }
 
     private IEnumerator ReloadRoutine()
-    { 
+    {
         state = EState.Reloading;
 
-        yield return new WaitForSeconds(reloadTime);
+        yield return new WaitForSeconds(playerManager.GetComponent<PlayerManager>().reloadTime);
 
-        LogPrintSystem.SystemLogPrint(transform, $"Reload Complete!!! -> ReloadTime : {reloadTime}", ELogType.Player);
+        LogPrintSystem.SystemLogPrint(transform, $"Reload Complete!!! -> ReloadTime : {playerManager.GetComponent<PlayerManager>().reloadTime}", ELogType.Player);
 
-        curAmmo = maxAmmo;
+        curAmmo = playerManager.GetComponent<PlayerManager>().maxAmmo;
 
         state = EState.Ready;
     }
