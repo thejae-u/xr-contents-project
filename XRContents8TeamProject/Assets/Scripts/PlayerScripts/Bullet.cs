@@ -1,24 +1,22 @@
-using EnemyScripts;
 using UnityEngine;
+using EnemyScripts;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float bulletSpeed = 10.0f;
-
     private Vector3 initialPosition;
-    [SerializeField] private float fireDistance = 50.0f;
+ 
+    private GameObject playerManager;
+    private NEnemyController nEnemyController;
 
-    [SerializeField] private NEnemyController nEnemyController;
-    [SerializeField] private float playerDamage = 5.0f;
-
-    private void Start()
+    void Start()
     {
         initialPosition = transform.position;
+        playerManager = GameObject.Find("Player");
     }
 
-    private void Update()
+    void Update()
     {
-        if (Vector3.Distance(initialPosition, transform.position) > fireDistance)
+        if (Vector3.Distance(initialPosition, transform.position) > playerManager.GetComponent<PlayerManager>().fireDistance)
         {
             BulletDestroy();
         }
@@ -30,12 +28,13 @@ public class Bullet : MonoBehaviour
         {
             BulletDestroy();
         }
-        else if(collision.gameObject.CompareTag("Enemy"))
+        else if (collision.gameObject.CompareTag("Enemy"))
         {
             nEnemyController = collision.GetComponent<NEnemyController>();
 
             BulletDestroy();
-            nEnemyController.DiscountHp(playerDamage);
+            float damage = playerManager.GetComponent<PlayerManager>().playerAtk;
+            nEnemyController.DiscountHp(damage);
         }
     }
 

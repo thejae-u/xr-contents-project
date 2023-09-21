@@ -1,24 +1,31 @@
-using EnemyScripts;
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
 public class PlayerManager : MonoBehaviour
 {
     public float MyRadius => rad;
-    [Header("적 추적 확인 반지름")]
-    public float rad;
-    [Header("플레이어 이동속도")]
-    [SerializeField] private float moveSpeed = 5.0f;
-    [Header("플레이어 점프힘")]
-    [SerializeField] private float jumpForce = 5.0f;
-    [Header("플레이어 중력")]
-    [SerializeField] private float gravityForce = 5.0f;
-    [Header("플레이어 체력")]
-    [SerializeField] private float playerHp = 100.0f;
+    public float rad = 1.0f;
 
-    private bool isJumping;
-    private bool canJumpReset;
-    
+    [Header("플레이어 이동 관련")]
+    [SerializeField] private float playerMoveSpeed = 5.0f;
+    [SerializeField] private float playerJumpForce = 20.0f;
+    [SerializeField] private float playerGravityForce = 5.0f;
+
+    private bool isPlayerViewDirRight = true;
+    private bool isJumping = false;
+    private bool canJump = true;
+
+    [Header("플레이어 스테이터스 관련")]
+    [SerializeField] private float playerHp = 100.0f;
+    [SerializeField] public float playerAtk = 10.0f;
+
+    [Header("플레이어 사격 관련")]
+    [SerializeField] public float shootSpeed = 1.0f;
+    [SerializeField] public float bulletSpeed = 5.0f;
+    [SerializeField] public float fireDistance = 50.0f;
+    [SerializeField] public int maxAmmo = 6;
+    [SerializeField] public float reloadTime = 2.0f;
+
     private Rigidbody2D playerRigidbody;
 
     private void Awake()
@@ -30,6 +37,7 @@ public class PlayerManager : MonoBehaviour
     {
         PlayerViewMousePoint();
         PlayerMove();
+
         if (Input.GetButton("Jump"))
         {
             PlayerJump();
@@ -40,46 +48,62 @@ public class PlayerManager : MonoBehaviour
     {
         if (collision.transform.CompareTag("Ground"))
         {
-            if (canJumpReset)
+            if (canJump)
                 isJumping = false;
-        } 
+        }
     }
 
+    #region MOVEMENT
     void PlayerMove()
     {
         float moveDir = Input.GetAxis("Horizontal");
-        Vector3 dir = moveDir * Vector3.right;
-        //transform.Translate(dir * moveSpeed * Time.deltaTime);
 
-        if (moveDir < 0)
+        if (isPlayerViewDirRight) 
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-            transform.Translate(dir * -1 * moveSpeed * Time.deltaTime);
+            Vector3 dir = moveDir * Vector3.right;
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
+            }
         }
-        else if (moveDir > 0)
+        else
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            transform.Translate(dir * moveSpeed * Time.deltaTime);
+            Vector3 dir = moveDir * Vector3.left;
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
+            }
         }
     }
+    #endregion
 
+    #region JUMP
     void PlayerJump()
     {
-        if (!isJumping)
+        if(!isJumping) 
         {
-            playerRigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            playerRigidbody.AddForce(Vector2.up * playerJumpForce, ForceMode2D.Impulse);
             StartCoroutine(PlayerJumpResetTime());
             isJumping = true;
         }
-        else return;
     }
 
     IEnumerator PlayerJumpResetTime()
     {
-        canJumpReset = false;
+        canJump = false;
         yield return new WaitForSeconds(0.5f);
-        canJumpReset = true;
+        canJump = true;
     }
+    #endregion JUMP
 
     private void PlayerViewMousePoint()
     {
@@ -88,10 +112,12 @@ public class PlayerManager : MonoBehaviour
         if (mousePosition.x < transform.position.x)
         {
             transform.eulerAngles = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
+            isPlayerViewDirRight = false;
         }
         else
         {
             transform.eulerAngles = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
+            isPlayerViewDirRight = true;
         }
     }
 
