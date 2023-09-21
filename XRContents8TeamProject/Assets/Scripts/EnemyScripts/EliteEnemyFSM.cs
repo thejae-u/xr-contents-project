@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -38,7 +39,9 @@ namespace EnemyScripts
             switch (type)
             {
                 case ETraceState.PlayerEnter:
-                    int rNum = Random.Range(0, 2);
+                    // Bomb doesn't Normal Attack
+                    int rNum = myType == EEliteType.Bomb ? 1 : Random.Range(0, 2);
+                    
                     switch (rNum)
                     {
                         case 0:
@@ -46,7 +49,8 @@ namespace EnemyScripts
                             return FSM.GuardNullNode(this,attacks[0]);
                         case 1:
                             // Special Attack
-                            return FSM.GuardNullNode(this, myType == EEliteType.Bomb ? attacks[1] : attacks[2]);
+                            return FSM.GuardNullNode(this,
+                                myType == EEliteType.Bomb ? attacks[1] : attacks[2]);
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
@@ -70,6 +74,11 @@ namespace EnemyScripts
         {
             if (!blackboard.GetData<ReferenceValueT<bool>>("isAttackReady").Value)
             {
+                LogPrintSystem.SystemLogPrint(
+                    blackboard.GetData<Transform>("myTransform"),
+                    "Now Ready For Special Attack",
+                    ELogType.EnemyAI);
+                
                 blackboard.GetData<ReferenceValueT<bool>>("isGroggy").Value = false;
                 blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttack").Value = false;
                 blackboard.GetData<ReferenceValueT<bool>>("isAttackReady").Value = true;
@@ -104,7 +113,7 @@ namespace EnemyScripts
         }
     }
 
-    public class EliteRunAttackReadyNode : INode
+    public class EliteRushAttackReadyNode : INode
     {
         public INode enterGroggy;
         public INode failedAttack;
@@ -125,15 +134,19 @@ namespace EnemyScripts
 
         public INode Execute(Blackboard blackboard)
         {
+            var playerTransform = blackboard.GetData<Transform>("playerTransform");
+            var myTransform = blackboard.GetData<Transform>("myTransform");
+
+            
             LogPrintSystem.SystemLogPrint(
                 blackboard.GetData<Transform>("myTransform"),
                 "Bomb Attack",
                 ELogType.EnemyAI);
-            return FSM.GuardNullNode(endAttack, this);
+            return FSM.GuardNullNode(this, endAttack);
         }
     }
 
-    public class EliteRunAttackNode : INode
+    public class EliteRushAttackNode : INode
     {
         public INode endAttack;
 

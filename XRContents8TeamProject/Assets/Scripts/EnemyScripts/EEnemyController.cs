@@ -65,10 +65,10 @@ namespace EnemyScripts
             var attack = new NormalAttackNode();
 
             var bombReady = new EliteBombAttackReadyNode();
-            var runReady = new EliteRunAttackReadyNode();
+            var rushReady = new EliteRushAttackReadyNode();
 
             var bombAttack = new EliteBombAttackNode();
-            var runAttack = new EliteRunAttackNode();
+            var rushAttack = new EliteRushAttackNode();
 
             var groggy = new EliteGroggyNode();
 
@@ -78,7 +78,7 @@ namespace EnemyScripts
             trace.attacks = new INode[3];
             trace.attacks[0] = attack;
             trace.attacks[1] = bombReady;
-            trace.attacks[2] = runAttack;
+            trace.attacks[2] = rushAttack;
             trace.playerExit = wait;
 
             attack.outOfAttackRange = wait;
@@ -87,9 +87,9 @@ namespace EnemyScripts
             bombReady.enterGroggy = groggy;
             bombAttack.endAttack = wait;
 
-            runReady.failedAttack = runAttack;
-            runReady.failedAttack = groggy;
-            runAttack.endAttack = wait;
+            rushReady.failedAttack = rushAttack;
+            rushReady.failedAttack = groggy;
+            rushAttack.endAttack = wait;
 
             groggy.endGroggy = wait;
             
