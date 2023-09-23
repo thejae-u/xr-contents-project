@@ -1,10 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Globalization;
-using Unity.VisualScripting;
-using Unity.VisualScripting.FullSerializer;
-using Random = UnityEngine.Random;
+using DG.Tweening;
 
 namespace EnemyScripts
 {
@@ -127,7 +124,8 @@ namespace EnemyScripts
     {
         PlayerEnter,
         PlayerExit,
-        PlayerTrace
+        PlayerTrace,
+        PlayerEnterRush
     }
 
     public abstract class TraceNode : INode
@@ -145,6 +143,28 @@ namespace EnemyScripts
 
             float traceRange = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
 
+            if (blackboard.GetData<ReferenceValueT<EEliteType>>("myType").Value == EEliteType.Rush
+                && !blackboard.GetData<ReferenceValueT<bool>>("hasSpecialFlag").Value)
+            {
+                // Rush Range Calculate
+                 Sequence sequence = DOTween.Sequence();
+                 sequence.SetDelay(blackboard.GetData<ReferenceValueT<float>>("specialAttackWait").Value).OnComplete(
+                     () =>
+                     {
+                         LogPrintSystem.SystemLogPrint(
+                             myTransform,
+                             "Flag is False",
+                             ELogType.EnemyAI);
+                         blackboard.GetData<ReferenceValueT<bool>>("hasSpecialFlag").Value = false;
+                     });
+                blackboard.GetData<ReferenceValueT<bool>>("hasSpecialFlag").Value = true;
+
+                float rd2 = blackboard.GetData<ReferenceValueT<float>>("myRushRange").Value;
+                if (d1 + rd2 >= distance)
+                    return ETraceState.PlayerEnterRush;
+                sequence.Play();
+            }
+            
             // IF ENTER ATTACK RANGE
             if (d1 + d2 >= distance)
                 return ETraceState.PlayerEnter;

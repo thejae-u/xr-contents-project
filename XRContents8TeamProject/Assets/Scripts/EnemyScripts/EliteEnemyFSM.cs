@@ -11,7 +11,7 @@ namespace EnemyScripts
     public enum EEliteType
     {
         Bomb,
-        Run
+        Rush
     }
 
     public class EliteTraceNode : TraceNode
@@ -40,23 +40,27 @@ namespace EnemyScripts
             {
                 case ETraceState.PlayerEnter:
                     // Bomb doesn't Normal Attack
-                    int rNum = myType == EEliteType.Bomb ? 1 : Random.Range(0, 2);
-                    
-                    switch (rNum)
+                    int attackNum = myType == EEliteType.Bomb ? 1 : 0;
+                    switch (attackNum)
                     {
                         case 0:
-                            // Normal Attack
-                            return FSM.GuardNullNode(this,attacks[0]);
+                            // Normal and Rush Monster NormalAttack Node
+                            return FSM.GuardNullNode(this, attacks[0]);
                         case 1:
-                            // Special Attack
-                            return FSM.GuardNullNode(this,
-                                myType == EEliteType.Bomb ? attacks[1] : attacks[2]);
+                            // Bomb Monster Attack Node
+                            return FSM.GuardNullNode(this, attacks[1]);
                         default:
-                            throw new ArgumentOutOfRangeException();
+                            throw new Exception("PlayerEnter Error");
                     }
+                case ETraceState.PlayerEnterRush:
+                    // Rush Monster Attack Node
+                    LogPrintSystem.SystemLogPrint(
+                        myTransform,
+                        "Rush Entered",
+                        ELogType.EnemyAI);
+                    return FSM.GuardNullNode(this, attacks[2]);
                 case ETraceState.PlayerTrace:
                     return FSM.GuardNullNode(this, this);
-                    break;
                 case ETraceState.PlayerExit:
                     return FSM.GuardNullNode(this, playerExit);
                 default:
@@ -124,6 +128,10 @@ namespace EnemyScripts
             //      return enterGroggy (Groggy Call)
             // else 
             //      return failedAttack (Special Attack Call)
+            LogPrintSystem.SystemLogPrint(
+                blackboard.GetData<Transform>("myTransform"),
+                "Rush Ready State On",
+                ELogType.EnemyAI);
             return FSM.GuardNullNode(this, this);
         }
     }
