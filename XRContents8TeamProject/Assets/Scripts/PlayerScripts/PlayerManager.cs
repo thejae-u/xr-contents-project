@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour
     public float MyRadius => rad;
     public float rad = 1.0f;
 
-    [Header("ÇÃ·¹ÀÌ¾î ÀÌµ¿ °ü·Ã")]
+    [Header("í”Œë ˆì´ì–´ ì´ë™ ê´€ë ¨")]
     [SerializeField] private float playerMoveSpeed = 5.0f;
     [SerializeField] private float playerJumpForce = 20.0f;
     [SerializeField] private float playerGravityForce = 5.0f;
@@ -15,11 +15,11 @@ public class PlayerManager : MonoBehaviour
     private bool isJumping = false;
     private bool canJump = true;
 
-    [Header("ÇÃ·¹ÀÌ¾î ½ºÅ×ÀÌÅÍ½º °ü·Ã")]
+    [Header("í”Œë ˆì´ì–´ ìŠ¤í…Œì´í„°ìŠ¤ ê´€ë ¨")]
     [SerializeField] private float playerHp = 100.0f;
     [SerializeField] public float playerAtk = 10.0f;
 
-    [Header("ÇÃ·¹ÀÌ¾î »ç°İ °ü·Ã")]
+    [Header("í”Œë ˆì´ì–´ ì‚¬ê²© ê´€ë ¨")]
     [SerializeField] public float shootSpeed = 1.0f;
     [SerializeField] public float bulletSpeed = 5.0f;
     [SerializeField] public float fireDistance = 50.0f;
