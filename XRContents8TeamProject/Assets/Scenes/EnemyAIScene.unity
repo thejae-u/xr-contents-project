@@ -328,13 +328,15 @@ MonoBehaviour:
   mySpecialAttackDamage:
     Value: 50
   myTraceRange:
-    Value: 5
+    Value: 8
   myAttackRange:
     Value: 1
-  mySpecialAttackRange:
-    Value: 3
+  myRushRange:
+    Value: 5
+  specialAttackWait:
+    Value: 5
   myType:
-    Value: 0
+    Value: 1
   isGroggy:
     Value: 0
   isAlive:
@@ -344,6 +346,8 @@ MonoBehaviour:
   isAttackReady:
     Value: 0
   canSpecialAttack:
+    Value: 0
+  hasSpecialFlag:
     Value: 0
 --- !u!212 &197580950
 SpriteRenderer:
@@ -575,10 +579,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rad: 1
-  moveSpeed: 5
-  jumpForce: 20
-  gravityForce: 5
+  playerMoveSpeed: 5
+  playerJumpForce: 20
+  playerGravityForce: 5
   playerHp: 100
+  playerAtk: 10
+  shootSpeed: 1
+  bulletSpeed: 5
+  fireDistance: 50
+  maxAmmo: 6
+  reloadTime: 2
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,15 +837,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 855477234}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e77a97c956cdda4ba13fbfb37f8262f, type: 3}
+  m_Script: {fileID: 11500000, guid: 339d101756a20954ab4fd8fb3fba4c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3818357213670130502, guid: a6c05d3313c146b4285be02c4a3ae3c7, type: 3}
-  fireTransform: {fileID: 110529410}
-  timeBetFire: 0.5
-  reloadTime: 3
-  maxAmmo: 6
-  bulletSpeed: 10
 --- !u!1 &1054433854
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,8 +1170,10 @@ MonoBehaviour:
     Value: 10
   myAttackRange:
     Value: 5
-  mySpecialAttackRange:
-    Value: 3
+  myRushRange:
+    Value: 0
+  specialAttackWait:
+    Value: 0
   myType:
     Value: 0
   isGroggy:
@@ -1179,6 +1185,8 @@ MonoBehaviour:
   isAttackReady:
     Value: 0
   canSpecialAttack:
+    Value: 0
+  hasSpecialFlag:
     Value: 0
 --- !u!50 &1937257976
 Rigidbody2D:
