@@ -969,7 +969,9 @@ MonoBehaviour:
     Value: 0
   myAttackRange:
     Value: 0
-  mySpecialAttackRange:
+  myRushRange:
+    Value: 0
+  specialAttackWait:
     Value: 0
   myType:
     Value: 0
@@ -982,6 +984,8 @@ MonoBehaviour:
   isAttackReady:
     Value: 0
   canSpecialAttack:
+    Value: 0
+  hasSpecialFlag:
     Value: 0
 --- !u!1 &2085436546
 GameObject:
@@ -1002,7 +1006,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &2085436547
 SpriteRenderer:
   m_ObjectHideFlags: 0
