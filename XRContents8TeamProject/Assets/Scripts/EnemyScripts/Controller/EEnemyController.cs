@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace EnemyScripts
 {
@@ -29,20 +31,28 @@ namespace EnemyScripts
         
         [Header("특수 공격 사거리를 조정(돌진 몬스터)")]
         [SerializeField] private ReferenceValueT<float> myRushRange;
+        [SerializeField] private ReferenceValueT<float> myOverRushRange;
         
-        [Header("특수 공격 시간을 조정(돌진 몬스터)")]
+        [Header("특수 공격 준비 시간을 조정")]
         [SerializeField] private ReferenceValueT<float> specialAttackWait;
+
+        [Header("툭수 공격 대기 시간을 조정")] 
+        [SerializeField] private ReferenceValueT<float> specialAttackCooldown;
         
         [Header("엘리트 몬스터 타입 선택")]
         [SerializeField] private ReferenceValueT<EEliteType> myType;
-               
-        
+
+        [Header("폭탄 프리팹")] 
+        [SerializeField] private GameObject bombPrefab;
+
+        [Header("약점 노출을 위한 오브젝트")] 
+        [SerializeField] private GameObject weak;
+
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isGroggy;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isAlive;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isNowAttack;
-        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isAttackReady;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isSpecialAttackReady;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> canSpecialAttack;
-        [HideInInspector] [SerializeField] private ReferenceValueT<bool> hasSpecialFlag;
 
         void Start()
         {
@@ -52,27 +62,41 @@ namespace EnemyScripts
 
             isAlive.Value = true;
             isGroggy.Value = false;
-            hasSpecialFlag.Value = false;
 
             // Blackboard Initialize
+            // About player Info
+            b.AddData("playerTransform", GameObject.Find("Player").transform);
+            
+            // About Life
             b.AddData("isAlive", isAlive);
             b.AddData("myHp", myHp);
+            
+            // About the Monster Basic Info
             b.AddData("myTransform", transform);
-            b.AddData("myAttackDamage", myAttackDamage);
+            b.AddData("myType", myType);
+            
             b.AddData("myTraceRange", myTraceRange);
-            b.AddData("myAttackRange", myAttackRange);
-            b.AddData("playerTransform", GameObject.Find("Player").transform);
             b.AddData("myMoveSpeed", myMoveSpeed);
+            
+            b.AddData("myAttackDamage", myAttackDamage);
+            b.AddData("myAttackRange", myAttackRange);
+            b.AddData("isSpecialAttackReady", isSpecialAttackReady);
             b.AddData("isNowAttack", isNowAttack);
-            b.AddData("isAttackReady", isAttackReady);
+            
+            // Monster Special Attack Info
+            b.AddData("bombPrefab", bombPrefab);
+            b.AddData("mySpecialAttackDamage", mySpecialAttackDamage);
+            b.AddData("specialAttackCooldown", specialAttackCooldown);
+            
+            // 특수 공격 그로기 가능 시간
+            b.AddData("specialAttackWait", specialAttackWait);
             b.AddData("isGroggy", isGroggy);
             b.AddData("canSpecialAttack", canSpecialAttack);
             
-            b.AddData("myType", myType);
-            b.AddData("mySpecialAttackDamage", mySpecialAttackDamage);
+            // Only Use Rush Monster
             b.AddData("myRushRange", myRushRange);
-            b.AddData("hasSpecialFlag", hasSpecialFlag);
-            b.AddData("specialAttackWait", specialAttackWait);
+            b.AddData("myOverRushRange", myOverRushRange);
+        
 
             // Node Initialize
             var wait = new WaitNode();
@@ -86,6 +110,7 @@ namespace EnemyScripts
             var rushAttack = new EliteRushAttackNode();
 
             var groggy = new EliteGroggyNode();
+            var overRush = new EliteRushOverNode();
 
             // Connect Node
             wait.enterPlayer = trace;
@@ -94,6 +119,7 @@ namespace EnemyScripts
             trace.attacks[0] = attack;
             trace.attacks[1] = bombReady;
             trace.attacks[2] = rushReady;
+            trace.overRush = overRush;
             trace.playerExit = wait;
 
             attack.outOfAttackRange = wait;
@@ -101,12 +127,13 @@ namespace EnemyScripts
             bombReady.failedAttack = bombAttack;
             bombReady.enterGroggy = groggy;
             bombAttack.endAttack = wait;
-
+            
             rushReady.failedAttack = rushAttack;
             rushReady.failedAttack = groggy;
             rushAttack.endAttack = wait;
 
             groggy.endGroggy = wait;
+            overRush.enterPlayer = attack;
             
             // About Life FSM
             fsmLife = new FSM();
@@ -128,7 +155,15 @@ namespace EnemyScripts
             {
                 fsm.Update();
                 fsmLife.Update();
+                
+                // Weakness Show Method
+                WeakShow();
             }
+        }
+
+        private void WeakShow()
+        {
+            weak.SetActive(isSpecialAttackReady.Value);
         }
 
         private void OnDrawGizmos()

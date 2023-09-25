@@ -31,13 +31,10 @@ namespace EnemyScripts
             {
                 case ETraceState.PlayerEnter:
                     return FSM.GuardNullNode(this, playerEnter);
-                    break;
                 case ETraceState.PlayerExit:
                     return FSM.GuardNullNode(this, playerExit);
-                    break;
                 case ETraceState.PlayerTrace:
                     return FSM.GuardNullNode(this, this);
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

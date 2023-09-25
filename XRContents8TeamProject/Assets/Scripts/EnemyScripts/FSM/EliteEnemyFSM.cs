@@ -18,6 +18,7 @@ namespace EnemyScripts
     {
         public INode[] attacks;
         public INode playerExit;
+        public INode overRush;
 
         public override INode Execute(Blackboard blackboard)
         {
@@ -40,18 +41,11 @@ namespace EnemyScripts
             {
                 case ETraceState.PlayerEnter:
                     // Bomb doesn't Normal Attack
-                    int attackNum = myType == EEliteType.Bomb ? 1 : 0;
-                    switch (attackNum)
-                    {
-                        case 0:
-                            // Normal and Rush Monster NormalAttack Node
-                            return FSM.GuardNullNode(this, attacks[0]);
-                        case 1:
-                            // Bomb Monster Attack Node
-                            return FSM.GuardNullNode(this, attacks[1]);
-                        default:
-                            throw new Exception("PlayerEnter Error");
-                    }
+                    return myType == EEliteType.Bomb
+                        ? FSM.GuardNullNode(this, attacks[0])
+                        : FSM.GuardNullNode(this, attacks[1]);
+                
+                // Only Use Rush Monster
                 case ETraceState.PlayerEnterRush:
                     // Rush Monster Attack Node
                     LogPrintSystem.SystemLogPrint(
@@ -59,10 +53,17 @@ namespace EnemyScripts
                         "Rush Entered",
                         ELogType.EnemyAI);
                     return FSM.GuardNullNode(this, attacks[2]);
+                
+                // Only Use Rush Monster
+                case ETraceState.PlayerEnterOverRush:
+                    return FSM.GuardNullNode(this, overRush);
+                
                 case ETraceState.PlayerTrace:
                     return FSM.GuardNullNode(this, this);
+                
                 case ETraceState.PlayerExit:
                     return FSM.GuardNullNode(this, playerExit);
+                
                 default:
                     throw new Exception("Error");
             }
@@ -76,7 +77,7 @@ namespace EnemyScripts
 
         public INode Execute(Blackboard blackboard)
         {
-            if (!blackboard.GetData<ReferenceValueT<bool>>("isAttackReady").Value)
+            if (!blackboard.GetData<ReferenceValueT<bool>>("isSpecialAttackReady").Value)
             {
                 LogPrintSystem.SystemLogPrint(
                     blackboard.GetData<Transform>("myTransform"),
@@ -85,9 +86,9 @@ namespace EnemyScripts
                 
                 blackboard.GetData<ReferenceValueT<bool>>("isGroggy").Value = false;
                 blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttack").Value = false;
-                blackboard.GetData<ReferenceValueT<bool>>("isAttackReady").Value = true;
+                blackboard.GetData<ReferenceValueT<bool>>("isSpecialAttackReady").Value = true;
                 Sequence sequence = DOTween.Sequence();
-                sequence.SetDelay(3.0f).OnComplete(() =>
+                sequence.SetDelay(blackboard.GetData<ReferenceValueT<float>>("specialAttackWait").Value).OnComplete(() =>
                 {
                     LogPrintSystem.SystemLogPrint(
                         blackboard.GetData<Transform>("myTransform"),
@@ -100,13 +101,13 @@ namespace EnemyScripts
             {
                 if (blackboard.GetData<ReferenceValueT<bool>>("isGroggy").Value)
                 {
-                    blackboard.GetData<ReferenceValueT<bool>>("isAttackReady").Value = false;
+                    blackboard.GetData<ReferenceValueT<bool>>("isSpecialAttackReady").Value = false;
                     return FSM.GuardNullNode(this, enterGroggy);
                 }
 
                 if (blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttack").Value)
                 {
-                    blackboard.GetData<ReferenceValueT<bool>>("isAttackReady").Value = false;
+                    blackboard.GetData<ReferenceValueT<bool>>("isSpecialAttackReady").Value = false;
                     return FSM.GuardNullNode(this, failedAttack);
                 }
 
@@ -145,6 +146,11 @@ namespace EnemyScripts
             var playerTransform = blackboard.GetData<Transform>("playerTransform");
             var myTransform = blackboard.GetData<Transform>("myTransform");
 
+            GameObject.Instantiate(blackboard.GetData<GameObject>("bombPrefab"),
+                myTransform.position,
+                quaternion.identity);
+
+            Sequence sequence = DOTween.Sequence();
             
             LogPrintSystem.SystemLogPrint(
                 blackboard.GetData<Transform>("myTransform"),
@@ -161,6 +167,16 @@ namespace EnemyScripts
         public INode Execute(Blackboard blackboard)
         {
             return FSM.GuardNullNode(this, this);
+        }
+    }
+
+    public class EliteRushOverNode : INode
+    {
+        public INode enterPlayer;
+
+        public INode Execute(Blackboard blackboard)
+        {
+            return FSM.GuardNullNode(this, enterPlayer);
         }
     }
 

@@ -11,6 +11,11 @@ namespace EnemyScripts
     public class ReferenceValueT<T> where T : struct
     {
         public T Value;
+        
+        public static implicit operator T(ReferenceValueT<T> v)
+        {
+            return v.Value;
+        }
     }
     public class Blackboard
     {
@@ -125,7 +130,8 @@ namespace EnemyScripts
         PlayerEnter,
         PlayerExit,
         PlayerTrace,
-        PlayerEnterRush
+        PlayerEnterRush,
+        PlayerEnterOverRush
     }
 
     public abstract class TraceNode : INode
@@ -136,34 +142,21 @@ namespace EnemyScripts
             Transform myTransform = blackboard.GetData<Transform>("myTransform");
             Transform playerTransform = blackboard.GetData<Transform>("playerTransform");
             
-            
+            // Whole Monster Use this variable
             float d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
             float d2 = blackboard.GetData<ReferenceValueT<float>>("myAttackRange").Value;
             float distance = (myTransform.position - playerTransform.position).magnitude;
 
             float traceRange = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
 
-            if (blackboard.GetData<ReferenceValueT<EEliteType>>("myType").Value == EEliteType.Rush
-                && !blackboard.GetData<ReferenceValueT<bool>>("hasSpecialFlag").Value)
-            {
-                // Rush Range Calculate
-                 Sequence sequence = DOTween.Sequence();
-                 sequence.SetDelay(blackboard.GetData<ReferenceValueT<float>>("specialAttackWait").Value).OnComplete(
-                     () =>
-                     {
-                         LogPrintSystem.SystemLogPrint(
-                             myTransform,
-                             "Flag is False",
-                             ELogType.EnemyAI);
-                         blackboard.GetData<ReferenceValueT<bool>>("hasSpecialFlag").Value = false;
-                     });
-                blackboard.GetData<ReferenceValueT<bool>>("hasSpecialFlag").Value = true;
-
-                float rd2 = blackboard.GetData<ReferenceValueT<float>>("myRushRange").Value;
-                if (d1 + rd2 >= distance)
-                    return ETraceState.PlayerEnterRush;
-                sequence.Play();
-            }
+            // Only Use Rush Monster
+            float rushD1 = blackboard.GetData<ReferenceValueT<float>>("myRushRange").Value;
+            
+            // Rush 몬스터
+            // 총 Range 개수 : 4
+            // 돌진 거리가 있지만 플레이어와 너무 가까우면 스킵
+            // 돌진 거리가 충족 되면 돌진
+            
             
             // IF ENTER ATTACK RANGE
             if (d1 + d2 >= distance)
