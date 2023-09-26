@@ -53,6 +53,7 @@ namespace EnemyScripts
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isNowAttack;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isSpecialAttackReady;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> canSpecialAttack;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> canSpecialAttackReady;
 
         void Start()
         {
@@ -62,6 +63,7 @@ namespace EnemyScripts
 
             isAlive.Value = true;
             isGroggy.Value = false;
+            canSpecialAttackReady.Value = true;
 
             // Blackboard Initialize
             // About player Info
@@ -87,6 +89,7 @@ namespace EnemyScripts
             b.AddData("bombPrefab", bombPrefab);
             b.AddData("mySpecialAttackDamage", mySpecialAttackDamage);
             b.AddData("specialAttackCooldown", specialAttackCooldown);
+            b.AddData("canSpecialAttackReady", canSpecialAttackReady);
             
             // 특수 공격 그로기 가능 시간
             b.AddData("specialAttackWait", specialAttackWait);
@@ -159,6 +162,11 @@ namespace EnemyScripts
                 // Weakness Show Method
                 WeakShow();
             }
+        }
+
+        public void WeakBreak()
+        {
+            isGroggy.Value = true;
         }
 
         private void WeakShow()

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 
 namespace EnemyScripts
@@ -41,10 +40,16 @@ namespace EnemyScripts
             {
                 case ETraceState.PlayerEnter:
                     // Bomb doesn't Normal Attack
-                    return myType == EEliteType.Bomb
-                        ? FSM.GuardNullNode(this, attacks[0])
-                        : FSM.GuardNullNode(this, attacks[1]);
-                
+                    if (myType == EEliteType.Bomb 
+                        && blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttackReady").Value)
+                    {
+                        return FSM.GuardNullNode(this, attacks[1]);
+                    }
+
+                    if (myType == EEliteType.Bomb)
+                        return FSM.GuardNullNode(this, this);
+                    return FSM.GuardNullNode(this, attacks[0]);
+
                 // Only Use Rush Monster
                 case ETraceState.PlayerEnterRush:
                     // Rush Monster Attack Node
@@ -55,9 +60,6 @@ namespace EnemyScripts
                     return FSM.GuardNullNode(this, attacks[2]);
                 
                 // Only Use Rush Monster
-                case ETraceState.PlayerEnterOverRush:
-                    return FSM.GuardNullNode(this, overRush);
-                
                 case ETraceState.PlayerTrace:
                     return FSM.GuardNullNode(this, this);
                 
@@ -118,6 +120,40 @@ namespace EnemyScripts
         }
     }
 
+    public class EliteBombAttackNode : INode
+    {
+        public INode endAttack;
+
+        public INode Execute(Blackboard blackboard)
+        {
+            var playerTransform = blackboard.GetData<Transform>("playerTransform");
+            var myTransform = blackboard.GetData<Transform>("myTransform");
+
+            GameObject.Instantiate(blackboard.GetData<GameObject>("bombPrefab"),
+                (Vector2)myTransform.position,
+                quaternion.identity);
+            
+            LogPrintSystem.SystemLogPrint(
+                blackboard.GetData<Transform>("myTransform"),
+                "Bomb Attack",
+                ELogType.EnemyAI);
+
+            Sequence sequence = DOTween.Sequence();
+            blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttackReady").Value = false;
+            sequence.SetDelay(blackboard.GetData<ReferenceValueT<float>>("specialAttackCooldown").Value).OnComplete(
+                () =>
+                {
+                    blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttackReady").Value = true;
+                    LogPrintSystem.SystemLogPrint(
+                        blackboard.GetData<Transform>("myTransform"),
+                        "Now Can Special Attack",
+                        ELogType.EnemyAI);
+                });
+            
+            return FSM.GuardNullNode(this, endAttack);
+        }
+    }
+
     public class EliteRushAttackReadyNode : INode
     {
         public INode enterGroggy;
@@ -129,34 +165,14 @@ namespace EnemyScripts
             //      return enterGroggy (Groggy Call)
             // else 
             //      return failedAttack (Special Attack Call)
+            
+            
+            
             LogPrintSystem.SystemLogPrint(
                 blackboard.GetData<Transform>("myTransform"),
                 "Rush Ready State On",
                 ELogType.EnemyAI);
             return FSM.GuardNullNode(this, this);
-        }
-    }
-
-    public class EliteBombAttackNode : INode
-    {
-        public INode endAttack;
-
-        public INode Execute(Blackboard blackboard)
-        {
-            var playerTransform = blackboard.GetData<Transform>("playerTransform");
-            var myTransform = blackboard.GetData<Transform>("myTransform");
-
-            GameObject.Instantiate(blackboard.GetData<GameObject>("bombPrefab"),
-                myTransform.position,
-                quaternion.identity);
-
-            Sequence sequence = DOTween.Sequence();
-            
-            LogPrintSystem.SystemLogPrint(
-                blackboard.GetData<Transform>("myTransform"),
-                "Bomb Attack",
-                ELogType.EnemyAI);
-            return FSM.GuardNullNode(this, endAttack);
         }
     }
 

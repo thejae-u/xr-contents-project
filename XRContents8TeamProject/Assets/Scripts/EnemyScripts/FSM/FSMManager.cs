@@ -130,44 +130,40 @@ namespace EnemyScripts
         PlayerEnter,
         PlayerExit,
         PlayerTrace,
-        PlayerEnterRush,
-        PlayerEnterOverRush
+        PlayerEnterRush
     }
 
     public abstract class TraceNode : INode
     {
         public ETraceState Trace(Blackboard blackboard)
         {
-            // Range Calculate
+            // Whole Monster Use this variable
             Transform myTransform = blackboard.GetData<Transform>("myTransform");
             Transform playerTransform = blackboard.GetData<Transform>("playerTransform");
             
-            // Whole Monster Use this variable
             float d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
             float d2 = blackboard.GetData<ReferenceValueT<float>>("myAttackRange").Value;
+
+            EEliteType myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType").Value;
+            
+            // Distance of Player to Monster
             float distance = (myTransform.position - playerTransform.position).magnitude;
 
             float traceRange = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
 
             // Only Use Rush Monster
-            float rushD1 = blackboard.GetData<ReferenceValueT<float>>("myRushRange").Value;
+            float rushD2 = blackboard.GetData<ReferenceValueT<float>>("myRushRange").Value;
+            float overRushD2 = blackboard.GetData<ReferenceValueT<float>>("myOverRushRange").Value;
             
-            // Rush 몬스터
-            // 총 Range 개수 : 4
-            // 돌진 거리가 있지만 플레이어와 너무 가까우면 스킵
-            // 돌진 거리가 충족 되면 돌진
+            if (d1 + rushD2 >= distance && myType == EEliteType.Rush)
+                return overRushD2 + d1 >= distance ? ETraceState.PlayerTrace : ETraceState.PlayerEnterRush;
             
-            
-            // IF ENTER ATTACK RANGE
+            // Check Normal Attack Range When Player Tracing
             if (d1 + d2 >= distance)
                 return ETraceState.PlayerEnter;
-            
-            // IF EXIT TRACE RANGE
-            if (distance >= traceRange)
-                return ETraceState.PlayerExit;
-            
-            // IF NOW TRACING
-            return ETraceState.PlayerTrace;
+
+            // Check Player Out Range when Tracing
+            return distance >= traceRange ? ETraceState.PlayerExit : ETraceState.PlayerTrace;
         }
 
         public abstract INode Execute(Blackboard blackboard);

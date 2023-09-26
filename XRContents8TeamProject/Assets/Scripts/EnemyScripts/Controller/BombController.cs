@@ -17,25 +17,18 @@ public class BombController : MonoBehaviour
     // Player Last Position Set
     private Vector3 playerLastPos;
     private Vector3 myPos;
+    private float range;
 
     private void Start()
     {
         playerLastPos = GameObject.Find("Player").transform.position;
         myPos = transform.position;
+        range = 1f;
         Shoot();
-    }
-
-    private void Update()
-    {
-        if (playerLastPos != transform.position) return;
-        LogPrintSystem.SystemLogPrint(transform, "BOOM!!", ELogType.EnemyAI);
-        Destroy(gameObject);
     }
 
     private void Shoot()
     {
-        Sequence sequence = DOTween.Sequence();
-        
         //Vector3 topPosition = new Vector3(
           //  Mathf.Pow(playerLastPos.x, 2) / (2*(playerLastPos.x - playerLastPos.y)) + myPos.x,
         //Mathf.Pow(playerLastPos.x, 2) / (4*(playerLastPos.x - playerLastPos.y)) + myPos.y);
@@ -47,6 +40,28 @@ public class BombController : MonoBehaviour
         wayPoints.SetValue(myPos, 0);
         wayPoints.SetValue(topPosition, 1);
         wayPoints.SetValue(playerLastPos, 2);
-        transform.DOPath(wayPoints, bombSpeed, PathType.CatmullRom, PathMode.Sidescroller2D);
+        
+        transform.DOPath(wayPoints, bombSpeed, PathType.CatmullRom, PathMode.Sidescroller2D).OnComplete(() =>
+        {
+            LogPrintSystem.SystemLogPrint(transform, "BOOM!!", ELogType.EnemyAI);
+            Transform playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+
+            float d2 = playerTransform.GetComponent<PlayerManager>().MyRadius;
+
+            float distance = (playerTransform.position - transform.position).magnitude;
+
+            if (d2 + range >= distance)
+            {
+                LogPrintSystem.SystemLogPrint(transform, "Hit Bomb", ELogType.EnemyAI);
+            }
+            
+            Destroy(gameObject);
+        });
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 }
