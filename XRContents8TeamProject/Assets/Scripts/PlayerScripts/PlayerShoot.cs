@@ -40,7 +40,7 @@ public class PlayerShoot : MonoBehaviour
             {
                 Shoot();
             }
-            else if (state == EState.Reloading && reloadCoroutine != null && curAmmo > 0)
+            else if (state == EState.Reloading && reloadCoroutine != null)
             { // 재장전 중에 사격 버튼을 입력한 경우 장전을 취소한다.
                 StopCoroutine(reloadCoroutine);        
                 LogPrintSystem.SystemLogPrint(transform, $"Reload Cancel", ELogType.Player);
@@ -97,7 +97,7 @@ public class PlayerShoot : MonoBehaviour
     public void Reload()
     {
         LogPrintSystem.SystemLogPrint(transform, "Requset Reload", ELogType.Player);
-        if (curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo)
+        if (curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo && curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo)
         {
             reloadCoroutine = StartCoroutine(ReloadRoutine());
         }

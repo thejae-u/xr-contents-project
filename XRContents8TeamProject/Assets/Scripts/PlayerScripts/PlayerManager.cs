@@ -19,7 +19,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float playerHp = 100.0f;
     [SerializeField] public float playerAtk = 10.0f;
     [SerializeField] private float playerInvincibilityDuration = 1.0f;
-    private bool stateInvincibility = false;
+    private bool playerStateInvincibility = false;
 
 
     [Header("플레이어 사격 관련")]
