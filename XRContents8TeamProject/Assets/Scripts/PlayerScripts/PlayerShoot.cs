@@ -72,7 +72,7 @@ public class PlayerShoot : MonoBehaviour
 
     public void Shoot()
     {
-        if (Time.time >= lastFireTime + playerManager.GetComponent<PlayerManager>().shootSpeed)
+        if (Time.time >= lastFireTime + playerManager.GetComponent<PlayerManager>().shootDelaySpeed)
         {
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = new Vector3(mousePosition.x, mousePosition.y, mousePosition.z);

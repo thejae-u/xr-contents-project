@@ -1,33 +1,41 @@
 using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class PlayerManager : MonoBehaviour
 {
+    // 플레이어 추적 범위
     public float MyRadius => rad;
     public float rad = 1.0f;
 
-    [Header("플레이어 이동 관련")]
+    [Header("플레이어 이동 속도 조정")]
     [SerializeField] private float playerMoveSpeed = 5.0f;
+    [Header("플레이어 점프 중력 * 점프 힘 조정")]
     [SerializeField] private float playerJumpForce = 20.0f;
-    [SerializeField] private float playerGravityForce = 5.0f;
+    [SerializeField] private float playerGravityForce = 2.0f;
 
     private bool isPlayerViewDirRight = true;
     private bool isJumping = false;
     private bool canJump = true;
 
-    [Header("플레이어 스테이터스 관련")]
+    [Header("플레이어 체력 조정")]
     [SerializeField] private float playerHp = 100.0f;
+    [Header("플레이어 공격력 조정")]
     [SerializeField] public float playerAtk = 10.0f;
+    [Header("플레이어 무적시간 조정")]
     [SerializeField] private float playerInvincibilityDuration = 1.0f;
     private bool playerStateInvincibility = false;
 
-
-    [Header("플레이어 사격 관련")]
-    [SerializeField] public float shootSpeed = 1.0f;
-    [SerializeField] public float bulletSpeed = 5.0f;
-    [SerializeField] public float fireDistance = 50.0f;
+    [Header("플레이어 한발당 사격 딜레이 조정")]
+    [SerializeField] public float shootDelaySpeed = 1.0f;
+    [Header("플레이어 총알 속도 조정")]
+    [SerializeField] public float bulletSpeed = 30.0f;
+    [Header("플레이어 유효 사격 거리")]
+    [SerializeField] public float fireDistance = 15.0f;
+    [Header("플레이어 최대 탄알")]
     [SerializeField] public int maxAmmo = 6;
-    [SerializeField] public float reloadTime = 2.0f;
+    [Header("플레이어 한발당 재장전 시간")]
+    [SerializeField] public float reloadTime = 0.7f;
 
     private Rigidbody2D playerRigidbody;
 
@@ -49,11 +57,8 @@ public class PlayerManager : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Ground"))
-        {
-            if (canJump)
-                isJumping = false;
-        }
+        if (canJump)
+            isJumping = false;
     }
 
     #region MOVEMENT
@@ -61,7 +66,7 @@ public class PlayerManager : MonoBehaviour
     {
         float moveDir = Input.GetAxis("Horizontal");
 
-        if (isPlayerViewDirRight) 
+        if (isPlayerViewDirRight)
         {
             Vector3 dir = moveDir * Vector3.right;
             if (Input.GetKey(KeyCode.A))
@@ -92,7 +97,7 @@ public class PlayerManager : MonoBehaviour
     #region JUMP
     void PlayerJump()
     {
-        if(!isJumping) 
+        if (!isJumping)
         {
             playerRigidbody.AddForce(Vector2.up * playerJumpForce, ForceMode2D.Impulse);
             StartCoroutine(PlayerJumpResetTime());
@@ -126,8 +131,18 @@ public class PlayerManager : MonoBehaviour
 
     public void DiscountHp(float damage)
     {
+        Sequence sequence = DOTween.Sequence();
+
+        // 플레이어 피격시 빨간색으로 변함
+        transform.GetComponent<Renderer>().material.DOColor(Color.red, 0.5f);
+        LogPrintSystem.SystemLogPrint(transform, $"Player change Red", ELogType.Player);
+        sequence.SetDelay(1.0f).OnComplete(() => {
+            transform.GetComponent<Renderer>().material.DOColor(Color.white, 0.5f);
+        });
+
         playerHp -= damage;
         LogPrintSystem.SystemLogPrint(transform, $"{damage}From Enemy -> Remain PlayerHP{playerHp}", ELogType.Player);
+
     }
 
     void OnDrawGizmos()
