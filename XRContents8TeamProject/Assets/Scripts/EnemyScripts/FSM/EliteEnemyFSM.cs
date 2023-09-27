@@ -79,6 +79,7 @@ namespace EnemyScripts
 
         public INode Execute(Blackboard blackboard)
         {
+            Sequence sequence = DOTween.Sequence();
             if (!blackboard.GetData<ReferenceValueT<bool>>("isSpecialAttackReady").Value)
             {
                 LogPrintSystem.SystemLogPrint(
@@ -89,7 +90,6 @@ namespace EnemyScripts
                 blackboard.GetData<ReferenceValueT<bool>>("isGroggy").Value = false;
                 blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttack").Value = false;
                 blackboard.GetData<ReferenceValueT<bool>>("isSpecialAttackReady").Value = true;
-                Sequence sequence = DOTween.Sequence();
                 sequence.SetDelay(blackboard.GetData<ReferenceValueT<float>>("specialAttackWait").Value).OnComplete(() =>
                 {
                     LogPrintSystem.SystemLogPrint(
@@ -104,16 +104,14 @@ namespace EnemyScripts
                 if (blackboard.GetData<ReferenceValueT<bool>>("isGroggy").Value)
                 {
                     blackboard.GetData<ReferenceValueT<bool>>("isSpecialAttackReady").Value = false;
+                    sequence.Kill();
                     return FSM.GuardNullNode(this, enterGroggy);
                 }
 
-                if (blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttack").Value)
-                {
-                    blackboard.GetData<ReferenceValueT<bool>>("isSpecialAttackReady").Value = false;
-                    return FSM.GuardNullNode(this, failedAttack);
-                }
-
-                return FSM.GuardNullNode(this, this);
+                if (!blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttack").Value)
+                    return FSM.GuardNullNode(this, this);
+                blackboard.GetData<ReferenceValueT<bool>>("isSpecialAttackReady").Value = false;
+                return FSM.GuardNullNode(this, failedAttack);
             }
 
             return FSM.GuardNullNode(this, this);
@@ -140,6 +138,7 @@ namespace EnemyScripts
 
             Sequence sequence = DOTween.Sequence();
             blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttackReady").Value = false;
+            
             sequence.SetDelay(blackboard.GetData<ReferenceValueT<float>>("specialAttackCooldown").Value).OnComplete(
                 () =>
                 {
@@ -203,8 +202,20 @@ namespace EnemyScripts
         public INode Execute(Blackboard blackboard)
         {
             var myTransform = blackboard.GetData<Transform>("myTransform");
-            // Spend Groggy Time and Start Animation
+            var groggyTime = blackboard.GetData<ReferenceValueT<float>>("groggyTime").Value;
+            
             LogPrintSystem.SystemLogPrint(myTransform, "Now Groggy", ELogType.EnemyAI);
+            
+            // Spend Groggy Time and Start Animation
+            Sequence sequence = DOTween.Sequence();
+
+            sequence.SetDelay(groggyTime).OnComplete(() =>
+            {
+                blackboard.GetData<ReferenceValueT<bool>>("isGroggy").Value = false;
+            });
+
+            if (!blackboard.GetData<ReferenceValueT<bool>>("isGroggy").Value)
+                return FSM.GuardNullNode(this, endGroggy);
             return FSM.GuardNullNode(this, this);
         }
     }

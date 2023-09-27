@@ -38,6 +38,9 @@ namespace EnemyScripts
 
         [Header("툭수 공격 대기 시간을 조정")] 
         [SerializeField] private ReferenceValueT<float> specialAttackCooldown;
+
+        [Header("무력화 상태 시간 조정")] 
+        [SerializeField] private ReferenceValueT<float> groggyTime;
         
         [Header("엘리트 몬스터 타입 선택")]
         [SerializeField] private ReferenceValueT<EEliteType> myType;
@@ -95,6 +98,9 @@ namespace EnemyScripts
             b.AddData("specialAttackWait", specialAttackWait);
             b.AddData("isGroggy", isGroggy);
             b.AddData("canSpecialAttack", canSpecialAttack);
+            
+            // 무력화 시간
+            b.AddData("groggyTime", groggyTime);
             
             // Only Use Rush Monster
             b.AddData("myRushRange", myRushRange);

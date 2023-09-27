@@ -471,6 +471,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6607649661471559730, guid: 38b49ab5221524c03990be858d475f1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6607649661471559730, guid: 38b49ab5221524c03990be858d475f1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 7677861787649296059, guid: 38b49ab5221524c03990be858d475f1f, type: 3}
       propertyPath: bulletSpeed
       value: 20
@@ -766,11 +774,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1311825291639649294, guid: 19ab1099802954a1ea7266985c1d40d2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2446761889370637375, guid: 19ab1099802954a1ea7266985c1d40d2, type: 3}
       propertyPath: m_Name
       value: BombEliteEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3373032760898926380, guid: 19ab1099802954a1ea7266985c1d40d2, type: 3}
+      propertyPath: groggyTime.Value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3373032760898926380, guid: 19ab1099802954a1ea7266985c1d40d2, type: 3}
+      propertyPath: specialAttackWait.Value
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5482026765705577290, guid: 19ab1099802954a1ea7266985c1d40d2, type: 3}
       propertyPath: m_LocalPosition.x
