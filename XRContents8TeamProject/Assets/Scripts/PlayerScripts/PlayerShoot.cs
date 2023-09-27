@@ -65,6 +65,7 @@ public class PlayerShoot : MonoBehaviour
             else if(curAmmo >= playerManager.GetComponent<PlayerManager>().maxAmmo)
             {
                 state = EState.Ready;
+                LogPrintSystem.SystemLogPrint(transform, "Requset Complete", ELogType.Player);
             }
         }
     }
@@ -86,19 +87,15 @@ public class PlayerShoot : MonoBehaviour
             lastFireTime = Time.time;
             curAmmo--;
             LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo}", ELogType.Player);
-
-            if (curAmmo <= 0)
-            {
-                Reload();
-            }
         }
     }
 
     public void Reload()
     {
-        LogPrintSystem.SystemLogPrint(transform, "Requset Reload", ELogType.Player);
-        if (curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo && curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo)
+        
+        if (curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo && reloadCoroutine == null)
         {
+            LogPrintSystem.SystemLogPrint(transform, "Requset Reload", ELogType.Player);
             reloadCoroutine = StartCoroutine(ReloadRoutine());
         }
     }
@@ -110,7 +107,7 @@ public class PlayerShoot : MonoBehaviour
         yield return new WaitForSeconds(playerManager.GetComponent<PlayerManager>().reloadTime);
 
         curAmmo++;
-
+        reloadCoroutine = null;
         state = EState.ReloadComplete;
 
         LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo} -> ReloadTime : {playerManager.GetComponent<PlayerManager>().reloadTime}", ELogType.Player);
