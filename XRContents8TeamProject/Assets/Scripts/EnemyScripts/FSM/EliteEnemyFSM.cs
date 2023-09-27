@@ -202,7 +202,9 @@ namespace EnemyScripts
 
         public INode Execute(Blackboard blackboard)
         {
+            var myTransform = blackboard.GetData<Transform>("myTransform");
             // Spend Groggy Time and Start Animation
+            LogPrintSystem.SystemLogPrint(myTransform, "Now Groggy", ELogType.EnemyAI);
             return FSM.GuardNullNode(this, this);
         }
     }

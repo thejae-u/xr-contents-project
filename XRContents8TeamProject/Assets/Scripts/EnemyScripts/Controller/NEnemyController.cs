@@ -21,6 +21,9 @@ namespace EnemyScripts
         [SerializeField] private ReferenceValueT<float> myAttackRange;
         [Header("속도 조정")]
         [SerializeField] private ReferenceValueT<float> myMoveSpeed;
+
+        [Header("타입 지정(일반 몬스터 None)")] 
+        [SerializeField] private ReferenceValueT<EEliteType> myType;
         
         [Header("경직 시간을 조정")] [Range(0.1f,0.5f)]
         [SerializeField] private float hitTime;
@@ -50,6 +53,7 @@ namespace EnemyScripts
             b.AddData("playerTransform", GameObject.Find("Player").transform);
             b.AddData("myMoveSpeed", myMoveSpeed);
             b.AddData("isNowAttack", isNowAttack);
+            b.AddData("myType", myType);
 
             var wait = new WaitNode();
             var trace = new NormalTraceNode();

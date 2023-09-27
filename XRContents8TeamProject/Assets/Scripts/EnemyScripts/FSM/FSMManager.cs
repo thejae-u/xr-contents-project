@@ -152,12 +152,15 @@ namespace EnemyScripts
             float traceRange = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
 
             // Only Use Rush Monster
-            float rushD2 = blackboard.GetData<ReferenceValueT<float>>("myRushRange").Value;
-            float overRushD2 = blackboard.GetData<ReferenceValueT<float>>("myOverRushRange").Value;
-            
-            if (d1 + rushD2 >= distance && myType == EEliteType.Rush)
-                return overRushD2 + d1 >= distance ? ETraceState.PlayerTrace : ETraceState.PlayerEnterRush;
-            
+            if (myType == EEliteType.Rush)
+            {
+                float rushD2 = blackboard.GetData<ReferenceValueT<float>>("myRushRange").Value;
+                float overRushD2 = blackboard.GetData<ReferenceValueT<float>>("myOverRushRange").Value;
+
+                if (d1 + rushD2 >= distance)
+                    return overRushD2 + d1 >= distance ? ETraceState.PlayerTrace : ETraceState.PlayerEnterRush;
+            }
+
             // Check Normal Attack Range When Player Tracing
             if (d1 + d2 >= distance)
                 return ETraceState.PlayerEnter;
