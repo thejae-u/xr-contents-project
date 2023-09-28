@@ -30,11 +30,11 @@ namespace EnemyScripts
             switch (type)
             {
                 case ETraceState.PlayerEnter:
-                    return FSM.GuardNullNode(this, playerEnter);
+                    return Fsm.GuardNullNode(this, playerEnter);
                 case ETraceState.PlayerExit:
-                    return FSM.GuardNullNode(this, playerExit);
+                    return Fsm.GuardNullNode(this, playerExit);
                 case ETraceState.PlayerTrace:
-                    return FSM.GuardNullNode(this, this);
+                    return Fsm.GuardNullNode(this, this);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -50,7 +50,7 @@ namespace EnemyScripts
             var isAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
             // animation start
             if (isAttack.Value)
-                return FSM.GuardNullNode(this, this);
+                return Fsm.GuardNullNode(this, this);
             else
             {
                 isAttack.Value = true;
@@ -83,7 +83,7 @@ namespace EnemyScripts
             if (d1 + d2 >= distance)
                 return this;
 
-            return FSM.GuardNullNode(this, outOfAttackRange);
+            return Fsm.GuardNullNode(this, outOfAttackRange);
         }
     }
 }

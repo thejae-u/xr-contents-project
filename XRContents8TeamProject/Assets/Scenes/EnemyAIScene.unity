@@ -786,7 +786,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3373032760898926380, guid: 19ab1099802954a1ea7266985c1d40d2, type: 3}
       propertyPath: specialAttackWait.Value
-      value: 10
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3373032760898926380, guid: 19ab1099802954a1ea7266985c1d40d2, type: 3}
+      propertyPath: specialAttackCooldown.Value
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5482026765705577290, guid: 19ab1099802954a1ea7266985c1d40d2, type: 3}
       propertyPath: m_LocalPosition.x

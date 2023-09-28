@@ -8,8 +8,8 @@ namespace EnemyScripts
 {
     public class NEnemyController : MonoBehaviour
     {
-        private FSM fsm;
-        private FSM fsmLife;
+        private Fsm fsm;
+        private Fsm fsmLife;
 
         [Header("체력 조정")]
         [SerializeField] private ReferenceValueT<float> myHp;
@@ -39,7 +39,7 @@ namespace EnemyScripts
 
         void Start()
         {
-            fsm = new FSM();
+            fsm = new Fsm();
             Blackboard b = new Blackboard();
 
             isAlive.Value = true;
@@ -64,7 +64,7 @@ namespace EnemyScripts
             trace.playerExit = wait;
             attack.outOfAttackRange = trace;
 
-            fsmLife = new FSM();
+            fsmLife = new Fsm();
             var alive = new AliveNode();
             var dead = new DeadNode();
             alive.dead = dead;

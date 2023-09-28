@@ -7,8 +7,8 @@ namespace EnemyScripts
 {
     public class EEnemyController : MonoBehaviour
     {
-        private FSM fsm;
-        private FSM fsmLife;
+        private Fsm fsm;
+        private Fsm fsmLife;
 
         // Blackboard Var initialize
         [Header("체력을 조정")]
@@ -52,21 +52,25 @@ namespace EnemyScripts
         [SerializeField] private GameObject weak;
 
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isGroggy;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isInGroggy;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isAlive;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isNowAttack;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isSpecialAttackReady;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> canSpecialAttack;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> canSpecialAttackReady;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> hasRemainAttackTime;
 
         void Start()
         {
             // About Attack FSM
-            fsm = new FSM();
+            fsm = new Fsm();
             Blackboard b = new Blackboard();
 
             isAlive.Value = true;
             isGroggy.Value = false;
+            isInGroggy.Value = false;
             canSpecialAttackReady.Value = true;
+            hasRemainAttackTime.Value = false;
 
             // Blackboard Initialize
             // About player Info
@@ -93,10 +97,12 @@ namespace EnemyScripts
             b.AddData("mySpecialAttackDamage", mySpecialAttackDamage);
             b.AddData("specialAttackCooldown", specialAttackCooldown);
             b.AddData("canSpecialAttackReady", canSpecialAttackReady);
+            b.AddData("hasRemainAttackTime", hasRemainAttackTime);
             
             // 특수 공격 그로기 가능 시간
             b.AddData("specialAttackWait", specialAttackWait);
             b.AddData("isGroggy", isGroggy);
+            b.AddData("isInGroggy", isInGroggy);
             b.AddData("canSpecialAttack", canSpecialAttack);
             
             // 무력화 시간
@@ -124,10 +130,12 @@ namespace EnemyScripts
             // Connect Node
             wait.enterPlayer = trace;
 
+            // normal : 0, bomb : 1, Rush : 2
             trace.attacks = new INode[3];
             trace.attacks[0] = attack;
             trace.attacks[1] = bombReady;
             trace.attacks[2] = rushReady;
+            
             trace.overRush = overRush;
             trace.playerExit = wait;
 
@@ -145,7 +153,7 @@ namespace EnemyScripts
             overRush.enterPlayer = attack;
             
             // About Life FSM
-            fsmLife = new FSM();
+            fsmLife = new Fsm();
             
             var alive = new AliveNode();
             var dead = new DeadNode();
@@ -156,7 +164,7 @@ namespace EnemyScripts
             fsmLife.Init(b, alive);
         }
 
-        void Update()
+        private void Update()
         {
             if(!isAlive.Value)
                 Destroy(gameObject);
@@ -170,6 +178,7 @@ namespace EnemyScripts
             }
         }
 
+        // Called In Weakness Prefab
         public void WeakBreak()
         {
             isGroggy.Value = true;

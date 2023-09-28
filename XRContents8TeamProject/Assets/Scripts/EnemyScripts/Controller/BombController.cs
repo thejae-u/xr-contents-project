@@ -35,7 +35,6 @@ public class BombController : MonoBehaviour
 
         Vector3 topPosition = new Vector3((playerLastPos.x + myPos.x) / 2, myPos.y + bombDeg, 0);
 
-        
         wayPoints = new Vector3[3];
         wayPoints.SetValue(myPos, 0);
         wayPoints.SetValue(topPosition, 1);
@@ -44,9 +43,11 @@ public class BombController : MonoBehaviour
         transform.DOPath(wayPoints, bombSpeed, PathType.CatmullRom, PathMode.Sidescroller2D).OnComplete(() =>
         {
             LogPrintSystem.SystemLogPrint(transform, "BOOM!!", ELogType.EnemyAI);
-            Transform playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+            var player = GameObject.Find("Player");
+            var playerManager = player.GetComponent<PlayerManager>();
+            var playerTransform = player.GetComponent<Transform>();
 
-            float d2 = playerTransform.GetComponent<PlayerManager>().MyRadius;
+            float d2 = playerManager.MyRadius;
 
             float distance = (playerTransform.position - transform.position).magnitude;
 
