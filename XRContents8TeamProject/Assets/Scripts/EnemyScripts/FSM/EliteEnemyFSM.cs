@@ -31,7 +31,7 @@ public class EliteTraceNode : TraceNode
 
         var myPos = myTransform.position;
 
-        myPos = new Vector3(Mathf.MoveTowards(myPos.x,
+        myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x,
                 playerTransform.position.x, myMoveSpeed.Value * Time.deltaTime),
             myPos.y, 0);
 
@@ -47,6 +47,9 @@ public class EliteTraceNode : TraceNode
 
             // Only Use Rush Monster
             case ETraceState.PlayerEnterRush:
+                if (hasRemainAttackTime.Value)
+                    return Fsm.GuardNullNode(this, this);
+
                 LogPrintSystem.SystemLogPrint(myTransform, "Rush Entered", ELogType.EnemyAI);
                 return Fsm.GuardNullNode(this, attacks[2]);
 
@@ -63,10 +66,11 @@ public class EliteTraceNode : TraceNode
     }
 }
 
-public class EliteBombAttackReadyNode : INode
+
+public class EliteAttackReadyNode : INode
 {
     public INode enterGroggy;
-    public INode failedAttack;
+    public INode[] failedAttack;
 
     public INode Execute(Blackboard blackboard)
     {
@@ -77,6 +81,7 @@ public class EliteBombAttackReadyNode : INode
         var canSpecialAttack = blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttack");
         var isSpecialAttackReady = blackboard.GetData<ReferenceValueT<bool>>("isSpecialAttackReady");
         var isGroggy = blackboard.GetData<ReferenceValueT<bool>>("isGroggy");
+        var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType");
 
         if (!isSpecialAttackReady.Value)
         {
@@ -95,8 +100,10 @@ public class EliteBombAttackReadyNode : INode
         {
             if (!canSpecialAttack.Value) return Fsm.GuardNullNode(this, this);
             isSpecialAttackReady.Value = false;
-            return Fsm.GuardNullNode(this, failedAttack);
 
+            return myType == EEliteType.Bomb
+                ? Fsm.GuardNullNode(this, failedAttack[0])
+                : Fsm.GuardNullNode(this, failedAttack[1]);
         }
 
         isSpecialAttackReady.Value = false;
@@ -138,29 +145,56 @@ public class EliteBombAttackNode : INode
     }
 }
 
-public class EliteRushAttackReadyNode : INode
-{
-    public INode enterGroggy;
-    public INode failedAttack;
-
-    public INode Execute(Blackboard blackboard)
-    {
-        var specialAttackWait = blackboard.GetData<ReferenceValueT<float>>("specialAttackWait");
-        var myTransform = blackboard.GetData<Transform>("myTransform");
-        var playerTransform = blackboard.GetData<Transform>("playerTransform");
-        var canSpecialAttack = blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttack");
-        var isGroggy = blackboard.GetData<ReferenceValueT<bool>>("isGroggy");
-
-        return Fsm.GuardNullNode(this, this);
-    }
-}
-
 public class EliteRushAttackNode : INode
 {
     public INode endAttack;
 
     public INode Execute(Blackboard blackboard)
     {
+        var myTransform = blackboard.GetData<Transform>("myTransform");
+        var playerTransform = blackboard.GetData<Transform>("playerTransform");
+        var isNowAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
+        var rushDirection = blackboard.GetData<ReferenceValueT<bool>>("rushDirection");
+
+        var myMoveSpeed = blackboard.GetData<ReferenceValueT<float>>("myMoveSpeed");
+
+        if (!isNowAttack)
+        {
+            rushDirection.Value = Vector3.Normalize(playerTransform.position - myTransform.position).x > 0.0f;
+            isNowAttack.Value = true;
+        }
+
+        Vector3 pos = Camera.main.WorldToViewportPoint(myTransform.position);
+
+        if (rushDirection)
+        {
+            LogPrintSystem.SystemLogPrint(myTransform, "Right", ELogType.EnemyAI);
+            if (pos.x < 1f)
+            {
+                pos.x += myMoveSpeed * 2.0f * Time.deltaTime;
+            }
+            else
+            {
+                isNowAttack.Value = false;
+                return Fsm.GuardNullNode(this, endAttack);
+            }
+
+            myTransform.position = Camera.main.ViewportToWorldPoint(pos);
+        }
+        else
+        {
+            LogPrintSystem.SystemLogPrint(myTransform, "Left", ELogType.EnemyAI);
+            if (pos.x > 0f)
+                pos.x -= myMoveSpeed * 2.0f * Time.deltaTime;
+            else
+            {
+                isNowAttack.Value = false;
+                return Fsm.GuardNullNode(this, endAttack);
+            }
+
+            myTransform.position = Camera.main.ViewportToWorldPoint(pos);
+        }
+        
         return Fsm.GuardNullNode(this, this);
     }
 }

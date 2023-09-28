@@ -60,6 +60,8 @@ namespace EnemyScripts
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> canSpecialAttackReady;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> hasRemainAttackTime;
 
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> rushDirection;
+
         void Start()
         {
             // About Attack FSM
@@ -71,6 +73,7 @@ namespace EnemyScripts
             isInGroggy.Value = false;
             canSpecialAttackReady.Value = true;
             hasRemainAttackTime.Value = false;
+            rushDirection.Value = false;
 
             // Blackboard Initialize
             // About player Info
@@ -105,12 +108,13 @@ namespace EnemyScripts
             b.AddData("isInGroggy", isInGroggy);
             b.AddData("canSpecialAttack", canSpecialAttack);
             
-            // 무력화 시간
+            // Groggy Time
             b.AddData("groggyTime", groggyTime);
             
             // Only Use Rush Monster
             b.AddData("myRushRange", myRushRange);
             b.AddData("myOverRushRange", myOverRushRange);
+            b.AddData("rushDirection", rushDirection);
         
 
             // Node Initialize
@@ -118,8 +122,8 @@ namespace EnemyScripts
             var trace = new EliteTraceNode();
             var attack = new NormalAttackNode();
 
-            var bombReady = new EliteBombAttackReadyNode();
-            var rushReady = new EliteRushAttackReadyNode();
+            var ready = new EliteAttackReadyNode();
+            // var rushReady = new EliteRushAttackReadyNode();
 
             var bombAttack = new EliteBombAttackNode();
             var rushAttack = new EliteRushAttackNode();
@@ -133,23 +137,34 @@ namespace EnemyScripts
             // normal : 0, bomb : 1, Rush : 2
             trace.attacks = new INode[3];
             trace.attacks[0] = attack;
-            trace.attacks[1] = bombReady;
-            trace.attacks[2] = rushReady;
+            trace.attacks[1] = ready;
+            trace.attacks[2] = ready;
             
+            // Only use Rush Monster
             trace.overRush = overRush;
-            trace.playerExit = wait;
-
-            attack.outOfAttackRange = wait;
             
-            bombReady.failedAttack = bombAttack;
-            bombReady.enterGroggy = groggy;
+            // Player Out of Range
+            trace.playerExit = wait;
+            attack.outOfAttackRange = wait;
+
+            // Share Ready Node
+            ready.failedAttack = new INode[2];
+            
+            // bomb Ready
+            ready.failedAttack[0] = bombAttack;
             bombAttack.endAttack = wait;
             
-            rushReady.failedAttack = rushAttack;
-            rushReady.failedAttack = groggy;
+            // rush Ready
+            ready.failedAttack[1] = rushAttack;
             rushAttack.endAttack = wait;
+            
+            // Share Groggy Node
+            ready.enterGroggy = groggy;
 
+            // End of Groggy
             groggy.endGroggy = wait;
+            
+            // Only use Rush Monster
             overRush.enterPlayer = attack;
             
             // About Life FSM
@@ -184,6 +199,11 @@ namespace EnemyScripts
             isGroggy.Value = true;
         }
 
+        public float GetMySpecialDamage()
+        {
+            return mySpecialAttackDamage.Value;
+        }
+
         private void WeakShow()
         {
             weak.SetActive(isSpecialAttackReady.Value);
@@ -199,6 +219,13 @@ namespace EnemyScripts
 
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(transform.position, myRushRange.Value);
+
+            if (myType.Value == EEliteType.Rush)
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawWireSphere(transform.position, myOverRushRange.Value);
+            }
+                
         }
     }
 }

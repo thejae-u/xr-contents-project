@@ -44,15 +44,15 @@ public class BombController : MonoBehaviour
         {
             LogPrintSystem.SystemLogPrint(transform, "BOOM!!", ELogType.EnemyAI);
             var player = GameObject.Find("Player");
-            var playerManager = player.GetComponent<PlayerManager>();
             var playerTransform = player.GetComponent<Transform>();
+            var playerManager = player.GetComponent<PlayerManager>();
 
             float d2 = playerManager.MyRadius;
-
             float distance = (playerTransform.position - transform.position).magnitude;
 
             if (d2 + range >= distance)
             {
+                playerManager.DiscountHp(5f);
                 LogPrintSystem.SystemLogPrint(transform, "Hit Bomb", ELogType.EnemyAI);
             }
             

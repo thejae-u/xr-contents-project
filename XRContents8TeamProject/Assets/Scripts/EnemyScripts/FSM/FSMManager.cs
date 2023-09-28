@@ -152,6 +152,7 @@ public abstract class TraceNode : INode
         // Only Use Rush Monster
         if (myType == EEliteType.Rush)
         {
+            LogPrintSystem.SystemLogPrint(myTransform, "Check in Rush Monster", ELogType.EnemyAI);
             float rushD2 = blackboard.GetData<ReferenceValueT<float>>("myRushRange").Value;
             float overRushD2 = blackboard.GetData<ReferenceValueT<float>>("myOverRushRange").Value;
 
