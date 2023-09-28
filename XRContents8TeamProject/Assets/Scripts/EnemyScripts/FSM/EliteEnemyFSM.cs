@@ -31,7 +31,7 @@ public class EliteTraceNode : TraceNode
 
         var myPos = myTransform.position;
 
-        myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x,
+      myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x,
                 playerTransform.position.x, myMoveSpeed.Value * Time.deltaTime),
             myPos.y, 0);
 
@@ -155,8 +155,7 @@ public class EliteRushAttackNode : INode
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
         var isNowAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
         var rushDirection = blackboard.GetData<ReferenceValueT<bool>>("rushDirection");
-
-        var myMoveSpeed = blackboard.GetData<ReferenceValueT<float>>("myMoveSpeed");
+        var myRushSpeed = blackboard.GetData<ReferenceValueT<float>>("myRushSpeed");
 
         if (!isNowAttack)
         {
@@ -168,10 +167,10 @@ public class EliteRushAttackNode : INode
 
         if (rushDirection)
         {
-            LogPrintSystem.SystemLogPrint(myTransform, "Right", ELogType.EnemyAI);
-            if (pos.x < 1f)
+            if (pos.x < 1.0f)
             {
-                pos.x += myMoveSpeed * 2.0f * Time.deltaTime;
+                pos = new Vector3(Mathf.MoveTowards(pos.x, 1.0f,
+                    myRushSpeed.Value * Time.deltaTime), pos.y, 10.0f);
             }
             else
             {
@@ -183,9 +182,11 @@ public class EliteRushAttackNode : INode
         }
         else
         {
-            LogPrintSystem.SystemLogPrint(myTransform, "Left", ELogType.EnemyAI);
-            if (pos.x > 0f)
-                pos.x -= myMoveSpeed * 2.0f * Time.deltaTime;
+            if (pos.x > 0.0f)
+            {
+                pos = new Vector3(Mathf.MoveTowards(pos.x, 0.0f,
+                    myRushSpeed.Value * Time.deltaTime), pos.y, 10.0f);
+            }
             else
             {
                 isNowAttack.Value = false;

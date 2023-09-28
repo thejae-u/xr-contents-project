@@ -32,6 +32,9 @@ namespace EnemyScripts
         [Header("특수 공격 사거리를 조정(돌진 몬스터)")]
         [SerializeField] private ReferenceValueT<float> myRushRange;
         [SerializeField] private ReferenceValueT<float> myOverRushRange;
+
+        [Header("돌진 속도를 조정")] [Range(0.1f, 1.5f)]
+        [SerializeField] private ReferenceValueT<float> myRushSpeed;
         
         [Header("특수 공격 준비 시간을 조정")]
         [SerializeField] private ReferenceValueT<float> specialAttackWait;
@@ -115,6 +118,7 @@ namespace EnemyScripts
             b.AddData("myRushRange", myRushRange);
             b.AddData("myOverRushRange", myOverRushRange);
             b.AddData("rushDirection", rushDirection);
+            b.AddData("myRushSpeed", myRushSpeed);
         
 
             // Node Initialize
