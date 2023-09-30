@@ -64,6 +64,7 @@ namespace EnemyScripts
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> hasRemainAttackTime;
 
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> rushDirection;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isOverRush;
 
         void Start()
         {
@@ -77,6 +78,7 @@ namespace EnemyScripts
             canSpecialAttackReady.Value = true;
             hasRemainAttackTime.Value = false;
             rushDirection.Value = false;
+            isOverRush.Value = false;
 
             // Blackboard Initialize
             // About player Info
@@ -119,6 +121,7 @@ namespace EnemyScripts
             b.AddData("myOverRushRange", myOverRushRange);
             b.AddData("rushDirection", rushDirection);
             b.AddData("myRushSpeed", myRushSpeed);
+            b.AddData("isOverRush", isOverRush);
         
 
             // Node Initialize
@@ -127,13 +130,11 @@ namespace EnemyScripts
             var attack = new NormalAttackNode();
 
             var ready = new EliteAttackReadyNode();
-            // var rushReady = new EliteRushAttackReadyNode();
 
             var bombAttack = new EliteBombAttackNode();
             var rushAttack = new EliteRushAttackNode();
 
             var groggy = new EliteGroggyNode();
-            var overRush = new EliteRushOverNode();
 
             // Connect Node
             wait.enterPlayer = trace;
@@ -143,9 +144,6 @@ namespace EnemyScripts
             trace.attacks[0] = attack;
             trace.attacks[1] = ready;
             trace.attacks[2] = ready;
-            
-            // Only use Rush Monster
-            trace.overRush = overRush;
             
             // Player Out of Range
             trace.playerExit = wait;
@@ -167,9 +165,6 @@ namespace EnemyScripts
 
             // End of Groggy
             groggy.endGroggy = wait;
-            
-            // Only use Rush Monster
-            overRush.enterPlayer = attack;
             
             // About Life FSM
             fsmLife = new Fsm();

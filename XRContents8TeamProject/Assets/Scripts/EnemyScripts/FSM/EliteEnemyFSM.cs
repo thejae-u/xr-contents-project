@@ -153,11 +153,15 @@ public class EliteRushAttackNode : INode
 
     public INode Execute(Blackboard blackboard)
     {
+        var sequence = DOTween.Sequence();
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
         var isNowAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
         var rushDirection = blackboard.GetData<ReferenceValueT<bool>>("rushDirection");
         var myRushSpeed = blackboard.GetData<ReferenceValueT<float>>("myRushSpeed");
+        var canSpecialAttackReady = blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttackReady");
+        var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
+        var specialAttackCooldown = blackboard.GetData<ReferenceValueT<float>>("specialAttackCooldown");
 
         if (!isNowAttack)
         {
@@ -177,6 +181,12 @@ public class EliteRushAttackNode : INode
             else
             {
                 isNowAttack.Value = false;
+                canSpecialAttackReady.Value = false;
+                hasRemainAttackTime.Value = true;
+                sequence.SetDelay(specialAttackCooldown.Value).OnComplete(() =>
+                {
+                    hasRemainAttackTime.Value = false;
+                });
                 return Fsm.GuardNullNode(this, endAttack);
             }
 
@@ -192,6 +202,12 @@ public class EliteRushAttackNode : INode
             else
             {
                 isNowAttack.Value = false;
+                canSpecialAttackReady.Value = false;
+                hasRemainAttackTime.Value = true;
+                sequence.SetDelay(specialAttackCooldown.Value).OnComplete(() =>
+                {
+                    hasRemainAttackTime.Value = false;
+                });
                 return Fsm.GuardNullNode(this, endAttack);
             }
 
@@ -199,16 +215,6 @@ public class EliteRushAttackNode : INode
         }
         
         return Fsm.GuardNullNode(this, this);
-    }
-}
-
-public class EliteRushOverNode : INode
-{
-    public INode enterPlayer;
-
-    public INode Execute(Blackboard blackboard)
-    {
-        return Fsm.GuardNullNode(this, enterPlayer);
     }
 }
 
