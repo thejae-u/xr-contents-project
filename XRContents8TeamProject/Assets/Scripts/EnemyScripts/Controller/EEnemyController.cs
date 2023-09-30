@@ -33,7 +33,7 @@ namespace EnemyScripts
         [SerializeField] private ReferenceValueT<float> myRushRange;
         [SerializeField] private ReferenceValueT<float> myOverRushRange;
 
-        [Header("돌진 속도를 조정")] [Range(0.1f, 1.5f)]
+        [Header("돌진 속도를 조정")]
         [SerializeField] private ReferenceValueT<float> myRushSpeed;
         
         [Header("특수 공격 준비 시간을 조정")]

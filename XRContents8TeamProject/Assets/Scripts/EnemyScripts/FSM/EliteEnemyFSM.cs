@@ -70,6 +70,8 @@ public class EliteTraceNode : TraceNode
 public class EliteAttackReadyNode : INode
 {
     public INode enterGroggy;
+    
+    // player failed attack weakness
     public INode[] failedAttack;
 
     public INode Execute(Blackboard blackboard)
