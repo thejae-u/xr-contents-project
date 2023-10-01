@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float playerMoveSpeed = 5.0f;
     [Header("플레이어 점프 중력 * 점프 힘 조정")]
     [SerializeField] private float playerJumpForce = 20.0f;
-    [SerializeField] private float playerGravityForce = 2.0f;
+    [SerializeField] private float playerGravityForce = 5.0f;
 
     private bool isPlayerViewDirRight = true;
     private bool isJumping = false;
@@ -22,7 +22,9 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float playerHp = 100.0f;
     [Header("플레이어 공격력 조정")]
     [SerializeField] public float playerAtk = 10.0f;
-    [Header("플레이어 무적시간 조정")]
+    [Header("플레이어 회피 거리")]
+    [SerializeField] private float dodgeDistance = 4.0f;
+    [Header("플레이어 무적 시간(지속 시간) 조정")]
     [SerializeField] private float playerInvincibilityDuration = 1.0f;
     private bool playerStateInvincibility = false;
 
@@ -44,12 +46,17 @@ public class PlayerManager : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        playerRigidbody.gravityScale = playerGravityForce;
+    }
+
     private void Update()
     {
         PlayerViewMousePoint();
         PlayerMove();
-
-        if (Input.GetButton("Jump"))
+        PlayerDodge();
+        if (Input.GetKey(KeyCode.Space))
         {
             PlayerJump();
         }
@@ -112,8 +119,42 @@ public class PlayerManager : MonoBehaviour
         canJump = true;
     }
     #endregion JUMP
+    
+    void PlayerDodge()
+    {            
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            LogPrintSystem.SystemLogPrint(transform, "회피 사용", ELogType.Player);
+            Sequence sequence = DOTween.Sequence();
 
-    private void PlayerViewMousePoint()
+            Vector3 DodgeDistance;
+            Vector3 playerPos = transform.position;
+
+            sequence.AppendCallback(() =>
+            {
+                playerStateInvincibility = true;
+            });
+
+            if (isPlayerViewDirRight)
+                DodgeDistance = new Vector3(playerPos.x + dodgeDistance,playerPos.y,playerPos.z);
+            else
+                DodgeDistance = new Vector3(playerPos.x - dodgeDistance,playerPos.y,playerPos.z);
+            
+            LogPrintSystem.SystemLogPrint(transform, $"회피 사용 전 거리{transform.position.x}", ELogType.Player);
+            sequence.Append(transform.DOMoveX(DodgeDistance.x, playerInvincibilityDuration));
+            LogPrintSystem.SystemLogPrint(transform, $"회피 이동 완료{transform.position.x}", ELogType.Player);
+
+
+            sequence.AppendCallback(() =>
+            {
+                playerStateInvincibility = false;
+            });
+
+            sequence.Play();
+        }
+    }
+
+    void PlayerViewMousePoint()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
