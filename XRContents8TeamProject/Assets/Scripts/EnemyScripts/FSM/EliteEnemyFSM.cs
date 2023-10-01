@@ -9,7 +9,8 @@ using UnityEngine;
 public enum EEliteType
 {
     Bomb,
-    Rush
+    Rush,
+    None
 }
 
 public class EliteTraceNode : TraceNode

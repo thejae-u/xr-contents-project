@@ -143,18 +143,26 @@ public abstract class TraceNode : INode
         float d2 = blackboard.GetData<ReferenceValueT<float>>("myAttackRange").Value;
 
         EEliteType myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType").Value;
-        
-        // Only use Rush Monster
-        var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
-        var isOverRush = blackboard.GetData<ReferenceValueT<bool>>("isOverRush");
 
         // Distance of Player to Monster
         float distance = (myTransform.position - playerTransform.position).magnitude;
 
         float traceRange = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
 
-        // Only Use Rush Monster
-        if (myType == EEliteType.Rush && !hasRemainAttackTime.Value && !isOverRush.Value)
+        if (myType != EEliteType.Rush)
+        {
+            if (d1 + d2 >= distance)
+                return ETraceState.PlayerEnter;
+            // Check Player Out Range when Tracing
+            return distance >= traceRange ? ETraceState.PlayerExit : ETraceState.PlayerTrace;
+        }
+
+        // From here Only Use Rush Monster
+        
+        var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
+        var isOverRush = blackboard.GetData<ReferenceValueT<bool>>("isOverRush");
+        
+        if (!hasRemainAttackTime.Value && !isOverRush.Value)
         {
             LogPrintSystem.SystemLogPrint(myTransform, "Check in Rush Monster", ELogType.EnemyAI);
             float rushD2 = blackboard.GetData<ReferenceValueT<float>>("myRushRange").Value;
@@ -178,8 +186,7 @@ public abstract class TraceNode : INode
         // Check Normal Attack Range When Player Tracing
         if (d1 + d2 >= distance)
         {
-            if (myType == EEliteType.Rush)
-                isOverRush.Value = false;
+            isOverRush.Value = false;
             return ETraceState.PlayerEnter;
         }
 
