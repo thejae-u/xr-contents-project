@@ -7,8 +7,8 @@ namespace EnemyScripts
 {
     public class EEnemyController : MonoBehaviour
     {
-        private FSM fsm;
-        private FSM fsmLife;
+        private Fsm fsm;
+        private Fsm fsmLife;
 
         // Blackboard Var initialize
         [Header("체력을 조정")]
@@ -32,12 +32,18 @@ namespace EnemyScripts
         [Header("특수 공격 사거리를 조정(돌진 몬스터)")]
         [SerializeField] private ReferenceValueT<float> myRushRange;
         [SerializeField] private ReferenceValueT<float> myOverRushRange;
+
+        [Header("돌진 속도를 조정")]
+        [SerializeField] private ReferenceValueT<float> myRushSpeed;
         
         [Header("특수 공격 준비 시간을 조정")]
         [SerializeField] private ReferenceValueT<float> specialAttackWait;
 
         [Header("툭수 공격 대기 시간을 조정")] 
         [SerializeField] private ReferenceValueT<float> specialAttackCooldown;
+
+        [Header("무력화 상태 시간 조정")] 
+        [SerializeField] private ReferenceValueT<float> groggyTime;
         
         [Header("엘리트 몬스터 타입 선택")]
         [SerializeField] private ReferenceValueT<EEliteType> myType;
@@ -49,21 +55,30 @@ namespace EnemyScripts
         [SerializeField] private GameObject weak;
 
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isGroggy;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isInGroggy;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isAlive;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isNowAttack;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isSpecialAttackReady;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> canSpecialAttack;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> canSpecialAttackReady;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> hasRemainAttackTime;
+
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> rushDirection;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isOverRush;
 
         void Start()
         {
             // About Attack FSM
-            fsm = new FSM();
+            fsm = new Fsm();
             Blackboard b = new Blackboard();
 
             isAlive.Value = true;
             isGroggy.Value = false;
+            isInGroggy.Value = false;
             canSpecialAttackReady.Value = true;
+            hasRemainAttackTime.Value = false;
+            rushDirection.Value = false;
+            isOverRush.Value = false;
 
             // Blackboard Initialize
             // About player Info
@@ -90,15 +105,23 @@ namespace EnemyScripts
             b.AddData("mySpecialAttackDamage", mySpecialAttackDamage);
             b.AddData("specialAttackCooldown", specialAttackCooldown);
             b.AddData("canSpecialAttackReady", canSpecialAttackReady);
+            b.AddData("hasRemainAttackTime", hasRemainAttackTime);
             
             // 특수 공격 그로기 가능 시간
             b.AddData("specialAttackWait", specialAttackWait);
             b.AddData("isGroggy", isGroggy);
+            b.AddData("isInGroggy", isInGroggy);
             b.AddData("canSpecialAttack", canSpecialAttack);
+            
+            // Groggy Time
+            b.AddData("groggyTime", groggyTime);
             
             // Only Use Rush Monster
             b.AddData("myRushRange", myRushRange);
             b.AddData("myOverRushRange", myOverRushRange);
+            b.AddData("rushDirection", rushDirection);
+            b.AddData("myRushSpeed", myRushSpeed);
+            b.AddData("isOverRush", isOverRush);
         
 
             // Node Initialize
@@ -106,40 +129,45 @@ namespace EnemyScripts
             var trace = new EliteTraceNode();
             var attack = new NormalAttackNode();
 
-            var bombReady = new EliteBombAttackReadyNode();
-            var rushReady = new EliteRushAttackReadyNode();
+            var ready = new EliteAttackReadyNode();
 
             var bombAttack = new EliteBombAttackNode();
             var rushAttack = new EliteRushAttackNode();
 
             var groggy = new EliteGroggyNode();
-            var overRush = new EliteRushOverNode();
 
             // Connect Node
             wait.enterPlayer = trace;
 
+            // normal : 0, bomb : 1, Rush : 2
             trace.attacks = new INode[3];
             trace.attacks[0] = attack;
-            trace.attacks[1] = bombReady;
-            trace.attacks[2] = rushReady;
-            trace.overRush = overRush;
-            trace.playerExit = wait;
-
-            attack.outOfAttackRange = wait;
+            trace.attacks[1] = ready;
+            trace.attacks[2] = ready;
             
-            bombReady.failedAttack = bombAttack;
-            bombReady.enterGroggy = groggy;
+            // Player Out of Range
+            trace.playerExit = wait;
+            attack.outOfAttackRange = wait;
+
+            // Share Ready Node
+            ready.failedAttack = new INode[2];
+            
+            // bomb Ready
+            ready.failedAttack[0] = bombAttack;
             bombAttack.endAttack = wait;
             
-            rushReady.failedAttack = rushAttack;
-            rushReady.failedAttack = groggy;
+            // rush Ready
+            ready.failedAttack[1] = rushAttack;
             rushAttack.endAttack = wait;
+            
+            // Share Groggy Node
+            ready.enterGroggy = groggy;
 
+            // End of Groggy
             groggy.endGroggy = wait;
-            overRush.enterPlayer = attack;
             
             // About Life FSM
-            fsmLife = new FSM();
+            fsmLife = new Fsm();
             
             var alive = new AliveNode();
             var dead = new DeadNode();
@@ -150,7 +178,7 @@ namespace EnemyScripts
             fsmLife.Init(b, alive);
         }
 
-        void Update()
+        private void Update()
         {
             if(!isAlive.Value)
                 Destroy(gameObject);
@@ -164,9 +192,15 @@ namespace EnemyScripts
             }
         }
 
+        // Called In Weakness Prefab
         public void WeakBreak()
         {
             isGroggy.Value = true;
+        }
+
+        public float GetMySpecialDamage()
+        {
+            return mySpecialAttackDamage.Value;
         }
 
         private void WeakShow()
@@ -184,6 +218,13 @@ namespace EnemyScripts
 
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(transform.position, myRushRange.Value);
+
+            if (myType.Value == EEliteType.Rush)
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawWireSphere(transform.position, myOverRushRange.Value);
+            }
+                
         }
     }
 }

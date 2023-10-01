@@ -5,205 +5,246 @@ using Unity.Mathematics;
 using UnityEngine;
 
 
-namespace EnemyScripts
+
+public enum EEliteType
 {
-    public enum EEliteType
-    {
-        Bomb,
-        Rush
-    }
+    Bomb,
+    Rush
+}
 
-    public class EliteTraceNode : TraceNode
-    {
-        public INode[] attacks;
-        public INode playerExit;
-        public INode overRush;
+public class EliteTraceNode : TraceNode
+{
+    public INode[] attacks;
+    public INode playerExit;
+    public INode overRush;
 
-        public override INode Execute(Blackboard blackboard)
+    public override INode Execute(Blackboard blackboard)
+    {
+        var type = Trace(blackboard);
+        var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType");
+
+        // Trace Logic
+        var myTransform = blackboard.GetData<Transform>("myTransform");
+        var playerTransform = blackboard.GetData<Transform>("playerTransform");
+        var myMoveSpeed = blackboard.GetData<ReferenceValueT<float>>("myMoveSpeed");
+        var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
+
+        var myPos = myTransform.position;
+
+      myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x,
+                playerTransform.position.x, myMoveSpeed.Value * Time.deltaTime),
+            myPos.y, 0);
+
+        switch (type)
         {
-            var type = Trace(blackboard);
-            var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType").Value;
+            // All monster Use, Bomb Monster's Normal Attack is Special Attack
+            case ETraceState.PlayerEnter:
+                if (myType == EEliteType.Bomb)
+                    return hasRemainAttackTime.Value
+                        ? Fsm.GuardNullNode(this, this)
+                        : Fsm.GuardNullNode(this, attacks[1]);
+                return Fsm.GuardNullNode(this, attacks[0]);
 
-            // Trace Logic
-            Transform myTransform = blackboard.GetData<Transform>("myTransform");
-            Transform playerTransform = blackboard.GetData<Transform>("playerTransform");
+            // Only Use Rush Monster
+            case ETraceState.PlayerEnterRush:
+                if (hasRemainAttackTime.Value)
+                    return Fsm.GuardNullNode(this, this);
 
-            myTransform.position = new Vector3(Mathf.MoveTowards(myTransform.position.x,
-                    playerTransform.position.x,
-                    blackboard.GetData<ReferenceValueT<float>>("myMoveSpeed").Value * Time.deltaTime),
-                myTransform.position.y,
-                myTransform.position.z);
+                LogPrintSystem.SystemLogPrint(myTransform, "Rush Entered", ELogType.EnemyAI);
+                return Fsm.GuardNullNode(this, attacks[2]);
 
-            LogPrintSystem.SystemLogPrint(myTransform, "Now Tracing", ELogType.EnemyAI);
+            case ETraceState.PlayerTrace:
+                return Fsm.GuardNullNode(this, this);
 
-            switch (type)
-            {
-                case ETraceState.PlayerEnter:
-                    // Bomb doesn't Normal Attack
-                    if (myType == EEliteType.Bomb 
-                        && blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttackReady").Value)
-                    {
-                        return FSM.GuardNullNode(this, attacks[1]);
-                    }
+            // All Monster Use
+            case ETraceState.PlayerExit:
+                return Fsm.GuardNullNode(this, playerExit);
 
-                    if (myType == EEliteType.Bomb)
-                        return FSM.GuardNullNode(this, this);
-                    return FSM.GuardNullNode(this, attacks[0]);
-
-                // Only Use Rush Monster
-                case ETraceState.PlayerEnterRush:
-                    // Rush Monster Attack Node
-                    LogPrintSystem.SystemLogPrint(
-                        myTransform,
-                        "Rush Entered",
-                        ELogType.EnemyAI);
-                    return FSM.GuardNullNode(this, attacks[2]);
-                
-                // Only Use Rush Monster
-                case ETraceState.PlayerTrace:
-                    return FSM.GuardNullNode(this, this);
-                
-                case ETraceState.PlayerExit:
-                    return FSM.GuardNullNode(this, playerExit);
-                
-                default:
-                    throw new Exception("Error");
-            }
+            default:
+                throw new Exception("Error");
         }
     }
+}
 
-    public class EliteBombAttackReadyNode : INode
+
+public class EliteAttackReadyNode : INode
+{
+    public INode enterGroggy;
+    
+    // player failed attack weakness
+    public INode[] failedAttack;
+
+    public INode Execute(Blackboard blackboard)
     {
-        public INode enterGroggy;
-        public INode failedAttack;
+        // Wait Time For Attack
+        var sequence = DOTween.Sequence();
+        var myTransform = blackboard.GetData<Transform>("myTransform");
+        var specialAttackWait = blackboard.GetData<ReferenceValueT<float>>("specialAttackWait");
+        var canSpecialAttack = blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttack");
+        var isSpecialAttackReady = blackboard.GetData<ReferenceValueT<bool>>("isSpecialAttackReady");
+        var isGroggy = blackboard.GetData<ReferenceValueT<bool>>("isGroggy");
+        var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType");
 
-        public INode Execute(Blackboard blackboard)
+        if (!isSpecialAttackReady.Value)
         {
-            if (!blackboard.GetData<ReferenceValueT<bool>>("isSpecialAttackReady").Value)
+            isSpecialAttackReady.Value = true;
+            canSpecialAttack.Value = false;
+            isGroggy.Value = false;
+            sequence.SetDelay(specialAttackWait.Value).OnComplete(() =>
             {
-                LogPrintSystem.SystemLogPrint(
-                    blackboard.GetData<Transform>("myTransform"),
-                    "Now Ready For Special Attack",
-                    ELogType.EnemyAI);
-                
-                blackboard.GetData<ReferenceValueT<bool>>("isGroggy").Value = false;
-                blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttack").Value = false;
-                blackboard.GetData<ReferenceValueT<bool>>("isSpecialAttackReady").Value = true;
-                Sequence sequence = DOTween.Sequence();
-                sequence.SetDelay(blackboard.GetData<ReferenceValueT<float>>("specialAttackWait").Value).OnComplete(() =>
-                {
-                    LogPrintSystem.SystemLogPrint(
-                        blackboard.GetData<Transform>("myTransform"),
-                        "DOTween Callback Function Call",
-                        ELogType.EnemyAI);
-                    blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttack").Value = true;
-                });
+                canSpecialAttack.Value = true;
+                LogPrintSystem.SystemLogPrint(myTransform, "Attack On", ELogType.EnemyAI);
+            });
+            LogPrintSystem.SystemLogPrint(myTransform, "Ready For Attack", ELogType.EnemyAI);
+        }
+
+        if (!isGroggy.Value)
+        {
+            if (!canSpecialAttack.Value) return Fsm.GuardNullNode(this, this);
+            isSpecialAttackReady.Value = false;
+
+            return myType == EEliteType.Bomb
+                ? Fsm.GuardNullNode(this, failedAttack[0])
+                : Fsm.GuardNullNode(this, failedAttack[1]);
+        }
+
+        isSpecialAttackReady.Value = false;
+        sequence.Kill();
+        LogPrintSystem.SystemLogPrint(myTransform, "Enter Groggy", ELogType.EnemyAI);
+        return Fsm.GuardNullNode(this, enterGroggy);
+    }
+}
+
+public class EliteBombAttackNode : INode
+{
+    public INode endAttack;
+
+    public INode Execute(Blackboard blackboard)
+    {
+        var sequence = DOTween.Sequence();
+        var myTransform = blackboard.GetData<Transform>("myTransform");
+        var bombPrefab = blackboard.GetData<GameObject>("bombPrefab");
+        var canSpecialAttackReady = blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttackReady");
+        var specialAttackCooldown = blackboard.GetData<ReferenceValueT<float>>("specialAttackCooldown");
+        var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
+
+
+        GameObject.Instantiate(bombPrefab, (Vector2)myTransform.position,
+            quaternion.identity);
+
+        LogPrintSystem.SystemLogPrint(myTransform, "Bomb Attack", ELogType.EnemyAI);
+
+        canSpecialAttackReady.Value = false;
+        hasRemainAttackTime.Value = true;
+
+        sequence.SetDelay(specialAttackCooldown.Value).OnComplete(() =>
+        {
+            hasRemainAttackTime.Value = false;
+            LogPrintSystem.SystemLogPrint(myTransform, "Now Can Special Attack", ELogType.EnemyAI);
+        });
+
+        return Fsm.GuardNullNode(this, endAttack);
+    }
+}
+
+public class EliteRushAttackNode : INode
+{
+    public INode endAttack;
+
+    public INode Execute(Blackboard blackboard)
+    {
+        var sequence = DOTween.Sequence();
+        var myTransform = blackboard.GetData<Transform>("myTransform");
+        var playerTransform = blackboard.GetData<Transform>("playerTransform");
+        var isNowAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
+        var rushDirection = blackboard.GetData<ReferenceValueT<bool>>("rushDirection");
+        var myRushSpeed = blackboard.GetData<ReferenceValueT<float>>("myRushSpeed");
+        var canSpecialAttackReady = blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttackReady");
+        var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
+        var specialAttackCooldown = blackboard.GetData<ReferenceValueT<float>>("specialAttackCooldown");
+
+        if (!isNowAttack)
+        {
+            rushDirection.Value = Vector3.Normalize(playerTransform.position - myTransform.position).x > 0.0f;
+            isNowAttack.Value = true;
+        }
+
+        Vector3 pos = Camera.main.WorldToViewportPoint(myTransform.position);
+
+        if (rushDirection)
+        {
+            if (pos.x < 1.0f)
+            {
+                pos = new Vector3(Mathf.MoveTowards(pos.x, 1.0f,
+                    myRushSpeed.Value * Time.deltaTime), pos.y, 10.0f);
             }
             else
             {
-                if (blackboard.GetData<ReferenceValueT<bool>>("isGroggy").Value)
+                isNowAttack.Value = false;
+                canSpecialAttackReady.Value = false;
+                hasRemainAttackTime.Value = true;
+                sequence.SetDelay(specialAttackCooldown.Value).OnComplete(() =>
                 {
-                    blackboard.GetData<ReferenceValueT<bool>>("isSpecialAttackReady").Value = false;
-                    return FSM.GuardNullNode(this, enterGroggy);
-                }
-
-                if (blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttack").Value)
-                {
-                    blackboard.GetData<ReferenceValueT<bool>>("isSpecialAttackReady").Value = false;
-                    return FSM.GuardNullNode(this, failedAttack);
-                }
-
-                return FSM.GuardNullNode(this, this);
+                    hasRemainAttackTime.Value = false;
+                });
+                return Fsm.GuardNullNode(this, endAttack);
             }
 
-            return FSM.GuardNullNode(this, this);
+            myTransform.position = Camera.main.ViewportToWorldPoint(pos);
         }
-    }
-
-    public class EliteBombAttackNode : INode
-    {
-        public INode endAttack;
-
-        public INode Execute(Blackboard blackboard)
+        else
         {
-            var playerTransform = blackboard.GetData<Transform>("playerTransform");
-            var myTransform = blackboard.GetData<Transform>("myTransform");
-
-            GameObject.Instantiate(blackboard.GetData<GameObject>("bombPrefab"),
-                (Vector2)myTransform.position,
-                quaternion.identity);
-            
-            LogPrintSystem.SystemLogPrint(
-                blackboard.GetData<Transform>("myTransform"),
-                "Bomb Attack",
-                ELogType.EnemyAI);
-
-            Sequence sequence = DOTween.Sequence();
-            blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttackReady").Value = false;
-            sequence.SetDelay(blackboard.GetData<ReferenceValueT<float>>("specialAttackCooldown").Value).OnComplete(
-                () =>
+            if (pos.x > 0.0f)
+            {
+                pos = new Vector3(Mathf.MoveTowards(pos.x, 0.0f,
+                    myRushSpeed.Value * Time.deltaTime), pos.y, 10.0f);
+            }
+            else
+            {
+                isNowAttack.Value = false;
+                canSpecialAttackReady.Value = false;
+                hasRemainAttackTime.Value = true;
+                sequence.SetDelay(specialAttackCooldown.Value).OnComplete(() =>
                 {
-                    blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttackReady").Value = true;
-                    LogPrintSystem.SystemLogPrint(
-                        blackboard.GetData<Transform>("myTransform"),
-                        "Now Can Special Attack",
-                        ELogType.EnemyAI);
+                    hasRemainAttackTime.Value = false;
                 });
-            
-            return FSM.GuardNullNode(this, endAttack);
+                return Fsm.GuardNullNode(this, endAttack);
+            }
+
+            myTransform.position = Camera.main.ViewportToWorldPoint(pos);
         }
+        
+        return Fsm.GuardNullNode(this, this);
     }
+}
 
-    public class EliteRushAttackReadyNode : INode
+public class EliteGroggyNode : INode
+{
+    public INode endGroggy;
+
+    public INode Execute(Blackboard blackboard)
     {
-        public INode enterGroggy;
-        public INode failedAttack;
+        var myTransform = blackboard.GetData<Transform>("myTransform");
+        var groggyTime = blackboard.GetData<ReferenceValueT<float>>("groggyTime");
+        var isGroggy = blackboard.GetData<ReferenceValueT<bool>>("isGroggy");
+        var isInGroggy = blackboard.GetData<ReferenceValueT<bool>>("isInGroggy");
 
-        public INode Execute(Blackboard blackboard)
+        LogPrintSystem.SystemLogPrint(myTransform, "In Groggy", ELogType.EnemyAI);
+
+        // Spend Groggy Time and Start Animation
+        var sequence = DOTween.Sequence();
+
+        if (!isInGroggy.Value)
         {
-            // if Weakness Point Attack Success ->
-            //      return enterGroggy (Groggy Call)
-            // else 
-            //      return failedAttack (Special Attack Call)
-            
-            
-            
-            LogPrintSystem.SystemLogPrint(
-                blackboard.GetData<Transform>("myTransform"),
-                "Rush Ready State On",
-                ELogType.EnemyAI);
-            return FSM.GuardNullNode(this, this);
+            isInGroggy.Value = true;
+            sequence.SetDelay(groggyTime.Value).OnComplete(() =>
+            {
+                isGroggy.Value = false;
+                isInGroggy.Value = false;
+            });
         }
-    }
 
-    public class EliteRushAttackNode : INode
-    {
-        public INode endAttack;
-
-        public INode Execute(Blackboard blackboard)
-        {
-            return FSM.GuardNullNode(this, this);
-        }
-    }
-
-    public class EliteRushOverNode : INode
-    {
-        public INode enterPlayer;
-
-        public INode Execute(Blackboard blackboard)
-        {
-            return FSM.GuardNullNode(this, enterPlayer);
-        }
-    }
-
-    public class EliteGroggyNode : INode
-    {
-        public INode endGroggy;
-
-        public INode Execute(Blackboard blackboard)
-        {
-            // Spend Groggy Time and Start Animation
-            return FSM.GuardNullNode(this, this);
-        }
+        return !isGroggy.Value ?
+            Fsm.GuardNullNode(this, endGroggy) : Fsm.GuardNullNode(this, this);
     }
 }

@@ -40,7 +40,7 @@ public class PlayerShoot : MonoBehaviour
             {
                 Shoot();
             }
-            else if (state == EState.Reloading && reloadCoroutine != null && curAmmo > 0)
+            else if (state == EState.Reloading && reloadCoroutine != null)
             { // 재장전 중에 사격 버튼을 입력한 경우 장전을 취소한다.
                 StopCoroutine(reloadCoroutine);        
                 LogPrintSystem.SystemLogPrint(transform, $"Reload Cancel", ELogType.Player);
@@ -65,13 +65,14 @@ public class PlayerShoot : MonoBehaviour
             else if(curAmmo >= playerManager.GetComponent<PlayerManager>().maxAmmo)
             {
                 state = EState.Ready;
+                LogPrintSystem.SystemLogPrint(transform, "Requset Complete", ELogType.Player);
             }
         }
     }
 
     public void Shoot()
     {
-        if (Time.time >= lastFireTime + playerManager.GetComponent<PlayerManager>().shootSpeed)
+        if (Time.time >= lastFireTime + playerManager.GetComponent<PlayerManager>().shootDelaySpeed)
         {
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = new Vector3(mousePosition.x, mousePosition.y, mousePosition.z);
@@ -86,19 +87,15 @@ public class PlayerShoot : MonoBehaviour
             lastFireTime = Time.time;
             curAmmo--;
             LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo}", ELogType.Player);
-
-            if (curAmmo <= 0)
-            {
-                Reload();
-            }
         }
     }
 
     public void Reload()
     {
-        LogPrintSystem.SystemLogPrint(transform, "Requset Reload", ELogType.Player);
-        if (curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo)
+        
+        if (curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo && reloadCoroutine == null)
         {
+            LogPrintSystem.SystemLogPrint(transform, "Requset Reload", ELogType.Player);
             reloadCoroutine = StartCoroutine(ReloadRoutine());
         }
     }
@@ -110,7 +107,7 @@ public class PlayerShoot : MonoBehaviour
         yield return new WaitForSeconds(playerManager.GetComponent<PlayerManager>().reloadTime);
 
         curAmmo++;
-
+        reloadCoroutine = null;
         state = EState.ReloadComplete;
 
         LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo} -> ReloadTime : {playerManager.GetComponent<PlayerManager>().reloadTime}", ELogType.Player);
