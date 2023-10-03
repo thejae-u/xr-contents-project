@@ -42,7 +42,8 @@ public class PlayerShoot : MonoBehaviour
             }
             else if (state == EState.Reloading && reloadCoroutine != null)
             { // 재장전 중에 사격 버튼을 입력한 경우 장전을 취소한다.
-                StopCoroutine(reloadCoroutine);        
+                StopCoroutine(reloadCoroutine);
+                reloadCoroutine = null;
                 LogPrintSystem.SystemLogPrint(transform, $"Reload Cancel", ELogType.Player);
 
                 state = EState.Ready;
