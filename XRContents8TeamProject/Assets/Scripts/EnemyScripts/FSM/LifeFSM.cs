@@ -12,7 +12,6 @@ public class AliveNode : INode
             return Fsm.GuardNullNode(this, dead);
         blackboard.GetData<ReferenceValueT<bool>>("isAlive").Value = true;
         return Fsm.GuardNullNode(this, this);
-
     }
 }
 

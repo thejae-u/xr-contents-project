@@ -152,6 +152,23 @@ public class EliteRushAttackNode : INode
 {
     public INode endAttack;
 
+    private bool CheckPlayer(Blackboard blackboard)
+    {
+        var myAttackRange = blackboard.GetData<ReferenceValueT<float>>("myAttackRange");
+        var playerTransform = blackboard.GetData<Transform>("playerTransform");
+        var myTransform = blackboard.GetData<Transform>("myTransform");
+
+        float playerRange = playerTransform.GetComponent<PlayerManager>().MyRadius;
+
+        float distance = (playerTransform.position - myTransform.position).magnitude;
+
+        if (playerRange + myAttackRange.Value >= distance)
+        {
+            return true;
+        }
+        return playerRange + myAttackRange.Value >= distance;
+    }
+
     public INode Execute(Blackboard blackboard)
     {
         var sequence = DOTween.Sequence();
