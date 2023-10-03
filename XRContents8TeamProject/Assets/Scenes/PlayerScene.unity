@@ -341,6 +341,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BombEliteEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 2446761889370637375, guid: 19ab1099802954a1ea7266985c1d40d2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5482026765705577290, guid: 19ab1099802954a1ea7266985c1d40d2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.4999175
@@ -552,8 +556,12 @@ PrefabInstance:
       value: Platform (2)
       objectReference: {fileID: 0}
     - target: {fileID: 215010697735748969, guid: 12f29ea9c4668d4488a36ac78474f3c5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 215010697735748969, guid: 12f29ea9c4668d4488a36ac78474f3c5, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 8585529641476115196, guid: 12f29ea9c4668d4488a36ac78474f3c5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -616,13 +624,25 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -1.1901263
       objectReference: {fileID: 0}
+    - target: {fileID: 759709160255606015, guid: 38b49ab5221524c03990be858d475f1f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5729836157773400071, guid: 38b49ab5221524c03990be858d475f1f, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5871502387009047570, guid: 38b49ab5221524c03990be858d475f1f, type: 3}
+      propertyPath: dodgeDistance
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871502387009047570, guid: 38b49ab5221524c03990be858d475f1f, type: 3}
       propertyPath: playerGravityForce
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5951337740764393561, guid: 38b49ab5221524c03990be858d475f1f, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6048368983734344908, guid: 38b49ab5221524c03990be858d475f1f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -631,6 +651,10 @@ PrefabInstance:
     - target: {fileID: 6048368983734344908, guid: 38b49ab5221524c03990be858d475f1f, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 6088807416899362254, guid: 38b49ab5221524c03990be858d475f1f, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6607649661471559730, guid: 38b49ab5221524c03990be858d475f1f, type: 3}
       propertyPath: m_LocalScale.x
@@ -757,8 +781,12 @@ PrefabInstance:
       value: Platform (1)
       objectReference: {fileID: 0}
     - target: {fileID: 215010697735748969, guid: 12f29ea9c4668d4488a36ac78474f3c5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 215010697735748969, guid: 12f29ea9c4668d4488a36ac78474f3c5, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 8585529641476115196, guid: 12f29ea9c4668d4488a36ac78474f3c5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -818,8 +846,12 @@ PrefabInstance:
       value: Platform (3)
       objectReference: {fileID: 0}
     - target: {fileID: 215010697735748969, guid: 12f29ea9c4668d4488a36ac78474f3c5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 215010697735748969, guid: 12f29ea9c4668d4488a36ac78474f3c5, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 8585529641476115196, guid: 12f29ea9c4668d4488a36ac78474f3c5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -877,6 +909,10 @@ PrefabInstance:
     - target: {fileID: 2174132782177813259, guid: 09b12179540564935a7efe2a352956fd, type: 3}
       propertyPath: m_Name
       value: NormalEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2174132782177813259, guid: 09b12179540564935a7efe2a352956fd, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2174132782177813259, guid: 09b12179540564935a7efe2a352956fd, type: 3}
       propertyPath: m_IsActive
@@ -945,8 +981,12 @@ PrefabInstance:
       value: Platform
       objectReference: {fileID: 0}
     - target: {fileID: 215010697735748969, guid: 12f29ea9c4668d4488a36ac78474f3c5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 215010697735748969, guid: 12f29ea9c4668d4488a36ac78474f3c5, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 8585529641476115196, guid: 12f29ea9c4668d4488a36ac78474f3c5, type: 3}
       propertyPath: m_LocalPosition.x

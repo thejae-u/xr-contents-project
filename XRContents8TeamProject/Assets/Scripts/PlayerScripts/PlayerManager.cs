@@ -20,26 +20,34 @@ public class PlayerManager : MonoBehaviour
 
     [Header("플레이어 체력 조정")]
     [SerializeField] private float playerHp = 100.0f;
+
     [Header("플레이어 공격력 조정")]
     [SerializeField] public float playerAtk = 10.0f;
+
     [Header("플레이어 회피 거리")]
     [SerializeField] private float dodgeDistance = 4.0f;
+
     [Header("플레이어 무적 시간(지속 시간) 조정")]
     [SerializeField] private float playerInvincibilityDuration = 1.0f;
     private bool playerStateInvincibility = false;
 
     [Header("플레이어 한발당 사격 딜레이 조정")]
     [SerializeField] public float shootDelaySpeed = 1.0f;
+
     [Header("플레이어 총알 속도 조정")]
     [SerializeField] public float bulletSpeed = 30.0f;
+
     [Header("플레이어 유효 사격 거리")]
     [SerializeField] public float fireDistance = 15.0f;
+
     [Header("플레이어 최대 탄알")]
     [SerializeField] public int maxAmmo = 6;
+
     [Header("플레이어 한발당 재장전 시간")]
     [SerializeField] public float reloadTime = 0.7f;
 
     private Rigidbody2D playerRigidbody;
+    Collider2D enemyCollider;
 
     private void Awake()
     {
@@ -59,6 +67,15 @@ public class PlayerManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             PlayerJump();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (playerStateInvincibility && collision.gameObject.tag != "Ground")
+        {
+            enemyCollider = collision.gameObject.GetComponent<Collider2D>();
+            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), enemyCollider,true);
         }
     }
 
@@ -119,39 +136,67 @@ public class PlayerManager : MonoBehaviour
         canJump = true;
     }
     #endregion JUMP
-    
+
     void PlayerDodge()
-    {            
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             LogPrintSystem.SystemLogPrint(transform, "회피 사용", ELogType.Player);
-            Sequence sequence = DOTween.Sequence();
+          
+            playerStateInvincibility = true;
 
-            Vector3 DodgeDistance;
+            Vector3 DodgeDistance = Vector3.zero;
             Vector3 playerPos = transform.position;
 
-            sequence.AppendCallback(() =>
-            {
-                playerStateInvincibility = true;
-            });
-
             if (isPlayerViewDirRight)
-                DodgeDistance = new Vector3(playerPos.x + dodgeDistance,playerPos.y,playerPos.z);
+                DodgeDistance = new Vector3(playerPos.x + dodgeDistance, playerPos.y, playerPos.z);
             else
-                DodgeDistance = new Vector3(playerPos.x - dodgeDistance,playerPos.y,playerPos.z);
-            
-            LogPrintSystem.SystemLogPrint(transform, $"회피 사용 전 거리{transform.position.x}", ELogType.Player);
-            sequence.Append(transform.DOMoveX(DodgeDistance.x, playerInvincibilityDuration));
-            LogPrintSystem.SystemLogPrint(transform, $"회피 이동 완료{transform.position.x}", ELogType.Player);
+                DodgeDistance = new Vector3(playerPos.x - dodgeDistance, playerPos.y, playerPos.z);
 
-
-            sequence.AppendCallback(() =>
-            {
-                playerStateInvincibility = false;
-            });
+            Sequence sequence = DOTween.Sequence();
+            sequence.Append(transform.DOMoveX(DodgeDistance.x, playerInvincibilityDuration))
+                .OnKill(() =>
+                {
+                    Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), enemyCollider, false);
+                    LogPrintSystem.SystemLogPrint(transform, $"회피 이동 완료 {transform.position.x}", ELogType.Player);
+                });
 
             sequence.Play();
         }
+    }
+
+
+
+    public void DiscountHp(float damage)
+    {
+        LogPrintSystem.SystemLogPrint(transform, "Call Function : DiscountHP", ELogType.Player);
+        if (!playerStateInvincibility)
+        {
+            Sequence sequence = DOTween.Sequence();
+
+            // 플레이어 피격시 빨간색으로 변함
+            transform.GetComponent<Renderer>().material.DOColor(Color.red, 0.1f);
+            LogPrintSystem.SystemLogPrint(transform, $"Player change Red", ELogType.Player);
+            sequence.SetDelay(1.0f).OnComplete(() =>
+            {
+                transform.GetComponent<Renderer>().material.DOColor(Color.white, 0.1f);
+            });
+
+            playerHp -= damage;
+            LogPrintSystem.SystemLogPrint(transform, $"{damage}From Enemy -> Remain PlayerHP{playerHp}", ELogType.Player);
+        }
+        else
+        {
+            StartCoroutine(BlockInvincibilityDuration(playerInvincibilityDuration));
+            LogPrintSystem.SystemLogPrint(transform, "player State : Invincibility",ELogType.Player);
+        }
+    }
+
+    private IEnumerator BlockInvincibilityDuration(float InvincibilityDuration)
+    {
+        yield return new WaitForSeconds(InvincibilityDuration);
+        Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), enemyCollider, false);
+        playerStateInvincibility = false;
     }
 
     void PlayerViewMousePoint()
@@ -168,22 +213,6 @@ public class PlayerManager : MonoBehaviour
             transform.eulerAngles = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
             isPlayerViewDirRight = true;
         }
-    }
-
-    public void DiscountHp(float damage)
-    {
-        Sequence sequence = DOTween.Sequence();
-
-        // 플레이어 피격시 빨간색으로 변함
-        transform.GetComponent<Renderer>().material.DOColor(Color.red, 0.5f);
-        LogPrintSystem.SystemLogPrint(transform, $"Player change Red", ELogType.Player);
-        sequence.SetDelay(1.0f).OnComplete(() => {
-            transform.GetComponent<Renderer>().material.DOColor(Color.white, 0.5f);
-        });
-
-        playerHp -= damage;
-        LogPrintSystem.SystemLogPrint(transform, $"{damage}From Enemy -> Remain PlayerHP{playerHp}", ELogType.Player);
-
     }
 
     void OnDrawGizmos()
