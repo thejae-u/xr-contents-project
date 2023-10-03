@@ -157,29 +157,46 @@ public class EliteRushAttackNode : INode
         var myAttackRange = blackboard.GetData<ReferenceValueT<float>>("myAttackRange");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
         var myTransform = blackboard.GetData<Transform>("myTransform");
+        var mySpecialAttackDamage = blackboard.GetData<ReferenceValueT<float>>("mySpecialAttackDamage");
 
+        
         float playerRange = playerTransform.GetComponent<PlayerManager>().MyRadius;
 
         float distance = (playerTransform.position - myTransform.position).magnitude;
 
         if (playerRange + myAttackRange.Value >= distance)
         {
+            playerTransform.GetComponent<PlayerManager>().DiscountHp(mySpecialAttackDamage.Value);
             return true;
         }
         return playerRange + myAttackRange.Value >= distance;
     }
 
-    public INode Execute(Blackboard blackboard)
+    private void InitSetting(Blackboard blackboard)
     {
         var sequence = DOTween.Sequence();
+        var isNowAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
+        var canSpecialAttackReady = blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttackReady");
+        var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
+        var specialAttackCooldown = blackboard.GetData<ReferenceValueT<float>>("specialAttackCooldown");
+        
+        isNowAttack.Value = false;
+        canSpecialAttackReady.Value = false;
+        hasRemainAttackTime.Value = true;
+        
+        sequence.SetDelay(specialAttackCooldown.Value).OnComplete(() =>
+        {
+            hasRemainAttackTime.Value = false;
+        });
+    }
+
+    public INode Execute(Blackboard blackboard)
+    {
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
         var isNowAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
         var rushDirection = blackboard.GetData<ReferenceValueT<bool>>("rushDirection");
         var myRushSpeed = blackboard.GetData<ReferenceValueT<float>>("myRushSpeed");
-        var canSpecialAttackReady = blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttackReady");
-        var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
-        var specialAttackCooldown = blackboard.GetData<ReferenceValueT<float>>("specialAttackCooldown");
 
         if (!isNowAttack)
         {
@@ -195,16 +212,15 @@ public class EliteRushAttackNode : INode
             {
                 pos = new Vector3(Mathf.MoveTowards(pos.x, 1.0f,
                     myRushSpeed.Value * Time.deltaTime), pos.y, 10.0f);
+                if (CheckPlayer(blackboard))
+                {
+                    InitSetting(blackboard);
+                    return Fsm.GuardNullNode(this, endAttack);
+                }
             }
             else
             {
-                isNowAttack.Value = false;
-                canSpecialAttackReady.Value = false;
-                hasRemainAttackTime.Value = true;
-                sequence.SetDelay(specialAttackCooldown.Value).OnComplete(() =>
-                {
-                    hasRemainAttackTime.Value = false;
-                });
+                InitSetting(blackboard);
                 return Fsm.GuardNullNode(this, endAttack);
             }
 
@@ -216,16 +232,15 @@ public class EliteRushAttackNode : INode
             {
                 pos = new Vector3(Mathf.MoveTowards(pos.x, 0.0f,
                     myRushSpeed.Value * Time.deltaTime), pos.y, 10.0f);
+                if (CheckPlayer(blackboard))
+                {
+                    InitSetting(blackboard);
+                    return Fsm.GuardNullNode(this, endAttack);
+                }
             }
             else
             {
-                isNowAttack.Value = false;
-                canSpecialAttackReady.Value = false;
-                hasRemainAttackTime.Value = true;
-                sequence.SetDelay(specialAttackCooldown.Value).OnComplete(() =>
-                {
-                    hasRemainAttackTime.Value = false;
-                });
+                InitSetting(blackboard);
                 return Fsm.GuardNullNode(this, endAttack);
             }
 
