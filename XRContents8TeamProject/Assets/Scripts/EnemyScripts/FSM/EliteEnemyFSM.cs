@@ -17,7 +17,6 @@ public class EliteTraceNode : TraceNode
 {
     public INode[] attacks;
     public INode playerExit;
-    public INode overRush;
 
     public override INode Execute(Blackboard blackboard)
     {
@@ -158,10 +157,9 @@ public class EliteRushAttackNode : INode
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var mySpecialAttackDamage = blackboard.GetData<ReferenceValueT<float>>("mySpecialAttackDamage");
-
         
         float playerRange = playerTransform.GetComponent<PlayerManager>().MyRadius;
-
+        
         float distance = (playerTransform.position - myTransform.position).magnitude;
 
         if (playerRange + myAttackRange.Value >= distance)

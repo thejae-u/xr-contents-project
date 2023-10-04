@@ -66,6 +66,9 @@ namespace EnemyScripts
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> rushDirection;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isOverRush;
 
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isJumping;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> canJumpNextNode;
+
         void Start()
         {
             // About Attack FSM
@@ -122,11 +125,15 @@ namespace EnemyScripts
             b.AddData("rushDirection", rushDirection);
             b.AddData("myRushSpeed", myRushSpeed);
             b.AddData("isOverRush", isOverRush);
-        
+            
+            // Jump
+            b.AddData("isJumping", isJumping);
+            b.AddData("canJumpNextNode", canJumpNextNode);
 
             // Node Initialize
             var wait = new WaitNode();
             var trace = new EliteTraceNode();
+            var jump = new JumpNode();
             var attack = new NormalAttackNode();
 
             var ready = new EliteAttackReadyNode();
@@ -144,6 +151,10 @@ namespace EnemyScripts
             trace.attacks[0] = attack;
             trace.attacks[1] = ready;
             trace.attacks[2] = ready;
+            trace.enterJump = jump;
+            
+            // End of Jump
+            jump.endJump = trace;
             
             // Player Out of Range
             trace.playerExit = wait;

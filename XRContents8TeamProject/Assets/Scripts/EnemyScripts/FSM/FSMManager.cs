@@ -80,7 +80,7 @@ public class Fsm
         currentNode = currentNode.Execute(blackboard);
     }
 
-    static public INode GuardNullNode(INode current, INode next)
+    public static INode GuardNullNode(INode current, INode next)
     {
         if (next == null)
         {
@@ -128,11 +128,14 @@ public enum ETraceState
     PlayerEnter,
     PlayerExit,
     PlayerTrace,
-    PlayerEnterRush
+    PlayerEnterRush,
+    NeedJump
 }
 
 public abstract class TraceNode : INode
 {
+    public INode enterJump;
+    
     public ETraceState Trace(Blackboard blackboard)
     {
         // Whole Monster Use this variable
@@ -199,6 +202,8 @@ public abstract class TraceNode : INode
 
 public class JumpNode : INode
 {
+    public INode endJump;
+    
     public INode Execute(Blackboard blackboard)
     {
         // Enemy가 플레이어를 제데로 따라 갈 수 있도록 y값을 판단
@@ -206,9 +211,27 @@ public class JumpNode : INode
         
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
+        var isJumping = blackboard.GetData<ReferenceValueT<bool>>("isJumping");
+        var canJumpNextNode = blackboard.GetData<ReferenceValueT<bool>>("canJumpNextNode");
+
+        Vector3 jumpPos = new Vector3(myTransform.position.x,
+            playerTransform.position.y, 0);
         
+        if (canJumpNextNode.Value)
+            return Fsm.GuardNullNode(this, endJump);
+
+        if (isJumping) return Fsm.GuardNullNode(this, this);
         
-        
+        canJumpNextNode.Value = false;
+        isJumping.Value = true;
+        myTransform.DOJump(jumpPos, 3f, 1, 2f).OnComplete(() =>
+        {
+            canJumpNextNode.Value = true;
+            isJumping.Value = false;
+        });
+
+        LogPrintSystem.SystemLogPrint(myTransform, "Jump Execute", ELogType.EnemyAI);
+
         return Fsm.GuardNullNode(this, this);
     }
 }
