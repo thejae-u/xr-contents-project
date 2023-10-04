@@ -27,9 +27,13 @@ public class PlayerManager : MonoBehaviour
     [Header("플레이어 회피 거리")]
     [SerializeField] private float dodgeDistance = 4.0f;
 
+    [Header("플레이어 회피 쿨타임")]
+    [SerializeField] private float dodgeCoolTime = 3.0f;
+    private bool canDodge = true;
+
     [Header("플레이어 무적 시간(지속 시간) 조정")]
-    [SerializeField] private float playerInvincibilityDuration = 1.0f;
-    private bool playerStateInvincibility = false;
+    [SerializeField] private float InvincibilityDuration = 1.5f;
+    private bool isInvincibility = false;
 
     [Header("플레이어 한발당 사격 딜레이 조정")]
     [SerializeField] public float shootDelaySpeed = 1.0f;
@@ -47,11 +51,13 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public float reloadTime = 0.7f;
 
     private Rigidbody2D playerRigidbody;
+    private Animator animator;
     Collider2D enemyCollider;
 
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -63,7 +69,12 @@ public class PlayerManager : MonoBehaviour
     {
         PlayerViewMousePoint();
         PlayerMove();
-        PlayerDodge();
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDodge)
+        {
+            PlayerDodge();
+        }
+
         if (Input.GetKey(KeyCode.Space))
         {
             PlayerJump();
@@ -72,10 +83,10 @@ public class PlayerManager : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (playerStateInvincibility && collision.gameObject.tag != "Ground")
+        if (isInvincibility && collision.gameObject.tag != "Ground")
         {
             enemyCollider = collision.gameObject.GetComponent<Collider2D>();
-            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), enemyCollider,true);
+            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), enemyCollider, true);
         }
     }
 
@@ -125,6 +136,7 @@ public class PlayerManager : MonoBehaviour
         {
             playerRigidbody.AddForce(Vector2.up * playerJumpForce, ForceMode2D.Impulse);
             StartCoroutine(PlayerJumpResetTime());
+            animator.SetBool("IsJump", true);
             isJumping = true;
         }
     }
@@ -139,38 +151,49 @@ public class PlayerManager : MonoBehaviour
 
     void PlayerDodge()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        Sequence sequence = DOTween.Sequence();
+
+        LogPrintSystem.SystemLogPrint(transform, "회피 사용", ELogType.Player);
+
+        isInvincibility = true;
+        canDodge = false;
+
+        Vector3 dodgeDirection = Vector3.zero;
+        Vector3 playerPos = transform.position;
+
+        if (isPlayerViewDirRight)
         {
-            LogPrintSystem.SystemLogPrint(transform, "회피 사용", ELogType.Player);
-          
-            playerStateInvincibility = true;
-
-            Vector3 DodgeDistance = Vector3.zero;
-            Vector3 playerPos = transform.position;
-
-            if (isPlayerViewDirRight)
-                DodgeDistance = new Vector3(playerPos.x + dodgeDistance, playerPos.y, playerPos.z);
-            else
-                DodgeDistance = new Vector3(playerPos.x - dodgeDistance, playerPos.y, playerPos.z);
-
-            Sequence sequence = DOTween.Sequence();
-            sequence.Append(transform.DOMoveX(DodgeDistance.x, playerInvincibilityDuration))
-                .OnKill(() =>
-                {
-                    Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), enemyCollider, false);
-                    LogPrintSystem.SystemLogPrint(transform, $"회피 이동 완료 {transform.position.x}", ELogType.Player);
-                });
-
-            sequence.Play();
+            transform.DOMoveX(dodgeDistance, 1.0f);
         }
+        else
+        {
+            transform.DOMoveX(-dodgeDistance, 1.0f);
+        }
+
+
+
+        sequence.SetDelay(InvincibilityDuration).OnComplete(() =>
+        {            
+            LogPrintSystem.SystemLogPrint(transform, "무적 종료", ELogType.Player);       
+            isInvincibility = false;    
+            
+            if(enemyCollider != null)
+            {
+                Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), enemyCollider, false);
+            }
+        }).SetDelay(dodgeCoolTime).OnComplete(() =>
+        {
+            LogPrintSystem.SystemLogPrint(transform, "회피 쿨타임 종료", ELogType.Player);
+            canDodge = true;
+        });
+        
+        return;
     }
-
-
 
     public void DiscountHp(float damage)
     {
         LogPrintSystem.SystemLogPrint(transform, "Call Function : DiscountHP", ELogType.Player);
-        if (!playerStateInvincibility)
+        if (!isInvincibility)
         {
             Sequence sequence = DOTween.Sequence();
 
@@ -187,16 +210,16 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(BlockInvincibilityDuration(playerInvincibilityDuration));
+            StartCoroutine(BlockInvincibilityDuration());
             LogPrintSystem.SystemLogPrint(transform, "player State : Invincibility",ELogType.Player);
         }
     }
 
-    private IEnumerator BlockInvincibilityDuration(float InvincibilityDuration)
+    private IEnumerator BlockInvincibilityDuration()
     {
         yield return new WaitForSeconds(InvincibilityDuration);
         Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), enemyCollider, false);
-        playerStateInvincibility = false;
+        isInvincibility = false;
     }
 
     void PlayerViewMousePoint()
