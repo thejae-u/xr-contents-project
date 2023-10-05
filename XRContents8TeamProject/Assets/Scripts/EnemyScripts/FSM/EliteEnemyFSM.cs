@@ -59,6 +59,9 @@ public class EliteTraceNode : TraceNode
             // All Monster Use
             case ETraceState.PlayerExit:
                 return Fsm.GuardNullNode(this, playerExit);
+            
+            case ETraceState.NeedJump:
+                return Fsm.GuardNullNode(this, enterJump);
 
             default:
                 throw new Exception("Error");

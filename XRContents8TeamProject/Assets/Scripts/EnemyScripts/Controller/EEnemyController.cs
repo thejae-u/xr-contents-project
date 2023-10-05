@@ -235,7 +235,6 @@ namespace EnemyScripts
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawWireSphere(transform.position, myOverRushRange.Value);
             }
-                
         }
     }
 }

@@ -33,6 +33,8 @@ public class NormalTraceNode : TraceNode
                 return Fsm.GuardNullNode(this, playerExit);
             case ETraceState.PlayerTrace:
                 return Fsm.GuardNullNode(this, this);
+            case ETraceState.NeedJump:
+                return Fsm.GuardNullNode(this, enterJump);
             default:
                 throw new ArgumentOutOfRangeException();
         }

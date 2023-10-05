@@ -136,6 +136,10 @@ public abstract class TraceNode : INode
 {
     public INode enterJump;
     
+    // Jump를 하기 위한 로직을 만들어야 함
+    // x값이  공격 범위에 들어오지만 Attack 노드로 못넘어 갈때를 판단
+    // y값을 체크하고 상향 or 하향 점프
+    
     public ETraceState Trace(Blackboard blackboard)
     {
         // Whole Monster Use this variable
@@ -152,7 +156,14 @@ public abstract class TraceNode : INode
         // Distance of Player to Monster
         float distance = (myTransform.position - playerTransform.position).magnitude;
         float traceRange = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
+        
+        // For Jump Node
+        float distanceForJump = Mathf.Abs(myTransform.position.x - playerTransform.position.x);
+        var isJumping = blackboard.GetData<ReferenceValueT<bool>>("isJumping");
+        if (isJumping.Value) return ETraceState.PlayerTrace;
+        if (distanceForJump <= d2) return ETraceState.NeedJump;
 
+        // Trace Logic
         if (myType != EEliteType.Rush)
         {
             if (d1 + d2 >= distance)
@@ -212,26 +223,18 @@ public class JumpNode : INode
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
         var isJumping = blackboard.GetData<ReferenceValueT<bool>>("isJumping");
-        var canJumpNextNode = blackboard.GetData<ReferenceValueT<bool>>("canJumpNextNode");
 
         Vector3 jumpPos = new Vector3(myTransform.position.x,
             playerTransform.position.y, 0);
         
-        if (canJumpNextNode.Value)
-            return Fsm.GuardNullNode(this, endJump);
-
-        if (isJumping) return Fsm.GuardNullNode(this, this);
-        
-        canJumpNextNode.Value = false;
         isJumping.Value = true;
-        myTransform.DOJump(jumpPos, 3f, 1, 2f).OnComplete(() =>
+        myTransform.DOJump(jumpPos, 3f, 1, 1f).OnComplete(() =>
         {
-            canJumpNextNode.Value = true;
             isJumping.Value = false;
         });
 
         LogPrintSystem.SystemLogPrint(myTransform, "Jump Execute", ELogType.EnemyAI);
 
-        return Fsm.GuardNullNode(this, this);
+        return Fsm.GuardNullNode(this, endJump);
     }
 }
