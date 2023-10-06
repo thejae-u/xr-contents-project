@@ -170,11 +170,9 @@ public class PlayerManager : MonoBehaviour
             transform.DOMoveX(-dodgeDistance, 1.0f);
         }
 
-
-
         sequence.SetDelay(InvincibilityDuration).OnComplete(() =>
         {            
-            LogPrintSystem.SystemLogPrint(transform, "무적 종료", ELogType.Player);       
+            LogPrintSystem.SystemLogPrint(transform, "무적 종료 -> 회피 쿨타임 시작", ELogType.Player);       
             isInvincibility = false;    
             
             if(enemyCollider != null)
