@@ -163,11 +163,13 @@ public class PlayerManager : MonoBehaviour
 
         if (isPlayerViewDirRight)
         {
-            transform.DOMoveX(dodgeDistance, 1.0f);
+            dodgeDirection = new Vector3(playerPos.x + dodgeDistance, playerPos.y, playerPos.z);
+            transform.DOMoveX(dodgeDirection.x, 1.0f);
         }
         else
         {
-            transform.DOMoveX(-dodgeDistance, 1.0f);
+            dodgeDirection = new Vector3(playerPos.x - dodgeDistance, playerPos.y, playerPos.z);
+            transform.DOMoveX(dodgeDirection.x, 1.0f);
         }
 
         sequence.SetDelay(InvincibilityDuration).OnComplete(() =>
