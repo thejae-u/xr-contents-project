@@ -136,7 +136,7 @@ public class PlayerManager : MonoBehaviour
         {
             playerRigidbody.AddForce(Vector2.up * playerJumpForce, ForceMode2D.Impulse);
             StartCoroutine(PlayerJumpResetTime());
-            animator.SetBool("IsJump", true);
+            //animator.SetBool("IsJump", true);
             isJumping = true;
         }
     }
