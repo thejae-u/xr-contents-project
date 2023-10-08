@@ -48,7 +48,7 @@ public class PlayerShot : MonoBehaviour
             {
                 StateReleaseTheBolt();
             }
-            else if (state == EState.ReleaseTheBolt && reloadCoroutine != null)
+            else if (state == EState.ReleaseTheBolt)
             { // 재장전 중에 사격 버튼을 입력한 경우 장전을 취소한다.
                 sequenceReleaseTheBolt.Kill();
                 LogPrintSystem.SystemLogPrint(transform, $"Reload Cancel", ELogType.Player);
@@ -117,7 +117,7 @@ public class PlayerShot : MonoBehaviour
 
     void StateReleaseTheBolt()
     {        
-        if (curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo && reloadCoroutine == null)
+        if (curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo)
         {
             // 노리쇠 후퇴 애니메이션 출력
 
@@ -155,7 +155,6 @@ public class PlayerShot : MonoBehaviour
         yield return new WaitForSeconds(playerManager.GetComponent<PlayerManager>().reloadTime);
 
         curAmmo++;
-        reloadCoroutine = null;
         state = EState.ReloadComplete;
 
         LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo} -> ReloadTime : {playerManager.GetComponent<PlayerManager>().reloadTime}", ELogType.Player);
