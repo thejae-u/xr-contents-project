@@ -43,7 +43,7 @@ public class PlayerManager : MonoBehaviour
     [Header("플레이어 공격력 조정")]
     [SerializeField] public float playerAtk = 10.0f;
     [Header("플레이어 한발당 사격 딜레이 조정")]
-    [SerializeField] public float shootDelaySpeed = 1.0f;
+    [SerializeField] public float shotDelaySpeed = 1.0f;
     [Header("플레이어 총알 속도 조정")]
     [SerializeField] public float bulletSpeed = 30.0f;
     [Header("플레이어 유효 사격 거리")]

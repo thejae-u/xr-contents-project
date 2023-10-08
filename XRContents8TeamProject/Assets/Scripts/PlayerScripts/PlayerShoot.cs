@@ -1,21 +1,28 @@
 using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
-public class PlayerShoot : MonoBehaviour
+public class PlayerShot : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform fireTransform;
     
     private GameObject playerManager;
-    private Coroutine reloadCoroutine;
+ 
+    Sequence sequence = DOTween.Sequence();
+    Sequence sequenceReleaseTheBolt = DOTween.Sequence();
 
     private float lastFireTime = 0f;
     private int curAmmo = 0;
 
     public enum EState
     {
-        Ready,
+        Idle,
+        ReleaseTheBolt, // 후퇴
         Reloading,
+        RackYourBolt, // 전진
+        Shot,
+        BoltAction,
         ReloadComplete
     }
 
@@ -29,31 +36,30 @@ public class PlayerShoot : MonoBehaviour
     private void Start()
     {
         curAmmo = playerManager.GetComponent<PlayerManager>().maxAmmo;
-        state = EState.Ready;
+        
+        state = EState.Idle;
     }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (state == EState.Ready && curAmmo > 0)
+            if (state == EState.Idle && curAmmo > 0)
             {
-                Shoot();
+                StateReleaseTheBolt();
             }
-            else if (state == EState.Reloading && reloadCoroutine != null)
+            else if (state == EState.ReleaseTheBolt && reloadCoroutine != null)
             { // 재장전 중에 사격 버튼을 입력한 경우 장전을 취소한다.
-                StopCoroutine(reloadCoroutine);
-                reloadCoroutine = null;
+                sequenceReleaseTheBolt.Kill();
                 LogPrintSystem.SystemLogPrint(transform, $"Reload Cancel", ELogType.Player);
-
-                state = EState.Ready;
-                Shoot();
+                StateRackYourBolt();
+                StateShot();
             }
         }
         
         if(Input.GetKeyDown(KeyCode.R))
         {
-            Reload();
+            StateReleaseTheBolt();
         }
 
         // 한발씩 장전해주기 위해 ReloadComplete 상태를 이용하여 장전이 완료된 후 curAmmo의 수치를 확인한다.
@@ -61,20 +67,24 @@ public class PlayerShoot : MonoBehaviour
         {
             if(curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo)
             {
-                Reload();
+                StateReloading();
             }
             else if(curAmmo >= playerManager.GetComponent<PlayerManager>().maxAmmo)
             {
-                state = EState.Ready;
+                state = EState.Idle;
                 LogPrintSystem.SystemLogPrint(transform, "Requset Complete", ELogType.Player);
             }
         }
     }
 
-    public void Shoot()
+    void StateShot()
     {
-        if (Time.time >= lastFireTime + playerManager.GetComponent<PlayerManager>().shootDelaySpeed)
+        if (Time.time >= lastFireTime + playerManager.GetComponent<PlayerManager>().shotDelaySpeed)
         {
+            state = EState.Shot;
+
+            // 총 쏘는 애니메이션 출력
+
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = new Vector3(mousePosition.x, mousePosition.y, mousePosition.z);
             mousePosition.z = -Camera.main.transform.position.z;
@@ -88,16 +98,54 @@ public class PlayerShoot : MonoBehaviour
             lastFireTime = Time.time;
             curAmmo--;
             LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo}", ELogType.Player);
+
+            StateBoltAction();
         }
     }
 
-    public void Reload()
+    void StateBoltAction()
     {
+        // 볼트액션 애니메이션 출력
+
+        float shotDelayTime = playerManager.GetComponent<PlayerManager>().shotDelaySpeed;
+
+        sequence.SetDelay(shotDelayTime).OnComplete(() =>
+        {
+
+        });
+    }
+
+    void StateReleaseTheBolt()
+    {        
         if (curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo && reloadCoroutine == null)
         {
-            LogPrintSystem.SystemLogPrint(transform, "Requset Reload", ELogType.Player);
-            reloadCoroutine = StartCoroutine(ReloadRoutine());
+            // 노리쇠 후퇴 애니메이션 출력
+
+            sequenceReleaseTheBolt.SetDelay(0.1f).OnComplete(() =>
+            {
+
+            });
         }
+    }
+
+    public void StateReloading()
+    {
+        sequence.SetDelay(0.5f).OnComplete(() =>
+        {
+            StateRackYourBolt();
+        });
+    }
+
+    void StateRackYourBolt()
+    {
+        // 노리쇠 전진 애니메이션 출력
+
+        sequence.SetDelay(0.1f).OnComplete(() =>
+        {
+            curAmmo++;
+            LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo} -> ReloadTime : {playerManager.GetComponent<PlayerManager>().reloadTime}", ELogType.Player);
+        });
+
     }
 
     private IEnumerator ReloadRoutine()
