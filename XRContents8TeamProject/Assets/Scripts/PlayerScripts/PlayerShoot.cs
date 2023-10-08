@@ -10,8 +10,8 @@ public class PlayerShot : MonoBehaviour
     private GameObject playerManager;
 
     Sequence sequence;
-    Sequence sequenceReleaseTheBolt;
     Sequence sequenceBoltAction;
+    Sequence sequenceReleaseTheBolt;
 
     private float lastFireTime = 0f;
     private int curAmmo = 0;
@@ -121,20 +121,30 @@ public class PlayerShot : MonoBehaviour
     }
 
     void StateReleaseTheBolt()
-    {        
+    {
+        sequenceReleaseTheBolt = DOTween.Sequence();
+
         if (curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo)
         {
             // 노리쇠 후퇴 애니메이션 출력
+            LogPrintSystem.SystemLogPrint(transform, "노리쇠 후퇴", ELogType.Player);
 
             sequenceReleaseTheBolt.SetDelay(0.1f).OnComplete(() =>
             {
-
+                LogPrintSystem.SystemLogPrint(transform, "노리쇠 후퇴 완료", ELogType.Player);
+                StateReloading();
             });
         }
     }
 
-    public void StateReloading()
+    void StateReloading()
     {
+        sequence = DOTween.Sequence();
+
+        LogPrintSystem.SystemLogPrint(transform, "장전 중", ELogType.Player);
+
+        // 장전 애니메이션 출력
+
         sequence.SetDelay(0.5f).OnComplete(() =>
         {
             StateRackYourBolt();
@@ -143,6 +153,8 @@ public class PlayerShot : MonoBehaviour
 
     void StateRackYourBolt()
     {
+        sequence = DOTween.Sequence();
+
         // 노리쇠 전진 애니메이션 출력
 
         sequence.SetDelay(0.1f).OnComplete(() =>
