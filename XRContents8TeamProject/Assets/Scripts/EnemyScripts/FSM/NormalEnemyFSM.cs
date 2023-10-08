@@ -47,36 +47,42 @@ public class NormalAttackNode : INode
 
     public INode Execute(Blackboard blackboard)
     {
-        var isAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
+        var isNowAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
+        
         // animation start
-        if (isAttack.Value)
+        if (isNowAttack.Value)
             return Fsm.GuardNullNode(this, this);
-        isAttack.Value = true;
-
-        var sequence = DOTween.Sequence();
-        sequence.SetDelay(1f).OnComplete(() => { isAttack.Value = false; });
-
+        
+        // Attack On
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
 
-        // 플레이어와 거리를 계산 하기 위한 변수 선언
+        // 거리 계산을 위한 변수
         var d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
         var d2 = blackboard.GetData<ReferenceValueT<float>>("myAttackRange").Value;
         var distance = (myTransform.position - playerTransform.position).magnitude;
-
-        // 플레이어의 Component에 접근하기 위한 변수 선언
+        
         var player = playerTransform.GetComponent<PlayerManager>();
 
-        // 플레이어의 체력을 Discount
         var attackDamage = blackboard.GetData<ReferenceValueT<float>>("myAttackDamage").Value;
+        
+        var sequence = DOTween.Sequence();
+
+        if (d1 + d2 < distance)
+        {
+            return Fsm.GuardNullNode(this, outOfAttackRange);
+        }
+        
+        isNowAttack.Value = true;
+        
         player.PlayerDiscountHp(attackDamage, myTransform.position.x);
-        blackboard.GetData<ReferenceValueT<bool>>("isNowAttack").Value = true;
 
+        sequence.SetDelay(1.5f).OnComplete(() =>
+        {
+            isNowAttack.Value = false;
+        });
+        
         LogPrintSystem.SystemLogPrint(myTransform, $"{attackDamage} Damage to Player!!", ELogType.EnemyAI);
-
-        if (d1 + d2 >= distance)
-            return this;
-
-        return Fsm.GuardNullNode(this, outOfAttackRange);
+        return Fsm.GuardNullNode(this, this);
     }
 }
