@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -69,6 +70,8 @@ namespace EnemyScripts
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isJumping;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> canJumpNextNode;
 
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isGround;
+
         void Start()
         {
             // About Attack FSM
@@ -129,6 +132,9 @@ namespace EnemyScripts
             // Jump
             b.AddData("isJumping", isJumping);
             b.AddData("canJumpNextNode", canJumpNextNode);
+            
+            // Ground Check
+            b.AddData("isGround", isGround);
 
             // Node Initialize
             var wait = new WaitNode();
@@ -219,6 +225,22 @@ namespace EnemyScripts
             if (isSpecialAttackReady.Value)
                 return;
             myHp.Value -= damage;
+        }
+
+        private void OnCollisionStay2D(Collision2D other)
+        {
+            if (other.transform.CompareTag("Ground"))
+            {
+                isGround.Value = true;
+            }
+        }
+
+        private void OnCollisionExit2D(Collision2D other)
+        {
+            if (other.transform.CompareTag("Ground"))
+            {
+                isGround.Value = false;
+            }
         }
 
         private void WeakShow()

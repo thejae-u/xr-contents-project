@@ -35,6 +35,7 @@ namespace EnemyScripts
 
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isNowAttack;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isJumping;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isGround;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> canJumpNextNode;
         
         private bool isHit;
@@ -58,6 +59,7 @@ namespace EnemyScripts
             b.AddData("myType", myType);
             b.AddData("isJumping", isJumping);
             b.AddData("canJumpNextNode", canJumpNextNode);
+            b.AddData("isGround", isGround);
 
             var wait = new WaitNode();
             var trace = new NormalTraceNode();
@@ -89,6 +91,24 @@ namespace EnemyScripts
             else
                 Destroy(gameObject);
         }
+
+
+        private void OnCollisionStay2D(Collision2D other)
+        {
+            if (other.transform.CompareTag("Ground"))
+            {
+                isGround.Value = true;
+            }
+        }
+
+        private void OnCollisionExit2D(Collision2D other)
+        {
+            if (other.transform.CompareTag("Ground"))
+            {
+                isGround.Value = false;
+            }
+        }
+
 
         private void OnDrawGizmos()
         {

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4797588268959100468}
   m_Layer: 7
   m_Name: RushEliteEnemy
-  m_TagString: Untagged
+  m_TagString: EliteEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,6 +151,8 @@ MonoBehaviour:
   isJumping:
     Value: 0
   canJumpNextNode:
+    Value: 0
+  isGround:
     Value: 0
 --- !u!61 &9006260000568180749
 BoxCollider2D:

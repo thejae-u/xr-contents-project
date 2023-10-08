@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3522377821671608275}
   m_Layer: 7
   m_Name: NormalEnemy
-  m_TagString: Enemy
+  m_TagString: NormalEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,6 +118,8 @@ MonoBehaviour:
   isNowAttack:
     Value: 0
   isJumping:
+    Value: 0
+  isGround:
     Value: 0
   canJumpNextNode:
     Value: 0
