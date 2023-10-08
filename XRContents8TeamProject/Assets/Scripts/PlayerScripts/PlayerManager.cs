@@ -54,7 +54,8 @@ public class PlayerManager : MonoBehaviour
 
     private Rigidbody2D playerRigidbody;
     private Animator animator;
-    Collider2D enemyCollider;
+    //private Collider2D enemyCollider;
+    private float enemyXPos = 0f;
 
     private void Awake()
     {
@@ -86,15 +87,6 @@ public class PlayerManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             PlayerJump();
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (isInvincibility && collision.gameObject.tag != "Ground")
-        {
-            enemyCollider = collision.gameObject.GetComponent<Collider2D>();
-            //Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), enemyCollider, true);
         }
     }
 
@@ -175,11 +167,9 @@ public class PlayerManager : MonoBehaviour
             transform.DOMoveX(playerPos.x - dodgeDistance, 1.0f);
         }
 
-        sequence.SetDelay(dodgeInvincibilityDuration).OnComplete(() =>
-        {
-            LogPrintSystem.SystemLogPrint(transform, "무적 종료 -> 회피 쿨타임 시작", ELogType.Player);
-
-        }).SetDelay(dodgeCoolTime).OnComplete(() =>
+        PlayerInvincibility(dodgeInvincibilityDuration);
+       
+        sequence.SetDelay(dodgeCoolTime).OnComplete(() =>
         {
             LogPrintSystem.SystemLogPrint(transform, "회피 쿨타임 종료", ELogType.Player);
             canDodge = true;
@@ -188,7 +178,7 @@ public class PlayerManager : MonoBehaviour
         return;
     }
 
-    public void PlayerDiscountHp(float damage)
+    public void PlayerDiscountHp(float damage, float enemyXPos)
     {
         if (!isInvincibility)
         {
@@ -205,30 +195,26 @@ public class PlayerManager : MonoBehaviour
             playerHp -= damage;
             LogPrintSystem.SystemLogPrint(transform, $"{damage}From Enemy -> Remain PlayerHP{playerHp}", ELogType.Player);
 
-            PlayerKnockback();
+            PlayerKnockback(enemyXPos);
         }
     }
 
-    private void PlayerKnockback()
+    private void PlayerKnockback(float enemyXPos)
     {
         Sequence sequence = DOTween.Sequence();
 
         // Knockback avatar
         float playerXPos = transform.position.x;
-        float enemyXPos = 0f;
-
-        if (enemyCollider != null)
-        {
-            enemyXPos = enemyCollider.transform.position.x;
-        }
 
         if (playerXPos > enemyXPos) // 플레이어가 오른쪽에 있다면
         {
             transform.DOMoveX(transform.position.x + playerKnockbackDistance, playerHitInvincibilityDuration);
+            LogPrintSystem.SystemLogPrint(transform, $"{playerXPos},{enemyXPos}", ELogType.Player);
         }
         else if (playerXPos < enemyXPos)
         {
             transform.DOMoveX(transform.position.x - playerKnockbackDistance, playerHitInvincibilityDuration);
+            LogPrintSystem.SystemLogPrint(transform, $"{playerXPos},{enemyXPos}", ELogType.Player);
         }
 
         PlayerInvincibility(playerHitInvincibilityDuration);
@@ -238,6 +224,7 @@ public class PlayerManager : MonoBehaviour
     {
         Sequence sequence = DOTween.Sequence();
         // 여기에 무적 상태로 만들어준다.
+        isInvincibility = true;
         gameObject.layer = 3; // 3: PlayerInvincibility
         canJump = false;
 
@@ -246,6 +233,7 @@ public class PlayerManager : MonoBehaviour
             // 무적 상태 해제
             gameObject.layer = 6;
             canJump = true;
+            isInvincibility = false;
         });
 
     }
