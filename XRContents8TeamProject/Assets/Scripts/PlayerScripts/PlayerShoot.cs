@@ -8,9 +8,10 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private Transform fireTransform;
     
     private GameObject playerManager;
- 
-    Sequence sequence = DOTween.Sequence();
-    Sequence sequenceReleaseTheBolt = DOTween.Sequence();
+
+    Sequence sequence;
+    Sequence sequenceReleaseTheBolt;
+    Sequence sequenceBoltAction;
 
     private float lastFireTime = 0f;
     private int curAmmo = 0;
@@ -36,7 +37,6 @@ public class PlayerShot : MonoBehaviour
     private void Start()
     {
         curAmmo = playerManager.GetComponent<PlayerManager>().maxAmmo;
-        
         state = EState.Idle;
     }
 
@@ -46,7 +46,7 @@ public class PlayerShot : MonoBehaviour
         {
             if (state == EState.Idle && curAmmo > 0)
             {
-                StateReleaseTheBolt();
+                StateShot();
             }
             else if (state == EState.ReleaseTheBolt)
             { // 재장전 중에 사격 버튼을 입력한 경우 장전을 취소한다.
@@ -105,13 +105,18 @@ public class PlayerShot : MonoBehaviour
 
     void StateBoltAction()
     {
-        // 볼트액션 애니메이션 출력
+        sequenceBoltAction = DOTween.Sequence();
 
+        state = EState.BoltAction;
+        // 볼트액션 애니메이션 출력
+        LogPrintSystem.SystemLogPrint(transform, "볼트 액션 애니메이션 출력",ELogType.Player);
         float shotDelayTime = playerManager.GetComponent<PlayerManager>().shotDelaySpeed;
 
-        sequence.SetDelay(shotDelayTime).OnComplete(() =>
+        sequenceBoltAction.SetDelay(shotDelayTime).OnComplete(() =>
         {
-
+            state = EState.Idle;
+            LogPrintSystem.SystemLogPrint(transform, "볼트 액션 애니메이션 종료", ELogType.Player);
+            sequenceBoltAction = null;
         });
     }
 
