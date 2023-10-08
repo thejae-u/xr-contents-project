@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1997762446669993285}
   - component: {fileID: 9221616839964623402}
   - component: {fileID: 3522377821671608275}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NormalEnemy
-  m_TagString: Enemy
+  m_TagString: NormalEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,11 +109,19 @@ MonoBehaviour:
     Value: 1
   myMoveSpeed:
     Value: 2
+  myType:
+    Value: 2
   hitTime: 0.5
   knockbackPower: 1
   isAlive:
     Value: 0
   isNowAttack:
+    Value: 0
+  isJumping:
+    Value: 0
+  isGround:
+    Value: 0
+  canJumpNextNode:
     Value: 0
 --- !u!50 &9221616839964623402
 Rigidbody2D:

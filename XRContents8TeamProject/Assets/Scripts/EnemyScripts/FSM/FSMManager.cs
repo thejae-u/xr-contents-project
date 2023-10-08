@@ -80,7 +80,7 @@ public class Fsm
         currentNode = currentNode.Execute(blackboard);
     }
 
-    static public INode GuardNullNode(INode current, INode next)
+    public static INode GuardNullNode(INode current, INode next)
     {
         if (next == null)
         {
@@ -128,14 +128,23 @@ public enum ETraceState
     PlayerEnter,
     PlayerExit,
     PlayerTrace,
-    PlayerEnterRush
+    PlayerEnterRush,
+    NeedJump
 }
 
 public abstract class TraceNode : INode
 {
+    public INode enterJump;
+    
+    // Jump를 하기 위한 로직을 만들어야 함
+    // x값이  공격 범위에 들어오지만 Attack 노드로 못넘어 갈때를 판단
+    // y값을 체크하고 상향 or 하향 점프
+    
     public ETraceState Trace(Blackboard blackboard)
     {
         // Whole Monster Use this variable
+        // Bomb Elite Monster's Position is Locked
+        
         Transform myTransform = blackboard.GetData<Transform>("myTransform");
         Transform playerTransform = blackboard.GetData<Transform>("playerTransform");
 
@@ -146,9 +155,23 @@ public abstract class TraceNode : INode
 
         // Distance of Player to Monster
         float distance = (myTransform.position - playerTransform.position).magnitude;
-
         float traceRange = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
+        
+        // For Jump Node
+        float distanceForJump = Mathf.Abs(myTransform.position.x - playerTransform.position.x);
+        var isJumping = blackboard.GetData<ReferenceValueT<bool>>("isJumping");
+        if (isJumping.Value) return ETraceState.PlayerTrace;
+        if (distanceForJump <= d2 && myType != EEliteType.Bomb)
+        {
+            float playerYPos = playerTransform.position.y;
+            float myYPos = myTransform.position.y;
 
+            float yPosCalc = Mathf.Abs(playerYPos - myYPos);
+
+            return yPosCalc <= 5.0f ? ETraceState.PlayerTrace : ETraceState.NeedJump;
+        }
+
+        // Trace Logic
         if (myType != EEliteType.Rush)
         {
             if (d1 + d2 >= distance)
@@ -158,7 +181,6 @@ public abstract class TraceNode : INode
         }
 
         // From here Only Use Rush Monster
-        
         var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
         var isOverRush = blackboard.GetData<ReferenceValueT<bool>>("isOverRush");
         
@@ -195,4 +217,32 @@ public abstract class TraceNode : INode
     }
 
     public abstract INode Execute(Blackboard blackboard);
+}
+
+public class JumpNode : INode
+{
+    public INode endJump;
+    
+    public INode Execute(Blackboard blackboard)
+    {
+        // Enemy가 플레이어를 제데로 따라 갈 수 있도록 y값을 판단
+        // 상향점프와 하향점프 모두 필요함
+        
+        var myTransform = blackboard.GetData<Transform>("myTransform");
+        var playerTransform = blackboard.GetData<Transform>("playerTransform");
+        var isJumping = blackboard.GetData<ReferenceValueT<bool>>("isJumping");
+
+        Vector3 jumpPos = new Vector3(myTransform.position.x,
+            playerTransform.position.y, 0);
+        
+        isJumping.Value = true;
+        myTransform.DOJump(jumpPos, 3f, 1, 1f).OnComplete(() =>
+        {
+            isJumping.Value = false;
+        });
+
+        LogPrintSystem.SystemLogPrint(myTransform, "Jump Execute", ELogType.EnemyAI);
+
+        return Fsm.GuardNullNode(this, endJump);
+    }
 }

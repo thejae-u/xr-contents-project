@@ -5,17 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Enemy
   - Bullet
+  - NormalEnemy
+  - EliteEnemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PlayerInvincibility
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 

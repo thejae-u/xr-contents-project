@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -66,6 +67,11 @@ namespace EnemyScripts
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> rushDirection;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isOverRush;
 
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isJumping;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> canJumpNextNode;
+
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isGround;
+
         void Start()
         {
             // About Attack FSM
@@ -122,11 +128,18 @@ namespace EnemyScripts
             b.AddData("rushDirection", rushDirection);
             b.AddData("myRushSpeed", myRushSpeed);
             b.AddData("isOverRush", isOverRush);
-        
+            
+            // Jump
+            b.AddData("isJumping", isJumping);
+            b.AddData("canJumpNextNode", canJumpNextNode);
+            
+            // Ground Check
+            b.AddData("isGround", isGround);
 
             // Node Initialize
             var wait = new WaitNode();
             var trace = new EliteTraceNode();
+            var jump = new JumpNode();
             var attack = new NormalAttackNode();
 
             var ready = new EliteAttackReadyNode();
@@ -144,6 +157,10 @@ namespace EnemyScripts
             trace.attacks[0] = attack;
             trace.attacks[1] = ready;
             trace.attacks[2] = ready;
+            trace.enterJump = jump;
+            
+            // End of Jump
+            jump.endJump = trace;
             
             // Player Out of Range
             trace.playerExit = wait;
@@ -203,6 +220,29 @@ namespace EnemyScripts
             return mySpecialAttackDamage.Value;
         }
 
+        public void DiscountHp(float damage)
+        {
+            if (isSpecialAttackReady.Value)
+                return;
+            myHp.Value -= damage;
+        }
+
+        private void OnCollisionStay2D(Collision2D other)
+        {
+            if (other.transform.CompareTag("Ground"))
+            {
+                isGround.Value = true;
+            }
+        }
+
+        private void OnCollisionExit2D(Collision2D other)
+        {
+            if (other.transform.CompareTag("Ground"))
+            {
+                isGround.Value = false;
+            }
+        }
+
         private void WeakShow()
         {
             weak.SetActive(isSpecialAttackReady.Value);
@@ -224,7 +264,6 @@ namespace EnemyScripts
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawWireSphere(transform.position, myOverRushRange.Value);
             }
-                
         }
     }
 }
