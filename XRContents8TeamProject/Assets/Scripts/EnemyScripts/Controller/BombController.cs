@@ -52,7 +52,7 @@ public class BombController : MonoBehaviour
 
             if (d2 + range >= distance)
             {
-                playerManager.DiscountHp(5f);
+                playerManager.PlayerDiscountHp(5f);
                 LogPrintSystem.SystemLogPrint(transform, "Hit Bomb", ELogType.EnemyAI);
             }
             
