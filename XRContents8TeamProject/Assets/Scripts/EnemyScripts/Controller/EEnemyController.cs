@@ -214,6 +214,13 @@ namespace EnemyScripts
             return mySpecialAttackDamage.Value;
         }
 
+        public void DiscountHp(float damage)
+        {
+            if (isSpecialAttackReady.Value)
+                return;
+            myHp.Value -= damage;
+        }
+
         private void WeakShow()
         {
             weak.SetActive(isSpecialAttackReady.Value);
