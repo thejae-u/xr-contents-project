@@ -93,7 +93,6 @@ public class PlayerShoot : MonoBehaviour
 
     public void Reload()
     {
-        
         if (curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo && reloadCoroutine == null)
         {
             LogPrintSystem.SystemLogPrint(transform, "Requset Reload", ELogType.Player);

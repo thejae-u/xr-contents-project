@@ -209,6 +209,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5871502387009047570, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
+      propertyPath: playerHitInvincibilityDuration
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5951337740764393561, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
       propertyPath: m_Layer
       value: 6

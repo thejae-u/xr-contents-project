@@ -24,6 +24,7 @@ public class PlayerManager : MonoBehaviour
     private bool isPlayerViewDirRight = true;
     private bool isJumping = false;
     private bool canJump = true;
+    private bool isKnockback = false;
 
 
     // Player dodge(evasion) related
@@ -54,8 +55,6 @@ public class PlayerManager : MonoBehaviour
 
     private Rigidbody2D playerRigidbody;
     private Animator animator;
-    //private Collider2D enemyCollider;
-    private float enemyXPos = 0f;
 
     private void Awake()
     {
@@ -180,6 +179,7 @@ public class PlayerManager : MonoBehaviour
 
     public void PlayerDiscountHp(float damage, float enemyXPos)
     {
+        LogPrintSystem.SystemLogPrint(transform, "Call PlayerDiscountHp", ELogType.Player);
         if (!isInvincibility)
         {
             Sequence sequence = DOTween.Sequence();
@@ -201,23 +201,28 @@ public class PlayerManager : MonoBehaviour
 
     private void PlayerKnockback(float enemyXPos)
     {
-        Sequence sequence = DOTween.Sequence();
-
-        // Knockback avatar
-        float playerXPos = transform.position.x;
-
-        if (playerXPos > enemyXPos) // 플레이어가 오른쪽에 있다면
+        if (!isKnockback)
         {
-            transform.DOMoveX(transform.position.x + playerKnockbackDistance, playerHitInvincibilityDuration);
-            LogPrintSystem.SystemLogPrint(transform, $"{playerXPos},{enemyXPos}", ELogType.Player);
-        }
-        else if (playerXPos < enemyXPos)
-        {
-            transform.DOMoveX(transform.position.x - playerKnockbackDistance, playerHitInvincibilityDuration);
-            LogPrintSystem.SystemLogPrint(transform, $"{playerXPos},{enemyXPos}", ELogType.Player);
-        }
+            Sequence sequence = DOTween.Sequence();
 
-        PlayerInvincibility(playerHitInvincibilityDuration);
+            isKnockback = true;
+
+            // Knockback avatar
+            float playerXPos = transform.position.x;
+
+            if (playerXPos > enemyXPos) // 플레이어가 오른쪽에 있다면
+            {
+                transform.DOMoveX(transform.position.x + playerKnockbackDistance, playerHitInvincibilityDuration);
+                LogPrintSystem.SystemLogPrint(transform, $"{playerXPos},{enemyXPos}", ELogType.Player);
+            }
+            else if (playerXPos < enemyXPos)
+            {
+                transform.DOMoveX(transform.position.x - playerKnockbackDistance, playerHitInvincibilityDuration);
+                LogPrintSystem.SystemLogPrint(transform, $"{playerXPos},{enemyXPos}", ELogType.Player);
+            }
+
+            PlayerInvincibility(playerHitInvincibilityDuration);
+        }
     }
 
     void PlayerInvincibility(float Duration)
@@ -234,6 +239,7 @@ public class PlayerManager : MonoBehaviour
             gameObject.layer = 6;
             canJump = true;
             isInvincibility = false;
+            isKnockback = false;
         });
 
     }
