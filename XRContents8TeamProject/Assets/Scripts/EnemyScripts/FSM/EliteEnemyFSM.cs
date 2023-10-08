@@ -28,12 +28,16 @@ public class EliteTraceNode : TraceNode
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
         var myMoveSpeed = blackboard.GetData<ReferenceValueT<float>>("myMoveSpeed");
         var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
+        var isGround = blackboard.GetData<ReferenceValueT<bool>>("isGround");
 
         var myPos = myTransform.position;
 
-      myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x,
-                playerTransform.position.x, myMoveSpeed.Value * Time.deltaTime),
-            myPos.y, 0);
+        if (isGround.Value)
+        {
+            myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x,
+                    playerTransform.position.x, myMoveSpeed.Value * Time.deltaTime),
+                myPos.y, 0);
+        }
 
         switch (type)
         {

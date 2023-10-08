@@ -17,11 +17,21 @@ public class NormalTraceNode : TraceNode
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
         var myPos = myTransform.position;
         var playerPos = playerTransform.position;
-        var myMoveSpeed = blackboard.GetData<ReferenceValueT<float>>("myMoveSpeed"); 
+        var myMoveSpeed = blackboard.GetData<ReferenceValueT<float>>("myMoveSpeed");
+        var isGround = blackboard.GetData<ReferenceValueT<bool>>("isGround");
 
-        myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x,
-                playerPos.x, myMoveSpeed.Value * Time.deltaTime),
-            myPos.y, myPos.z);
+
+        if (isGround.Value)
+        {
+            LogPrintSystem.SystemLogPrint(myTransform, "isGround -> Trace Player", ELogType.EnemyAI);
+            myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x,
+                    playerPos.x, myMoveSpeed.Value * Time.deltaTime),
+                myPos.y, myPos.z);
+        }
+        else
+        {
+            LogPrintSystem.SystemLogPrint(myTransform, "isGround FALSE", ELogType.EnemyAI);
+        }
 
         LogPrintSystem.SystemLogPrint(myTransform, "Now Tracing", ELogType.EnemyAI);
 

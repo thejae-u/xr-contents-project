@@ -161,7 +161,15 @@ public abstract class TraceNode : INode
         float distanceForJump = Mathf.Abs(myTransform.position.x - playerTransform.position.x);
         var isJumping = blackboard.GetData<ReferenceValueT<bool>>("isJumping");
         if (isJumping.Value) return ETraceState.PlayerTrace;
-        if (distanceForJump <= d2 && myType != EEliteType.Bomb) return ETraceState.NeedJump;
+        if (distanceForJump <= d2 && myType != EEliteType.Bomb)
+        {
+            float playerYPos = playerTransform.position.y;
+            float myYPos = myTransform.position.y;
+
+            float yPosCalc = Mathf.Abs(playerYPos - myYPos);
+
+            return yPosCalc <= 5.0f ? ETraceState.PlayerTrace : ETraceState.NeedJump;
+        }
 
         // Trace Logic
         if (myType != EEliteType.Rush)
