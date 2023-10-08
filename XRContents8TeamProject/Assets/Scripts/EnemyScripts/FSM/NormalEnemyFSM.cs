@@ -69,7 +69,7 @@ public class NormalAttackNode : INode
 
         // 플레이어의 체력을 Discount
         var attackDamage = blackboard.GetData<ReferenceValueT<float>>("myAttackDamage").Value;
-        player.PlayerDiscountHp(attackDamage);
+        player.PlayerDiscountHp(attackDamage, myTransform.position.x);
         blackboard.GetData<ReferenceValueT<bool>>("isNowAttack").Value = true;
 
         LogPrintSystem.SystemLogPrint(myTransform, $"{attackDamage} Damage to Player!!", ELogType.EnemyAI);

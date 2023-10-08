@@ -167,7 +167,8 @@ public class EliteRushAttackNode : INode
 
         if (playerRange + myAttackRange.Value >= distance)
         {
-            playerTransform.GetComponent<PlayerManager>().PlayerDiscountHp(mySpecialAttackDamage.Value);
+            playerTransform.GetComponent<PlayerManager>().PlayerDiscountHp(mySpecialAttackDamage.Value,
+                myTransform.position.x);
             return true;
         }
         return playerRange + myAttackRange.Value >= distance;
