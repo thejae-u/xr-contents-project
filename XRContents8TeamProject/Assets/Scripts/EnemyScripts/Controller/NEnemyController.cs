@@ -34,6 +34,8 @@ namespace EnemyScripts
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isAlive;
 
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isNowAttack;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isJumping;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> canJumpNextNode;
         
         private bool isHit;
 
@@ -54,14 +56,19 @@ namespace EnemyScripts
             b.AddData("myMoveSpeed", myMoveSpeed);
             b.AddData("isNowAttack", isNowAttack);
             b.AddData("myType", myType);
+            b.AddData("isJumping", isJumping);
+            b.AddData("canJumpNextNode", canJumpNextNode);
 
             var wait = new WaitNode();
             var trace = new NormalTraceNode();
             var attack = new NormalAttackNode();
+            var jump = new JumpNode();
 
             wait.enterPlayer = trace;
             trace.playerEnter = attack;
             trace.playerExit = wait;
+            trace.enterJump = jump;
+            jump.endJump = trace;
             attack.outOfAttackRange = trace;
 
             fsmLife = new Fsm();

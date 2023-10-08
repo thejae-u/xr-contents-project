@@ -99,3 +99,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bombSpeed: 2
   bombDeg: 2
+  bombDamage: 20

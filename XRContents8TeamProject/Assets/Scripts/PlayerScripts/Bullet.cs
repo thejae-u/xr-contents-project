@@ -25,10 +25,10 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
-        {
-            nEnemyController = collision.GetComponent<NEnemyController>();
-
+        {           
             BulletDestroy();
+
+            nEnemyController = collision.GetComponent<NEnemyController>();
             float damage = playerManager.GetComponent<PlayerManager>().playerAtk;
             nEnemyController.DiscountHp(damage);
         }

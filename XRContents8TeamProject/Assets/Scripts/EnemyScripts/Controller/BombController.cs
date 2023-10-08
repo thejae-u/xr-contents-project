@@ -12,6 +12,9 @@ public class BombController : MonoBehaviour
     [Header("폭탄의 각도를 조절")] 
     [SerializeField] private float bombDeg;
 
+    [Header("폭탄 대미지")] 
+    [SerializeField] private float bombDamage;
+
     private Vector3[] wayPoints;
     
     // Player Last Position Set
@@ -52,7 +55,7 @@ public class BombController : MonoBehaviour
 
             if (d2 + range >= distance)
             {
-                playerManager.DiscountHp(5f);
+                playerManager.PlayerDiscountHp(bombDamage, myPos.x);
                 LogPrintSystem.SystemLogPrint(transform, "Hit Bomb", ELogType.EnemyAI);
             }
             
