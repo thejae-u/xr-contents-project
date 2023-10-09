@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myHp:
-    Value: 100
+    Value: 30
   myMoveSpeed:
     Value: 3
   myAttackDamage:
@@ -109,11 +109,11 @@ MonoBehaviour:
   mySpecialAttackDamage:
     Value: 50
   myTraceRange:
-    Value: 8
+    Value: 20
   myAttackRange:
     Value: 1
   myRushRange:
-    Value: 5
+    Value: 14
   myOverRushRange:
     Value: 3
   myRushSpeed:
@@ -121,7 +121,7 @@ MonoBehaviour:
   specialAttackWait:
     Value: 5
   specialAttackCooldown:
-    Value: 5
+    Value: 2.5
   groggyTime:
     Value: 3
   myType:
