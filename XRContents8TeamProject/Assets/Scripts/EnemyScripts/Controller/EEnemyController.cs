@@ -197,8 +197,14 @@ namespace EnemyScripts
 
         private void Update()
         {
-            if(!isAlive.Value)
+            if (!isAlive.Value)
+            {
+                if (DOTween.IsTweening(this))
+                {
+                    DOTween.Kill(this);
+                }
                 Destroy(gameObject);
+            }
             else
             {
                 fsm.Update();
