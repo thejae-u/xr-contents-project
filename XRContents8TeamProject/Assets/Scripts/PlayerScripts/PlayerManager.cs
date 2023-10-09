@@ -265,4 +265,9 @@ public class PlayerManager : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, rad);
     }
+
+    public float PlayerMaxHP()
+    {
+        return playerHp;
+    }
 }

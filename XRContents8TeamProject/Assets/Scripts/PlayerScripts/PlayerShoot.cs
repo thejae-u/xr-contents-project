@@ -8,6 +8,7 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private Transform fireTransform;
     
     private GameObject playerManager;
+    private GameObject bulletUI;
 
     Sequence sequence;
     Sequence sequenceBoltAction;
@@ -16,6 +17,7 @@ public class PlayerShot : MonoBehaviour
     private float lastFireTime = 0f;
     private int curAmmo = 0;
     private bool isReloading;
+    private bool isDiscountBullet;
 
     [Header("총 딜레이 관련")]
     [SerializeField] private float reverseDelay = 0.1f;
@@ -38,6 +40,7 @@ public class PlayerShot : MonoBehaviour
     private void Awake()
     {
         playerManager = GameObject.Find("Player");
+        bulletUI = GameObject.Find("Bullet");
     }
 
     private void Start()
@@ -105,6 +108,10 @@ public class PlayerShot : MonoBehaviour
 
             lastFireTime = Time.time;
             curAmmo--;
+
+            isDiscountBullet = true;
+            bulletUI.GetComponent<BalletUIController>().SetAmmo(isDiscountBullet);
+
             LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo}", ELogType.Player);
 
             StateBoltAction();
@@ -174,8 +181,12 @@ public class PlayerShot : MonoBehaviour
             // 노리쇠 전진 애니메이션 출력
 
             sequence.SetDelay(forwardDelay).OnComplete(() =>
-            {
+            {              
                 curAmmo++;
+
+                isDiscountBullet = false;
+                bulletUI.GetComponent<BalletUIController>().SetAmmo(isDiscountBullet);
+
                 isReloading = false;
                 LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo} -> ReloadTime : {playerManager.GetComponent<PlayerManager>().reloadTime}", ELogType.Player);
             });
