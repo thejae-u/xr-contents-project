@@ -15,6 +15,11 @@ public class PlayerShot : MonoBehaviour
 
     private float lastFireTime = 0f;
     private int curAmmo = 0;
+    private bool isReloading;
+
+    private float retreatDelay = 0.1f;
+    private float reloadingDelay = 0.5f;
+    private float forwardDelay = 0.1f;
 
     public enum EState
     {
@@ -37,6 +42,7 @@ public class PlayerShot : MonoBehaviour
     private void Start()
     {
         curAmmo = playerManager.GetComponent<PlayerManager>().maxAmmo;
+        isReloading = false;
         state = EState.Idle;
     }
 
@@ -48,16 +54,17 @@ public class PlayerShot : MonoBehaviour
             {
                 StateShot();
             }
-            else if (state == EState.ReleaseTheBolt)
+            else if (state == EState.ReleaseTheBolt && curAmmo > 0)
             { // 재장전 중에 사격 버튼을 입력한 경우 장전을 취소한다.
                 sequenceReleaseTheBolt.Kill();
+                isReloading = false;
                 LogPrintSystem.SystemLogPrint(transform, $"Reload Cancel", ELogType.Player);
                 StateRackYourBolt();
                 StateShot();
             }
         }
         
-        if(Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKeyDown(KeyCode.R) && !isReloading)
         {
             StateReleaseTheBolt();
         }
@@ -124,12 +131,15 @@ public class PlayerShot : MonoBehaviour
     {
         sequenceReleaseTheBolt = DOTween.Sequence();
 
+        isReloading = true;
+        state = EState.ReleaseTheBolt;
+
         if (curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo)
         {
             // 노리쇠 후퇴 애니메이션 출력
             LogPrintSystem.SystemLogPrint(transform, "노리쇠 후퇴", ELogType.Player);
 
-            sequenceReleaseTheBolt.SetDelay(0.1f).OnComplete(() =>
+            sequenceReleaseTheBolt.SetDelay(retreatDelay).OnComplete(() =>
             {
                 LogPrintSystem.SystemLogPrint(transform, "노리쇠 후퇴 완료", ELogType.Player);
                 StateReloading();
@@ -139,41 +149,35 @@ public class PlayerShot : MonoBehaviour
 
     void StateReloading()
     {
-        sequence = DOTween.Sequence();
-
-        LogPrintSystem.SystemLogPrint(transform, "장전 중", ELogType.Player);
-
-        // 장전 애니메이션 출력
-
-        sequence.SetDelay(0.5f).OnComplete(() =>
+        if (isReloading)
         {
-            StateRackYourBolt();
-        });
+            sequence = DOTween.Sequence();
+
+            LogPrintSystem.SystemLogPrint(transform, "장전 중", ELogType.Player);
+
+            // 장전 애니메이션 출력
+
+            sequence.SetDelay(reloadingDelay).OnComplete(() =>
+            {
+                StateRackYourBolt();
+            });
+        }
     }
 
     void StateRackYourBolt()
     {
-        sequence = DOTween.Sequence();
-
-        // 노리쇠 전진 애니메이션 출력
-
-        sequence.SetDelay(0.1f).OnComplete(() =>
+        if (isReloading)
         {
-            curAmmo++;
-            LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo} -> ReloadTime : {playerManager.GetComponent<PlayerManager>().reloadTime}", ELogType.Player);
-        });
+            sequence = DOTween.Sequence();
 
-    }
+            // 노리쇠 전진 애니메이션 출력
 
-    private IEnumerator ReloadRoutine()
-    {
-        state = EState.Reloading;
-
-        yield return new WaitForSeconds(playerManager.GetComponent<PlayerManager>().reloadTime);
-
-        curAmmo++;
-        state = EState.ReloadComplete;
-
-        LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo} -> ReloadTime : {playerManager.GetComponent<PlayerManager>().reloadTime}", ELogType.Player);
+            sequence.SetDelay(forwardDelay).OnComplete(() =>
+            {
+                curAmmo++;
+                isReloading = false;
+                LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo} -> ReloadTime : {playerManager.GetComponent<PlayerManager>().reloadTime}", ELogType.Player);
+            });
+        }
     }
 }
