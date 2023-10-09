@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.33, y: 3.97, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2586547241528913782}
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myHp:
-    Value: 30
+    Value: 100
   myMoveSpeed:
     Value: 3
   myAttackDamage:
@@ -109,17 +109,17 @@ MonoBehaviour:
   mySpecialAttackDamage:
     Value: 50
   myTraceRange:
-    Value: 20
+    Value: 8
   myAttackRange:
     Value: 1
   myRushRange:
-    Value: 14
+    Value: 5
   myOverRushRange:
     Value: 3
   myRushSpeed:
     Value: 1
   specialAttackWait:
-    Value: 3
+    Value: 5
   specialAttackCooldown:
     Value: 5
   groggyTime:

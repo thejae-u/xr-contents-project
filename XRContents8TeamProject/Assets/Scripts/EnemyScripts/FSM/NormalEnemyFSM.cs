@@ -90,7 +90,7 @@ public class NormalAttackNode : INode
         sequence.SetDelay(1.5f).OnComplete(() =>
         {
             isNowAttack.Value = false;
-        }).SetId(this);
+        });
         
         LogPrintSystem.SystemLogPrint(myTransform, $"{attackDamage} Damage to Player!!", ELogType.EnemyAI);
         return Fsm.GuardNullNode(this, this);

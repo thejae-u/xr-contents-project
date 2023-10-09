@@ -89,13 +89,7 @@ namespace EnemyScripts
             if (isAlive.Value)
                 fsmLife.Update();
             else
-            {
-                if (DOTween.IsTweening(this))
-                {
-                    DOTween.Kill(this);
-                }
                 Destroy(gameObject);
-            }
         }
 
 
@@ -145,7 +139,7 @@ namespace EnemyScripts
                 isHit = false;
             });
             
-            sequence.Play().SetId(this);
+            sequence.Play();
         }
     }
 }
