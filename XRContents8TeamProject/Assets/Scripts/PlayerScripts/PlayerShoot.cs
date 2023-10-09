@@ -17,9 +17,10 @@ public class PlayerShot : MonoBehaviour
     private int curAmmo = 0;
     private bool isReloading;
 
-    private float retreatDelay = 0.1f;
-    private float reloadingDelay = 0.5f;
-    private float forwardDelay = 0.1f;
+    [Header("총 딜레이 관련")]
+    [SerializeField] private float reverseDelay = 0.1f;
+    [SerializeField] private float reloadingDelay = 0.5f;
+    [SerializeField] private float forwardDelay = 0.1f;
 
     public enum EState
     {
@@ -139,7 +140,7 @@ public class PlayerShot : MonoBehaviour
             // 노리쇠 후퇴 애니메이션 출력
             LogPrintSystem.SystemLogPrint(transform, "노리쇠 후퇴", ELogType.Player);
 
-            sequenceReleaseTheBolt.SetDelay(retreatDelay).OnComplete(() =>
+            sequenceReleaseTheBolt.SetDelay(reverseDelay).OnComplete(() =>
             {
                 LogPrintSystem.SystemLogPrint(transform, "노리쇠 후퇴 완료", ELogType.Player);
                 StateReloading();
