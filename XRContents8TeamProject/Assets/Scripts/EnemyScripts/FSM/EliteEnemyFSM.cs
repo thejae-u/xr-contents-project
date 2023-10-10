@@ -206,6 +206,10 @@ public class EliteRushAttackNode : INode
         var rushDirection = blackboard.GetData<ReferenceValueT<bool>>("rushDirection");
         var myRushSpeed = blackboard.GetData<ReferenceValueT<float>>("myRushSpeed");
 
+        int enemyLayer = LayerMask.NameToLayer("Enemy");
+        
+        Physics2D.IgnoreLayerCollision(enemyLayer, enemyLayer, true);
+        
         if (!isNowAttack)
         {
             rushDirection.Value = Vector3.Normalize(playerTransform.position - myTransform.position).x > 0.0f;
@@ -223,12 +227,14 @@ public class EliteRushAttackNode : INode
                 if (CheckPlayer(blackboard))
                 {
                     InitSetting(blackboard);
+                    Physics2D.IgnoreLayerCollision(enemyLayer, enemyLayer, false);
                     return Fsm.GuardNullNode(this, endAttack);
                 }
             }
             else
             {
                 InitSetting(blackboard);
+                Physics2D.IgnoreLayerCollision(enemyLayer, enemyLayer, false);
                 return Fsm.GuardNullNode(this, endAttack);
             }
 
@@ -243,12 +249,14 @@ public class EliteRushAttackNode : INode
                 if (CheckPlayer(blackboard))
                 {
                     InitSetting(blackboard);
+                    Physics2D.IgnoreLayerCollision(enemyLayer, enemyLayer, false);
                     return Fsm.GuardNullNode(this, endAttack);
                 }
             }
             else
             {
                 InitSetting(blackboard);
+                Physics2D.IgnoreLayerCollision(enemyLayer, enemyLayer, false);
                 return Fsm.GuardNullNode(this, endAttack);
             }
 

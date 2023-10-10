@@ -12,6 +12,6 @@ public class AimingController : MonoBehaviour
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        aimingPoint.transform.position = new Vector3(mousePosition.x, mousePosition.y, aimingPoint.transform.position.z);
+        aimingPoint.transform.position = new Vector3(mousePosition.x, mousePosition.y, -1);
     }
 }
