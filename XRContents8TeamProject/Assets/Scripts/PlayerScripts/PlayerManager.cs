@@ -91,6 +91,11 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public float GetPlayerHp()
+    {
+        return playerHp;
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (canJump)
