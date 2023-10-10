@@ -115,28 +115,12 @@ public class PlayerManager : MonoBehaviour
         if (isPlayerViewDirRight)
         {
             Vector3 dir = moveDir * Vector3.right;
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
-            }
+            transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
         }
         else
         {
             Vector3 dir = moveDir * Vector3.left;
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
-            }
+            transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
         }
     }
     #endregion
