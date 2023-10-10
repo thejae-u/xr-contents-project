@@ -232,6 +232,11 @@ public class JumpNode : INode
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
         var isJumping = blackboard.GetData<ReferenceValueT<bool>>("isJumping");
 
+        if (playerTransform.GetComponent<PlayerManager>().GetIsJumping())
+        {
+            return Fsm.GuardNullNode(this, endJump);
+        }
+
         Vector3 jumpPos = new Vector3(myTransform.position.x,
             playerTransform.position.y, 0);
         

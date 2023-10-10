@@ -96,6 +96,11 @@ public class PlayerManager : MonoBehaviour
         return playerHp;
     }
 
+    public bool GetIsJumping()
+    {
+        return isJumping;
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (canJump)
