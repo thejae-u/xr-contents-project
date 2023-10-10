@@ -3,6 +3,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Transform target;
+
+    public bool IsCameraStop { get; set; }
     private float trackSpeed = 10;
 
     public void SetTarget(Transform t)
