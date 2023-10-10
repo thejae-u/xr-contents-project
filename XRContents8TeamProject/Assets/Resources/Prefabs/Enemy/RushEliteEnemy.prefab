@@ -111,11 +111,11 @@ MonoBehaviour:
   myTraceRange:
     Value: 20
   myAttackRange:
-    Value: 1
+    Value: 2.5
   myRushRange:
     Value: 14
   myOverRushRange:
-    Value: 3
+    Value: 5
   myRushSpeed:
     Value: 1
   specialAttackWait:
@@ -214,7 +214,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.25, y: 2}
+  m_Size: {x: 3, y: 4}
   m_Direction: 0
 --- !u!1001 &7845387109028631115
 PrefabInstance:
@@ -234,11 +234,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5694002389645557053, guid: 201ed26a627f846229c9c450aeb9c827, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 5694002389645557053, guid: 201ed26a627f846229c9c450aeb9c827, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5694002389645557053, guid: 201ed26a627f846229c9c450aeb9c827, type: 3}
       propertyPath: m_LocalPosition.z
