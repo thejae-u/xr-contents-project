@@ -16,10 +16,7 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (IsCameraStop)
-        {
-            transform.position = prevPosition;
-        }
+        if (IsCameraStop) return;
         
         if (target)
         {
