@@ -114,7 +114,10 @@ public class PlayerManager : MonoBehaviour
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (canJump)
+        {
             isJumping = false;
+            animator.SetBool("isJump", false);
+        }
     }
 
     #region MOVEMENT
@@ -122,15 +125,21 @@ public class PlayerManager : MonoBehaviour
     {
         float moveDir = Input.GetAxis("Horizontal");
 
-        if (isPlayerViewDirRight)
+        if (isPlayerViewDirRight && moveDir != 0)
         {
             Vector3 dir = moveDir * Vector3.right;
             transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
+            animator.SetBool("isMove", true);
         }
-        else
+        else if (!isPlayerViewDirRight && moveDir != 0)
         {
             Vector3 dir = moveDir * Vector3.left;
             transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
+            animator.SetBool("isMove", true);
+        }
+        else
+        {
+            animator.SetBool("isMove", false);
         }
     }
     #endregion
@@ -142,8 +151,10 @@ public class PlayerManager : MonoBehaviour
         {
             playerRigidbody.AddForce(Vector2.up * playerJumpForce, ForceMode2D.Impulse);
             StartCoroutine(PlayerJumpResetTime());
-            //animator.SetBool("IsJump", true);
-            isJumping = true;
+            isJumping = true;         
+            
+            animator.SetBool("isJump", true);
+            animator.SetTrigger("doJump");
         }
     }
 

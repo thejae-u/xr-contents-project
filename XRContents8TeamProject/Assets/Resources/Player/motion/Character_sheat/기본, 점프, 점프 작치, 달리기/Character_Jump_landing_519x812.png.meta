@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -121,7 +121,847 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4060
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbdbdd21010a84b43a3a888b7ff3d112
+      internalID: 432660340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_1
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 4060
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e36cdfb55b21059469d3055a6a8e82a7
+      internalID: 438134987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_2
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 4060
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9f03ae014a15fe44b98b97b22f74c33
+      internalID: -918029986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_3
+      rect:
+        serializedVersion: 2
+        x: 1557
+        y: 4060
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2bccc3cf43528f4fbe753d8e735c030
+      internalID: 1462001731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_4
+      rect:
+        serializedVersion: 2
+        x: 2076
+        y: 4060
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0477dcdf200cbc45811a24f414051e7
+      internalID: -1468584229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_5
+      rect:
+        serializedVersion: 2
+        x: 2595
+        y: 4060
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b85e20e385e0a024d8c9d9066da25468
+      internalID: 1716086136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_6
+      rect:
+        serializedVersion: 2
+        x: 3114
+        y: 4060
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c102b5a39653a44392ae61b6b232200
+      internalID: 760159933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3248
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8c8d322c23a1884db80a5eeebca705c
+      internalID: 1780663505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_8
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 3248
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38932a044b2f37248aabcbab999700b2
+      internalID: 1611143114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_9
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 3248
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c57518c583c9c244eb224ece1aba2747
+      internalID: -155023789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_10
+      rect:
+        serializedVersion: 2
+        x: 1557
+        y: 3248
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8c965b8d14c18c44b829cf7159accfd
+      internalID: -744460492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_11
+      rect:
+        serializedVersion: 2
+        x: 2076
+        y: 3248
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 530c36c8557df2749a712aa4727f52d4
+      internalID: 1589756734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_12
+      rect:
+        serializedVersion: 2
+        x: 2595
+        y: 3248
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14edefcba3703eb4a9c684779904c6c4
+      internalID: -1923517372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_13
+      rect:
+        serializedVersion: 2
+        x: 3114
+        y: 3248
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9a7502e737122c4eb89e7bc687b8ab2
+      internalID: 1203566126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2436
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3421855780f2a8544a400c6d1d77730d
+      internalID: 811614474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_15
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 2436
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bdb06187801ae24789ba55bae577100
+      internalID: 777393014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_16
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 2436
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ac5104349d46f941ba153a58348230d
+      internalID: 1567514921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_17
+      rect:
+        serializedVersion: 2
+        x: 1557
+        y: 2436
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aed7d416a050a345a8350f1b4e41fed
+      internalID: -1301942807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_18
+      rect:
+        serializedVersion: 2
+        x: 2076
+        y: 2436
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c25e0dace40839a4c941e07595ae5e34
+      internalID: -1384190969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_19
+      rect:
+        serializedVersion: 2
+        x: 2595
+        y: 2436
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd3c664b1d109924d99a52d6a6c63d9b
+      internalID: -1415079375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_20
+      rect:
+        serializedVersion: 2
+        x: 3114
+        y: 2436
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9938d4bf1821e5645af20bae089cf8e0
+      internalID: 1463512605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1624
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdf7a029adcfe9946a376f8caaa4ef00
+      internalID: 1015583313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_22
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 1624
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2f98958a2ccf3a4fb8bca8c44c16b4d
+      internalID: -1669716830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_23
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 1624
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e409eb9485884d4c8a4c6508edfe8c1
+      internalID: 761872446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_24
+      rect:
+        serializedVersion: 2
+        x: 1557
+        y: 1624
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fb8651c22ab45048b105b2f275dc580
+      internalID: -1010020687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_25
+      rect:
+        serializedVersion: 2
+        x: 2076
+        y: 1624
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c0ccf356140cf44c8d5d2266eb44e76
+      internalID: -1656504372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_26
+      rect:
+        serializedVersion: 2
+        x: 2595
+        y: 1624
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78eb8b007803c3d42b0c70687ac04ea7
+      internalID: -1186272863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_27
+      rect:
+        serializedVersion: 2
+        x: 3114
+        y: 1624
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce83e4ec2a1c66d4e94dd38a3bb61532
+      internalID: -604500277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 812
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a679563c61759f34c80b040b60f4613a
+      internalID: 1774456654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_29
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 812
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1abe4ad358800714e8c46c6bf1cc4213
+      internalID: -1368967727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_30
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 812
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c42d8bf6871417a42abfc839f7bee82b
+      internalID: -825828607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_31
+      rect:
+        serializedVersion: 2
+        x: 1557
+        y: 812
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3533458c78b818d42935b13cb897d539
+      internalID: 138872561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_32
+      rect:
+        serializedVersion: 2
+        x: 2076
+        y: 812
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a44787ff66b62bd42b7a98cb464f0367
+      internalID: -15261494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_33
+      rect:
+        serializedVersion: 2
+        x: 2595
+        y: 812
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12290b0852f838047969beadf528ca5b
+      internalID: 1960962348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_34
+      rect:
+        serializedVersion: 2
+        x: 3114
+        y: 812
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5be5fcb8e64338d488f35e9835c57339
+      internalID: -1373725364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9dccf496aa06364459adfe23d5e21cd5
+      internalID: -2097073501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_36
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 0
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 941912fc17bf23f4b909120504e47bff
+      internalID: 180108003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_37
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 0
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43534b75cdc618649a3761405713428f
+      internalID: 561033992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_38
+      rect:
+        serializedVersion: 2
+        x: 1557
+        y: 0
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e19e5c3b4e50f864fb3baa236169a736
+      internalID: 496099095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Jump_landing_519x812_39
+      rect:
+        serializedVersion: 2
+        x: 2076
+        y: 0
+        width: 519
+        height: 812
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b108e902ff035a445b75607b70e0333a
+      internalID: 403981206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +972,49 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Character_Jump_landing_519x812_0: 432660340
+      Character_Jump_landing_519x812_1: 438134987
+      Character_Jump_landing_519x812_10: -744460492
+      Character_Jump_landing_519x812_11: 1589756734
+      Character_Jump_landing_519x812_12: -1923517372
+      Character_Jump_landing_519x812_13: 1203566126
+      Character_Jump_landing_519x812_14: 811614474
+      Character_Jump_landing_519x812_15: 777393014
+      Character_Jump_landing_519x812_16: 1567514921
+      Character_Jump_landing_519x812_17: -1301942807
+      Character_Jump_landing_519x812_18: -1384190969
+      Character_Jump_landing_519x812_19: -1415079375
+      Character_Jump_landing_519x812_2: -918029986
+      Character_Jump_landing_519x812_20: 1463512605
+      Character_Jump_landing_519x812_21: 1015583313
+      Character_Jump_landing_519x812_22: -1669716830
+      Character_Jump_landing_519x812_23: 761872446
+      Character_Jump_landing_519x812_24: -1010020687
+      Character_Jump_landing_519x812_25: -1656504372
+      Character_Jump_landing_519x812_26: -1186272863
+      Character_Jump_landing_519x812_27: -604500277
+      Character_Jump_landing_519x812_28: 1774456654
+      Character_Jump_landing_519x812_29: -1368967727
+      Character_Jump_landing_519x812_3: 1462001731
+      Character_Jump_landing_519x812_30: -825828607
+      Character_Jump_landing_519x812_31: 138872561
+      Character_Jump_landing_519x812_32: -15261494
+      Character_Jump_landing_519x812_33: 1960962348
+      Character_Jump_landing_519x812_34: -1373725364
+      Character_Jump_landing_519x812_35: -2097073501
+      Character_Jump_landing_519x812_36: 180108003
+      Character_Jump_landing_519x812_37: 561033992
+      Character_Jump_landing_519x812_38: 496099095
+      Character_Jump_landing_519x812_39: 403981206
+      Character_Jump_landing_519x812_4: -1468584229
+      Character_Jump_landing_519x812_40: 1062171590
+      Character_Jump_landing_519x812_41: 581812309
+      Character_Jump_landing_519x812_5: 1716086136
+      Character_Jump_landing_519x812_6: 760159933
+      Character_Jump_landing_519x812_7: 1780663505
+      Character_Jump_landing_519x812_8: 1611143114
+      Character_Jump_landing_519x812_9: -155023789
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
