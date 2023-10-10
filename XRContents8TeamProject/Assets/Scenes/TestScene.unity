@@ -4429,17 +4429,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4362786424884906897, guid: 109b14217312046548c4eaf23cb649f7, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5522067202717067044, guid: 109b14217312046548c4eaf23cb649f7, type: 3}
       propertyPath: m_Name
       value: RushEliteEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 8542631169174227961, guid: 109b14217312046548c4eaf23cb649f7, type: 3}
-      propertyPath: myRushRange.Value
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
