@@ -197,8 +197,14 @@ namespace EnemyScripts
 
         private void Update()
         {
-            if(!isAlive.Value)
+            if (!isAlive.Value)
+            {
+                if (DOTween.IsTweening(this))
+                {
+                    DOTween.Kill(this);
+                }
                 Destroy(gameObject);
+            }
             else
             {
                 fsm.Update();
@@ -232,14 +238,6 @@ namespace EnemyScripts
             if (other.transform.CompareTag("Ground"))
             {
                 isGround.Value = true;
-            }
-        }
-
-        private void OnCollisionExit2D(Collision2D other)
-        {
-            if (other.transform.CompareTag("Ground"))
-            {
-                isGround.Value = false;
             }
         }
 

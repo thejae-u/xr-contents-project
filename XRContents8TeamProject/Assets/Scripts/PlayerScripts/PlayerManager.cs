@@ -35,7 +35,7 @@ public class PlayerManager : MonoBehaviour
     private bool canDodge = true;
     [Header("플레이어 회피 사용 시 무적 시간(지속 시간) 조정")]
     [SerializeField] private float dodgeInvincibilityDuration = 1.5f;
-    
+
     private bool isInvincibility = false;
     private bool isDodgeDirRight;
 
@@ -54,12 +54,14 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public float reloadTime = 0.7f;
 
     private Rigidbody2D playerRigidbody;
+    private GameObject playerHpUI;
     private Animator animator;
 
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        playerHpUI = GameObject.Find("HP");
     }
 
     private void Start()
@@ -72,12 +74,12 @@ public class PlayerManager : MonoBehaviour
         PlayerViewMousePoint();
         PlayerMove();
 
-        if (Input.GetKeyDown(KeyCode.LeftShift)&& Input.GetKey(KeyCode.A) && canDodge)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKey(KeyCode.A) && canDodge)
         {
             isDodgeDirRight = false;
             PlayerDodge(isDodgeDirRight);
         }
-        else if(Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKey(KeyCode.D) && canDodge)
+        else if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKey(KeyCode.D) && canDodge)
         {
             isDodgeDirRight = true;
             PlayerDodge(isDodgeDirRight);
@@ -87,6 +89,11 @@ public class PlayerManager : MonoBehaviour
         {
             PlayerJump();
         }
+    }
+
+    public float GetPlayerHp()
+    {
+        return playerHp;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -136,7 +143,7 @@ public class PlayerManager : MonoBehaviour
         {
             playerRigidbody.AddForce(Vector2.up * playerJumpForce, ForceMode2D.Impulse);
             StartCoroutine(PlayerJumpResetTime());
-            animator.SetBool("IsJump", true);
+            //animator.SetBool("IsJump", true);
             isJumping = true;
         }
     }
@@ -150,9 +157,9 @@ public class PlayerManager : MonoBehaviour
     #endregion JUMP
 
     void PlayerDodge(bool dodgeDirRight)
-    {       
+    {
         LogPrintSystem.SystemLogPrint(transform, "회피 사용", ELogType.Player);
-        
+
         Sequence sequence = DOTween.Sequence();
         canDodge = false;
         Vector3 playerPos = transform.position;
@@ -167,7 +174,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         PlayerInvincibility(dodgeInvincibilityDuration);
-       
+
         sequence.SetDelay(dodgeCoolTime).OnComplete(() =>
         {
             LogPrintSystem.SystemLogPrint(transform, "회피 쿨타임 종료", ELogType.Player);
@@ -193,6 +200,9 @@ public class PlayerManager : MonoBehaviour
             });
 
             playerHp -= damage;
+
+            playerHpUI.GetComponent<hpUIController>().Sethp(damage);
+
             LogPrintSystem.SystemLogPrint(transform, $"{damage}From Enemy -> Remain PlayerHP{playerHp}", ELogType.Player);
 
             PlayerKnockback(enemyXPos);
@@ -213,12 +223,12 @@ public class PlayerManager : MonoBehaviour
             if (playerXPos > enemyXPos) // 플레이어가 오른쪽에 있다면
             {
                 transform.DOMoveX(transform.position.x + playerKnockbackDistance, playerHitInvincibilityDuration);
-                LogPrintSystem.SystemLogPrint(transform, $"{playerXPos},{enemyXPos}", ELogType.Player);
+                LogPrintSystem.SystemLogPrint(transform, $"넉백 시 플레이어와 적위치 : {playerXPos},{enemyXPos}", ELogType.Player);
             }
             else if (playerXPos < enemyXPos)
             {
                 transform.DOMoveX(transform.position.x - playerKnockbackDistance, playerHitInvincibilityDuration);
-                LogPrintSystem.SystemLogPrint(transform, $"{playerXPos},{enemyXPos}", ELogType.Player);
+                LogPrintSystem.SystemLogPrint(transform, $"넉백 시 플레이어와 적위치 : {playerXPos},{enemyXPos}", ELogType.Player);
             }
 
             PlayerInvincibility(playerHitInvincibilityDuration);
@@ -233,7 +243,7 @@ public class PlayerManager : MonoBehaviour
         gameObject.layer = 3; // 3: PlayerInvincibility
         canJump = false;
 
-        sequence.SetDelay(Duration).OnComplete(() => 
+        sequence.SetDelay(Duration).OnComplete(() =>
         {
             // 무적 상태 해제
             gameObject.layer = 6;

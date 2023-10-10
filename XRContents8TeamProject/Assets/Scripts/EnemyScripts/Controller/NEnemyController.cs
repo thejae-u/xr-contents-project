@@ -89,7 +89,13 @@ namespace EnemyScripts
             if (isAlive.Value)
                 fsmLife.Update();
             else
+            {
+                if (DOTween.IsTweening(this))
+                {
+                    DOTween.Kill(this);
+                }
                 Destroy(gameObject);
+            }
         }
 
 
@@ -100,15 +106,6 @@ namespace EnemyScripts
                 isGround.Value = true;
             }
         }
-
-        private void OnCollisionExit2D(Collision2D other)
-        {
-            if (other.transform.CompareTag("Ground"))
-            {
-                isGround.Value = false;
-            }
-        }
-
 
         private void OnDrawGizmos()
         {
@@ -148,7 +145,7 @@ namespace EnemyScripts
                 isHit = false;
             });
             
-            sequence.Play();
+            sequence.Play().SetId(this);
         }
     }
 }
