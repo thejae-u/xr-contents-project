@@ -101,7 +101,7 @@ public class EliteAttackReadyNode : INode
             {
                 canSpecialAttack.Value = true;
                 LogPrintSystem.SystemLogPrint(myTransform, "Attack On", ELogType.EnemyAI);
-            });
+            }).SetId(this);
             LogPrintSystem.SystemLogPrint(myTransform, "Ready For Attack", ELogType.EnemyAI);
         }
 
@@ -148,7 +148,7 @@ public class EliteBombAttackNode : INode
         {
             hasRemainAttackTime.Value = false;
             LogPrintSystem.SystemLogPrint(myTransform, "Now Can Special Attack", ELogType.EnemyAI);
-        });
+        }).SetId(this);
 
         return Fsm.GuardNullNode(this, endAttack);
     }
@@ -195,7 +195,7 @@ public class EliteRushAttackNode : INode
         sequence.SetDelay(specialAttackCooldown.Value).OnComplete(() =>
         {
             hasRemainAttackTime.Value = false;
-        });
+        }).SetId(this);
     }
 
     public INode Execute(Blackboard blackboard)
@@ -282,7 +282,7 @@ public class EliteGroggyNode : INode
             {
                 isGroggy.Value = false;
                 isInGroggy.Value = false;
-            });
+            }).SetId(this);
         }
 
         return !isGroggy.Value ?

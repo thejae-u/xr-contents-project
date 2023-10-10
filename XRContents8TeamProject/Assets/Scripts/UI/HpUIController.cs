@@ -9,28 +9,46 @@ public class hpUIController : MonoBehaviour
 
     private float hpMax;
 
-    private void Start()
+    private void Awake()
     {
-        for(int i = 0; i < heart.Length; i++) 
-        {
-            heart[i] = heart[i].transform.GetChild(0).GetComponent<Image>();
-        }
-
         hpMax = heart.Length;
         hp = hpMax;
+
+        for (int i = 0; i < heart.Length; i++)
+        {
+            if (heart[i].transform.childCount > 0)
+            {
+                Transform childTransform = heart[i].transform.GetChild(0);
+
+                Image heartImage = childTransform.GetComponent<Image>();
+
+                if (heartImage != null)
+                {
+                    heart[i] = heartImage;
+                }
+                else
+                {
+                    LogPrintSystem.SystemLogPrint(transform, $"자식에 이미지 컴포넌트가 없습니다.", ELogType.Player);
+                }
+            }      
+            else
+            {
+                LogPrintSystem.SystemLogPrint(transform, $"자식이 없습니다.", ELogType.Player);
+            }
+        }
     }
 
-    public void ExInit()
+    public void Sethp(float damage)
     {
-        heart = new Image[transform.childCount];
+        damage /= 20;
+        hp -= damage;
 
-        for(int i = 0;i < heart.Length;i++)
-            heart[i] = transform.GetChild(i).GetChild(0).GetComponent<Image>();
+        hp = Mathf.Clamp(hp, 0, hpMax); // 최대생명 넘지 못하도록 처리    
 
-            hpMax = heart.Length;
-            hp = Mathf.Clamp(hp, 0, hpMax); // 최대생명 넘지 못하도록 처리    
-        
-        for (int i = 0; i < hpMax; i++)
+        for (int i = 0; i < heart.Length; i++)
+            heart[i].fillAmount = 0;
+
+        for (int i = 0; i < heart.Length; i++)
         {
             heart[i].fillAmount = 0;
 
@@ -38,12 +56,7 @@ public class hpUIController : MonoBehaviour
                 heart[i].fillAmount = 1;
 
             if ((int)hp == i)
-                heart[i].fillAmount = hp - (int)hp;
+                heart[i].fillAmount = hp - (int)hp; // 소수점만 남게 처리
         }
-    }
-
-    public void Sethp(float damage)
-    {
-
     }
 }
