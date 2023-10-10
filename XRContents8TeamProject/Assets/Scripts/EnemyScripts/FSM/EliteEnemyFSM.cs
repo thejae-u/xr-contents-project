@@ -166,8 +166,10 @@ public class EliteRushAttackNode : INode
         var mySpecialAttackDamage = blackboard.GetData<ReferenceValueT<float>>("mySpecialAttackDamage");
         
         float playerRange = playerTransform.GetComponent<PlayerManager>().MyRadius;
+
+        Vector3 myPos = new Vector3(myTransform.position.x, myTransform.position.y, 0);
         
-        float distance = (playerTransform.position - myTransform.position).magnitude;
+        float distance = (playerTransform.position - myPos).magnitude;
 
         if (playerRange + myAttackRange.Value >= distance)
         {
