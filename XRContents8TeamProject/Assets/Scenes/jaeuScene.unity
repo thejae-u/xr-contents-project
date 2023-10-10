@@ -955,7 +955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1124869624aa6324f9de3baa8973d3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 3
+  x: 1
   y: 1
   mat: {fileID: 2100000, guid: 9d458fa5b59ceb34ca0721980c38e016, type: 2}
 --- !u!1001 &209543864
@@ -2811,7 +2811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1124869624aa6324f9de3baa8973d3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 4
+  x: 1.5
   y: 1
   mat: {fileID: 2100000, guid: 99a896dbc8d1d27458cc990e85808434, type: 2}
 --- !u!1 &795112416
@@ -14923,7 +14923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1124869624aa6324f9de3baa8973d3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 2
+  x: 0.5
   y: 1
   mat: {fileID: 2100000, guid: 65b14590fe75b0e448b4ebb4cd400588, type: 2}
 --- !u!1001 &2123219044
