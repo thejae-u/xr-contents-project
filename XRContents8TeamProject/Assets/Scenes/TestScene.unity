@@ -1145,6 +1145,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e917f19a7db2d2c49b214d640387eba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stages:
+  - {fileID: 228473445}
+  - {fileID: 1437938279}
+  - {fileID: 439494679}
+  - {fileID: 706542126}
+  - {fileID: 1407695470}
+  - {fileID: 1946647032}
+  - {fileID: 781439394}
+  - {fileID: 1447426277}
+  - {fileID: 1880443768}
+  - {fileID: 1749159297}
+  - {fileID: 7154269}
+  - {fileID: 1069424356}
+  - {fileID: 2125253740}
+  - {fileID: 1535535154}
 --- !u!4 &341456246 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6504124012999883842, guid: 09b12179540564935a7efe2a352956fd, type: 3}
