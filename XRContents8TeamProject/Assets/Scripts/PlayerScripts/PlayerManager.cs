@@ -25,6 +25,7 @@ public class PlayerManager : MonoBehaviour
     private bool isJumping = false;
     private bool canJump = true;
     private bool isKnockback = false;
+    private bool canKnockback = true;
 
 
     // Player dodge(evasion) related
@@ -54,6 +55,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public float reloadTime = 0.7f;
 
     private Rigidbody2D playerRigidbody;
+    // private CameraController cameraController;
     private GameObject playerHpUI;
     private Animator animator;
 
@@ -67,6 +69,7 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         playerRigidbody.gravityScale = playerGravityForce;
+        // cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
     }
 
     private void Update()
@@ -89,6 +92,13 @@ public class PlayerManager : MonoBehaviour
         {
             PlayerJump();
         }
+
+        PlayerMoveLimit();
+
+        //if (cameraController.IsCameraStop) 
+        //{
+        //    PlayerMoveLimit();
+        //}
     }
 
     public float GetPlayerHp()
@@ -202,22 +212,25 @@ public class PlayerManager : MonoBehaviour
     {
         if (!isKnockback)
         {
-            Sequence sequence = DOTween.Sequence();
-
-            isKnockback = true;
-
-            // Knockback avatar
-            float playerXPos = transform.position.x;
-
-            if (playerXPos > enemyXPos) // 플레이어가 오른쪽에 있다면
+            if (canKnockback)
             {
-                transform.DOMoveX(transform.position.x + playerKnockbackDistance, playerHitInvincibilityDuration);
-                LogPrintSystem.SystemLogPrint(transform, $"넉백 시 플레이어와 적위치 : {playerXPos},{enemyXPos}", ELogType.Player);
-            }
-            else if (playerXPos < enemyXPos)
-            {
-                transform.DOMoveX(transform.position.x - playerKnockbackDistance, playerHitInvincibilityDuration);
-                LogPrintSystem.SystemLogPrint(transform, $"넉백 시 플레이어와 적위치 : {playerXPos},{enemyXPos}", ELogType.Player);
+                Sequence sequence = DOTween.Sequence();
+
+                isKnockback = true;
+
+                // Knockback avatar
+                float playerXPos = transform.position.x;
+
+                if (playerXPos > enemyXPos) // 플레이어가 오른쪽에 있다면
+                {
+                    transform.DOMoveX(transform.position.x + playerKnockbackDistance, playerHitInvincibilityDuration);
+                    LogPrintSystem.SystemLogPrint(transform, $"넉백 시 플레이어와 적위치 : {playerXPos},{enemyXPos}", ELogType.Player);
+                }
+                else if (playerXPos < enemyXPos)
+                {
+                    transform.DOMoveX(transform.position.x - playerKnockbackDistance, playerHitInvincibilityDuration);
+                    LogPrintSystem.SystemLogPrint(transform, $"넉백 시 플레이어와 적위치 : {playerXPos},{enemyXPos}", ELogType.Player);
+                }
             }
 
             PlayerInvincibility(playerHitInvincibilityDuration);
@@ -227,14 +240,14 @@ public class PlayerManager : MonoBehaviour
     void PlayerInvincibility(float Duration)
     {
         Sequence sequence = DOTween.Sequence();
-        // 여기에 무적 상태로 만들어준다.
+        LogPrintSystem.SystemLogPrint(transform, "플레이어 무적 상태", ELogType.Player);
         isInvincibility = true;
         gameObject.layer = 3; // 3: PlayerInvincibility
         canJump = false;
 
         sequence.SetDelay(Duration).OnComplete(() =>
         {
-            // 무적 상태 해제
+            LogPrintSystem.SystemLogPrint(transform, "플레이어 무적 상태 해제", ELogType.Player);
             gameObject.layer = 6;
             canJump = true;
             isInvincibility = false;
@@ -263,5 +276,35 @@ public class PlayerManager : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, rad);
+    }
+
+    void PlayerMoveLimit()
+    {
+        Vector3 worldpos = Camera.main.WorldToViewportPoint(this.transform.position);
+        
+        if (worldpos.x < 0f)
+        {
+            canKnockback = false;
+            worldpos.x = 0f;
+        }
+
+        if(worldpos.x < 1f && worldpos.x > 0f)
+        {
+            canKnockback = true;
+        }
+
+        if (worldpos.x > 1f)
+        {
+            canKnockback = false;
+            worldpos.x = 1f;
+        }
+                
+        if (worldpos.y < 0f) 
+                worldpos.y = 0f;
+        if (worldpos.y > 1f)
+                worldpos.y = 1f;
+        
+        
+        this.transform.position = Camera.main.ViewportToWorldPoint(worldpos);
     }
 }

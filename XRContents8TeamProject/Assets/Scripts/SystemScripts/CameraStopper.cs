@@ -7,6 +7,7 @@ public class CameraStopper : MonoBehaviour
 {
     public List<GameObject> stopSections;
 
+    private PlayerManager playerManager;
     private CameraController cameraController;
     
     private int curCount;
@@ -14,6 +15,7 @@ public class CameraStopper : MonoBehaviour
 
     private void Start()
     {
+        playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
         cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
     }
 

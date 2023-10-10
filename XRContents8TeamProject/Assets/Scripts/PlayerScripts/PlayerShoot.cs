@@ -7,8 +7,8 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform fireTransform;
 
-    private GameObject playerManager;
-    private GameObject bulletUI;
+    private PlayerManager playerManager;
+    private BalletUIController bulletUI;
 
     Sequence sequence;
     Sequence sequenceBoltAction;
@@ -39,13 +39,13 @@ public class PlayerShot : MonoBehaviour
 
     private void Awake()
     {
-        playerManager = GameObject.Find("Player");
-        bulletUI = GameObject.Find("Bullet");
+        playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
+        bulletUI = GameObject.Find("Bullet").GetComponent<BalletUIController>();
     }
 
     private void Start()
     {
-        curAmmo = playerManager.GetComponent<PlayerManager>().maxAmmo;
+        curAmmo = playerManager.maxAmmo;
         isReloading = false;
         state = EState.Idle;
     }
@@ -76,11 +76,11 @@ public class PlayerShot : MonoBehaviour
         // 한발씩 장전해주기 위해 ReloadComplete 상태를 이용하여 장전이 완료된 후 curAmmo의 수치를 확인한다.
         if (state == EState.ReloadComplete)
         {
-            if (curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo)
+            if (curAmmo < playerManager.maxAmmo)
             {
                 StateReleaseTheBolt();
             }
-            else if (curAmmo >= playerManager.GetComponent<PlayerManager>().maxAmmo)
+            else if (curAmmo >= playerManager.maxAmmo)
             {
                 state = EState.Idle;
                 isReloading = false;
@@ -91,7 +91,7 @@ public class PlayerShot : MonoBehaviour
 
     void StateShot()
     {
-        if (Time.time >= lastFireTime + playerManager.GetComponent<PlayerManager>().shotDelaySpeed)
+        if (Time.time >= lastFireTime + playerManager.shotDelaySpeed)
         {
             state = EState.Shot;
 
@@ -105,13 +105,13 @@ public class PlayerShot : MonoBehaviour
 
             GameObject bullet = Instantiate(bulletPrefab, fireTransform.position, Quaternion.identity);
             Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
-            bulletRigidbody.velocity = direction * playerManager.GetComponent<PlayerManager>().bulletSpeed;
+            bulletRigidbody.velocity = direction * playerManager.bulletSpeed;
 
             lastFireTime = Time.time;
             curAmmo--;
 
             isDiscountBullet = true;
-            bulletUI.GetComponent<BalletUIController>().SetAmmo(isDiscountBullet);
+            bulletUI.SetAmmo(isDiscountBullet);
 
             LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo}", ELogType.Player);
 
@@ -126,7 +126,7 @@ public class PlayerShot : MonoBehaviour
         state = EState.BoltAction;
         // 볼트액션 애니메이션 출력
         LogPrintSystem.SystemLogPrint(transform, "볼트 액션 애니메이션 출력", ELogType.Player);
-        float shotDelayTime = playerManager.GetComponent<PlayerManager>().shotDelaySpeed;
+        float shotDelayTime = playerManager.shotDelaySpeed;
 
         sequenceBoltAction.SetDelay(shotDelayTime).OnComplete(() =>
         {
@@ -138,7 +138,7 @@ public class PlayerShot : MonoBehaviour
 
     void StateReleaseTheBolt()
     {
-        if (curAmmo < playerManager.GetComponent<PlayerManager>().maxAmmo)
+        if (curAmmo < playerManager.maxAmmo)
         {
             sequenceReleaseTheBolt = DOTween.Sequence();
 
@@ -188,10 +188,10 @@ public class PlayerShot : MonoBehaviour
                 curAmmo++;
 
                 isDiscountBullet = false;
-                bulletUI.GetComponent<BalletUIController>().SetAmmo(isDiscountBullet);
+                bulletUI.SetAmmo(isDiscountBullet);
 
                 isReloading = false;
-                LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo} -> ReloadTime : {playerManager.GetComponent<PlayerManager>().reloadTime}", ELogType.Player);
+                LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo} -> ReloadTime : {playerManager.reloadTime}", ELogType.Player);
 
                 state = EState.ReloadComplete;
             });
