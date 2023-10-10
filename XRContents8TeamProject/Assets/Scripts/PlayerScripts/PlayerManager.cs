@@ -25,7 +25,7 @@ public class PlayerManager : MonoBehaviour
     private bool isJumping = false;
     private bool canJump = true;
     private bool isKnockback = false;
-    private bool canKnockback = true;
+    private bool canMove = true;
 
 
     // Player dodge(evasion) related
@@ -156,31 +156,34 @@ public class PlayerManager : MonoBehaviour
     #endregion JUMP
 
     void PlayerDodge(bool dodgeDirRight)
-    {
-        LogPrintSystem.SystemLogPrint(transform, "회피 사용", ELogType.Player);
-
-        Sequence sequence = DOTween.Sequence();
-        canDodge = false;
-        Vector3 playerPos = transform.position;
-
-        if (dodgeDirRight)
+    { 
+        if (canMove)
         {
-            transform.DOMoveX(playerPos.x + dodgeDistance, 1.0f);
+            Sequence sequence = DOTween.Sequence();
+            LogPrintSystem.SystemLogPrint(transform, "회피 사용", ELogType.Player);
+
+            canDodge = false;
+            Vector3 playerPos = transform.position;
+
+            if (dodgeDirRight)
+            {
+                transform.DOMoveX(playerPos.x + dodgeDistance, 1.0f);
+            }
+            else
+            {
+                transform.DOMoveX(playerPos.x - dodgeDistance, 1.0f);
+            }
+
+            PlayerInvincibility(dodgeInvincibilityDuration);
+
+            sequence.SetDelay(dodgeCoolTime).OnComplete(() =>
+            {
+                LogPrintSystem.SystemLogPrint(transform, "회피 쿨타임 종료", ELogType.Player);
+                canDodge = true;
+            });
+
+            return;
         }
-        else
-        {
-            transform.DOMoveX(playerPos.x - dodgeDistance, 1.0f);
-        }
-
-        PlayerInvincibility(dodgeInvincibilityDuration);
-
-        sequence.SetDelay(dodgeCoolTime).OnComplete(() =>
-        {
-            LogPrintSystem.SystemLogPrint(transform, "회피 쿨타임 종료", ELogType.Player);
-            canDodge = true;
-        });
-
-        return;
     }
 
     public void PlayerDiscountHp(float damage, float enemyXPos)
@@ -212,7 +215,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (!isKnockback)
         {
-            if (canKnockback)
+            if (canMove)
             {
                 Sequence sequence = DOTween.Sequence();
 
@@ -284,18 +287,18 @@ public class PlayerManager : MonoBehaviour
         
         if (worldpos.x < 0f)
         {
-            canKnockback = false;
+            canMove = false;
             worldpos.x = 0f;
         }
 
         if(worldpos.x < 1f && worldpos.x > 0f)
         {
-            canKnockback = true;
+            canMove = true;
         }
 
         if (worldpos.x > 1f)
         {
-            canKnockback = false;
+            canMove = false;
             worldpos.x = 1f;
         }
                 
@@ -303,7 +306,6 @@ public class PlayerManager : MonoBehaviour
                 worldpos.y = 0f;
         if (worldpos.y > 1f)
                 worldpos.y = 1f;
-        
         
         this.transform.position = Camera.main.ViewportToWorldPoint(worldpos);
     }
