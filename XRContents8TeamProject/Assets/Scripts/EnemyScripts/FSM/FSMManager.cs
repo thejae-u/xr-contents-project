@@ -136,10 +136,6 @@ public abstract class TraceNode : INode
 {
     public INode enterJump;
     
-    // Jump를 하기 위한 로직을 만들어야 함
-    // x값이  공격 범위에 들어오지만 Attack 노드로 못넘어 갈때를 판단
-    // y값을 체크하고 상향 or 하향 점프
-    
     public ETraceState Trace(Blackboard blackboard)
     {
         // Whole Monster Use this variable
@@ -161,6 +157,7 @@ public abstract class TraceNode : INode
         float distanceForJump = Mathf.Abs(myTransform.position.x - playerTransform.position.x);
         var isJumping = blackboard.GetData<ReferenceValueT<bool>>("isJumping");
         if (isJumping.Value) return ETraceState.PlayerTrace;
+
         if (distanceForJump <= d2 && myType != EEliteType.Bomb)
         {
             float playerYPos = playerTransform.position.y;
@@ -168,18 +165,23 @@ public abstract class TraceNode : INode
 
             float yPosCalc = Mathf.Abs(playerYPos - myYPos);
 
-            return yPosCalc <= 5.0f ? ETraceState.PlayerTrace : ETraceState.NeedJump;
+            if (yPosCalc >= 5.0f)
+                return ETraceState.NeedJump;
         }
 
         // Trace Logic
         if (myType != EEliteType.Rush)
         {
             if (d1 + d2 >= distance)
+            {
                 return ETraceState.PlayerEnter;
+            }
+
             // Check Player Out Range when Tracing
-            return distance >= traceRange ? ETraceState.PlayerExit : ETraceState.PlayerTrace;
+            return ETraceState.PlayerTrace;
         }
 
+        LogPrintSystem.SystemLogPrint(myTransform, "RUSH TRACING", ELogType.EnemyAI);
         // From here Only Use Rush Monster
         var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
         var isOverRush = blackboard.GetData<ReferenceValueT<bool>>("isOverRush");
@@ -190,7 +192,7 @@ public abstract class TraceNode : INode
             float rushD2 = blackboard.GetData<ReferenceValueT<float>>("myRushRange").Value;
             float overRushD2 = blackboard.GetData<ReferenceValueT<float>>("myOverRushRange").Value;
 
-            if (d1 + rushD2 >= distance)
+            if (d1 + rushD2 >= distance && !isOverRush.Value)
             {
                 if (d1 + overRushD2 >= distance)
                 {
@@ -201,8 +203,8 @@ public abstract class TraceNode : INode
             }
             
             // if Player In rush over range : Don't Special Attack
-            if (d1 + rushD2 >= distance)
-                return overRushD2 + d1 >= distance ? ETraceState.PlayerTrace : ETraceState.PlayerEnterRush;
+            if (d1 + d2 >= distance)
+                return ETraceState.PlayerEnter;
         }
 
         // Check Normal Attack Range When Player Tracing

@@ -44,9 +44,11 @@ public class EliteTraceNode : TraceNode
             // All monster Use, Bomb Monster's Normal Attack is Special Attack
             case ETraceState.PlayerEnter:
                 if (myType == EEliteType.Bomb)
+                {
                     return hasRemainAttackTime.Value
                         ? Fsm.GuardNullNode(this, this)
                         : Fsm.GuardNullNode(this, attacks[1]);
+                }
                 return Fsm.GuardNullNode(this, attacks[0]);
 
             // Only Use Rush Monster
