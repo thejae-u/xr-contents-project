@@ -23,7 +23,7 @@ public class GameoverUIScript : MonoBehaviour
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
-            Application.Quit(0);
+            Application.Quit();
 #endif
         }
     }

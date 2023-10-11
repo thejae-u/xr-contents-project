@@ -1892,11 +1892,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6607649661471559730, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.41
+      value: -5.11
       objectReference: {fileID: 0}
     - target: {fileID: 6607649661471559730, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.76
+      value: -2.43
       objectReference: {fileID: 0}
     - target: {fileID: 6607649661471559730, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12525,63 +12525,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 20}
   m_EdgeRadius: 0
---- !u!1001 &1610356006
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2830494096670406936, guid: 109b14217312046548c4eaf23cb649f7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.2037964
-      objectReference: {fileID: 0}
-    - target: {fileID: 2830494096670406936, guid: 109b14217312046548c4eaf23cb649f7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.9846832
-      objectReference: {fileID: 0}
-    - target: {fileID: 2830494096670406936, guid: 109b14217312046548c4eaf23cb649f7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2830494096670406936, guid: 109b14217312046548c4eaf23cb649f7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2830494096670406936, guid: 109b14217312046548c4eaf23cb649f7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2830494096670406936, guid: 109b14217312046548c4eaf23cb649f7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2830494096670406936, guid: 109b14217312046548c4eaf23cb649f7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2830494096670406936, guid: 109b14217312046548c4eaf23cb649f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2830494096670406936, guid: 109b14217312046548c4eaf23cb649f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2830494096670406936, guid: 109b14217312046548c4eaf23cb649f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5522067202717067044, guid: 109b14217312046548c4eaf23cb649f7, type: 3}
-      propertyPath: m_Name
-      value: RushEliteEnemy
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 109b14217312046548c4eaf23cb649f7, type: 3}
 --- !u!4 &1626037358 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6504124012999883842, guid: 09b12179540564935a7efe2a352956fd, type: 3}
@@ -15746,4 +15689,3 @@ SceneRoots:
   - {fileID: 1992107081}
   - {fileID: 1903921352}
   - {fileID: 1538205069}
-  - {fileID: 1610356006}
