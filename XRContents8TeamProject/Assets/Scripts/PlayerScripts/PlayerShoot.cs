@@ -8,6 +8,7 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private Transform fireTransform;
 
     private PlayerManager playerManager;
+    private Animator animator;
     private BalletUIController bulletUI;
 
     Sequence sequence;
@@ -16,13 +17,15 @@ public class PlayerShot : MonoBehaviour
 
     private float lastFireTime = 0f;
     private int curAmmo = 0;
-    private bool isReloading;
+    private bool isReloading = false;
+    private bool isFinishReloadCheck = false; // 현재 장전 사이클이 끝났는지 확인
+    private bool notMaxAmmoFill = false;
     private bool isDiscountBullet;
 
     [Header("총 딜레이 관련")]
-    [SerializeField] private float reverseDelay = 0.1f;
-    [SerializeField] private float reloadingDelay = 0.5f;
-    [SerializeField] private float forwardDelay = 0.1f;
+    [SerializeField] private float reverseDelay = 1.5f;
+    [SerializeField] private float reloadingDelay = 1.5f;
+    [SerializeField] private float forwardDelay = 1.5f;
 
     public enum EState
     {
@@ -32,7 +35,7 @@ public class PlayerShot : MonoBehaviour
         RackYourBolt, // 전진
         Shot,
         BoltAction,
-        ReloadComplete
+        ReloadCheck
     }
 
     public EState state { get; private set; }
@@ -40,13 +43,13 @@ public class PlayerShot : MonoBehaviour
     private void Awake()
     {
         playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
+        animator = gameObject.GetComponent<Animator>();
         bulletUI = GameObject.Find("Bullet").GetComponent<BalletUIController>();
     }
 
     private void Start()
     {
         curAmmo = playerManager.maxAmmo;
-        isReloading = false;
         state = EState.Idle;
     }
 
@@ -62,8 +65,13 @@ public class PlayerShot : MonoBehaviour
             { // 재장전 중에 사격 버튼을 입력한 경우 장전을 취소한다.
                 sequenceReleaseTheBolt.Kill();
                 isReloading = false;
+
+                animator.SetBool("isReloadCancle", true);
                 LogPrintSystem.SystemLogPrint(transform, $"Reload Cancel", ELogType.Player);
+                 
                 StateRackYourBolt();
+                state = EState.Idle;
+                animator.SetBool("isReloadCancle", false);
                 StateShot();
             }
         }
@@ -73,19 +81,9 @@ public class PlayerShot : MonoBehaviour
             StateReleaseTheBolt();
         }
 
-        // 한발씩 장전해주기 위해 ReloadComplete 상태를 이용하여 장전이 완료된 후 curAmmo의 수치를 확인한다.
-        if (state == EState.ReloadComplete)
+        if(notMaxAmmoFill && isFinishReloadCheck)
         {
-            if (curAmmo < playerManager.maxAmmo)
-            {
-                StateReleaseTheBolt();
-            }
-            else if (curAmmo >= playerManager.maxAmmo)
-            {
-                state = EState.Idle;
-                isReloading = false;
-                LogPrintSystem.SystemLogPrint(transform, "Reload Requset Complete", ELogType.Player);
-            }
+            StateReleaseTheBolt();
         }
     }
 
@@ -96,6 +94,8 @@ public class PlayerShot : MonoBehaviour
             state = EState.Shot;
 
             // 총 쏘는 애니메이션 출력
+            animator.SetBool("isShot", true);
+            animator.SetTrigger("doShot");
 
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = new Vector3(mousePosition.x, mousePosition.y, mousePosition.z);
@@ -125,13 +125,15 @@ public class PlayerShot : MonoBehaviour
 
         state = EState.BoltAction;
         // 볼트액션 애니메이션 출력
+        animator.SetBool("isShot", false);
         LogPrintSystem.SystemLogPrint(transform, "볼트 액션 애니메이션 출력", ELogType.Player);
+        
         float shotDelayTime = playerManager.shotDelaySpeed;
-
         sequenceBoltAction.SetDelay(shotDelayTime).OnComplete(() =>
         {
             state = EState.Idle;
             LogPrintSystem.SystemLogPrint(transform, "볼트 액션 애니메이션 종료", ELogType.Player);
+            animator.SetBool("isShot", true);
             sequenceBoltAction = null;
         });
     }
@@ -140,16 +142,24 @@ public class PlayerShot : MonoBehaviour
     {
         if (curAmmo < playerManager.maxAmmo)
         {
+            // 값 초기화
+            notMaxAmmoFill = false;
+            isFinishReloadCheck = false;
+            animator.SetBool("isReloading", false);
+            animator.SetBool("isRack", false);
+
+
             sequenceReleaseTheBolt = DOTween.Sequence();
 
             state = EState.ReleaseTheBolt;
             isReloading = true;
-            // 노리쇠 후퇴 애니메이션 출력
+
+            animator.SetTrigger("doReload"); 
+
             LogPrintSystem.SystemLogPrint(transform, "노리쇠 후퇴", ELogType.Player);
 
             sequenceReleaseTheBolt.SetDelay(reverseDelay).OnComplete(() =>
             {
-                LogPrintSystem.SystemLogPrint(transform, "노리쇠 후퇴 완료", ELogType.Player);
                 StateReloading();
             });
         }
@@ -162,9 +172,8 @@ public class PlayerShot : MonoBehaviour
             state = EState.Reloading;
             sequence = DOTween.Sequence();
 
-            LogPrintSystem.SystemLogPrint(transform, "장전 중", ELogType.Player);
-
-            // 장전 애니메이션 출력
+            animator.SetBool("isReloading", true);
+            LogPrintSystem.SystemLogPrint(transform, "탄알 삽입", ELogType.Player);
 
             sequence.SetDelay(reloadingDelay).OnComplete(() =>
             {
@@ -175,26 +184,38 @@ public class PlayerShot : MonoBehaviour
 
     void StateRackYourBolt()
     {
-        state = EState.RackYourBolt;
-
-        sequence = DOTween.Sequence();
-
-        // 노리쇠 전진 애니메이션 출력
-
         if (isReloading)
         {
+            state = EState.RackYourBolt;
+            sequence = DOTween.Sequence();
+            animator.SetBool("isRack", true);
+
             sequence.SetDelay(forwardDelay).OnComplete(() =>
             {
-                curAmmo++;
+                LogPrintSystem.SystemLogPrint(transform, "노리쇠 전진", ELogType.Player);
 
+                curAmmo++;
                 isDiscountBullet = false;
                 bulletUI.SetAmmo(isDiscountBullet);
 
                 isReloading = false;
-                LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo} -> ReloadTime : {playerManager.reloadTime}", ELogType.Player);
+                LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo} -> ReloadTime : {playerManager.reloadTime}", ELogType.Player);         
+                
+                if (curAmmo < playerManager.maxAmmo)
+                {
+                    animator.SetBool("notMaxAmmo", true);
+                    notMaxAmmoFill = true;
+                }
 
-                state = EState.ReloadComplete;
+                else if (curAmmo >= playerManager.maxAmmo)
+                {
+                    animator.SetBool("notMaxAmmo", false);
+                    state = EState.Idle;
+                    LogPrintSystem.SystemLogPrint(transform, "Reload Requset Complete", ELogType.Player);
+                }
+
+                isFinishReloadCheck = true;
             });
-        }
+        }    
     }
 }

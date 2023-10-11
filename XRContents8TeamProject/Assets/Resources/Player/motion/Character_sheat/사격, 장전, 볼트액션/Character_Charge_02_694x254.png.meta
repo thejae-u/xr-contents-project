@@ -121,7 +121,259 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Character_Charge_02_694x254_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 508
+        width: 694
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75371a09015a14f45ad9f5a4d17620a5
+      internalID: -91977265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Charge_02_694x254_1
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 508
+        width: 694
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15a820a9b8d27dc46aed5a58d847ee0f
+      internalID: 953742293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Charge_02_694x254_2
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 508
+        width: 694
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2376d89566d18947ba31282085951b8
+      internalID: 658267274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Charge_02_694x254_3
+      rect:
+        serializedVersion: 2
+        x: 2082
+        y: 508
+        width: 694
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07116c3db94014545882fd1a58190993
+      internalID: 306987175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Charge_02_694x254_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 254
+        width: 694
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9046e97c4e49dd4cb326a3ca17a4c90
+      internalID: 1443217142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Charge_02_694x254_5
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 254
+        width: 694
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4bf71bbaa32859498b0102bbee27d4c
+      internalID: -1024195162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Charge_02_694x254_6
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 254
+        width: 694
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07dc9671c6b22444697147943792b351
+      internalID: 96267265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Charge_02_694x254_7
+      rect:
+        serializedVersion: 2
+        x: 2082
+        y: 254
+        width: 694
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7c2a59d8429fc4478b00329606602d3
+      internalID: -1912375881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Charge_02_694x254_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 694
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f3f7183245956743b7f73e70e221aa2
+      internalID: -692024696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Charge_02_694x254_9
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 0
+        width: 694
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54fdd4611ef1e9848a9bf86dc727a67e
+      internalID: -1179827884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Charge_02_694x254_10
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 0
+        width: 694
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 065d88f6f40ceac44af95b4a76cfca1c
+      internalID: 2009476092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Charge_02_694x254_11
+      rect:
+        serializedVersion: 2
+        x: 2082
+        y: 0
+        width: 694
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05f233822ee56314a8c892e5cec5347a
+      internalID: 1849642284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +384,19 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Character_Charge_02_694x254_0: -91977265
+      Character_Charge_02_694x254_1: 953742293
+      Character_Charge_02_694x254_10: 2009476092
+      Character_Charge_02_694x254_11: 1849642284
+      Character_Charge_02_694x254_2: 658267274
+      Character_Charge_02_694x254_3: 306987175
+      Character_Charge_02_694x254_4: 1443217142
+      Character_Charge_02_694x254_5: -1024195162
+      Character_Charge_02_694x254_6: 96267265
+      Character_Charge_02_694x254_7: -1912375881
+      Character_Charge_02_694x254_8: -692024696
+      Character_Charge_02_694x254_9: -1179827884
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

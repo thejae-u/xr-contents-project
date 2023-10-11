@@ -312,11 +312,6 @@ public class PlayerManager : MonoBehaviour
             canMove = false;
             worldpos.x = 1f;
         }
-                
-        if (worldpos.y < 0f) 
-                worldpos.y = 0f;
-        if (worldpos.y > 1f)
-                worldpos.y = 1f;
         
         this.transform.position = Camera.main.ViewportToWorldPoint(worldpos);
     }

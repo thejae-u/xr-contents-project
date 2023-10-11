@@ -121,7 +121,511 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1324
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d11ba668f8bd6004fa6f08e2a3627089
+      internalID: -1410245209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_1
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 1324
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c1d5c51c599d8242b131bb9614338e7
+      internalID: 1949529369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_2
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 1324
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 690089a9f1aa04545aff95e5b0aa4ea3
+      internalID: -1440671869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_3
+      rect:
+        serializedVersion: 2
+        x: 2082
+        y: 1324
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d9d6469618284c4bba90dc84b371eae
+      internalID: 674124867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_4
+      rect:
+        serializedVersion: 2
+        x: 2776
+        y: 1324
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9897607b1df833459fdd5c181ac566e
+      internalID: 1833266360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 993
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea9c0d6105332c9429c15c4ea3eb0541
+      internalID: 1059610774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_6
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 993
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b4c33f202a9fc548902e3c5913ad197
+      internalID: -1596354024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_7
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 993
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74f241a47931cff4883336aa7762af32
+      internalID: 144819187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_8
+      rect:
+        serializedVersion: 2
+        x: 2082
+        y: 993
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4406283ef6482b245b69440ec413a749
+      internalID: 484337966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_9
+      rect:
+        serializedVersion: 2
+        x: 2776
+        y: 993
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 960dcedd079eeff47a1578e561e9f1d4
+      internalID: 1815146904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 662
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4337bbbf2465774a96c4982ace5cd56
+      internalID: 770121149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_11
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 662
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16092258fc603a9488973b041418c2e0
+      internalID: 1889685323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_12
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 662
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34107c9b4b4a96c47be2c4e0acb6174d
+      internalID: -819802678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_13
+      rect:
+        serializedVersion: 2
+        x: 2082
+        y: 662
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5be20e56e921d464183567d8d3cdba27
+      internalID: 298577607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_14
+      rect:
+        serializedVersion: 2
+        x: 2776
+        y: 662
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 931554190a286544d8005d418e7b8bb9
+      internalID: 228534644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 331
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50065c8675fda544e9399bc2d75ed59f
+      internalID: 1331319421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_16
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 331
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c6fa7efe6c79d146a02d4e21b48ed52
+      internalID: -739187115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_17
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 331
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9e9336af8add5c4997c03b5507865e1
+      internalID: 748582384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_18
+      rect:
+        serializedVersion: 2
+        x: 2082
+        y: 331
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9bb877ee2fc4e64f85316a57b72320b
+      internalID: -1546222295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_19
+      rect:
+        serializedVersion: 2
+        x: 2776
+        y: 331
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2b2130d176574f418a8490b43a732ae
+      internalID: 66344795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b3e6ae90320eb442ad50608f269bf94
+      internalID: 1634770262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_21
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 0
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4b39b2bc156a304a900590002e95bf4
+      internalID: -1656086772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_22
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 0
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1001af8441f63c48998ce9076d62d0b
+      internalID: 375925040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Character_Bolt Action_694x331_23
+      rect:
+        serializedVersion: 2
+        x: 2082
+        y: 0
+        width: 694
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30b0d97b33eacd74cb36729c98b0c4f5
+      internalID: -1509178287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +636,31 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Character_Bolt Action_694x331_0: -1410245209
+      Character_Bolt Action_694x331_1: 1949529369
+      Character_Bolt Action_694x331_10: 770121149
+      Character_Bolt Action_694x331_11: 1889685323
+      Character_Bolt Action_694x331_12: -819802678
+      Character_Bolt Action_694x331_13: 298577607
+      Character_Bolt Action_694x331_14: 228534644
+      Character_Bolt Action_694x331_15: 1331319421
+      Character_Bolt Action_694x331_16: -739187115
+      Character_Bolt Action_694x331_17: 748582384
+      Character_Bolt Action_694x331_18: -1546222295
+      Character_Bolt Action_694x331_19: 66344795
+      Character_Bolt Action_694x331_2: -1440671869
+      Character_Bolt Action_694x331_20: 1634770262
+      Character_Bolt Action_694x331_21: -1656086772
+      Character_Bolt Action_694x331_22: 375925040
+      Character_Bolt Action_694x331_23: -1509178287
+      Character_Bolt Action_694x331_3: 674124867
+      Character_Bolt Action_694x331_4: 1833266360
+      Character_Bolt Action_694x331_5: 1059610774
+      Character_Bolt Action_694x331_6: -1596354024
+      Character_Bolt Action_694x331_7: 144819187
+      Character_Bolt Action_694x331_8: 484337966
+      Character_Bolt Action_694x331_9: 1815146904
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
