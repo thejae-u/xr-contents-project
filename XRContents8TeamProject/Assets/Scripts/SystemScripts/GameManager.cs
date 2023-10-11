@@ -22,10 +22,27 @@ public class GameManager : MonoBehaviour
         {
             remainMonster += stage.childCount;
         }
-        
+
         if (playerManager.GetPlayerHp() <= 0 || remainMonster == 0)
         {
             SceneManager.LoadScene("GameoverScene");
+        }
+
+        Exit();
+    }
+
+    private void Exit()
+    {
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit(0);
+        }
+
+#endif
         }
     }
 }
