@@ -525,6 +525,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Middle
       objectReference: {fileID: 0}
+    - target: {fileID: 4330487925566996896, guid: b8cf11503cba97041b44e45b1a487dae, type: 3}
+      propertyPath: x
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4705818924957046952, guid: b8cf11503cba97041b44e45b1a487dae, type: 3}
       propertyPath: m_LocalScale.x
       value: 25.199997
@@ -2052,6 +2056,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4719854472873386534, guid: a633433676b6417478ad1c1df2203d36, type: 3}
+      propertyPath: x
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6780797605703497245, guid: a633433676b6417478ad1c1df2203d36, type: 3}
       propertyPath: m_Name
       value: Far
@@ -2662,6 +2670,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 519420032}
     m_Modifications:
+    - target: {fileID: 941094990612430318, guid: 5bb1fdfafc7bee943af5e3d21f8dfe4a, type: 3}
+      propertyPath: x
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2626485401043116632, guid: 5bb1fdfafc7bee943af5e3d21f8dfe4a, type: 3}
       propertyPath: m_Name
       value: Near
