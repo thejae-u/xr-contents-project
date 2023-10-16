@@ -15147,7 +15147,7 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: idle
+  _animationName: 
   loop: 1
   timeScale: 1
 --- !u!23 &1977350502

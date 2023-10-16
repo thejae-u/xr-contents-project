@@ -124,8 +124,7 @@ public class EliteAttackReadyNode : INode
         }
 
         isSpecialAttackReady.Value = false;
-        canSpecialAttack.Value = false;
-        sequence.Kill();
+        DOTween.Kill(this);
         LogPrintSystem.SystemLogPrint(myTransform, "Enter Groggy", ELogType.EnemyAI);
         return Fsm.GuardNullNode(this, enterGroggy);
     }

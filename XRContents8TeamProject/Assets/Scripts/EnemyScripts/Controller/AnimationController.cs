@@ -41,7 +41,11 @@ public class AnimationController : MonoBehaviour
                 // Special Attack Animation Call
                 break;
             case ENode.Groggy:
+                Groggy();
                 // Groggy Animation Call
+                break;
+            case ENode.Dead:
+                Dead();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -59,5 +63,16 @@ public class AnimationController : MonoBehaviour
         if (anim.AnimationName == "run") return;
         anim.AnimationState.SetAnimation(0, "run", true);
     }
-    
+
+    private void Groggy()
+    {
+        if (anim.AnimationName == "paralyzation") return;
+        anim.AnimationState.SetAnimation(0, "paralyzation", true);
+    }
+
+    private void Dead()
+    {
+        if (anim.AnimationName == "dead") return;
+        anim.AnimationState.SetAnimation(0, "dead", false);
+    }
 }

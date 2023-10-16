@@ -19,6 +19,8 @@ public class DeadNode : INode
 {
     public INode Execute(Blackboard blackboard)
     {
+        blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Dead;
+        
         blackboard.GetData<ReferenceValueT<bool>>("isAlive").Value = false;
         return Fsm.GuardNullNode(this, this);
     }

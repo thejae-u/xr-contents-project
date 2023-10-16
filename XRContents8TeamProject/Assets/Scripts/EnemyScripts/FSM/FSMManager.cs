@@ -101,7 +101,8 @@ public enum ENode
     Jump,
     SpecialAttackReady,
     SpecialAttack,
-    Groggy
+    Groggy,
+    Dead
 }
 
 public interface INode

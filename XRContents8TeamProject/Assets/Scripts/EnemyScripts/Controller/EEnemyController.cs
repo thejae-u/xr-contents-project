@@ -78,11 +78,14 @@ namespace EnemyScripts
         
         private Blackboard b;
 
+        private SkeletonAnimation anim;
+
         void Start()
         {
             // About Attack FSM
             fsm = new Fsm();
             b = new Blackboard();
+            anim = gameObject.GetComponent<SkeletonAnimation>();
 
             isAlive.Value = true;
             isGroggy.Value = false;
@@ -213,7 +216,11 @@ namespace EnemyScripts
                 {
                     DOTween.Kill(this);
                 }
-                Destroy(gameObject);
+
+                if (anim.AnimationName == "dead" && anim.AnimationState.GetCurrent(0).IsComplete)
+                {
+                    Destroy(gameObject);
+                }
             }
             else
             {
