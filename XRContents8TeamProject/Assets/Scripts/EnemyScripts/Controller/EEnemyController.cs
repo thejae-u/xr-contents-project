@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using Spine;
+using Spine.Unity;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -72,11 +74,15 @@ namespace EnemyScripts
 
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isGround;
 
+        [HideInInspector] [SerializeField] private ReferenceValueT<ENode> myNode;
+        
+        private Blackboard b;
+
         void Start()
         {
             // About Attack FSM
             fsm = new Fsm();
-            Blackboard b = new Blackboard();
+            b = new Blackboard();
 
             isAlive.Value = true;
             isGroggy.Value = false;
@@ -86,7 +92,11 @@ namespace EnemyScripts
             rushDirection.Value = false;
             isOverRush.Value = false;
 
-            // Blackboard Initialize
+            myNode.Value = ENode.Idle;
+            
+            // First Node State Store
+            b.AddData("myNode", myNode);
+            
             // About player Info
             b.AddData("playerTransform", GameObject.Find("Player").transform);
             
@@ -226,6 +236,11 @@ namespace EnemyScripts
             return mySpecialAttackDamage.Value;
         }
 
+        public Blackboard Data()
+        {
+            return b;
+        }
+        
         public void DiscountHp(float damage)
         {
             if (isSpecialAttackReady.Value)

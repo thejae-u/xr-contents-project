@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using Spine.Unity;
 using Unity.Mathematics;
 using UnityEngine;
-
-
 
 public enum EEliteType
 {
@@ -18,11 +17,13 @@ public class EliteTraceNode : TraceNode
     public INode[] attacks;
     public INode playerExit;
 
+    private bool isRunningAnimation;
+
     public override INode Execute(Blackboard blackboard)
     {
         var type = Trace(blackboard);
         var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType");
-
+        
         // Trace Logic
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
@@ -31,6 +32,8 @@ public class EliteTraceNode : TraceNode
         var isGround = blackboard.GetData<ReferenceValueT<bool>>("isGround");
 
         var myPos = myTransform.position;
+
+        blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Trace;
 
         if (isGround.Value)
         {
@@ -49,13 +52,14 @@ public class EliteTraceNode : TraceNode
                         ? Fsm.GuardNullNode(this, this)
                         : Fsm.GuardNullNode(this, attacks[1]);
                 }
+
                 return Fsm.GuardNullNode(this, attacks[0]);
 
             // Only Use Rush Monster
             case ETraceState.PlayerEnterRush:
                 if (hasRemainAttackTime.Value)
                     return Fsm.GuardNullNode(this, this);
-
+                
                 LogPrintSystem.SystemLogPrint(myTransform, "Rush Entered", ELogType.EnemyAI);
                 return Fsm.GuardNullNode(this, attacks[2]);
 
@@ -85,6 +89,8 @@ public class EliteAttackReadyNode : INode
 
     public INode Execute(Blackboard blackboard)
     {
+        blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.SpecialAttackReady;
+        
         // Wait Time For Attack
         var sequence = DOTween.Sequence();
         var myTransform = blackboard.GetData<Transform>("myTransform");
@@ -118,6 +124,7 @@ public class EliteAttackReadyNode : INode
         }
 
         isSpecialAttackReady.Value = false;
+        canSpecialAttack.Value = false;
         sequence.Kill();
         LogPrintSystem.SystemLogPrint(myTransform, "Enter Groggy", ELogType.EnemyAI);
         return Fsm.GuardNullNode(this, enterGroggy);
@@ -130,6 +137,8 @@ public class EliteBombAttackNode : INode
 
     public INode Execute(Blackboard blackboard)
     {
+        blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.SpecialAttack;
+        
         var sequence = DOTween.Sequence();
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var bombPrefab = blackboard.GetData<GameObject>("bombPrefab");
@@ -202,6 +211,8 @@ public class EliteRushAttackNode : INode
 
     public INode Execute(Blackboard blackboard)
     {
+        blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.SpecialAttack;
+        
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
         var isNowAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
@@ -275,6 +286,8 @@ public class EliteGroggyNode : INode
 
     public INode Execute(Blackboard blackboard)
     {
+        blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Groggy;
+        
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var groggyTime = blackboard.GetData<ReferenceValueT<float>>("groggyTime");
         var isGroggy = blackboard.GetData<ReferenceValueT<bool>>("isGroggy");

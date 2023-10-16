@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using Spine.Unity;
 using UnityEngine;
 
 public class NormalTraceNode : TraceNode
@@ -57,12 +58,13 @@ public class NormalAttackNode : INode
 
     public INode Execute(Blackboard blackboard)
     {
+        blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.NormalAttack;
+        
         var isNowAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
         
-        // animation start
         if (isNowAttack.Value)
             return Fsm.GuardNullNode(this, this);
-        
+
         // Attack On
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
@@ -91,6 +93,7 @@ public class NormalAttackNode : INode
         {
             isNowAttack.Value = false;
         }).SetId(this);
+
         
         LogPrintSystem.SystemLogPrint(myTransform, $"{attackDamage} Damage to Player!!", ELogType.EnemyAI);
         return Fsm.GuardNullNode(this, this);

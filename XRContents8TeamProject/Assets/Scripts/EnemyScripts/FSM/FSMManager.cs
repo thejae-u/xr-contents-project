@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using DG.Tweening;
+using Spine.Unity;
 
 
 [Serializable]
@@ -92,10 +93,21 @@ public class Fsm
     }
 }
 
+public enum ENode
+{
+    Idle,
+    Trace,
+    NormalAttack,
+    Jump,
+    SpecialAttackReady,
+    SpecialAttack,
+    Groggy
+}
+
 public interface INode
-    {
-        public INode Execute(Blackboard blackboard);
-    }
+{
+    public INode Execute(Blackboard blackboard);
+}
 
 public class WaitNode : INode
 {
@@ -103,12 +115,18 @@ public class WaitNode : INode
 
     public INode Execute(Blackboard blackboard)
     {
-        //..대기로직
+        blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Idle;
+        
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
 
         float d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
         float d2 = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
+
+        var spine = myTransform.GetComponent<SkeletonAnimation>();
+
+        if (spine.AnimationState.GetCurrent(0).IsComplete)
+            spine.AnimationState.SetAnimation(0, "idle", false);
 
         float distance = (myTransform.position - playerTransform.position).magnitude;
 
@@ -152,11 +170,12 @@ public abstract class TraceNode : INode
         // Distance of Player to Monster
         float distance = (myTransform.position - playerTransform.position).magnitude;
         float traceRange = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
-        
+
         // For Jump Node
         float distanceForJump = Mathf.Abs(myTransform.position.x - playerTransform.position.x);
         var isJumping = blackboard.GetData<ReferenceValueT<bool>>("isJumping");
         if (isJumping.Value) return ETraceState.PlayerTrace;
+
 
         if (distanceForJump <= d2 && myType != EEliteType.Bomb)
         {
@@ -229,7 +248,8 @@ public class JumpNode : INode
     {
         // Enemy가 플레이어를 제데로 따라 갈 수 있도록 y값을 판단
         // 상향점프와 하향점프 모두 필요함
-        
+        blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Jump;
+
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
         var isJumping = blackboard.GetData<ReferenceValueT<bool>>("isJumping");
