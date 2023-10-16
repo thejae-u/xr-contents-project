@@ -1,0 +1,125 @@
+
+Elite_Rush_M.png
+size: 731,518
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arm1_L
+  rotate: true
+  xy: 2, 2
+  size: 137, 213
+  orig: 147, 307
+  offset: 1, 93
+  index: -1
+arm1_R
+  rotate: true
+  xy: 376, 132
+  size: 142, 172
+  orig: 144, 172
+  offset: 1, 0
+  index: -1
+arm2_L
+  rotate: false
+  xy: 217, 11
+  size: 148, 128
+  orig: 207, 134
+  offset: 52, 6
+  index: -1
+arm2_R
+  rotate: false
+  xy: 613, 253
+  size: 104, 127
+  orig: 105, 128
+  offset: 1, 1
+  index: -1
+body
+  rotate: false
+  xy: 2, 141
+  size: 372, 375
+  orig: 372, 478
+  offset: 0, 102
+  index: -1
+face
+  rotate: false
+  xy: 376, 276
+  size: 235, 240
+  orig: 238, 243
+  offset: 2, 2
+  index: -1
+face_damage
+  rotate: false
+  xy: 550, 185
+  size: 124, 66
+  orig: 170, 106
+  offset: 27, 14
+  index: -1
+face_incapacitate, dead
+  rotate: true
+  xy: 591, 12
+  size: 118, 69
+  orig: 170, 98
+  offset: 29, 7
+  index: -1
+foot_L
+  rotate: false
+  xy: 609, 135
+  size: 42, 23
+  orig: 48, 25
+  offset: 4, 2
+  index: -1
+foot_R
+  rotate: false
+  xy: 609, 160
+  size: 43, 23
+  orig: 48, 25
+  offset: 3, 2
+  index: -1
+hand_L
+  rotate: false
+  xy: 367, 2
+  size: 145, 128
+  orig: 147, 128
+  offset: 2, 0
+  index: -1
+hand_R
+  rotate: false
+  xy: 613, 382
+  size: 114, 134
+  orig: 117, 143
+  offset: 1, 1
+  index: -1
+leg1_L
+  rotate: false
+  xy: 662, 10
+  size: 67, 85
+  orig: 104, 88
+  offset: 36, 2
+  index: -1
+leg1_R
+  rotate: false
+  xy: 662, 97
+  size: 67, 86
+  orig: 104, 88
+  offset: 36, 1
+  index: -1
+leg2_L
+  rotate: true
+  xy: 550, 132
+  size: 51, 57
+  orig: 55, 58
+  offset: 1, 1
+  index: -1
+leg2_R
+  rotate: false
+  xy: 676, 194
+  size: 52, 57
+  orig: 55, 58
+  offset: 0, 1
+  index: -1
+tail
+  rotate: true
+  xy: 514, 2
+  size: 128, 75
+  orig: 133, 77
+  offset: 1, 2
+  index: -1
