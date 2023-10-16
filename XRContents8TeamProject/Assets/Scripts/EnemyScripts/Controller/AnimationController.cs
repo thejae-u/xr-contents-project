@@ -22,11 +22,9 @@ public class AnimationController : MonoBehaviour
         {
             case ENode.Idle:
                 Idle();
-                // Idle animation Call
                 break;
             case ENode.Trace:
                 Run();
-                // Run Animation Call
                 break;
             case ENode.NormalAttack:
                 // NormalAttack Animation Call
@@ -42,7 +40,6 @@ public class AnimationController : MonoBehaviour
                 break;
             case ENode.Groggy:
                 Groggy();
-                // Groggy Animation Call
                 break;
             case ENode.Dead:
                 Dead();

@@ -37,16 +37,21 @@ namespace EnemyScripts
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isJumping;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isGround;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> canJumpNextNode;
+        [HideInInspector] [SerializeField] private ReferenceValueT<ENode> myNode;
         
         private bool isHit;
+
+        private Blackboard b;
 
         void Start()
         {
             fsm = new Fsm();
-            Blackboard b = new Blackboard();
+            b = new Blackboard();
 
             isAlive.Value = true;
-
+            myNode.Value = ENode.Idle;
+            
+            b.AddData("myNode", myNode);
             b.AddData("isAlive", isAlive);
             b.AddData("myHp", myHp);
             b.AddData("myTransform", transform);
@@ -84,8 +89,11 @@ namespace EnemyScripts
 
         private void Update()
         {
+            Flip();
+            
             if (!isHit)
                 fsm.Update();
+            
             if (isAlive.Value)
                 fsmLife.Update();
             else
@@ -105,6 +113,14 @@ namespace EnemyScripts
             {
                 isGround.Value = true;
             }
+        }
+        
+        private void Flip()
+        {
+            var playerTransform = b.GetData<Transform>("playerTransform");
+            float dir = playerTransform.position.x - transform.position.x;
+
+            transform.rotation = dir > 0 ? new Quaternion(0, 180, 0, 0) : new Quaternion(0, 0, 0, 0);
         }
 
         private void OnDrawGizmos()

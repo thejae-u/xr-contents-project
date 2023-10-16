@@ -227,6 +227,9 @@ namespace EnemyScripts
                 fsm.Update();
                 fsmLife.Update();
                 
+                // Flip X Rotation
+                Flip();
+                
                 // Weakness Show Method
                 WeakShow();
             }
@@ -253,6 +256,14 @@ namespace EnemyScripts
             if (isSpecialAttackReady.Value)
                 return;
             myHp.Value -= damage;
+        }
+
+        private void Flip()
+        {
+            var playerTransform = b.GetData<Transform>("playerTransform");
+            float dir = playerTransform.position.x - transform.position.x;
+
+            transform.rotation = dir > 0 ? new Quaternion(0, 180, 0, 0) : new Quaternion(0, 0, 0, 0);
         }
 
         private void OnCollisionStay2D(Collision2D other)
