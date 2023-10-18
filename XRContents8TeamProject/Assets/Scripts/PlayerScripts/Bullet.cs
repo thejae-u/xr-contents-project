@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
             BulletDestroy();
 
             nEnemyController = collision.GetComponent<NEnemyController>();
-            float damage = playerManager.GetComponent<PlayerManager>().playerAtk;
+            float damage = playerManager.GetComponent<PlayerManager>().playerNormalAtk;
             nEnemyController.DiscountHp(damage);
         }
         else if(collision.gameObject.CompareTag("EliteEnemy"))
@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
             BulletDestroy();
             
             eEnemyController = collision.GetComponent<EEnemyController>();
-            float damege = playerManager.GetComponent<PlayerManager>().playerAtk;
+            float damege = playerManager.GetComponent<PlayerManager>().playerNormalAtk;
             eEnemyController.DiscountHp(damege);
         }
         else if (collision.gameObject.CompareTag("Ground"))

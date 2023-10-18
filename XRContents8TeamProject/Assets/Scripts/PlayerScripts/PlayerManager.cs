@@ -41,35 +41,35 @@ public class PlayerManager : MonoBehaviour
     private bool isDodgeDirRight;
 
     // Player shooting related
-    [Header("플레이어 공격력 조정")]
-    [SerializeField] public float playerAtk = 10.0f;
+    [Header("플레이어 노말 공격력 조정")]
+    [SerializeField] public float playerNormalAtk = 10.0f;
+    [Header("플레이어 사격 게이지에 따른 추가 공격력 조정")]
+    [SerializeField] public float playerBonusAtk = 5.0f;
     [Header("플레이어 한발당 사격 딜레이 조정")]
     [SerializeField] public float shotDelaySpeed = 1.0f;
-    [Header("플레이어 총알 속도 조정")]
-    [SerializeField] public float bulletSpeed = 30.0f;
-    [Header("플레이어 유효 사격 거리")]
-    [SerializeField] public float fireDistance = 15.0f;
+    //[Header("플레이어 총알 속도 조정")]
+    //[SerializeField] public float bulletSpeed = 30.0f;
+    //[Header("플레이어 유효 사격 거리")]
+    //[SerializeField] public float fireDistance = 15.0f;
     [Header("플레이어 최대 탄알")]
     [SerializeField] public int maxAmmo = 6;
     [Header("플레이어 한발당 재장전 시간")]
     [SerializeField] public float reloadTime = 0.7f;
+    [Header("플레이어 최대 발사 게이지")]
+    [SerializeField] public float maxGauge = 0.5f;
 
     private Rigidbody2D playerRigidbody;
-    // private CameraController cameraController;
     private GameObject playerHpUI;
-    private Animator animator;
 
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         playerHpUI = GameObject.Find("HP");
     }
 
     private void Start()
     {
         playerRigidbody.gravityScale = playerGravityForce;
-        // cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
     }
 
     private void Update()
@@ -94,11 +94,6 @@ public class PlayerManager : MonoBehaviour
         }
 
         PlayerMoveLimit();
-
-        //if (cameraController.IsCameraStop) 
-        //{
-        //    PlayerMoveLimit();
-        //}
     }
 
     public float GetPlayerHp()
@@ -116,7 +111,6 @@ public class PlayerManager : MonoBehaviour
         if (canJump)
         {
             isJumping = false;
-            animator.SetBool("isJump", false);
         }
     }
 
@@ -129,17 +123,11 @@ public class PlayerManager : MonoBehaviour
         {
             Vector3 dir = moveDir * Vector3.right;
             transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
-            animator.SetBool("isMove", true);
         }
         else if (!isPlayerViewDirRight && moveDir != 0)
         {
             Vector3 dir = moveDir * Vector3.left;
             transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
-            animator.SetBool("isMove", true);
-        }
-        else
-        {
-            animator.SetBool("isMove", false);
         }
     }
     #endregion
@@ -151,10 +139,7 @@ public class PlayerManager : MonoBehaviour
         {
             playerRigidbody.AddForce(Vector2.up * playerJumpForce, ForceMode2D.Impulse);
             StartCoroutine(PlayerJumpResetTime());
-            isJumping = true;         
-            
-            animator.SetBool("isJump", true);
-            animator.SetTrigger("doJump");
+            isJumping = true;
         }
     }
 
@@ -251,21 +236,22 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    // 무적상태 호출
     void PlayerInvincibility(float Duration)
     {
-        Sequence sequence = DOTween.Sequence();
-        LogPrintSystem.SystemLogPrint(transform, "플레이어 무적 상태", ELogType.Player);
-        isInvincibility = true;
+        isInvincibility = true;        
         gameObject.layer = 3; // 3: PlayerInvincibility
         canJump = false;
+        LogPrintSystem.SystemLogPrint(transform, "플레이어 무적 상태", ELogType.Player);
 
+        Sequence sequence = DOTween.Sequence();
         sequence.SetDelay(Duration).OnComplete(() =>
         {
-            LogPrintSystem.SystemLogPrint(transform, "플레이어 무적 상태 해제", ELogType.Player);
             gameObject.layer = 6;
             canJump = true;
             isInvincibility = false;
             isKnockback = false;
+            LogPrintSystem.SystemLogPrint(transform, "플레이어 무적 상태 해제", ELogType.Player);
         });
 
     }

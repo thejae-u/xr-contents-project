@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7664019248145066982}
   - component: {fileID: 5058585670143218601}
   - component: {fileID: 330303974747212952}
-  - component: {fileID: 5597400192648563130}
   - component: {fileID: 5871502387009047570}
   - component: {fileID: 4310163627948344860}
   m_Layer: 6
@@ -154,27 +153,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.30778715, y: 0.009719986}
   m_Size: {x: 2.5754514, y: 7.6146235}
   m_Direction: 0
---- !u!95 &5597400192648563130
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759709160255606015}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3bc772d6f93a8a24683673306b4dce83, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &5871502387009047570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,12 +175,12 @@ MonoBehaviour:
   dodgeDistance: 6
   dodgeCoolTime: 0.2
   dodgeInvincibilityDuration: 1.5
-  playerAtk: 10
+  playerNormalAtk: 10
+  playerBonusAtk: 5
   shotDelaySpeed: 1
-  bulletSpeed: 30
-  fireDistance: 15
   maxAmmo: 6
   reloadTime: 1.5
+  maxGauge: 0.5
 --- !u!114 &4310163627948344860
 MonoBehaviour:
   m_ObjectHideFlags: 0
