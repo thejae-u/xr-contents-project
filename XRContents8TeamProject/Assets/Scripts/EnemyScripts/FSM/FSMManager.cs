@@ -125,11 +125,6 @@ public class WaitNode : INode
         float d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
         float d2 = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
 
-        var spine = myTransform.GetComponent<SkeletonAnimation>();
-
-        if (spine.AnimationState.GetCurrent(0).IsComplete)
-            spine.AnimationState.SetAnimation(0, "idle", false);
-
         float distance = (myTransform.position - playerTransform.position).magnitude;
 
         if (d1 + d2 >= distance)

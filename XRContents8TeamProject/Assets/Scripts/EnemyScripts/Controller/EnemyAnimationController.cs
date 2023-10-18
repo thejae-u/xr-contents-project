@@ -3,7 +3,7 @@ using EnemyScripts;
 using Spine.Unity;
 using UnityEngine;
 
-public class AnimationController : MonoBehaviour
+public class EnemyAnimationController : MonoBehaviour
 {
     private EEnemyController inst;
     private SkeletonAnimation anim;
