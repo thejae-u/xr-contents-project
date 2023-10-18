@@ -17,8 +17,6 @@ public class EliteTraceNode : TraceNode
     public INode[] attacks;
     public INode playerExit;
 
-    private bool isRunningAnimation;
-
     public override INode Execute(Blackboard blackboard)
     {
         var type = Trace(blackboard);
@@ -30,6 +28,7 @@ public class EliteTraceNode : TraceNode
         var myMoveSpeed = blackboard.GetData<ReferenceValueT<float>>("myMoveSpeed");
         var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
         var isGround = blackboard.GetData<ReferenceValueT<bool>>("isGround");
+        
 
         var myPos = myTransform.position;
 

@@ -106,10 +106,12 @@ namespace EnemyScripts
                     DOTween.Kill(this);
                 }
 
+                /*
                 if (anim.AnimationName == "dead" && anim.AnimationState.GetCurrent(0).IsComplete)
                 {
                     Destroy(gameObject);
-                }
+                }*/
+                Destroy(gameObject);
             }
         }
 

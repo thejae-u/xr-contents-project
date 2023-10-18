@@ -122,6 +122,35 @@ public class WaitNode : INode
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
 
+        var isTimerWait = blackboard.GetData<ReferenceValueT<bool>>("isTimerWait");
+        var isTimerEnded = blackboard.GetData<ReferenceValueT<bool>>("isTimerEnded");
+
+        if (!isTimerEnded.Value)
+        {
+            var timer = myTransform.GetComponentInChildren<WeakTimeController>(true);
+
+            if (!isTimerWait.Value)
+            {
+                LogPrintSystem.SystemLogPrint(myTransform, "Timer Init Call", ELogType.EnemyAI);
+                timer.Init();
+                isTimerWait.Value = true;
+                return Fsm.GuardNullNode(this, this);
+            }
+
+            if (!timer.IsEnded) return Fsm.GuardNullNode(this, this);
+
+            if (!isTimerEnded.Value)
+            {
+                isTimerEnded.Value = true;
+            }
+
+            // timer.IsAttacked ? do Something : do SomeThing
+
+            timer.Checked();
+        }
+
+
+
         float d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
         float d2 = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
 

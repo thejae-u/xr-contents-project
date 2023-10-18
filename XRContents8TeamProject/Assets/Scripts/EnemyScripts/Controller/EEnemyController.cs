@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Spine.Unity;
@@ -6,6 +8,7 @@ namespace EnemyScripts
 {
     public class EEnemyController : MonoBehaviour
     {
+        # region AboutFSM
         private Fsm fsm;
         private Fsm fsmLife;
 
@@ -70,11 +73,23 @@ namespace EnemyScripts
 
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isGround;
 
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isTimerWait;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isTimerEnded;
+            
         [HideInInspector] [SerializeField] private ReferenceValueT<ENode> myNode;
         
+        
         private Blackboard b;
-
+        # endregion
+        
         private SkeletonAnimation anim;
+        [SerializeField] private List<GameObject> timers;
+
+        private void Awake()
+        {
+            foreach(var obj in timers)
+                obj.SetActive(true);
+        }
 
         void Start()
         {
@@ -90,11 +105,18 @@ namespace EnemyScripts
             hasRemainAttackTime.Value = false;
             rushDirection.Value = false;
             isOverRush.Value = false;
+            isTimerWait.Value = false;
+            isTimerEnded.Value = false;
+
 
             myNode.Value = ENode.Idle;
             
             // First Node State Store
             b.AddData("myNode", myNode);
+            
+            // About First Weak Timer
+            b.AddData("isTimerWait", isTimerWait);
+            b.AddData("isTimerEnded", isTimerEnded);
             
             // About player Info
             b.AddData("playerTransform", GameObject.Find("Player").transform);
