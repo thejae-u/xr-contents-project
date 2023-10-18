@@ -47,10 +47,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public float playerBonusAtk = 5.0f;
     [Header("플레이어 한발당 사격 딜레이 조정")]
     [SerializeField] public float shotDelaySpeed = 1.0f;
-    //[Header("플레이어 총알 속도 조정")]
-    //[SerializeField] public float bulletSpeed = 30.0f;
-    //[Header("플레이어 유효 사격 거리")]
-    //[SerializeField] public float fireDistance = 15.0f;
     [Header("플레이어 최대 탄알")]
     [SerializeField] public int maxAmmo = 6;
     [Header("플레이어 한발당 재장전 시간")]
@@ -70,6 +66,7 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         playerRigidbody.gravityScale = playerGravityForce;
+        Cursor.visible = false;
     }
 
     private void Update()

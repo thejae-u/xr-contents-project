@@ -7,7 +7,8 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private Transform fireTransform;
 
     private PlayerManager playerManager;
-    private BalletUIController bulletUI;
+    private AimUIController AimUIController;
+    private BalletUIController bulletUIController;
 
     Sequence sequence;
     Sequence sequenceBoltAction;
@@ -15,14 +16,13 @@ public class PlayerShot : MonoBehaviour
         
     private int curAmmo = 0;
     private float curGauge = 0;
-    private float maxGaugeTime = 0;
     private float lastFireTime = 0;
 
     private bool isReloading = false;
     private bool isFinishReloadCheck = false; // 현재 장전 사이클이 끝났는지 확인
     private bool notMaxAmmoFill = false;
     private bool isDiscountBullet;
-    private bool isMaxGauge = false; // 게이지 최대치 오버
+    public bool isMaxGauge = false; // 게이지 최대치 오버
 
     [Header("총 딜레이 관련")]
     [SerializeField] private float reverseDelay = 1.5f;
@@ -45,7 +45,8 @@ public class PlayerShot : MonoBehaviour
     private void Awake()
     {
         playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
-        bulletUI = GameObject.Find("Bullet").GetComponent<BalletUIController>();
+        AimUIController = GameObject.Find("PlayerAim").GetComponent<AimUIController>();
+        bulletUIController = GameObject.Find("Bullet").GetComponent<BalletUIController>();
     }
 
     private void Start()
@@ -58,17 +59,22 @@ public class PlayerShot : MonoBehaviour
     { 
         if (Input.GetMouseButton(0))
         {
-            curGauge = Time.deltaTime;
-               
-            // 현재 게이지가 최대 게이지를 넘었다면
-            if(curGauge >= maxGaugeTime)
+            curGauge += Time.deltaTime;
+            // 게이지가 차기 시작할 때 UI에 생성한 함수를 호출한다.
+            AimUIController.SetGauge();
+
+            if (!isMaxGauge && curGauge >= playerManager.maxGauge)
             {
                 isMaxGauge = true;
+                LogPrintSystem.SystemLogPrint(transform, $"{curGauge} => MAXGAUGE", ELogType.Player);
             }
         }
 
         if (Input.GetMouseButtonUp(0))
         {
+            curGauge = 0;
+            AimUIController.InitGauge();
+
             if (state == EState.Idle && curAmmo > 0)
             {
                 StateShot();
@@ -87,12 +93,18 @@ public class PlayerShot : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.F) && !isReloading)
+        //if (Input.GetKeyDown(KeyCode.F) && !isReloading)
+        //{
+        //    StateBackforward();
+        //}        
+        
+        // 테스트에 좀 더 편하게 하기 위해 일단 마우스 우클릭 사용
+        if (Input.GetMouseButtonDown(1) && !isReloading)
         {
             StateBackforward();
         }
 
-        if(notMaxAmmoFill && isFinishReloadCheck)
+        if (notMaxAmmoFill && isFinishReloadCheck)
         {
             StateBackforward();
         }
@@ -109,14 +121,13 @@ public class PlayerShot : MonoBehaviour
             mousePosition.z = -Camera.main.transform.position.z;
 
             GameObject bullet = Instantiate(bulletPrefab, Camera.main.ScreenToWorldPoint(mousePosition), Quaternion.identity);
-            Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
 
             lastFireTime = Time.time;
-            curAmmo--;
+            curAmmo--;          
 
             /* UI */
             isDiscountBullet = true;
-            bulletUI.SetAmmo(isDiscountBullet);
+            bulletUIController.SetAmmo(isDiscountBullet);
             LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo}", ELogType.Player);
             StateBoltAction();
         }
@@ -135,6 +146,8 @@ public class PlayerShot : MonoBehaviour
             state = EState.Idle;
             LogPrintSystem.SystemLogPrint(transform, "볼트 액션 애니메이션 종료", ELogType.Player);
             sequenceBoltAction = null;
+
+            isMaxGauge = false;
         });
     }
 
@@ -188,7 +201,7 @@ public class PlayerShot : MonoBehaviour
 
                 curAmmo++;
                 isDiscountBullet = false;
-                bulletUI.SetAmmo(isDiscountBullet);
+                bulletUIController.SetAmmo(isDiscountBullet);
 
                 isReloading = false;
                 LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo} -> ReloadTime : {playerManager.reloadTime}", ELogType.Player);         

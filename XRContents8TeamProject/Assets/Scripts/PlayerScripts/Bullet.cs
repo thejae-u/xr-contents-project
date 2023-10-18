@@ -2,42 +2,79 @@ using UnityEngine;
 using EnemyScripts;
 
 public class Bullet : MonoBehaviour
-{ 
-    private GameObject playerManager;
+{
+    private float bulletCreateTime = 0;
+    private float bulletDestroyTime = 3.0f;
+    //private float bulletDestroyTime = 0.01f;
+
+    public bool isBounsDamage;
+
+    private PlayerManager playerManager;
+    private PlayerShot playerShot;
     private NEnemyController nEnemyController;
     private EEnemyController eEnemyController;
 
+    private void Awake()
+    {
+        playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
+        playerShot = GameObject.Find("Gun").GetComponent<PlayerShot>();
+    }
     void Start()
     {
-        playerManager = GameObject.Find("Player");
+        isBounsDamage = playerShot.isMaxGauge;
+        LogPrintSystem.SystemLogPrint(transform, $"bounsDamage : {isBounsDamage}", ELogType.Player);
+    }
+
+    private void Update()
+    {
+        bulletCreateTime += Time.deltaTime;
+        if(bulletCreateTime > bulletDestroyTime) 
+        {    
+            BulletDestroy();
+            LogPrintSystem.SystemLogPrint(transform, "TimeOver Bullet Destroy", ELogType.Player);
+
+            bulletCreateTime = 0;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("NormalEnemy"))
-        {           
-            BulletDestroy();
-
+        {
             nEnemyController = collision.GetComponent<NEnemyController>();
-            float damage = playerManager.GetComponent<PlayerManager>().playerNormalAtk;
+            float damage = playerManager.playerNormalAtk;
+            
+            if (isBounsDamage) 
+                damage += playerManager.playerBonusAtk;
+            
             nEnemyController.DiscountHp(damage);
+
+            BulletDestroy();
+            LogPrintSystem.SystemLogPrint(transform, $"Hit {damage}  NormalEnemy", ELogType.Player);
         }
         else if(collision.gameObject.CompareTag("EliteEnemy"))
-        {
-            BulletDestroy();
-            
+        { 
             eEnemyController = collision.GetComponent<EEnemyController>();
-            float damege = playerManager.GetComponent<PlayerManager>().playerNormalAtk;
-            eEnemyController.DiscountHp(damege);
+            float damage = playerManager.playerNormalAtk;
+
+            if (isBounsDamage)
+                damage += playerManager.playerBonusAtk;
+
+            eEnemyController.DiscountHp(damage);        
+            
+            BulletDestroy();
+            LogPrintSystem.SystemLogPrint(transform, $"Hit {damage} EliteEnemy", ELogType.Player);
         }
         else if (collision.gameObject.CompareTag("Ground"))
         {
             BulletDestroy();
+            LogPrintSystem.SystemLogPrint(transform, "Hit Ground", ELogType.Player);
         }
     }
 
     private void BulletDestroy()
     {
         Destroy(this.gameObject);
+        LogPrintSystem.SystemLogPrint(transform, "Bullet Destroy", ELogType.Player);
     }
 }
