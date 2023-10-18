@@ -145,9 +145,12 @@ public class EliteBombAttackNode : INode
         var specialAttackCooldown = blackboard.GetData<ReferenceValueT<float>>("specialAttackCooldown");
         var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
 
-
-        GameObject.Instantiate(bombPrefab, (Vector2)myTransform.position,
+        // 폭탄 생성 시 몬스터의 자식으로 생성
+        var myPos = myTransform.position;
+        Vector3 bombPos = new Vector3(myPos.x, myPos.y, 0);
+        var bomb = GameObject.Instantiate(bombPrefab, bombPos,
             quaternion.identity);
+        bomb.transform.SetParent(myTransform);
 
         LogPrintSystem.SystemLogPrint(myTransform, "Bomb Attack", ELogType.EnemyAI);
 

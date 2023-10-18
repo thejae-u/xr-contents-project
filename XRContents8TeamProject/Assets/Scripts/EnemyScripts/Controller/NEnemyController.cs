@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Spine.Unity;
 using UnityEngine;
 
 namespace EnemyScripts
@@ -42,12 +43,14 @@ namespace EnemyScripts
         private bool isHit;
 
         private Blackboard b;
+        private SkeletonAnimation anim;
 
         void Start()
         {
             fsm = new Fsm();
             b = new Blackboard();
-
+            anim = gameObject.GetComponent<SkeletonAnimation>();
+            
             isAlive.Value = true;
             myNode.Value = ENode.Idle;
             
@@ -102,7 +105,11 @@ namespace EnemyScripts
                 {
                     DOTween.Kill(this);
                 }
-                Destroy(gameObject);
+
+                if (anim.AnimationName == "dead" && anim.AnimationState.GetCurrent(0).IsComplete)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
 

@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using DG.Tweening;
-using Spine;
-using Spine.Unity;
 using UnityEngine;
-using UnityEngine.Serialization;
+using DG.Tweening;
+using Spine.Unity;
 
 namespace EnemyScripts
 {
@@ -20,10 +16,10 @@ namespace EnemyScripts
         [Header("속도를 조정")]
         [SerializeField] private ReferenceValueT<float> myMoveSpeed;
         
-        [Header("공격 대미지를 조정")]
+        [Header("공격 대미지를 조정 (폭탄 대미지 포함)")]
         [SerializeField] private ReferenceValueT<float> myAttackDamage;
         
-        [Header("특수 공격 대미지를 조정")]
+        [Header("특수 공격 대미지를 조정 (돌진 몬스터)")]
         [SerializeField] private ReferenceValueT<float> mySpecialAttackDamage;
         
         [Header("탐지 거리를 조정")]
@@ -235,7 +231,8 @@ namespace EnemyScripts
             }
         }
 
-        // Called In Weakness Prefab
+        
+        // Called In WeakController
         public void WeakBreak()
         {
             isGroggy.Value = true;
@@ -243,7 +240,7 @@ namespace EnemyScripts
 
         public float GetMySpecialDamage()
         {
-            return mySpecialAttackDamage.Value;
+            return myAttackDamage.Value;
         }
 
         public Blackboard Data()
