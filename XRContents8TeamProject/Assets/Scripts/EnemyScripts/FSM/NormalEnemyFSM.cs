@@ -13,6 +13,8 @@ public class NormalTraceNode : TraceNode
     {
         var type = Trace(blackboard);
 
+        blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Trace;
+        
         // Trace Logic
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");

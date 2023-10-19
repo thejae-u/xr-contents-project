@@ -5,48 +5,98 @@ using UnityEngine;
 
 public class EnemyAnimationController : MonoBehaviour
 {
-    private EEnemyController inst;
+    private EEliteType myType;
+    private EEnemyController instElite;
+    private NEnemyController instNormal;
     private SkeletonAnimation anim;
         
     private void Start()
     {
-        inst = gameObject.GetComponent<EEnemyController>();
+        if (transform.CompareTag("EliteEnemy"))
+        {
+            instElite = gameObject.GetComponent<EEnemyController>();
+            instNormal = null;
+            myType = instElite.Data().GetData<ReferenceValueT<EEliteType>>("myType").Value;
+        }
+        else
+        {
+            instNormal = gameObject.GetComponent<NEnemyController>();
+            instElite = null;
+            myType = instNormal.Data().GetData<ReferenceValueT<EEliteType>>("myType").Value;
+        }
+
         anim = gameObject.GetComponent<SkeletonAnimation>();
     }
 
     private void Update()
     {
-        switch (inst.Data().GetData<ReferenceValueT<ENode>>("myNode").Value)
+        if (myType != EEliteType.None)
         {
-            case ENode.Idle:
-                Idle();
-                break;
-            case ENode.Trace:
-                Run();
-                break;
-            case ENode.NormalAttack:
-                // Attack();
-                break;
-            case ENode.Jump:
-                // Jump();
-                break;
-            case ENode.SpecialAttackReady:
-                // SpecialAttackWait();
-                break;
-            case ENode.SpecialAttack:
-                // SpecialAttack();
-                break;
-            case ENode.Groggy:
-                Groggy();
-                break;
-            case ENode.Dead:
-                Dead();
-                break;
-            case ENode.Hit:
-                // Hit();
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
+            // Elite Enemy Animation Call
+            switch (instElite.Data().GetData<ReferenceValueT<ENode>>("myNode").Value)
+            {
+                case ENode.Idle:
+                    Idle();
+                    break;
+                case ENode.Trace:
+                    Run();
+                    break;
+                case ENode.NormalAttack:
+                    // Attack();
+                    break;
+                case ENode.Jump:
+                    // Jump();
+                    break;
+                case ENode.SpecialAttackReady:
+                    // SpecialAttackWait();
+                    break;
+                case ENode.SpecialAttack:
+                    // SpecialAttack();
+                    break;
+                case ENode.Groggy:
+                    Groggy();
+                    break;
+                case ENode.Dead:
+                    Dead();
+                    break;
+                case ENode.Hit:
+                    // Hit();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+        else
+        {
+            // Normal Enemy Animation Call
+            switch(instNormal.Data().GetData<ReferenceValueT<ENode>>("myNode").Value)
+            {
+                case ENode.Idle:
+                    // Idle();
+                    break;
+                case ENode.Trace:
+                    // Run();
+                    break;
+                case ENode.NormalAttack:
+                    // Attack();
+                    break;
+                case ENode.Jump:
+                    // Jump();
+                    break;
+                case ENode.Dead:
+                    // Dead();
+                    break;
+                case ENode.Hit:
+                    // Hit();
+                    break;
+                
+                // Use Elite Only
+                case ENode.SpecialAttackReady:
+                case ENode.SpecialAttack:
+                case ENode.Groggy:
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 

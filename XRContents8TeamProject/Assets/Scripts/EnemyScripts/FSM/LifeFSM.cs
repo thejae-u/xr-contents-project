@@ -1,6 +1,5 @@
-using System;
 using UnityEngine;
-using System.Collections.Generic;
+using System;
 
 public class AliveNode : INode
 {
@@ -8,10 +7,8 @@ public class AliveNode : INode
 
     public INode Execute(Blackboard blackboard)
     {
-        if (blackboard.GetData<ReferenceValueT<float>>("myHp").Value <= 0)
-            return Fsm.GuardNullNode(this, dead);
-        blackboard.GetData<ReferenceValueT<bool>>("isAlive").Value = true;
-        return Fsm.GuardNullNode(this, this);
+        var myHp = blackboard.GetData<ReferenceValueT<float>>("myHp");
+        return Fsm.GuardNullNode(this, myHp.Value >= 0.0f ? this : dead);
     }
 }
 
@@ -20,8 +17,8 @@ public class DeadNode : INode
     public INode Execute(Blackboard blackboard)
     {
         blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Dead;
-        
         blackboard.GetData<ReferenceValueT<bool>>("isAlive").Value = false;
+        
         return Fsm.GuardNullNode(this, this);
     }
 }
