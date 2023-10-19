@@ -39,11 +39,23 @@ namespace EnemyScripts
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isGround;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> canJumpNextNode;
         [HideInInspector] [SerializeField] private ReferenceValueT<ENode> myNode;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isTimerWait;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isTimerEnded;
+
+        [SerializeField] private List<GameObject> timers;
         
         private bool isHit;
 
         private Blackboard b;
         private SkeletonAnimation anim;
+
+        private void Awake()
+        {
+            foreach (var obj in timers)
+            {
+                obj.SetActive(true);
+            }
+        }
 
         void Start()
         {
@@ -53,6 +65,12 @@ namespace EnemyScripts
             
             isAlive.Value = true;
             myNode.Value = ENode.Idle;
+
+            isTimerWait.Value = false;
+            isTimerEnded.Value = false;
+            
+            b.AddData("isTimerWait", isTimerWait);
+            b.AddData("isTimerEnded", isTimerEnded);
             
             b.AddData("myNode", myNode);
             b.AddData("isAlive", isAlive);
