@@ -145,7 +145,7 @@ public class WaitNode : INode
             }
 
             // timer.IsAttacked ? do Something : do SomeThing
-
+            
             timer.Checked();
         }
 

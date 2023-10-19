@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,7 @@ public class WeakTimeController : MonoBehaviour
     private Color myColor;
 
     private float normalizedValue;
+    private bool isSequenceOn;
     
     public bool IsAttacked { get; private set; }
     
@@ -32,25 +34,49 @@ public class WeakTimeController : MonoBehaviour
         IsEnded = false;
         IsAttacked = false;
         weakImage = gameObject.GetComponent<Image>();
+        myColor = Color.white;
+        isSequenceOn = false;
     }
 
     private void Update()
     {
-        if (isRunning && normalizedValue <= 1.0f)
+        if (!isRunning)
+        {
+            if (isSequenceOn) return;
+
+            var sequence = DOTween.Sequence();
+            LogPrintSystem.SystemLogPrint(transform, "Sequence Active", ELogType.EnemyAI);
+            myColor = Color.red;
+            weakImage.color = myColor;
+            isSequenceOn = true;
+            
+            sequence.SetDelay(1.0f).OnComplete(() =>
+            {
+                IsEnded = true;
+            }).SetId(this);
+        }
+        else
+        {
+            Execute();
+        }
+    }
+
+    private void Execute()
+    {
+        if (normalizedValue <= 1.0f)
         {
             curValue += Time.deltaTime;
 
             normalizedValue = curValue / waitTime;
             weakImage.fillAmount = normalizedValue;
 
-            myColor = Color.Lerp(Color.white, Color.red, normalizedValue);
             weakImage.color = myColor;
         }
         else if (normalizedValue > 1.0f)
         {
+            LogPrintSystem.SystemLogPrint(transform, "Gauge Full", ELogType.EnemyAI);
             IsAttacked = false;
             isRunning = false;
-            IsEnded = true;
         }
     }
 
@@ -61,6 +87,8 @@ public class WeakTimeController : MonoBehaviour
 
     public void Checked()
     {
+        if(DOTween.IsTweening(DOTween.Sequence(this)))
+            DOTween.Sequence(this).Kill();
         Destroy(gameObject.transform.parent.gameObject);
     }
 
