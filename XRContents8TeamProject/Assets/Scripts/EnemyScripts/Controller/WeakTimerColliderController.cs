@@ -17,6 +17,6 @@ public class WeakTimerColliderController : MonoBehaviour
     {
         if(!other.transform.CompareTag("Bullet")) return;
         timer.Hit();
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

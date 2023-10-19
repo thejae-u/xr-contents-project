@@ -89,6 +89,12 @@ public class EliteAttackReadyNode : INode
     private void Init(Blackboard blackboard)
     {
         var myTransform = blackboard.GetData<Transform>("myTransform");
+        var timers = blackboard.GetData<List<GameObject>>("timers");
+
+        foreach (var obj in timers)
+        {
+            obj.SetActive(true);
+        }
 
         myTransform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
         myTransform.GetComponent<Collider2D>().enabled = false;
@@ -97,7 +103,7 @@ public class EliteAttackReadyNode : INode
     private void EndOfNode(Blackboard blackboard)
     {
         var myTransform = blackboard.GetData<Transform>("myTransform");
-
+        
         myTransform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         myTransform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         myTransform.GetComponent<Collider2D>().enabled = true;
@@ -108,47 +114,39 @@ public class EliteAttackReadyNode : INode
         blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.SpecialAttackReady;
         
         // Wait Time For Attack
-        var sequence = DOTween.Sequence();
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var specialAttackWait = blackboard.GetData<ReferenceValueT<float>>("specialAttackWait");
         var canSpecialAttack = blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttack");
         var isSpecialAttackReady = blackboard.GetData<ReferenceValueT<bool>>("isSpecialAttackReady");
-        var isGroggy = blackboard.GetData<ReferenceValueT<bool>>("isGroggy");
         var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType");
-
         
+        var timer = myTransform.GetComponentInChildren<WeakTimeController>(true);
 
         if (!isSpecialAttackReady.Value)
         {
             Init(blackboard);
+            timer.Init(specialAttackWait.Value);
+            
             isSpecialAttackReady.Value = true;
             canSpecialAttack.Value = false;
-            isGroggy.Value = false;
-            sequence.SetDelay(specialAttackWait.Value).OnComplete(() =>
-            {
-                canSpecialAttack.Value = true;
-                LogPrintSystem.SystemLogPrint(myTransform, "Attack On", ELogType.EnemyAI);
-            }).SetId(this);
-            LogPrintSystem.SystemLogPrint(myTransform, "Ready For Attack", ELogType.EnemyAI);
         }
 
-        if (!isGroggy.Value)
-        {
-            if (!canSpecialAttack.Value) return Fsm.GuardNullNode(this, this);
-            
-            EndOfNode(blackboard);
-            isSpecialAttackReady.Value = false;
+        if (!timer.IsEnded) return Fsm.GuardNullNode(this, this);
+        
+        EndOfNode(blackboard);
+        isSpecialAttackReady.Value = false;
 
+        if (!timer.IsAttacked)
+        {
+            timer.Checked();
             return myType == EEliteType.Bomb
                 ? Fsm.GuardNullNode(this, failedAttack[0])
                 : Fsm.GuardNullNode(this, failedAttack[1]);
         }
 
-        isSpecialAttackReady.Value = false;
-        DOTween.Kill(this);
-        EndOfNode(blackboard);
-        LogPrintSystem.SystemLogPrint(myTransform, "Enter Groggy", ELogType.EnemyAI);
+        timer.Checked();
         return Fsm.GuardNullNode(this, enterGroggy);
+
     }
 }
 

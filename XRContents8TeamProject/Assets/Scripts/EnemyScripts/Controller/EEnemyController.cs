@@ -53,9 +53,6 @@ namespace EnemyScripts
         [Header("폭탄 프리팹")] 
         [SerializeField] private GameObject bombPrefab;
 
-        [Header("약점 노출을 위한 오브젝트")] 
-        [SerializeField] private GameObject weak;
-
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isGroggy;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isInGroggy;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isAlive;
@@ -85,12 +82,6 @@ namespace EnemyScripts
         private SkeletonAnimation anim;
         [SerializeField] private List<GameObject> timers;
 
-        private void Awake()
-        {
-            foreach(var obj in timers)
-                obj.SetActive(true);
-        }
-
         void Start()
         {
             // About Attack FSM
@@ -108,7 +99,6 @@ namespace EnemyScripts
             isTimerWait.Value = false;
             isTimerEnded.Value = false;
 
-
             myNode.Value = ENode.Idle;
             
             // First Node State Store
@@ -117,6 +107,7 @@ namespace EnemyScripts
             // About First Weak Timer
             b.AddData("isTimerWait", isTimerWait);
             b.AddData("isTimerEnded", isTimerEnded);
+            b.AddData("timers", timers);
             
             // About player Info
             b.AddData("playerTransform", GameObject.Find("Player").transform);
@@ -247,9 +238,6 @@ namespace EnemyScripts
                 
                 // Flip X Rotation
                 Flip();
-                
-                // Weakness Show Method
-                WeakShow();
             }
         }
 
@@ -291,11 +279,6 @@ namespace EnemyScripts
             {
                 isGround.Value = true;
             }
-        }
-
-        private void WeakShow()
-        {
-            weak.SetActive(isSpecialAttackReady.Value);
         }
 
         private void OnDrawGizmos()

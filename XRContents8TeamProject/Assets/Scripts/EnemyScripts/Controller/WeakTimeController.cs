@@ -2,17 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.Properties;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WeakTimeController : MonoBehaviour
 {
-    [Header("대기 시간 조정")] 
-    [SerializeField] private float waitTime;
-    
+    private float waitTime;
 
     private float curValue;
-    private float curColorValue;
     
     // 내부에서 실행중임을 확인
     private bool isRunning;
@@ -80,16 +78,24 @@ public class WeakTimeController : MonoBehaviour
         }
     }
 
-    public void Init()
+    public void Init(float waitTime)
     {
+        this.waitTime = waitTime;
         isRunning = true;
+        IsEnded = false;
+        IsAttacked = false;
+        isSequenceOn = false;
+        curValue = 0.0f;
+        normalizedValue = 0.0f;
+        myColor = Color.white;
+        weakImage.color = myColor;
     }
 
     public void Checked()
     {
         if(DOTween.IsTweening(DOTween.Sequence(this)))
             DOTween.Sequence(this).Kill();
-        Destroy(gameObject.transform.parent.gameObject);
+        gameObject.transform.parent.gameObject.SetActive(false);
     }
 
     public void Hit()
