@@ -86,6 +86,23 @@ public class EliteAttackReadyNode : INode
     // player failed attack weakness
     public INode[] failedAttack;
 
+    private void Init(Blackboard blackboard)
+    {
+        var myTransform = blackboard.GetData<Transform>("myTransform");
+
+        myTransform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+        myTransform.GetComponent<Collider2D>().enabled = false;
+    }
+
+    private void EndOfNode(Blackboard blackboard)
+    {
+        var myTransform = blackboard.GetData<Transform>("myTransform");
+
+        myTransform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        myTransform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        myTransform.GetComponent<Collider2D>().enabled = true;
+    }
+
     public INode Execute(Blackboard blackboard)
     {
         blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.SpecialAttackReady;
@@ -99,8 +116,11 @@ public class EliteAttackReadyNode : INode
         var isGroggy = blackboard.GetData<ReferenceValueT<bool>>("isGroggy");
         var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType");
 
+        
+
         if (!isSpecialAttackReady.Value)
         {
+            Init(blackboard);
             isSpecialAttackReady.Value = true;
             canSpecialAttack.Value = false;
             isGroggy.Value = false;
@@ -115,6 +135,8 @@ public class EliteAttackReadyNode : INode
         if (!isGroggy.Value)
         {
             if (!canSpecialAttack.Value) return Fsm.GuardNullNode(this, this);
+            
+            EndOfNode(blackboard);
             isSpecialAttackReady.Value = false;
 
             return myType == EEliteType.Bomb
@@ -124,6 +146,7 @@ public class EliteAttackReadyNode : INode
 
         isSpecialAttackReady.Value = false;
         DOTween.Kill(this);
+        EndOfNode(blackboard);
         LogPrintSystem.SystemLogPrint(myTransform, "Enter Groggy", ELogType.EnemyAI);
         return Fsm.GuardNullNode(this, enterGroggy);
     }

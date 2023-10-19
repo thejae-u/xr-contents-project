@@ -1484,6 +1484,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NormalEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 2174132782177813259, guid: 09b12179540564935a7efe2a352956fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6504124012999883842, guid: 09b12179540564935a7efe2a352956fd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.34
@@ -2041,6 +2045,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3401521922472138278, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
+      propertyPath: skeletonAnimation
+      value: 
+      objectReference: {fileID: 1511251850}
     - target: {fileID: 3551641590804901377, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -6543,7 +6551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed0c76a74b7748444b157e442249c9e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonAnimation: {fileID: 0}
+  skeletonAnimation: {fileID: 1511251850}
   trackControls: []
 --- !u!4 &1531280584 stripped
 Transform:
