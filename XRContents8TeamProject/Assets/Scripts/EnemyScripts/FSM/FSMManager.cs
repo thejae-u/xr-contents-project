@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using DG.Tweening;
+using EnemyScripts;
 
 
 [Serializable]
@@ -121,10 +122,15 @@ public class WaitNode : INode
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
         var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType");
+        var isGround = blackboard.GetData<ReferenceValueT<bool>>("isGround");
+        
+        if (!isGround.Value) return Fsm.GuardNullNode(this, this);
+        
+        LogPrintSystem.SystemLogPrint(myTransform, "IsGround On", ELogType.EnemyAI);
 
         if (myType.Value == EEliteType.None)
         {
-
+            
             var waitTime = blackboard.GetData<ReferenceValueT<float>>("waitTime");
             var isTimerWait = blackboard.GetData<ReferenceValueT<bool>>("isTimerWait");
             var isTimerEnded = blackboard.GetData<ReferenceValueT<bool>>("isTimerEnded");
@@ -135,6 +141,7 @@ public class WaitNode : INode
 
                 if (!isTimerWait.Value)
                 {
+                    myTransform.GetComponent<NEnemyController>().TimerSwitch();
                     LogPrintSystem.SystemLogPrint(myTransform, "Timer Init Call", ELogType.EnemyAI);
                     timer.Init(waitTime);
                     isTimerWait.Value = true;

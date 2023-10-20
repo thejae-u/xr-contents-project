@@ -59,11 +59,6 @@ namespace EnemyScripts
 
         private void Awake()
         {
-            foreach (var obj in timers)
-            {
-                obj.SetActive(true);
-            }
-
             fsm = new Fsm();
             b = new Blackboard();
             anim = gameObject.GetComponent<SkeletonAnimation>();
@@ -168,6 +163,14 @@ namespace EnemyScripts
 
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, myTraceRange.Value);
+        }
+
+        public void TimerSwitch()
+        {
+            foreach (var obj in timers)
+            {
+                obj.SetActive(true);
+            }
         }
 
         public Blackboard Data()

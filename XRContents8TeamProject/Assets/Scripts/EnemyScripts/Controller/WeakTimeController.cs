@@ -25,15 +25,10 @@ public class WeakTimeController : MonoBehaviour
     
     // 외부에서 실행중임을 확인
     public bool IsEnded { get; private set; }
-    
-    private void Start()
+
+    private void Awake()
     {
-        curValue = 0.0f;
-        IsEnded = false;
-        IsAttacked = false;
         weakImage = gameObject.GetComponent<Image>();
-        myColor = Color.white;
-        isSequenceOn = false;
     }
 
     private void Update()
@@ -72,7 +67,6 @@ public class WeakTimeController : MonoBehaviour
         }
         else if (normalizedValue > 1.0f)
         {
-            LogPrintSystem.SystemLogPrint(transform, "Gauge Full", ELogType.EnemyAI);
             IsAttacked = false;
             isRunning = false;
         }

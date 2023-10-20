@@ -112,7 +112,7 @@ MonoBehaviour:
   myMoveSpeed:
     Value: 2
   waitTime:
-    Value: 0
+    Value: 1.5
   myType:
     Value: 2
   hitTime: 0.5
