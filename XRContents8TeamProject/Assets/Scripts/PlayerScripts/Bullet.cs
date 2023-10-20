@@ -4,8 +4,7 @@ using EnemyScripts;
 public class Bullet : MonoBehaviour
 {
     private float bulletCreateTime = 0;
-    private float bulletDestroyTime = 3.0f;
-    //private float bulletDestroyTime = 0.01f;
+    private float bulletDestroyTime = 0.01f;
 
     public bool isBounsDamage;
 
@@ -17,7 +16,7 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
-        playerShot = GameObject.Find("Gun").GetComponent<PlayerShot>();
+        playerShot = GameObject.Find("Player").GetComponent<PlayerShot>();
     }
     void Start()
     {

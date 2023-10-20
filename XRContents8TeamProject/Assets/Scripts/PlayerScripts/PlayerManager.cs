@@ -158,6 +158,8 @@ public class PlayerManager : MonoBehaviour
             canDodge = false;
             Vector3 playerPos = transform.position;
 
+            PlayerInvincibility(dodgeInvincibilityDuration);
+
             if (dodgeDirRight)
             {
                 transform.DOMoveX(playerPos.x + dodgeDistance, 1.0f);
@@ -166,8 +168,6 @@ public class PlayerManager : MonoBehaviour
             {
                 transform.DOMoveX(playerPos.x - dodgeDistance, 1.0f);
             }
-
-            PlayerInvincibility(dodgeInvincibilityDuration);
 
             sequence.SetDelay(dodgeCoolTime).OnComplete(() =>
             {

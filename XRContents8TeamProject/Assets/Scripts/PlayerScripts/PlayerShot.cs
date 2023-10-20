@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerShot : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform fireTransform;
+    // [SerializeField] private Transform fireTransform;
 
     private PlayerManager playerManager;
     private AimUIController AimUIController;
@@ -25,9 +25,9 @@ public class PlayerShot : MonoBehaviour
     public bool isMaxGauge = false; // 게이지 최대치 오버
 
     [Header("총 딜레이 관련")]
-    [SerializeField] private float reverseDelay = 1.5f;
-    [SerializeField] private float reloadingDelay = 1.5f;
-    [SerializeField] private float forwardDelay = 1.5f;
+    [SerializeField] private float reverseDelay = 0.5f;
+    [SerializeField] private float reloadingDelay = 0.5f;
+    [SerializeField] private float forwardDelay = 0.5f;
 
     public enum EState
     {
