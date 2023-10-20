@@ -34,7 +34,7 @@ public class BalletUIController : MonoBehaviour
         }
         else
         {
-            Ammo++;
+            Ammo = Ammo + maxAmmo;
         }
 
         Ammo = Mathf.Clamp(Ammo, 0, maxAmmo);

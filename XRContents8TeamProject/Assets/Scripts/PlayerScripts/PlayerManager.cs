@@ -128,7 +128,6 @@ public class PlayerManager : MonoBehaviour
         }
     }
     #endregion
-
     #region JUMP
     void PlayerJump()
     {
@@ -184,16 +183,6 @@ public class PlayerManager : MonoBehaviour
         LogPrintSystem.SystemLogPrint(transform, "Call PlayerDiscountHp", ELogType.Player);
         if (!isInvincibility)
         {
-            Sequence sequence = DOTween.Sequence();
-
-            // Turns red when hit
-            transform.GetComponent<Renderer>().material.DOColor(Color.red, 0.1f);
-            LogPrintSystem.SystemLogPrint(transform, $"Player change Red", ELogType.Player);
-            sequence.SetDelay(1.0f).OnComplete(() =>
-            {
-                transform.GetComponent<Renderer>().material.DOColor(Color.white, 0.1f);
-            });
-
             playerHp -= damage;
 
             playerHpUI.GetComponent<hpUIController>().Sethp(damage);

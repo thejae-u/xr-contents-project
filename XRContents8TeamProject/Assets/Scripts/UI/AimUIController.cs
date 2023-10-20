@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class AimUIController : MonoBehaviour
 {
     public Transform aimingPoint;
+    public Image aimImage;
     public Image Gauge;
 
     private float fillGuage;
@@ -21,11 +22,20 @@ public class AimUIController : MonoBehaviour
     {
         Vector3 mousePosition = Input.mousePosition;
         aimingPoint.transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
+
+        if(Gauge.fillAmount == 1 ) 
+        {
+            aimImage.color = Color.red;
+        }
+        else
+        {
+            aimImage.color = Color.white;
+        }
     }
 
     public void SetGauge()
     {
-        Gauge.fillAmount += fillGuage;
+        Gauge.fillAmount = Gauge.fillAmount + fillGuage + Time.deltaTime;
     }
 
     public void InitGauge()

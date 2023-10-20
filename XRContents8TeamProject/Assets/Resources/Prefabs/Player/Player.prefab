@@ -9,14 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6607649661471559730}
-  - component: {fileID: 6009692622373706282}
-  - component: {fileID: 791484309048636529}
-  - component: {fileID: 8655657158191057136}
+  - component: {fileID: 3802929441285293159}
+  - component: {fileID: 6998830531416386706}
+  - component: {fileID: 8448108486643829588}
+  - component: {fileID: 3401521922472138278}
   - component: {fileID: 5058585670143218601}
   - component: {fileID: 330303974747212952}
   - component: {fileID: 5871502387009047570}
-  - component: {fileID: 3401521922472138278}
-  - component: {fileID: 3923633538413375849}
   - component: {fileID: 3854289692963828313}
   m_Layer: 6
   m_Name: Player
@@ -40,7 +39,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6009692622373706282
+--- !u!33 &3802929441285293159
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,7 +47,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759709160255606015}
   m_Mesh: {fileID: 0}
---- !u!23 &791484309048636529
+--- !u!23 &6998830531416386706
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,7 +89,7 @@ MeshRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 1
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8655657158191057136
+--- !u!114 &8448108486643829588
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,6 +126,20 @@ MonoBehaviour:
   _animationName: Idle
   loop: 1
   timeScale: 1
+--- !u!114 &3401521922472138278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759709160255606015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed0c76a74b7748444b157e442249c9e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skeletonAnimation: {fileID: 8448108486643829588}
+  trackControls: []
 --- !u!50 &5058585670143218601
 Rigidbody2D:
   serializedVersion: 4
@@ -217,34 +230,6 @@ MonoBehaviour:
   maxAmmo: 6
   reloadTime: 0.5
   maxGauge: 0.5
---- !u!114 &3401521922472138278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759709160255606015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed0c76a74b7748444b157e442249c9e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skeletonAnimation: {fileID: 8655657158191057136}
-  trackControls: []
---- !u!114 &3923633538413375849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759709160255606015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed0c76a74b7748444b157e442249c9e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skeletonAnimation: {fileID: 8655657158191057136}
-  trackControls: []
 --- !u!114 &3854289692963828313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +244,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3818357213670130502, guid: a6c05d3313c146b4285be02c4a3ae3c7, type: 3}
   isMaxGauge: 0
-  reverseDelay: 1.5
-  reloadingDelay: 1.5
-  forwardDelay: 1.5
+  reverseDelay: 0.5
+  reloadingDelay: 0.5
+  forwardDelay: 0.5

@@ -4,7 +4,7 @@ using EnemyScripts;
 public class Bullet : MonoBehaviour
 {
     private float bulletCreateTime = 0;
-    private float bulletDestroyTime = 0.01f;
+    [SerializeField] private float bulletDestroyTime = 0.1f;
 
     public bool isBounsDamage;
 

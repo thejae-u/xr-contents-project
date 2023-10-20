@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
         isCoroutineOn = true;
         while (newColor.a > 0)
         {
-            Debug.Log($"{newColor.a}");
+            //Debug.Log($"{newColor.a}");
             newColor.a -= speed * Time.deltaTime;
             bloodImage.color = newColor;
             yield return new WaitForEndOfFrame();

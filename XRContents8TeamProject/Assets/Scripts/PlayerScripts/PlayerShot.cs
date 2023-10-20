@@ -4,30 +4,28 @@ using UnityEngine;
 public class PlayerShot : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
-    // [SerializeField] private Transform fireTransform;
-
     private PlayerManager playerManager;
     private AimUIController AimUIController;
     private BalletUIController bulletUIController;
 
-    Sequence sequence;
     Sequence sequenceBoltAction;
     Sequence sequenceBackforward;
+    Sequence sequenceReloading;
+    Sequence sequenceForward;
         
     private int curAmmo = 0;
     private float curGauge = 0;
     private float lastFireTime = 0;
 
     private bool isReloading = false;
-    private bool isFinishReloadCheck = false; // 현재 장전 사이클이 끝났는지 확인
     private bool notMaxAmmoFill = false;
     private bool isDiscountBullet;
     public bool isMaxGauge = false; // 게이지 최대치 오버
 
     [Header("총 딜레이 관련")]
-    [SerializeField] private float reverseDelay = 0.5f;
-    [SerializeField] private float reloadingDelay = 0.5f;
-    [SerializeField] private float forwardDelay = 0.5f;
+    [SerializeField] private float reverseDelay = 0.3f;
+    [SerializeField] private float reloadingDelay = 0.3f;
+    [SerializeField] private float forwardDelay = 0.3f;
 
     public enum EState
     {
@@ -36,8 +34,7 @@ public class PlayerShot : MonoBehaviour
         Reloading,
         Forward,
         Shot,
-        BoltAction,
-        ReloadCheck
+        BoltAction
     }
 
     public EState state { get; private set; }
@@ -92,24 +89,15 @@ public class PlayerShot : MonoBehaviour
                 StateShot();
             }
         }
-
-        //if (Input.GetKeyDown(KeyCode.F) && !isReloading)
-        //{
-        //    StateBackforward();
-        //}        
-        
-        // 테스트에 좀 더 편하게 하기 위해 일단 마우스 우클릭 사용
-        if (Input.GetMouseButtonDown(1) && !isReloading)
+            
+        if (Input.GetKeyDown(KeyCode.F) && !isReloading)
         {
             StateBackforward();
-        }
-
-        if (notMaxAmmoFill && isFinishReloadCheck)
-        {
-            StateBackforward();
+            LogPrintSystem.SystemLogPrint(transform,"장전 실행",ELogType.Player);
         }
     }
 
+    #region SHOOTING
     void StateShot()
     {
         if (Time.time >= lastFireTime + playerManager.shotDelaySpeed)
@@ -138,32 +126,30 @@ public class PlayerShot : MonoBehaviour
         sequenceBoltAction = DOTween.Sequence();
 
         state = EState.BoltAction;
-        LogPrintSystem.SystemLogPrint(transform, "볼트 액션 애니메이션 출력", ELogType.Player);
+        LogPrintSystem.SystemLogPrint(transform, "볼트 액션", ELogType.Player);
         
         float shotDelayTime = playerManager.shotDelaySpeed;
         sequenceBoltAction.SetDelay(shotDelayTime).OnComplete(() =>
         {
             state = EState.Idle;
-            LogPrintSystem.SystemLogPrint(transform, "볼트 액션 애니메이션 종료", ELogType.Player);
+            LogPrintSystem.SystemLogPrint(transform, "볼트 액션 종료", ELogType.Player);
             sequenceBoltAction = null;
 
             isMaxGauge = false;
         });
     }
-
+    #endregion
+    #region RELOADING
     void StateBackforward()
     {
         if (curAmmo < playerManager.maxAmmo)
         {
-            notMaxAmmoFill = false;
-            isFinishReloadCheck = false;
-
-            sequenceBackforward = DOTween.Sequence();
-
             state = EState.Backforward;
-            isReloading = true;
-
+            sequenceBackforward = DOTween.Sequence();
             LogPrintSystem.SystemLogPrint(transform, "노리쇠 후퇴", ELogType.Player);
+
+            isReloading = true;
+            notMaxAmmoFill = false;
 
             sequenceBackforward.SetDelay(reverseDelay).OnComplete(() =>
             {
@@ -177,11 +163,10 @@ public class PlayerShot : MonoBehaviour
         if (isReloading)
         {
             state = EState.Reloading;
-            sequence = DOTween.Sequence();
-
+            sequenceReloading = DOTween.Sequence();
             LogPrintSystem.SystemLogPrint(transform, "탄알 삽입", ELogType.Player);
 
-            sequence.SetDelay(reloadingDelay).OnComplete(() =>
+            sequenceReloading.SetDelay(reloadingDelay).OnComplete(() =>
             {
                 StateForward();
             });
@@ -193,32 +178,22 @@ public class PlayerShot : MonoBehaviour
         if (isReloading)
         {
             state = EState.Forward;
-            sequence = DOTween.Sequence();
+            sequenceForward = DOTween.Sequence();
+            LogPrintSystem.SystemLogPrint(transform, "노리쇠 전진", ELogType.Player);
 
-            sequence.SetDelay(forwardDelay).OnComplete(() =>
+            sequenceForward.SetDelay(forwardDelay).OnComplete(() =>
             {
-                LogPrintSystem.SystemLogPrint(transform, "노리쇠 전진", ELogType.Player);
+                curAmmo = playerManager.maxAmmo;
 
-                curAmmo++;
+                /* -----UI----- */
                 isDiscountBullet = false;
                 bulletUIController.SetAmmo(isDiscountBullet);
 
                 isReloading = false;
-                LogPrintSystem.SystemLogPrint(transform, $"Current : {curAmmo} -> ReloadTime : {playerManager.reloadTime}", ELogType.Player);         
-                
-                if (curAmmo < playerManager.maxAmmo)
-                {
-                    notMaxAmmoFill = true;
-                }
-
-                else if (curAmmo >= playerManager.maxAmmo)
-                {
-                    state = EState.Idle;
-                    LogPrintSystem.SystemLogPrint(transform, "Reload Requset Complete", ELogType.Player);
-                }
-
-                isFinishReloadCheck = true;
+                state = EState.Idle;
+                LogPrintSystem.SystemLogPrint(transform, $"Reload Requset Complete => Current : {curAmmo} -> ReloadTime : {reverseDelay + reloadingDelay + forwardDelay}", ELogType.Player);         
             });
         }    
     }
+    #endregion
 }
