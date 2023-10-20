@@ -82,13 +82,72 @@ namespace EnemyScripts
         private SkeletonAnimation anim;
         [SerializeField] private List<GameObject> timers;
 
-        void Start()
+        private void Awake()
         {
-            // About Attack FSM
             fsm = new Fsm();
             b = new Blackboard();
             anim = gameObject.GetComponent<SkeletonAnimation>();
+            
+            // First Node State Store
+            b.AddData("myNode", myNode);
 
+            // About First Weak Timer
+            b.AddData("isTimerWait", isTimerWait);
+            b.AddData("isTimerEnded", isTimerEnded);
+            b.AddData("timers", timers);
+
+            // About player Info
+            b.AddData("playerTransform", GameObject.Find("Player").transform);
+
+            // About Life
+            b.AddData("isAlive", isAlive);
+            b.AddData("myHp", myHp);
+
+            // About the Monster Basic Info
+            b.AddData("myTransform", transform);
+            b.AddData("myType", myType);
+
+            b.AddData("myTraceRange", myTraceRange);
+            b.AddData("myMoveSpeed", myMoveSpeed);
+
+            b.AddData("myAttackDamage", myAttackDamage);
+            b.AddData("myAttackRange", myAttackRange);
+            b.AddData("isSpecialAttackReady", isSpecialAttackReady);
+            b.AddData("isNowAttack", isNowAttack);
+
+            // Monster Special Attack Info
+            b.AddData("bombPrefab", bombPrefab);
+            b.AddData("mySpecialAttackDamage", mySpecialAttackDamage);
+            b.AddData("specialAttackCooldown", specialAttackCooldown);
+            b.AddData("canSpecialAttackReady", canSpecialAttackReady);
+            b.AddData("hasRemainAttackTime", hasRemainAttackTime);
+
+            // 특수 공격 그로기 가능 시간
+            b.AddData("specialAttackWait", specialAttackWait);
+            b.AddData("isGroggy", isGroggy);
+            b.AddData("isInGroggy", isInGroggy);
+            b.AddData("canSpecialAttack", canSpecialAttack);
+
+            // Groggy Time
+            b.AddData("groggyTime", groggyTime);
+
+            // Only Use Rush Monster
+            b.AddData("myRushRange", myRushRange);
+            b.AddData("myOverRushRange", myOverRushRange);
+            b.AddData("rushDirection", rushDirection);
+            b.AddData("myRushSpeed", myRushSpeed);
+            b.AddData("isOverRush", isOverRush);
+
+            // Jump
+            b.AddData("isJumping", isJumping);
+            b.AddData("canJumpNextNode", canJumpNextNode);
+
+            // Ground Check
+            b.AddData("isGround", isGround);
+        }
+
+        void Start()
+        {
             isAlive.Value = true;
             isGroggy.Value = false;
             isInGroggy.Value = false;
@@ -101,63 +160,6 @@ namespace EnemyScripts
 
             myNode.Value = ENode.Idle;
             
-            // First Node State Store
-            b.AddData("myNode", myNode);
-            
-            // About First Weak Timer
-            b.AddData("isTimerWait", isTimerWait);
-            b.AddData("isTimerEnded", isTimerEnded);
-            b.AddData("timers", timers);
-            
-            // About player Info
-            b.AddData("playerTransform", GameObject.Find("Player").transform);
-            
-            // About Life
-            b.AddData("isAlive", isAlive);
-            b.AddData("myHp", myHp);
-            
-            // About the Monster Basic Info
-            b.AddData("myTransform", transform);
-            b.AddData("myType", myType);
-            
-            b.AddData("myTraceRange", myTraceRange);
-            b.AddData("myMoveSpeed", myMoveSpeed);
-            
-            b.AddData("myAttackDamage", myAttackDamage);
-            b.AddData("myAttackRange", myAttackRange);
-            b.AddData("isSpecialAttackReady", isSpecialAttackReady);
-            b.AddData("isNowAttack", isNowAttack);
-            
-            // Monster Special Attack Info
-            b.AddData("bombPrefab", bombPrefab);
-            b.AddData("mySpecialAttackDamage", mySpecialAttackDamage);
-            b.AddData("specialAttackCooldown", specialAttackCooldown);
-            b.AddData("canSpecialAttackReady", canSpecialAttackReady);
-            b.AddData("hasRemainAttackTime", hasRemainAttackTime);
-            
-            // 특수 공격 그로기 가능 시간
-            b.AddData("specialAttackWait", specialAttackWait);
-            b.AddData("isGroggy", isGroggy);
-            b.AddData("isInGroggy", isInGroggy);
-            b.AddData("canSpecialAttack", canSpecialAttack);
-            
-            // Groggy Time
-            b.AddData("groggyTime", groggyTime);
-            
-            // Only Use Rush Monster
-            b.AddData("myRushRange", myRushRange);
-            b.AddData("myOverRushRange", myOverRushRange);
-            b.AddData("rushDirection", rushDirection);
-            b.AddData("myRushSpeed", myRushSpeed);
-            b.AddData("isOverRush", isOverRush);
-            
-            // Jump
-            b.AddData("isJumping", isJumping);
-            b.AddData("canJumpNextNode", canJumpNextNode);
-            
-            // Ground Check
-            b.AddData("isGround", isGround);
-
             // Node Initialize
             var wait = new WaitNode();
             var trace = new EliteTraceNode();

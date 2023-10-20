@@ -55,6 +55,7 @@ namespace EnemyScripts
         private bool isHit;
 
         private Blackboard b;
+        private SkeletonAnimation anim;
 
         private void Awake()
         {
@@ -62,23 +63,21 @@ namespace EnemyScripts
             {
                 obj.SetActive(true);
             }
-        }
 
-        void Start()
-        {
             fsm = new Fsm();
             b = new Blackboard();
-            
+            anim = gameObject.GetComponent<SkeletonAnimation>();
+
             isAlive.Value = true;
             myNode.Value = ENode.Idle;
-            
+
             isTimerWait.Value = false;
             isTimerEnded.Value = false;
-            
+
             b.AddData("isTimerWait", isTimerWait);
             b.AddData("isTimerEnded", isTimerEnded);
             b.AddData("waitTime", waitTime);
-            
+
             b.AddData("myNode", myNode);
             b.AddData("isAlive", isAlive);
             b.AddData("myHp", myHp);
@@ -93,7 +92,10 @@ namespace EnemyScripts
             b.AddData("isJumping", isJumping);
             b.AddData("canJumpNextNode", canJumpNextNode);
             b.AddData("isGround", isGround);
+        }
 
+        void Start()
+        {
             var wait = new WaitNode();
             var trace = new NormalTraceNode();
             var attack = new NormalAttackNode();

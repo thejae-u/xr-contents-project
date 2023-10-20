@@ -90,6 +90,7 @@ public class NormalAttackNode : INode
         isNowAttack.Value = true;
         
         player.PlayerDiscountHp(attackDamage, myTransform.position.x);
+        GameManager.Inst.HitPlayer();
 
         sequence.SetDelay(1.5f).OnComplete(() =>
         {

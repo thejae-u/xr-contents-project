@@ -16,12 +16,12 @@ public class EnemyAnimationController : MonoBehaviour
         {
             instElite = gameObject.GetComponent<EEnemyController>();
             instNormal = null;
-            myType = instElite.Data().GetData<ReferenceValueT<EEliteType>>("myType").Value;
+            myType = instElite.Data().GetData<ReferenceValueT<EEliteType>>("myType");
         }
         else
         {
-            instNormal = gameObject.GetComponent<NEnemyController>();
             instElite = null;
+            instNormal = gameObject.GetComponent<NEnemyController>();
             myType = instNormal.Data().GetData<ReferenceValueT<EEliteType>>("myType").Value;
         }
 
