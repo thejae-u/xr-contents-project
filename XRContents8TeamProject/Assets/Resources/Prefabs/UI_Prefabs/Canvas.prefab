@@ -660,6 +660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimingPoint: {fileID: 2612693104545634809}
+  Gauge: {fileID: 1255804613121135286}
 --- !u!1 &4009612112720604350
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,13 +893,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 8af055127a2f0a14b8727c811643780e, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!1 &5238015608697939666
@@ -1917,6 +1918,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  bloodImage: {fileID: 0}
+  speed: 0
 --- !u!1 &8795716203963653763
 GameObject:
   m_ObjectHideFlags: 0
