@@ -126,8 +126,6 @@ public class WaitNode : INode
         
         if (!isGround.Value) return Fsm.GuardNullNode(this, this);
         
-        LogPrintSystem.SystemLogPrint(myTransform, "IsGround On", ELogType.EnemyAI);
-
         if (myType.Value == EEliteType.None)
         {
             

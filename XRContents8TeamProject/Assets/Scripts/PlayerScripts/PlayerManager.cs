@@ -266,6 +266,7 @@ public class PlayerManager : MonoBehaviour
 
     void PlayerMoveLimit()
     {
+        if (CameraController.Inst.IsNowCutScene) return;
         Vector3 worldpos = Camera.main.WorldToViewportPoint(this.transform.position);
         
         if (worldpos.x < 0f)

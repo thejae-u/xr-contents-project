@@ -5,10 +5,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+[Serializable]
+public class Stage
+{
+    public List<GameObject> sectors;
+}
+
 public class GameManager : MonoBehaviour
 {
     private PlayerManager playerManager;
-    public List<Transform> stages;
+    public List<Stage> stages;
     
     public Image bloodImage;
     private bool isCoroutineOn;
@@ -37,9 +43,7 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if (inst == null)
-                return null;
-            return inst;
+            return inst == null ? null : inst;
         }
     }
     
@@ -53,23 +57,23 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         remainMonster = 0;
-        
+
         foreach (var stage in stages)
         {
-            remainMonster += stage.childCount;
+            foreach (var sector in stage.sectors)
+            {
+                remainMonster += sector.transform.childCount;
+            }
         }
 
-        if (playerManager.GetPlayerHp() <= 0 || remainMonster == 0)
-        {
+        if (remainMonster == 0 || playerManager.GetPlayerHp() <= 0)
             SceneManager.LoadScene("GameoverScene");
-        }
 
         Exit();
     }
 
     private void Exit()
     {
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
 #if UNITY_EDITOR
@@ -78,6 +82,12 @@ public class GameManager : MonoBehaviour
             Application.Quit();
 #endif
         }
+    }
+    
+    // Enemy Spawner
+    public void EnemySpawn(int stage, int sector)
+    {
+        stages[stage].sectors[sector].SetActive(true);
     }
 
     public void HitPlayer()

@@ -38,7 +38,6 @@ public class WeakTimeController : MonoBehaviour
             if (isSequenceOn) return;
 
             var sequence = DOTween.Sequence();
-            LogPrintSystem.SystemLogPrint(transform, "Sequence Active", ELogType.EnemyAI);
             myColor = Color.red;
             weakImage.color = myColor;
             isSequenceOn = true;
