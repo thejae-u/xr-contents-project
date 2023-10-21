@@ -115,6 +115,8 @@ namespace EnemyScripts
         private void Update()
         {
             Flip();
+
+            if (CameraController.Inst.IsNowCutScene) return;
             
             if (!isHit)
                 fsm.Update();

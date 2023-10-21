@@ -221,6 +221,8 @@ namespace EnemyScripts
 
         private void Update()
         {
+            if (CameraController.Inst.IsNowCutScene) return;
+            
             if (!isAlive.Value)
             {
                 if (DOTween.IsTweening(this))
