@@ -72,6 +72,7 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {
         if (CameraController.Inst.IsNowCutScene) return;
+        
         PlayerViewMousePoint();
         PlayerMove();
 
@@ -194,6 +195,15 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    private void PlayerDeath()
+    {
+        if(playerHp <= 0)
+        {
+            // player Dead animation 실행 (delay 준다.)
+            // 게임 오버 씬으로 변경
+        }
+    }
+
     private void PlayerKnockback(float enemyXPos)
     {
         if (!isKnockback)
@@ -240,7 +250,6 @@ public class PlayerManager : MonoBehaviour
             isKnockback = false;
             LogPrintSystem.SystemLogPrint(transform, "플레이어 무적 상태 해제", ELogType.Player);
         });
-
     }
 
     void PlayerViewMousePoint()

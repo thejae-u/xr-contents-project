@@ -5,7 +5,7 @@ public class PlayerShot : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
     private PlayerManager playerManager;
-    private AimUIController AimUIController;
+    private AimUIController aimUIController;
     private BalletUIController bulletUIController;
 
     Sequence sequenceBoltAction;
@@ -18,7 +18,6 @@ public class PlayerShot : MonoBehaviour
     private float lastFireTime = 0;
 
     private bool isReloading = false;
-    private bool notMaxAmmoFill = false;
     private bool isDiscountBullet;
     public bool isMaxGauge = false; // 게이지 최대치 오버
 
@@ -42,7 +41,7 @@ public class PlayerShot : MonoBehaviour
     private void Awake()
     {
         playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
-        AimUIController = GameObject.Find("PlayerAim").GetComponent<AimUIController>();
+        aimUIController = GameObject.Find("PlayerAim").GetComponent<AimUIController>();
         bulletUIController = GameObject.Find("Bullet").GetComponent<BalletUIController>();
     }
 
@@ -56,9 +55,17 @@ public class PlayerShot : MonoBehaviour
     { 
         if (Input.GetMouseButton(0))
         {
-            curGauge += Time.deltaTime;
-            // 게이지가 차기 시작할 때 UI에 생성한 함수를 호출한다.
-            AimUIController.SetGauge();
+            if(curAmmo > 0)
+            {
+                curGauge += Time.deltaTime;
+                // 게이지가 차기 시작할 때 UI에 생성한 함수를 호출한다.
+                aimUIController.SetGauge();
+            }
+            else if(curAmmo == 0) 
+            {
+                // 총알이 없는 경우 게이지가 차지 않는다.
+                aimUIController.SetWarningGauge();
+            }
 
             if (!isMaxGauge && curGauge >= playerManager.maxGauge)
             {
@@ -70,7 +77,7 @@ public class PlayerShot : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             curGauge = 0;
-            AimUIController.InitGauge();
+            aimUIController.InitGauge();
 
             if (state == EState.Idle && curAmmo > 0)
             {
@@ -149,7 +156,6 @@ public class PlayerShot : MonoBehaviour
             LogPrintSystem.SystemLogPrint(transform, "노리쇠 후퇴", ELogType.Player);
 
             isReloading = true;
-            notMaxAmmoFill = false;
 
             sequenceBackforward.SetDelay(reverseDelay).OnComplete(() =>
             {

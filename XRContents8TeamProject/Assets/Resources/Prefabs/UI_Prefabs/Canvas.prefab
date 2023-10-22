@@ -660,6 +660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimingPoint: {fileID: 2612693104545634809}
+  aimImage: {fileID: 7772452965211685273}
   Gauge: {fileID: 1255804613121135286}
 --- !u!1 &4009612112720604350
 GameObject:
@@ -1904,20 +1905,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - sectors: []
+  - sectors: []
+  - sectors: []
+  - sectors: []
+  - sectors: []
+  - sectors: []
+  - sectors: []
+  - sectors: []
+  - sectors: []
+  - sectors: []
+  - sectors: []
+  - sectors: []
+  - sectors: []
+  - sectors: []
   bloodImage: {fileID: 0}
   speed: 0
 --- !u!1 &8795716203963653763
