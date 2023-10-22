@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Cinemachine;
+using DG.Tweening;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -35,9 +36,25 @@ public class CameraController : MonoBehaviour
 
     public void CameraTransition()
     {
-        GameObject curCamera = cameras[0].gameObject;
+        cameras[0].gameObject.SetActive(false);
+        cameras[1].gameObject.SetActive(true);
+        
         IsNowCutScene = true;
-        curCamera.SetActive(false);
+
+        Sequence sequence = DOTween.Sequence();
+        sequence.SetDelay(5.0f).OnComplete(CutSceneEnd);
+    }
+
+    private void CutSceneEnd()
+    {
+        cameras[0].gameObject.SetActive(true);
+        cameras[1].gameObject.SetActive(false);
+        
+        Sequence sequence = DOTween.Sequence();
+        sequence.SetDelay(3.0f).OnComplete(() =>
+        {
+            IsNowCutScene = false;
+        });
     }
 
     private void Start()

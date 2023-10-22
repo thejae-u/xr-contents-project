@@ -245,13 +245,6 @@ namespace EnemyScripts
             }
         }
 
-        
-        // Called In WeakController
-        public void WeakBreak()
-        {
-            isGroggy.Value = true;
-        }
-
         public float GetMySpecialDamage()
         {
             return myAttackDamage.Value;
