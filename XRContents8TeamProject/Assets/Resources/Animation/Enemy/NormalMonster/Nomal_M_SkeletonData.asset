@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
-  m_Name: Elite_Rush_M_SkeletonData
+  m_Name: Nomal_M_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: 2b0c3a2cdee51144eba27f28c3d7d405, type: 2}
+  - {fileID: 11400000, guid: 7b9ac66105cbd84459000a60e97b65f6, type: 2}
   scale: 0.003
-  skeletonJSON: {fileID: 4900000, guid: 9a8c20cb76ff3da4e8c8b2ede1146130, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: 4181646d63d00d7469b16b2795b3af51, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 0

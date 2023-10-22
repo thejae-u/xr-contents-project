@@ -114,13 +114,6 @@ namespace EnemyScripts
 
         private void Update()
         {
-            Flip();
-
-            if (CameraController.Inst.IsNowCutScene) return;
-            
-            if (!isHit)
-                fsm.Update();
-            
             if (isAlive.Value)
                 fsmLife.Update();
             else
@@ -130,14 +123,20 @@ namespace EnemyScripts
                     DOTween.Kill(this);
                 }
 
-                /*
-                if (anim.AnimationName == "dead" && anim.AnimationState.GetCurrent(0).IsComplete)
+                if (anim.AnimationName == "Monster_Dead" && anim.AnimationState.GetCurrent(0).IsComplete)
                 {
                     Destroy(gameObject);
-                }*/
-                
-                Destroy(gameObject);
+                }
             }
+
+            Flip();
+
+            if (CameraController.Inst.IsNowCutScene) return;
+
+            if (anim.AnimationName == "Monster_Hit" && !anim.AnimationState.GetCurrent(0).IsComplete) return;
+            
+            if (!isHit)
+                fsm.Update();
         }
 
 
@@ -203,12 +202,12 @@ namespace EnemyScripts
             myPos += dirVector * knockbackPower;
             
             sequence.Append(transform.DOMoveX(myPos.x, hitTime));
-            
+
             sequence.AppendCallback(() =>
             {
-                isHit = false;
+                isHit = false; 
             });
-            
+
             sequence.Play().SetId(this);
         }
     }

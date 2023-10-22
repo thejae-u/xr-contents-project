@@ -9,12 +9,10 @@ public class CameraController : MonoBehaviour
     public List<CinemachineVirtualCamera> cameras;
 
     public bool IsCameraStop { get; set; }
-    public bool IsNowCutScene { get; set; }
+    public bool IsNowCutScene { get; private set; }
     
     private Transform target;
     private float trackSpeed = 10;
-
-    private Vector3 prevPosition;
 
     private static CameraController inst;
 
@@ -34,7 +32,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public void CameraTransition()
+    public void FirstCameraTransition()
     {
         cameras[0].gameObject.SetActive(false);
         cameras[1].gameObject.SetActive(true);
@@ -47,8 +45,13 @@ public class CameraController : MonoBehaviour
 
     private void CutSceneEnd()
     {
-        cameras[0].gameObject.SetActive(true);
-        cameras[1].gameObject.SetActive(false);
+        foreach (var camera in cameras)
+        {
+            if(camera.transform.name == "PlayerFollowCamera")
+                camera.gameObject.SetActive(true);
+            else
+                camera.gameObject.SetActive(false);
+        }
         
         Sequence sequence = DOTween.Sequence();
         sequence.SetDelay(3.0f).OnComplete(() =>
@@ -69,7 +72,6 @@ public class CameraController : MonoBehaviour
         if (target)
         {
             var v = cameras[0].transform.position;
-            prevPosition = v;
             v.x = target.position.x + 5.5f;
             cameras[0].transform.position = Vector3.MoveTowards(cameras[0].transform.position, v, trackSpeed * Time.deltaTime);
         }

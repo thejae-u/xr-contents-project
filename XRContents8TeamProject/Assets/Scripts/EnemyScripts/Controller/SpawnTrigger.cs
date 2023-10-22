@@ -27,7 +27,7 @@ public class SpawnTrigger : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
-            CameraController.Inst.CameraTransition();
+            CameraController.Inst.FirstCameraTransition();
             GameManager.Inst.EnemySpawn(stageCount, sectorCount);
             isRunning = true;
         }

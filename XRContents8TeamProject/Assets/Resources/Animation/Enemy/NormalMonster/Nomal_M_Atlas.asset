@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
-  m_Name: Elite_Rush_M_Atlas
+  m_Name: Nomal_M_Atlas
   m_EditorClassIdentifier: 
-  atlasFile: {fileID: 4900000, guid: b1f1d29e0b437a2478d4482fd131e9fb, type: 3}
+  atlasFile: {fileID: 4900000, guid: dbfc43543ddc2af44a34806a836f0763, type: 3}
   materials:
-  - {fileID: 2100000, guid: c99d3f9ac3f55354a90bede19bbad118, type: 2}
+  - {fileID: 2100000, guid: 373c73fc908a9ff4f98413af312585cf, type: 2}

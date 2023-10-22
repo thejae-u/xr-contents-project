@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d482664fcffe3440a0d1ee76eaaad73, type: 3}
-  m_Name: LogSetting
+  m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
+  m_Name: Rush_M_Atlas
   m_EditorClassIdentifier: 
-  logType: 2
+  atlasFile: {fileID: 4900000, guid: 428df55fddf35c8488ea777ca8b83a57, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 20d559b0b90d87540879d8b432cc5733, type: 2}

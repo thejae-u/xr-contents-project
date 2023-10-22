@@ -39,7 +39,7 @@ public class EnemyAnimationController : MonoBehaviour
                     Idle();
                     break;
                 case ENode.Trace:
-                    Run();
+                    Move();
                     break;
                 case ENode.NormalAttack:
                     // Attack();
@@ -48,10 +48,10 @@ public class EnemyAnimationController : MonoBehaviour
                     // Jump();
                     break;
                 case ENode.SpecialAttackReady:
-                    // SpecialAttackWait();
+                     SpecialAttackWait();
                     break;
                 case ENode.SpecialAttack:
-                    // SpecialAttack();
+                     SpecialAttack();
                     break;
                 case ENode.Groggy:
                     Groggy();
@@ -72,22 +72,24 @@ public class EnemyAnimationController : MonoBehaviour
             switch(instNormal.Data().GetData<ReferenceValueT<ENode>>("myNode").Value)
             {
                 case ENode.Idle:
-                    // Idle();
+                    Idle();
                     break;
                 case ENode.Trace:
-                    // Run();
+                    LogPrintSystem.SystemLogPrint(transform, "Trace Node Activate", ELogType.EnemyAI);
+                    Move();
                     break;
                 case ENode.NormalAttack:
-                    // Attack();
+                    Attack();
                     break;
                 case ENode.Jump:
                     // Jump();
                     break;
                 case ENode.Dead:
-                    // Dead();
+                    Dead();
                     break;
                 case ENode.Hit:
-                    // Hit();
+                    LogPrintSystem.SystemLogPrint(transform, "Hit Node Activate", ELogType.EnemyAI);
+                    Hit();
                     break;
                 
                 // Use Elite Only
@@ -100,61 +102,98 @@ public class EnemyAnimationController : MonoBehaviour
         }
     }
 
-    #region Animatinons
     
     private void Idle()
     {
-        if (anim.AnimationName == "idle") return;
-        anim.AnimationState.SetAnimation(0, "idle", true);
+        if (myType == EEliteType.None)
+        {
+            if (anim.AnimationName == "Monster_Idle") return;
+            anim.AnimationState.SetAnimation(0, "Monster_Idle", true);
+        }
+        else
+        {
+            if (anim.AnimationName == "Rush_Idle") return;
+            anim.AnimationState.SetAnimation(0, "Rush_Idle", true);
+        }
     }
     
-    private void Run()
+    private void Move()
     {
-        if (anim.AnimationName == "run") return;
-        anim.AnimationState.SetAnimation(0, "run", true);
+        if (myType == EEliteType.None)
+        {
+            if (anim.AnimationName == "Monster_Move") return;
+            anim.AnimationState.SetAnimation(0, "Monster_Move", true);
+        }
+        else
+        {
+            if (anim.AnimationName == "Rush_Move") return;
+            anim.AnimationState.SetAnimation(0, "Rush_Move", true);
+        }
     }
 
     private void Groggy()
     {
-        if (anim.AnimationName == "paralyzation") return;
-        anim.AnimationState.SetAnimation(0, "paralyzation", true);
+        if (anim.AnimationName == "Rush_Groggy") return;
+        anim.AnimationState.SetAnimation(0, "Rush_Groggy", true);
     }
 
     private void Attack()
     {
-        if (anim.AnimationName == "attack") return;
-        anim.AnimationState.SetAnimation(0, "attack", true);
+        if (myType == EEliteType.None)
+        {
+            if (anim.AnimationName == "Monster_Atk") return;
+            anim.AnimationState.SetAnimation(0, "Monster_Atk", true);
+        }
+        else
+        {
+            if (anim.AnimationName == "") return;
+            anim.AnimationState.SetAnimation(0, "", true);
+        }
     }
 
     private void Jump()
     {
-        if (anim.AnimationName == "jump") return;
-        anim.AnimationState.SetAnimation(0, "jump", false);
+        if (anim.AnimationName == "") return;
+        anim.AnimationState.SetAnimation(0, "", false);
     }
 
     private void SpecialAttackWait()
     {
-        if (anim.AnimationName == "specialAttackWait") return;
-        anim.AnimationState.SetAnimation(0, "specialAttackWait", true);
+        if (myType == EEliteType.None)
+        {
+            if (anim.AnimationName == "Monster_Atk_Ready") return;
+            anim.AnimationState.SetAnimation(0, "Monster_Atk_Ready", true);
+        }
+        else
+        {
+            if (anim.AnimationName == "Rush_SpecialATK_Ready") return;
+            anim.AnimationState.SetAnimation(0, "Rush_SpecialATK_Ready", true);
+        }
     }
 
     private void SpecialAttack()
     {
-        if (anim.AnimationName == "specialAttack") return;
-        anim.AnimationState.SetAnimation(0, "specialAttack", false);
+        if (anim.AnimationName == "Rush_SpecialATK") return;
+        anim.AnimationState.SetAnimation(0, "Rush_SpecialATK", false);
     }
 
     private void Dead()
     {
-        if (anim.AnimationName == "dead") return;
-        anim.AnimationState.SetAnimation(0, "dead", false);
+        if (myType == EEliteType.None)
+        {
+            if (anim.AnimationName == "Monster_Dead") return;
+            anim.AnimationState.SetAnimation(0, "Monster_Dead", true);
+        }
+        else
+        {
+            if (anim.AnimationName == "Rush_Dead") return;
+            anim.AnimationState.SetAnimation(0, "Rush_Dead", false);
+        }
     }
 
     private void Hit()
     {
-        if (anim.AnimationName == "hit") return;
-        anim.AnimationState.SetAnimation(0, "hit", false);
+        if (anim.AnimationName == "Monster_Hit") return;
+        anim.AnimationState.SetAnimation(0, "Monster_Hit", false);
     }
-    
-    #endregion
 }
