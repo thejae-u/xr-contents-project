@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class BalletUIController : MonoBehaviour
 {
+    public Transform BulletPos;
     public Image[] bullet;
 
     public int Ammo { get; private set; }
@@ -24,6 +25,12 @@ public class BalletUIController : MonoBehaviour
                 bullet[i].sprite = drawFront;
             }
         }
+    }
+
+    private void Update()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        BulletPos.transform.position = new Vector3(mousePosition.x - 70, mousePosition.y, 0);
     }
 
     public void SetAmmo(bool isDiscount )

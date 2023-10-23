@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6607649661471559730}
-  - component: {fileID: 3802929441285293159}
-  - component: {fileID: 6998830531416386706}
-  - component: {fileID: 8448108486643829588}
+  - component: {fileID: 197114666532102079}
+  - component: {fileID: 4964331156947014229}
+  - component: {fileID: 8444904569608711496}
   - component: {fileID: 3401521922472138278}
   - component: {fileID: 5058585670143218601}
   - component: {fileID: 330303974747212952}
@@ -39,7 +39,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3802929441285293159
+--- !u!33 &197114666532102079
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,7 +47,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759709160255606015}
   m_Mesh: {fileID: 0}
---- !u!23 &6998830531416386706
+--- !u!23 &4964331156947014229
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,7 +89,7 @@ MeshRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 1
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8448108486643829588
+--- !u!114 &8444904569608711496
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,8 +138,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed0c76a74b7748444b157e442249c9e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonAnimation: {fileID: 8448108486643829588}
-  trackControls: []
+  skeletonAnimation: {fileID: 8444904569608711496}
+  useOverrideMixDuration: 0
+  overrideMixDuration: 0.2
+  useOverrideAttachmentThreshold: 1
+  attachmentThreshold: 0.5
+  useOverrideDrawOrderThreshold: 0
+  drawOrderThreshold: 0.5
+  trackControls:
+  - controls:
+    - animationName: 
+      loop: 0
+      key: 0
+      useCustomMixDuration: 0
+      mixDuration: 0
+    - animationName: 
+      loop: 0
+      key: 0
+      useCustomMixDuration: 0
+      mixDuration: 0
+    - animationName: 
+      loop: 0
+      key: 0
+      useCustomMixDuration: 0
+      mixDuration: 0
+    - animationName: 
+      loop: 0
+      key: 0
+      useCustomMixDuration: 0
+      mixDuration: 0
+    - animationName: 
+      loop: 0
+      key: 0
+      useCustomMixDuration: 0
+      mixDuration: 0
+    - animationName: 
+      loop: 0
+      key: 0
+      useCustomMixDuration: 0
+      mixDuration: 0
+  - controls:
+    - animationName: 
+      loop: 0
+      key: 0
+      useCustomMixDuration: 0
+      mixDuration: 0
+    - animationName: 
+      loop: 0
+      key: 0
+      useCustomMixDuration: 0
+      mixDuration: 0
+    - animationName: 
+      loop: 0
+      key: 0
+      useCustomMixDuration: 0
+      mixDuration: 0
+    - animationName: 
+      loop: 0
+      key: 0
+      useCustomMixDuration: 0
+      mixDuration: 0
+    - animationName: 
+      loop: 0
+      key: 0
+      useCustomMixDuration: 0
+      mixDuration: 0
+    - animationName: 
+      loop: 0
+      key: 0
+      useCustomMixDuration: 0
+      mixDuration: 0
 --- !u!50 &5058585670143218601
 Rigidbody2D:
   serializedVersion: 4

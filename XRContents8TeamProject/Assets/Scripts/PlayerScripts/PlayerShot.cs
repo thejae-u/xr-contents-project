@@ -42,7 +42,7 @@ public class PlayerShot : MonoBehaviour
     {
         playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
         aimUIController = GameObject.Find("PlayerAim").GetComponent<AimUIController>();
-        bulletUIController = GameObject.Find("Bullet").GetComponent<BalletUIController>();
+        bulletUIController = GameObject.Find("PlayerAim").GetComponent<BalletUIController>();
     }
 
     private void Start()
