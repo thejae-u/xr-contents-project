@@ -127,16 +127,23 @@ namespace EnemyScripts
                 {
                     Destroy(gameObject);
                 }
+
+                return;
             }
 
             Flip();
 
             if (CameraController.Inst.IsNowCutScene) return;
 
-            if (anim.AnimationName == "Monster_Hit" && !anim.AnimationState.GetCurrent(0).IsComplete) return;
-            
-            if (!isHit)
+            if (anim.AnimationName == "Monster_Hit")
+            {
+                if (!anim.AnimationState.GetCurrent(0).IsComplete) return;
                 fsm.Update();
+            }
+            else
+            {
+                fsm.Update();
+            }
         }
 
 
@@ -181,6 +188,8 @@ namespace EnemyScripts
         
         public void DiscountHp(float damage)
         {
+            if (anim.AnimationName == "Monster_Hit") return;
+            
             b.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Hit;
             
             myHp.Value -= damage;

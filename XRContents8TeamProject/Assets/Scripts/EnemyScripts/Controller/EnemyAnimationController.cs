@@ -75,7 +75,6 @@ public class EnemyAnimationController : MonoBehaviour
                     Idle();
                     break;
                 case ENode.Trace:
-                    LogPrintSystem.SystemLogPrint(transform, "Trace Node Activate", ELogType.EnemyAI);
                     Move();
                     break;
                 case ENode.NormalAttack:
@@ -182,7 +181,7 @@ public class EnemyAnimationController : MonoBehaviour
         if (myType == EEliteType.None)
         {
             if (anim.AnimationName == "Monster_Dead") return;
-            anim.AnimationState.SetAnimation(0, "Monster_Dead", true);
+            anim.AnimationState.SetAnimation(0, "Monster_Dead", false);
         }
         else
         {
