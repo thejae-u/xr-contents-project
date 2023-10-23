@@ -86,8 +86,6 @@ public class WeakTimeController : MonoBehaviour
 
     public void Checked()
     {
-        if(DOTween.IsTweening(DOTween.Sequence(this)))
-            DOTween.Sequence(this).Kill();
         gameObject.transform.parent.gameObject.SetActive(false);
     }
 

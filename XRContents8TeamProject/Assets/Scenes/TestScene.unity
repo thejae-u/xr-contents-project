@@ -1457,6 +1457,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RushEliteEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3907302254929122994, guid: d25d73d8cda3a94418729bd15fb40afc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4272973455071949034, guid: d25d73d8cda3a94418729bd15fb40afc, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -3651,7 +3655,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1038227398}
   - component: {fileID: 1038227397}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6281,7 +6285,7 @@ GameObject:
   - component: {fileID: 1555547892}
   - component: {fileID: 1555547891}
   - component: {fileID: 1555547893}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -13874,7 +13878,7 @@ GameObject:
   - component: {fileID: 1830765509}
   - component: {fileID: 1830765511}
   - component: {fileID: 1830765510}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

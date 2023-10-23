@@ -101,11 +101,9 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator BloodTime(Color newColor)
     {
-        Debug.Log($"Coroutine CALL");
         isCoroutineOn = true;
         while (newColor.a > 0)
         {
-            //Debug.Log($"{newColor.a}");
             newColor.a -= speed * Time.deltaTime;
             bloodImage.color = newColor;
             yield return new WaitForEndOfFrame();

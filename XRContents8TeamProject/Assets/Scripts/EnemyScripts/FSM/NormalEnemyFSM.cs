@@ -22,9 +22,27 @@ public class NormalTraceNode : TraceNode
         var playerPos = playerTransform.position;
         var myMoveSpeed = blackboard.GetData<ReferenceValueT<float>>("myMoveSpeed");
 
-        myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x,
-                playerPos.x, myMoveSpeed.Value * Time.deltaTime),
-            myPos.y, myPos.z);
+        Vector2 rayCastPos = myPos;
+        float rayDistance = 1.5f;
+        Vector2 dir = (playerPos - myPos).normalized;
+        
+        rayCastPos.y -= 0.55f;
+        int layerMask = LayerMask.GetMask("Background");
+
+        RaycastHit2D hit = Physics2D.Raycast(rayCastPos, Vector2.right * dir.x, rayDistance, layerMask);
+        Debug.DrawRay(rayCastPos, Vector2.right * (dir.x * rayDistance));
+
+        if (hit.collider != null)
+        {
+            var myRd = myTransform.GetComponent<Rigidbody2D>();
+            myRd.velocity += Vector2.up * myMoveSpeed;
+        }
+        else
+        {
+            myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x,
+                    playerPos.x, myMoveSpeed.Value * Time.deltaTime),
+                myPos.y, myPos.z);
+        }
 
         LogPrintSystem.SystemLogPrint(myTransform, "Now Tracing", ELogType.EnemyAI);
 

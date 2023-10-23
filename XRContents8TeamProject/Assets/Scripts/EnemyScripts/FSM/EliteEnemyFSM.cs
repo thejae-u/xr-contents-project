@@ -24,20 +24,33 @@ public class EliteTraceNode : TraceNode
         // Trace Logic
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
+        var myPos = myTransform.position;
+        var playerPos = playerTransform.position;
         var myMoveSpeed = blackboard.GetData<ReferenceValueT<float>>("myMoveSpeed");
         var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
         var isGround = blackboard.GetData<ReferenceValueT<bool>>("isGround");
-        
-
-        var myPos = myTransform.position;
 
         blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Trace;
+        Vector2 rayCastPos = myPos;
+        float rayDistance = 1.5f;
+        Vector2 dir = (playerPos - myPos).normalized;
+        
+        rayCastPos.y -= 0.55f;
+        int layerMask = LayerMask.GetMask("Background");
 
-        if (isGround.Value)
+        RaycastHit2D hit = Physics2D.Raycast(rayCastPos, Vector2.right * dir.x, rayDistance, layerMask);
+        Debug.DrawRay(rayCastPos, Vector2.right * (dir.x * rayDistance));
+
+        if (hit.collider != null)
+        {
+            var myRd = myTransform.GetComponent<Rigidbody2D>();
+            myRd.velocity += Vector2.up * myMoveSpeed;
+        }
+        else
         {
             myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x,
-                    playerTransform.position.x, myMoveSpeed.Value * Time.deltaTime),
-                myPos.y, 0);
+                    playerPos.x, myMoveSpeed.Value * Time.deltaTime),
+                myPos.y, myPos.z);
         }
 
         switch (type)
@@ -83,6 +96,8 @@ public class EliteAttackReadyNode : INode
     public INode enterGroggy;
     
     // player failed attack weakness
+    // 0 : Bomb
+    // 1 : Rush
     public INode[] failedAttack;
 
     private void Init(Blackboard blackboard)
@@ -118,6 +133,7 @@ public class EliteAttackReadyNode : INode
         var canSpecialAttack = blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttack");
         var isSpecialAttackReady = blackboard.GetData<ReferenceValueT<bool>>("isSpecialAttackReady");
         var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType");
+        var isInGroggy = blackboard.GetData<ReferenceValueT<bool>>("isInGroggy");
         
         var timer = myTransform.GetComponentInChildren<WeakTimeController>(true);
 
@@ -143,6 +159,7 @@ public class EliteAttackReadyNode : INode
                 : Fsm.GuardNullNode(this, failedAttack[1]);
         }
 
+        isInGroggy.Value = false;
         timer.Checked();
         return Fsm.GuardNullNode(this, enterGroggy);
 
@@ -321,11 +338,11 @@ public class EliteGroggyNode : INode
 
         if (!isInGroggy.Value)
         {
+            isGroggy.Value = true;
             isInGroggy.Value = true;
             sequence.SetDelay(groggyTime.Value).OnComplete(() =>
             {
                 isGroggy.Value = false;
-                isInGroggy.Value = false;
             }).SetId(this);
         }
 
