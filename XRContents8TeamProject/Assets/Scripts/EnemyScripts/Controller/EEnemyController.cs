@@ -230,10 +230,16 @@ namespace EnemyScripts
                     DOTween.Kill(this);
                 }
 
+                if (anim.AnimationName != "Rush_Dead")
+                    anim.AnimationState.SetAnimation(0, "Rush_Dead", false);
+                
+
                 if (anim.AnimationName == "dead" && anim.AnimationState.GetCurrent(0).IsComplete)
                 {
                     Destroy(gameObject);
                 }
+
+                return;
             }
             else
             {

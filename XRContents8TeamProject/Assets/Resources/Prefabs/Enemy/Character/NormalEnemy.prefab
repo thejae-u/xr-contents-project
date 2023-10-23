@@ -202,15 +202,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myHp:
-    Value: 100
+    Value: 20
   myAttackDamage:
     Value: 5
   myTraceRange:
-    Value: 10
+    Value: 8
   myAttackRange:
-    Value: 1.5
+    Value: 1
   myMoveSpeed:
-    Value: 3
+    Value: 2
   waitTime:
     Value: 1.5
   myType:
