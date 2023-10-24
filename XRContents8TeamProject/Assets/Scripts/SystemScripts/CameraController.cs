@@ -7,6 +7,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public List<CinemachineVirtualCamera> cameras;
+    private List<bool> visited;
 
     public bool IsCameraStop { get; set; }
     public bool IsNowCutScene { get; private set; }
@@ -21,7 +22,11 @@ public class CameraController : MonoBehaviour
         if (inst == null)
             inst = this;
         else
-            Destroy(gameObject);       
+            Destroy(gameObject);
+
+        visited = new List<bool>();
+        for (int i = 0; i < cameras.Count; i++)
+            visited.Add(false);
     }
 
     public static CameraController Inst
@@ -34,10 +39,12 @@ public class CameraController : MonoBehaviour
 
     public void FirstCameraTransition()
     {
+        if (visited[0]) return;
         cameras[0].gameObject.SetActive(false);
         cameras[1].gameObject.SetActive(true);
         
         IsNowCutScene = true;
+        visited[0] = true;
 
         Sequence sequence = DOTween.Sequence();
         sequence.SetDelay(5.0f).OnComplete(CutSceneEnd);

@@ -28,29 +28,33 @@ public class EliteTraceNode : TraceNode
         var playerPos = playerTransform.position;
         var myMoveSpeed = blackboard.GetData<ReferenceValueT<float>>("myMoveSpeed");
         var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
-        var isGround = blackboard.GetData<ReferenceValueT<bool>>("isGround");
 
         blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Trace;
-        Vector2 rayCastPos = myPos;
-        float rayDistance = 1.5f;
-        Vector2 dir = (playerPos - myPos).normalized;
-        
-        rayCastPos.y -= 0.55f;
-        int layerMask = LayerMask.GetMask("Background");
 
-        RaycastHit2D hit = Physics2D.Raycast(rayCastPos, Vector2.right * dir.x, rayDistance, layerMask);
-        Debug.DrawRay(rayCastPos, Vector2.right * (dir.x * rayDistance));
+        if (myType.Value == EEliteType.Rush)
+        {
+            Vector2 rayCastPos = myPos;
+            float rayDistance = 1.5f;
+            Vector2 dir = (playerPos - myPos).normalized;
 
-        if (hit.collider != null)
-        {
-            var myRd = myTransform.GetComponent<Rigidbody2D>();
-            myRd.velocity += Vector2.up * myMoveSpeed;
-        }
-        else
-        {
-            myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x,
-                    playerPos.x, myMoveSpeed.Value * Time.deltaTime),
-                myPos.y, myPos.z);
+            rayCastPos.y -= 0.55f;
+            int layerMask = LayerMask.GetMask("Background");
+
+            RaycastHit2D hit = Physics2D.Raycast(rayCastPos, Vector2.right * dir.x, rayDistance, layerMask);
+            Debug.DrawRay(rayCastPos, Vector2.right * (dir.x * rayDistance));
+
+            if (hit.collider != null)
+            {
+                var myRd = myTransform.GetComponent<Rigidbody2D>();
+                myRd.velocity += Vector2.up * (myMoveSpeed / 1.5f);
+            }
+            else
+            {
+                LogPrintSystem.SystemLogPrint(myTransform, "Move", ELogType.EnemyAI);
+                myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x, 
+                        playerPos.x, myMoveSpeed.Value * Time.deltaTime),
+                    myPos.y, myPos.z);
+            }
         }
 
         switch (type)
@@ -68,10 +72,7 @@ public class EliteTraceNode : TraceNode
 
             // Only Use Rush Monster
             case ETraceState.PlayerEnterRush:
-                if (hasRemainAttackTime.Value)
-                    return Fsm.GuardNullNode(this, this);
-                // Rush Attack Begin
-                return Fsm.GuardNullNode(this, attacks[2]);
+                return Fsm.GuardNullNode(this, hasRemainAttackTime.Value ? this : attacks[2]);
 
             case ETraceState.PlayerTrace:
                 return Fsm.GuardNullNode(this, this);
@@ -195,7 +196,6 @@ public class EliteBombAttackNode : INode
         sequence.SetDelay(specialAttackCooldown.Value).OnComplete(() =>
         {
             hasRemainAttackTime.Value = false;
-            LogPrintSystem.SystemLogPrint(myTransform, "Now Can Special Attack", ELogType.EnemyAI);
         }).SetId(this);
 
         return Fsm.GuardNullNode(this, endAttack);
@@ -245,12 +245,10 @@ public class EliteRushAttackNode : INode
         isNowAttack.Value = false;
         canSpecialAttackReady.Value = false;
         hasRemainAttackTime.Value = true;
-        LogPrintSystem.SystemLogPrint(myTransform, "InitSetting Called", ELogType.EnemyAI);
         myTransform.position = myPos;
         
         sequence.SetDelay(specialAttackCooldown.Value).OnComplete(() =>
         {
-            LogPrintSystem.SystemLogPrint(myTransform, "special Attack Cooldown End", ELogType.EnemyAI);
             hasRemainAttackTime.Value = false;
         }).SetId(this);
     }
