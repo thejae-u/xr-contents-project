@@ -4,15 +4,15 @@ using UnityEngine.UI;
 public class AimUIController : MonoBehaviour
 {
     public Transform aimingPoint;
-    public Image aimImage;
+    //public Image aimImage;
     public Image Gauge;
 
     private float fillGuage;
     private float fillMax;
     private Color currentColor;
 
-    private bool isSetWarningGauge = false;
-    //public bool isWarningGauge = false;
+    public bool isReadyWarningGauge = false;
+    private bool isMaxGauge = false;
 
     private void Start()
     {
@@ -26,30 +26,32 @@ public class AimUIController : MonoBehaviour
     {
         Vector3 mousePosition = Input.mousePosition;
         aimingPoint.transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
-        
-        //if (Gauge.fillAmount == 1)
-        //{
-        //    aimImage.color = Color.red;
-        //}
-        //else
-        //{
-        //    aimImage.color = Color.white;
-        //}
+
+        if (isMaxGauge)
+        {
+            Gauge.color = Color.yellow;
+        }
     }
 
     public void SetGauge()
     {
+        Gauge.color = Color.white;
         Gauge.fillAmount = Gauge.fillAmount + fillGuage + Time.deltaTime;
+
+        if(Gauge.fillAmount == 1) 
+        {
+            isMaxGauge = true;
+        }
     }
 
     public void SetWarningGauge()
     {
-        if (!isSetWarningGauge)
+        if (!isReadyWarningGauge)
         {
             Gauge.fillAmount = 1;
             Gauge.color = Color.red;
             currentColor = Gauge.color;
-            isSetWarningGauge = true;
+            isReadyWarningGauge = true;
         }
 
         if (Gauge.color.a > 0)
@@ -59,12 +61,15 @@ public class AimUIController : MonoBehaviour
         }
         else if( Gauge.color.a <= 0)
         {
-            isSetWarningGauge = false;
+            InitGauge();
         }
     }
 
     public void InitGauge()
     {
         Gauge.fillAmount = 0;
+
+        isMaxGauge = false;
+        Gauge.color = Color.white;
     }
 }

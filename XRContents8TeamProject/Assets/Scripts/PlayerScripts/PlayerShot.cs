@@ -19,16 +19,17 @@ public class PlayerShot : MonoBehaviour
 
     private bool isReloading = false;
     private bool isDiscountBullet;
-    public bool isMaxGauge = false; // 게이지 최대치 오버
+    public bool isMaxGauge = false;
+    private bool canShot = true;
 
     [Header("총 딜레이 관련")]
     [SerializeField] private float reverseDelay = 0.3f;
     [SerializeField] private float reloadingDelay = 0.3f;
     [SerializeField] private float forwardDelay = 0.3f;
 
-    public enum EState
+    public enum EShotState
     {
-        Idle,
+        None,
         Backforward,
         Reloading,
         Forward,
@@ -36,7 +37,7 @@ public class PlayerShot : MonoBehaviour
         BoltAction
     }
 
-    public EState state { get; private set; }
+    public EShotState state { get; private set; }
 
     private void Awake()
     {
@@ -48,55 +49,61 @@ public class PlayerShot : MonoBehaviour
     private void Start()
     {
         curAmmo = playerManager.maxAmmo;
-        state = EState.Idle;
+        state = EShotState.None;
     }
 
     private void Update()
-    { 
-        if (Input.GetMouseButton(0))
+    {
+        if (canShot)
         {
-            if(curAmmo > 0)
-            {
-                curGauge += Time.deltaTime;
-                // 게이지가 차기 시작할 때 UI에 생성한 함수를 호출한다.
-                aimUIController.SetGauge();
-            }
-            else if(curAmmo == 0) 
+            if (curAmmo == 0)
             {
                 // 총알이 없는 경우 게이지가 차지 않는다.
                 aimUIController.SetWarningGauge();
             }
 
-            if (!isMaxGauge && curGauge >= playerManager.maxGauge)
+            if (Input.GetMouseButton(0))
             {
-                isMaxGauge = true;
-                LogPrintSystem.SystemLogPrint(transform, $"{curGauge} => MAXGAUGE", ELogType.Player);
+                if (curAmmo > 0)
+                {
+                    curGauge += Time.deltaTime;
+                    // 게이지가 차기 시작할 때 UI에 생성한 함수를 호출한다.
+                    aimUIController.SetGauge();
+                }
+
+                if (!isMaxGauge && curGauge >= playerManager.maxGauge)
+                {
+                    isMaxGauge = true;
+                    LogPrintSystem.SystemLogPrint(transform, $"{curGauge} => MAXGAUGE", ELogType.Player);
+                }
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                curGauge = 0;
+                aimUIController.InitGauge();
+                aimUIController.isReadyWarningGauge = false;
+                canShot = false;
+
+                if (state == EShotState.None && curAmmo > 0)
+                {
+                    StateShot();
+                }
+                else if (state == EShotState.Backforward && curAmmo > 0)
+                {
+                    // 재장전 중에 사격 버튼을 입력한 경우 장전을 취소한다.
+                    sequenceBackforward.Kill();
+                    isReloading = false;
+
+                    LogPrintSystem.SystemLogPrint(transform, $"Reload Cancel", ELogType.Player);
+
+                    StateForward();
+                    state = EShotState.None;
+                    StateShot();
+                }
             }
         }
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            curGauge = 0;
-            aimUIController.InitGauge();
-
-            if (state == EState.Idle && curAmmo > 0)
-            {
-                StateShot();
-            }
-            else if (state == EState.Backforward && curAmmo > 0)
-            { 
-                // 재장전 중에 사격 버튼을 입력한 경우 장전을 취소한다.
-                sequenceBackforward.Kill();
-                isReloading = false;
-
-                LogPrintSystem.SystemLogPrint(transform, $"Reload Cancel", ELogType.Player);
-                 
-                StateForward();
-                state = EState.Idle;
-                StateShot();
-            }
-        }
-            
         if (Input.GetKeyDown(KeyCode.F) && !isReloading)
         {
             StateBackforward();
@@ -109,7 +116,7 @@ public class PlayerShot : MonoBehaviour
     {
         if (Time.time >= lastFireTime + playerManager.shotDelaySpeed)
         {
-            state = EState.Shot;
+            state = EShotState.Shot;
 
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = new Vector3(mousePosition.x, mousePosition.y, mousePosition.z);
@@ -132,17 +139,18 @@ public class PlayerShot : MonoBehaviour
     {
         sequenceBoltAction = DOTween.Sequence();
 
-        state = EState.BoltAction;
+        state = EShotState.BoltAction;
         LogPrintSystem.SystemLogPrint(transform, "볼트 액션", ELogType.Player);
         
         float shotDelayTime = playerManager.shotDelaySpeed;
         sequenceBoltAction.SetDelay(shotDelayTime).OnComplete(() =>
         {
-            state = EState.Idle;
+            state = EShotState.None;
             LogPrintSystem.SystemLogPrint(transform, "볼트 액션 종료", ELogType.Player);
             sequenceBoltAction = null;
 
             isMaxGauge = false;
+            canShot = true;
         });
     }
     #endregion
@@ -151,7 +159,7 @@ public class PlayerShot : MonoBehaviour
     {
         if (curAmmo < playerManager.maxAmmo)
         {
-            state = EState.Backforward;
+            state = EShotState.Backforward;
             sequenceBackforward = DOTween.Sequence();
             LogPrintSystem.SystemLogPrint(transform, "노리쇠 후퇴", ELogType.Player);
 
@@ -168,7 +176,7 @@ public class PlayerShot : MonoBehaviour
     {
         if (isReloading)
         {
-            state = EState.Reloading;
+            state = EShotState.Reloading;
             sequenceReloading = DOTween.Sequence();
             LogPrintSystem.SystemLogPrint(transform, "탄알 삽입", ELogType.Player);
 
@@ -183,7 +191,7 @@ public class PlayerShot : MonoBehaviour
     {
         if (isReloading)
         {
-            state = EState.Forward;
+            state = EShotState.Forward;
             sequenceForward = DOTween.Sequence();
             LogPrintSystem.SystemLogPrint(transform, "노리쇠 전진", ELogType.Player);
 
@@ -196,7 +204,7 @@ public class PlayerShot : MonoBehaviour
                 bulletUIController.SetAmmo(isDiscountBullet);
 
                 isReloading = false;
-                state = EState.Idle;
+                state = EShotState.None;
                 LogPrintSystem.SystemLogPrint(transform, $"Reload Requset Complete => Current : {curAmmo} -> ReloadTime : {reverseDelay + reloadingDelay + forwardDelay}", ELogType.Player);         
             });
         }    

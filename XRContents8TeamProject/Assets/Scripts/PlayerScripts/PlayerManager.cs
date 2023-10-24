@@ -27,7 +27,6 @@ public class PlayerManager : MonoBehaviour
     private bool isKnockback = false;
     private bool canMove = true;
 
-
     // Player dodge(evasion) related
     [Header("플레이어 회피 거리")]
     [SerializeField] private float dodgeDistance = 4.0f;
@@ -57,6 +56,18 @@ public class PlayerManager : MonoBehaviour
     private Rigidbody2D playerRigidbody;
     private GameObject playerHpUI;
 
+    public enum EPlayerState
+    {
+        Idle,
+        Move,
+        Jump,
+        Dodge,
+        Hit,
+        Dead
+    }
+
+    public EPlayerState state { get; private set; }
+
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
@@ -67,6 +78,8 @@ public class PlayerManager : MonoBehaviour
     {
         playerRigidbody.gravityScale = playerGravityForce;
         Cursor.visible = false;
+
+        state = EPlayerState.Idle;
     }
 
     private void Update()
