@@ -14,7 +14,7 @@ public class AimUIController : MonoBehaviour
     public bool isReadyWarningGauge = false;
     private bool isMaxGauge = false;
 
-    private void Start()
+    private void Awake()
     {
         fillMax = GameObject.Find("Player").GetComponent<PlayerManager>().maxGauge;
         fillGuage = fillMax / 100;
@@ -38,7 +38,7 @@ public class AimUIController : MonoBehaviour
         Gauge.color = Color.white;
         Gauge.fillAmount = Gauge.fillAmount + fillGuage + Time.deltaTime;
 
-        if(Gauge.fillAmount == 1) 
+        if (Gauge.fillAmount == 1)
         {
             isMaxGauge = true;
         }
@@ -59,7 +59,7 @@ public class AimUIController : MonoBehaviour
             currentColor.a = Mathf.Clamp(currentColor.a - Time.deltaTime * 2f, 0.0f, 1.0f);
             Gauge.color = currentColor;
         }
-        else if( Gauge.color.a <= 0)
+        else if (Gauge.color.a <= 0)
         {
             InitGauge();
         }
