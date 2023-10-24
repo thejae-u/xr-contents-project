@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
+using DG.Tweening;
+using Spine.Unity;
 
 namespace EnemyScripts
 {
     public class EEnemyController : MonoBehaviour
     {
+        # region AboutFSM
         private Fsm fsm;
         private Fsm fsmLife;
 
@@ -18,10 +19,10 @@ namespace EnemyScripts
         [Header("속도를 조정")]
         [SerializeField] private ReferenceValueT<float> myMoveSpeed;
         
-        [Header("공격 대미지를 조정")]
+        [Header("공격 대미지를 조정 (폭탄 대미지 포함)")]
         [SerializeField] private ReferenceValueT<float> myAttackDamage;
         
-        [Header("특수 공격 대미지를 조정")]
+        [Header("특수 공격 대미지를 조정 (돌진 몬스터)")]
         [SerializeField] private ReferenceValueT<float> mySpecialAttackDamage;
         
         [Header("탐지 거리를 조정")]
@@ -52,9 +53,6 @@ namespace EnemyScripts
         [Header("폭탄 프리팹")] 
         [SerializeField] private GameObject bombPrefab;
 
-        [Header("약점 노출을 위한 오브젝트")] 
-        [SerializeField] private GameObject weak;
-
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isGroggy;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isInGroggy;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isAlive;
@@ -72,12 +70,84 @@ namespace EnemyScripts
 
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isGround;
 
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isTimerWait;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isTimerEnded;
+            
+        [HideInInspector] [SerializeField] private ReferenceValueT<ENode> myNode;
+        
+        
+        private Blackboard b;
+        # endregion
+        
+        private SkeletonAnimation anim;
+        [SerializeField] private List<GameObject> timers;
+
+        private void Awake()
+        {
+            fsm = new Fsm();
+            b = new Blackboard();
+            anim = gameObject.GetComponent<SkeletonAnimation>();
+            
+            // First Node State Store
+            b.AddData("myNode", myNode);
+
+            // About First Weak Timer
+            b.AddData("isTimerWait", isTimerWait);
+            b.AddData("isTimerEnded", isTimerEnded);
+            b.AddData("timers", timers);
+
+            // About player Info
+            b.AddData("playerTransform", GameObject.Find("Player").transform);
+
+            // About Life
+            b.AddData("isAlive", isAlive);
+            b.AddData("myHp", myHp);
+
+            // About the Monster Basic Info
+            b.AddData("myTransform", transform);
+            b.AddData("myType", myType);
+
+            b.AddData("myTraceRange", myTraceRange);
+            b.AddData("myMoveSpeed", myMoveSpeed);
+
+            b.AddData("myAttackDamage", myAttackDamage);
+            b.AddData("myAttackRange", myAttackRange);
+            b.AddData("isSpecialAttackReady", isSpecialAttackReady);
+            b.AddData("isNowAttack", isNowAttack);
+
+            // Monster Special Attack Info
+            b.AddData("bombPrefab", bombPrefab);
+            b.AddData("mySpecialAttackDamage", mySpecialAttackDamage);
+            b.AddData("specialAttackCooldown", specialAttackCooldown);
+            b.AddData("canSpecialAttackReady", canSpecialAttackReady);
+            b.AddData("hasRemainAttackTime", hasRemainAttackTime);
+
+            // 특수 공격 그로기 가능 시간
+            b.AddData("specialAttackWait", specialAttackWait);
+            b.AddData("isGroggy", isGroggy);
+            b.AddData("isInGroggy", isInGroggy);
+            b.AddData("canSpecialAttack", canSpecialAttack);
+
+            // Groggy Time
+            b.AddData("groggyTime", groggyTime);
+
+            // Only Use Rush Monster
+            b.AddData("myRushRange", myRushRange);
+            b.AddData("myOverRushRange", myOverRushRange);
+            b.AddData("rushDirection", rushDirection);
+            b.AddData("myRushSpeed", myRushSpeed);
+            b.AddData("isOverRush", isOverRush);
+
+            // Jump
+            b.AddData("isJumping", isJumping);
+            b.AddData("canJumpNextNode", canJumpNextNode);
+
+            // Ground Check
+            b.AddData("isGround", isGround);
+        }
+
         void Start()
         {
-            // About Attack FSM
-            fsm = new Fsm();
-            Blackboard b = new Blackboard();
-
             isAlive.Value = true;
             isGroggy.Value = false;
             isInGroggy.Value = false;
@@ -85,57 +155,11 @@ namespace EnemyScripts
             hasRemainAttackTime.Value = false;
             rushDirection.Value = false;
             isOverRush.Value = false;
+            isTimerWait.Value = false;
+            isTimerEnded.Value = false;
 
-            // Blackboard Initialize
-            // About player Info
-            b.AddData("playerTransform", GameObject.Find("Player").transform);
+            myNode.Value = ENode.Idle;
             
-            // About Life
-            b.AddData("isAlive", isAlive);
-            b.AddData("myHp", myHp);
-            
-            // About the Monster Basic Info
-            b.AddData("myTransform", transform);
-            b.AddData("myType", myType);
-            
-            b.AddData("myTraceRange", myTraceRange);
-            b.AddData("myMoveSpeed", myMoveSpeed);
-            
-            b.AddData("myAttackDamage", myAttackDamage);
-            b.AddData("myAttackRange", myAttackRange);
-            b.AddData("isSpecialAttackReady", isSpecialAttackReady);
-            b.AddData("isNowAttack", isNowAttack);
-            
-            // Monster Special Attack Info
-            b.AddData("bombPrefab", bombPrefab);
-            b.AddData("mySpecialAttackDamage", mySpecialAttackDamage);
-            b.AddData("specialAttackCooldown", specialAttackCooldown);
-            b.AddData("canSpecialAttackReady", canSpecialAttackReady);
-            b.AddData("hasRemainAttackTime", hasRemainAttackTime);
-            
-            // 특수 공격 그로기 가능 시간
-            b.AddData("specialAttackWait", specialAttackWait);
-            b.AddData("isGroggy", isGroggy);
-            b.AddData("isInGroggy", isInGroggy);
-            b.AddData("canSpecialAttack", canSpecialAttack);
-            
-            // Groggy Time
-            b.AddData("groggyTime", groggyTime);
-            
-            // Only Use Rush Monster
-            b.AddData("myRushRange", myRushRange);
-            b.AddData("myOverRushRange", myOverRushRange);
-            b.AddData("rushDirection", rushDirection);
-            b.AddData("myRushSpeed", myRushSpeed);
-            b.AddData("isOverRush", isOverRush);
-            
-            // Jump
-            b.AddData("isJumping", isJumping);
-            b.AddData("canJumpNextNode", canJumpNextNode);
-            
-            // Ground Check
-            b.AddData("isGround", isGround);
-
             // Node Initialize
             var wait = new WaitNode();
             var trace = new EliteTraceNode();
@@ -197,40 +221,57 @@ namespace EnemyScripts
 
         private void Update()
         {
+            Debug.Log($"{b.GetData<ReferenceValueT<ENode>>("myNode").Value}");
+            if (CameraController.Inst.IsNowCutScene) return;
+            
             if (!isAlive.Value)
             {
                 if (DOTween.IsTweening(this))
                 {
                     DOTween.Kill(this);
                 }
-                Destroy(gameObject);
+
+                if (anim.AnimationName != "Rush_Dead")
+                    anim.AnimationState.SetAnimation(0, "Rush_Dead", false);
+
+                if (anim.AnimationName == "Rush_Dead" && anim.AnimationState.GetCurrent(0).IsComplete)
+                {
+                    Destroy(gameObject);
+                }
             }
             else
             {
                 fsm.Update();
                 fsmLife.Update();
                 
-                // Weakness Show Method
-                WeakShow();
+                // Flip X Rotation
+                Flip();
             }
-        }
-
-        // Called In Weakness Prefab
-        public void WeakBreak()
-        {
-            isGroggy.Value = true;
         }
 
         public float GetMySpecialDamage()
         {
-            return mySpecialAttackDamage.Value;
+            return myAttackDamage.Value;
         }
 
+        public Blackboard Data()
+        {
+            return b;
+        }
+        
         public void DiscountHp(float damage)
         {
             if (isSpecialAttackReady.Value)
                 return;
             myHp.Value -= damage;
+        }
+
+        private void Flip()
+        {
+            var playerTransform = b.GetData<Transform>("playerTransform");
+            float dir = playerTransform.position.x - transform.position.x;
+
+            transform.rotation = dir > 0 ? new Quaternion(0, 180, 0, 0) : new Quaternion(0, 0, 0, 0);
         }
 
         private void OnCollisionStay2D(Collision2D other)
@@ -239,11 +280,6 @@ namespace EnemyScripts
             {
                 isGround.Value = true;
             }
-        }
-
-        private void WeakShow()
-        {
-            weak.SetActive(isSpecialAttackReady.Value);
         }
 
         private void OnDrawGizmos()

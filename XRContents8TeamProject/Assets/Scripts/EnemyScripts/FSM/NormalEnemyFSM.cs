@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using Spine.Unity;
 using UnityEngine;
 
 public class NormalTraceNode : TraceNode
@@ -12,25 +13,35 @@ public class NormalTraceNode : TraceNode
     {
         var type = Trace(blackboard);
 
+        blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Trace;
+
         // Trace Logic
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
         var myPos = myTransform.position;
         var playerPos = playerTransform.position;
         var myMoveSpeed = blackboard.GetData<ReferenceValueT<float>>("myMoveSpeed");
-        var isGround = blackboard.GetData<ReferenceValueT<bool>>("isGround");
 
+        Vector2 rayCastPos = myPos;
+        float rayDistance = 1.5f;
+        Vector2 dir = (playerPos - myPos).normalized;
+        
+        rayCastPos.y -= 0.55f;
+        int layerMask = LayerMask.GetMask("Background");
 
-        if (isGround.Value)
+        RaycastHit2D hit = Physics2D.Raycast(rayCastPos, Vector2.right * dir.x, rayDistance, layerMask);
+        Debug.DrawRay(rayCastPos, Vector2.right * (dir.x * rayDistance));
+
+        if (hit.collider != null)
         {
-            LogPrintSystem.SystemLogPrint(myTransform, "isGround -> Trace Player", ELogType.EnemyAI);
-            myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x,
-                    playerPos.x, myMoveSpeed.Value * Time.deltaTime),
-                myPos.y, myPos.z);
+            var myRd = myTransform.GetComponent<Rigidbody2D>();
+            myRd.velocity += Vector2.up * myMoveSpeed;
         }
         else
         {
-            LogPrintSystem.SystemLogPrint(myTransform, "isGround FALSE", ELogType.EnemyAI);
+            myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x,
+                    playerPos.x, myMoveSpeed.Value * Time.deltaTime),
+                myPos.y, myPos.z);
         }
 
         LogPrintSystem.SystemLogPrint(myTransform, "Now Tracing", ELogType.EnemyAI);
@@ -57,12 +68,13 @@ public class NormalAttackNode : INode
 
     public INode Execute(Blackboard blackboard)
     {
+        blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.NormalAttack;
+        
         var isNowAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
         
-        // animation start
         if (isNowAttack.Value)
             return Fsm.GuardNullNode(this, this);
-        
+
         // Attack On
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
@@ -86,11 +98,13 @@ public class NormalAttackNode : INode
         isNowAttack.Value = true;
         
         player.PlayerDiscountHp(attackDamage, myTransform.position.x);
+        GameManager.Inst.HitPlayer();
 
         sequence.SetDelay(1.5f).OnComplete(() =>
         {
             isNowAttack.Value = false;
         }).SetId(this);
+
         
         LogPrintSystem.SystemLogPrint(myTransform, $"{attackDamage} Damage to Player!!", ELogType.EnemyAI);
         return Fsm.GuardNullNode(this, this);
