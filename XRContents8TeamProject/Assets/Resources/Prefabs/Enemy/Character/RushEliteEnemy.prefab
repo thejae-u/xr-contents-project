@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 403723682669501862}
   - component: {fileID: 757410080103352550}
   - component: {fileID: 2455984488092389800}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RushEliteEnemy
   m_TagString: EliteEnemy
   m_Icon: {fileID: 0}

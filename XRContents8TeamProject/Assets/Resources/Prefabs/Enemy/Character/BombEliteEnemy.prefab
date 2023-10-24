@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3174084348782302623}
   m_Layer: 7
   m_Name: BombEliteEnemy
-  m_TagString: Enemy
+  m_TagString: EliteEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

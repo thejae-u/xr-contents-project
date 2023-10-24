@@ -70,8 +70,7 @@ public class EliteTraceNode : TraceNode
             case ETraceState.PlayerEnterRush:
                 if (hasRemainAttackTime.Value)
                     return Fsm.GuardNullNode(this, this);
-                
-                LogPrintSystem.SystemLogPrint(myTransform, "Rush Entered", ELogType.EnemyAI);
+                // Rush Attack Begin
                 return Fsm.GuardNullNode(this, attacks[2]);
 
             case ETraceState.PlayerTrace:
@@ -224,25 +223,34 @@ public class EliteRushAttackNode : INode
         {
             playerTransform.GetComponent<PlayerManager>().PlayerDiscountHp(mySpecialAttackDamage.Value,
                 myTransform.position.x);
+            LogPrintSystem.SystemLogPrint(myTransform, $"Damage to Player {mySpecialAttackDamage.Value}", ELogType.EnemyAI);
             return true;
         }
+        
         return playerRange + myAttackRange.Value >= distance;
     }
 
     private void InitSetting(Blackboard blackboard)
     {
         var sequence = DOTween.Sequence();
+        var myTransform = blackboard.GetData<Transform>("myTransform");
         var isNowAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
         var canSpecialAttackReady = blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttackReady");
         var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
         var specialAttackCooldown = blackboard.GetData<ReferenceValueT<float>>("specialAttackCooldown");
         
+        var myPos = myTransform.position;
+        myPos.z = 0.0f;
+        
         isNowAttack.Value = false;
         canSpecialAttackReady.Value = false;
         hasRemainAttackTime.Value = true;
+        LogPrintSystem.SystemLogPrint(myTransform, "InitSetting Called", ELogType.EnemyAI);
+        myTransform.position = myPos;
         
         sequence.SetDelay(specialAttackCooldown.Value).OnComplete(() =>
         {
+            LogPrintSystem.SystemLogPrint(myTransform, "special Attack Cooldown End", ELogType.EnemyAI);
             hasRemainAttackTime.Value = false;
         }).SetId(this);
     }

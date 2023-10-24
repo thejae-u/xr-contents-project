@@ -166,11 +166,9 @@ public class WaitNode : INode
 
         if (d1 + d2 >= distance)
         {
-            LogPrintSystem.SystemLogPrint(myTransform, "Trace Start", ELogType.EnemyAI);
             return Fsm.GuardNullNode(this, enterPlayer);
         }
 
-        LogPrintSystem.SystemLogPrint(myTransform, "Waiting", ELogType.EnemyAI);
         return Fsm.GuardNullNode(this, this);
     }
 }
@@ -190,14 +188,11 @@ public abstract class TraceNode : INode
     
     public ETraceState Trace(Blackboard blackboard)
     {
-        // Whole Monster Use this variable
-        // Bomb Elite Monster's Position is Locked
-        
         Transform myTransform = blackboard.GetData<Transform>("myTransform");
         Transform playerTransform = blackboard.GetData<Transform>("playerTransform");
 
-        float d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
-        float d2 = blackboard.GetData<ReferenceValueT<float>>("myAttackRange").Value;
+        float playerRange = playerTransform.GetComponent<PlayerManager>().MyRadius;
+        float myAttackRange = blackboard.GetData<ReferenceValueT<float>>("myAttackRange").Value;
 
         EEliteType myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType").Value;
 
@@ -210,8 +205,8 @@ public abstract class TraceNode : INode
         var isJumping = blackboard.GetData<ReferenceValueT<bool>>("isJumping");
         if (isJumping.Value) return ETraceState.PlayerTrace;
 
-
-        if (distanceForJump <= d2 && myType != EEliteType.Bomb)
+        // Distance of Player to Monster is Same -> Check Y Position -> need jump return
+        if (distanceForJump <= myAttackRange && myType != EEliteType.Bomb)
         {
             float playerYPos = playerTransform.position.y;
             float myYPos = myTransform.position.y;
@@ -222,53 +217,49 @@ public abstract class TraceNode : INode
                 return ETraceState.NeedJump;
         }
 
+        // Player Out of Range
+        if (traceRange + playerRange <= distance)
+            return ETraceState.PlayerExit;
+
         // Trace Logic
         if (myType != EEliteType.Rush)
         {
-            if (d1 + d2 >= distance)
-            {
-                return ETraceState.PlayerEnter;
-            }
-
-            // Check Player Out Range when Tracing
-            return ETraceState.PlayerTrace;
+            // Check Attack Range
+            return playerRange + myAttackRange >= distance ? ETraceState.PlayerEnter : ETraceState.PlayerTrace;
         }
 
-        LogPrintSystem.SystemLogPrint(myTransform, "RUSH TRACING", ELogType.EnemyAI);
+        // Rush Monster Normal Attack Range Check
+        if (playerRange + myAttackRange >= distance)
+            return ETraceState.PlayerEnter;
+        
         // From here Only Use Rush Monster
         var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
         var isOverRush = blackboard.GetData<ReferenceValueT<bool>>("isOverRush");
         
-        if (!hasRemainAttackTime.Value && !isOverRush.Value)
+        // When Rush Attack Not in Cooldown
+        if (!hasRemainAttackTime.Value)
         {
-            LogPrintSystem.SystemLogPrint(myTransform, "Check in Rush Monster", ELogType.EnemyAI);
-            float rushD2 = blackboard.GetData<ReferenceValueT<float>>("myRushRange").Value;
-            float overRushD2 = blackboard.GetData<ReferenceValueT<float>>("myOverRushRange").Value;
+            float myRushRange = blackboard.GetData<ReferenceValueT<float>>("myRushRange").Value;
+            float myOverRushRange = blackboard.GetData<ReferenceValueT<float>>("myOverRushRange").Value;
 
-            if (d1 + rushD2 >= distance && !isOverRush.Value)
+            // Check Rush Range
+            if (playerRange + myRushRange >= distance)
             {
-                if (d1 + overRushD2 >= distance)
-                {
+                // Check Over Rush Range
+                if (playerRange + myOverRushRange >= distance)
                     isOverRush.Value = true;
-                    return ETraceState.PlayerTrace;
+
+                // Enable Rush Attack
+                if (!isOverRush.Value)
+                {
+                    return ETraceState.PlayerEnterRush;
                 }
-                return ETraceState.PlayerEnterRush;
             }
-            
-            // if Player In rush over range : Don't Special Attack
-            if (d1 + d2 >= distance)
-                return ETraceState.PlayerEnter;
         }
 
-        // Check Normal Attack Range When Player Tracing
-        if (d1 + d2 >= distance)
-        {
-            isOverRush.Value = false;
-            return ETraceState.PlayerEnter;
-        }
-
-        // Check Player Out Range when Tracing
-        return distance >= traceRange ? ETraceState.PlayerExit : ETraceState.PlayerTrace;
+        // Rush Attack in Cooldown
+        // Check Attack Range for Rush Monster
+        return playerRange + myAttackRange >= distance ? ETraceState.PlayerEnter : ETraceState.PlayerTrace;
     }
 
     public abstract INode Execute(Blackboard blackboard);
