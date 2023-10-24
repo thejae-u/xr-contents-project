@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using DG.Tweening;
+using EnemyScripts;
 
 
 [Serializable]
@@ -92,10 +93,23 @@ public class Fsm
     }
 }
 
+public enum ENode
+{
+    Idle,
+    Trace,
+    NormalAttack,
+    Jump,
+    SpecialAttackReady,
+    SpecialAttack,
+    Groggy,
+    Dead,
+    Hit
+}
+
 public interface INode
-    {
-        public INode Execute(Blackboard blackboard);
-    }
+{
+    public INode Execute(Blackboard blackboard);
+}
 
 public class WaitNode : INode
 {
@@ -103,9 +117,47 @@ public class WaitNode : INode
 
     public INode Execute(Blackboard blackboard)
     {
-        //..대기로직
+        blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Idle;
+        
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
+        var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType");
+        var isGround = blackboard.GetData<ReferenceValueT<bool>>("isGround");
+        
+        if (!isGround.Value) return Fsm.GuardNullNode(this, this);
+        
+        if (myType.Value == EEliteType.None)
+        {
+            
+            var waitTime = blackboard.GetData<ReferenceValueT<float>>("waitTime");
+            var isTimerWait = blackboard.GetData<ReferenceValueT<bool>>("isTimerWait");
+            var isTimerEnded = blackboard.GetData<ReferenceValueT<bool>>("isTimerEnded");
+
+            if (!isTimerEnded.Value)
+            {
+                var timer = myTransform.GetComponentInChildren<WeakTimeController>(true);
+
+                if (!isTimerWait.Value)
+                {
+                    myTransform.GetComponent<NEnemyController>().TimerSwitch();
+                    LogPrintSystem.SystemLogPrint(myTransform, "Timer Init Call", ELogType.EnemyAI);
+                    timer.Init(waitTime);
+                    isTimerWait.Value = true;
+                    return Fsm.GuardNullNode(this, this);
+                }
+
+                if (!timer.IsEnded) return Fsm.GuardNullNode(this, this);
+
+                if (!isTimerEnded.Value)
+                {
+                    isTimerEnded.Value = true;
+                }
+
+                // timer.IsAttacked ? do Something : do SomeThing
+
+                timer.Checked();
+            }
+        }
 
         float d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
         float d2 = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
@@ -114,11 +166,9 @@ public class WaitNode : INode
 
         if (d1 + d2 >= distance)
         {
-            LogPrintSystem.SystemLogPrint(myTransform, "Trace Start", ELogType.EnemyAI);
             return Fsm.GuardNullNode(this, enterPlayer);
         }
 
-        LogPrintSystem.SystemLogPrint(myTransform, "Waiting", ELogType.EnemyAI);
         return Fsm.GuardNullNode(this, this);
     }
 }
@@ -136,84 +186,80 @@ public abstract class TraceNode : INode
 {
     public INode enterJump;
     
-    // Jump를 하기 위한 로직을 만들어야 함
-    // x값이  공격 범위에 들어오지만 Attack 노드로 못넘어 갈때를 판단
-    // y값을 체크하고 상향 or 하향 점프
-    
     public ETraceState Trace(Blackboard blackboard)
     {
-        // Whole Monster Use this variable
-        // Bomb Elite Monster's Position is Locked
-        
         Transform myTransform = blackboard.GetData<Transform>("myTransform");
         Transform playerTransform = blackboard.GetData<Transform>("playerTransform");
 
-        float d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
-        float d2 = blackboard.GetData<ReferenceValueT<float>>("myAttackRange").Value;
+        float playerRange = playerTransform.GetComponent<PlayerManager>().MyRadius;
+        float myAttackRange = blackboard.GetData<ReferenceValueT<float>>("myAttackRange").Value;
 
         EEliteType myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType").Value;
 
         // Distance of Player to Monster
         float distance = (myTransform.position - playerTransform.position).magnitude;
         float traceRange = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
-        
+
         // For Jump Node
         float distanceForJump = Mathf.Abs(myTransform.position.x - playerTransform.position.x);
         var isJumping = blackboard.GetData<ReferenceValueT<bool>>("isJumping");
         if (isJumping.Value) return ETraceState.PlayerTrace;
-        if (distanceForJump <= d2 && myType != EEliteType.Bomb)
+
+        // Distance of Player to Monster is Same -> Check Y Position -> need jump return
+        if (distanceForJump <= myAttackRange && myType != EEliteType.Bomb)
         {
             float playerYPos = playerTransform.position.y;
             float myYPos = myTransform.position.y;
 
             float yPosCalc = Mathf.Abs(playerYPos - myYPos);
 
-            return yPosCalc <= 5.0f ? ETraceState.PlayerTrace : ETraceState.NeedJump;
+            if (yPosCalc >= 5.0f)
+                return ETraceState.NeedJump;
         }
+
+        // Player Out of Range
+        if (traceRange + playerRange <= distance)
+            return ETraceState.PlayerExit;
 
         // Trace Logic
         if (myType != EEliteType.Rush)
         {
-            if (d1 + d2 >= distance)
-                return ETraceState.PlayerEnter;
-            // Check Player Out Range when Tracing
-            return distance >= traceRange ? ETraceState.PlayerExit : ETraceState.PlayerTrace;
+            // Check Attack Range
+            return playerRange + myAttackRange >= distance ? ETraceState.PlayerEnter : ETraceState.PlayerTrace;
         }
 
+        // Rush Monster Normal Attack Range Check
+        if (playerRange + myAttackRange >= distance)
+            return ETraceState.PlayerEnter;
+        
         // From here Only Use Rush Monster
         var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
         var isOverRush = blackboard.GetData<ReferenceValueT<bool>>("isOverRush");
         
-        if (!hasRemainAttackTime.Value && !isOverRush.Value)
+        // When Rush Attack Not in Cooldown
+        if (!hasRemainAttackTime.Value)
         {
-            LogPrintSystem.SystemLogPrint(myTransform, "Check in Rush Monster", ELogType.EnemyAI);
-            float rushD2 = blackboard.GetData<ReferenceValueT<float>>("myRushRange").Value;
-            float overRushD2 = blackboard.GetData<ReferenceValueT<float>>("myOverRushRange").Value;
+            float myRushRange = blackboard.GetData<ReferenceValueT<float>>("myRushRange").Value;
+            float myOverRushRange = blackboard.GetData<ReferenceValueT<float>>("myOverRushRange").Value;
 
-            if (d1 + rushD2 >= distance)
+            // Check Rush Range
+            if (playerRange + myRushRange >= distance)
             {
-                if (d1 + overRushD2 >= distance)
-                {
+                // Check Over Rush Range
+                if (playerRange + myOverRushRange >= distance)
                     isOverRush.Value = true;
-                    return ETraceState.PlayerTrace;
+
+                // Enable Rush Attack
+                if (!isOverRush.Value)
+                {
+                    return ETraceState.PlayerEnterRush;
                 }
-                return ETraceState.PlayerEnterRush;
             }
-            
-            // if Player In rush over range : Don't Special Attack
-            if (d1 + rushD2 >= distance)
-                return overRushD2 + d1 >= distance ? ETraceState.PlayerTrace : ETraceState.PlayerEnterRush;
         }
 
-        // Check Normal Attack Range When Player Tracing
-        if (d1 + d2 >= distance)
-        {
-            isOverRush.Value = false;
-            return ETraceState.PlayerEnter;
-        }
-
-        // Check Player Out Range when Tracing
-        return distance >= traceRange ? ETraceState.PlayerExit : ETraceState.PlayerTrace;
+        // Rush Attack in Cooldown
+        // Check Attack Range for Rush Monster
+        return playerRange + myAttackRange >= distance ? ETraceState.PlayerEnter : ETraceState.PlayerTrace;
     }
 
     public abstract INode Execute(Blackboard blackboard);
@@ -227,10 +273,16 @@ public class JumpNode : INode
     {
         // Enemy가 플레이어를 제데로 따라 갈 수 있도록 y값을 판단
         // 상향점프와 하향점프 모두 필요함
-        
+        blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Jump;
+
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
         var isJumping = blackboard.GetData<ReferenceValueT<bool>>("isJumping");
+
+        if (playerTransform.GetComponent<PlayerManager>().GetIsJumping())
+        {
+            return Fsm.GuardNullNode(this, endJump);
+        }
 
         Vector3 jumpPos = new Vector3(myTransform.position.x,
             playerTransform.position.y, 0);

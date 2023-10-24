@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using EnemyScripts;
 
 public class BombController : MonoBehaviour
 {
@@ -12,9 +13,6 @@ public class BombController : MonoBehaviour
     [Header("폭탄의 각도를 조절")] 
     [SerializeField] private float bombDeg;
 
-    [Header("폭탄 대미지")] 
-    [SerializeField] private float bombDamage;
-
     private Vector3[] wayPoints;
     
     // Player Last Position Set
@@ -22,8 +20,11 @@ public class BombController : MonoBehaviour
     private Vector3 myPos;
     private float range;
 
+    private EEnemyController parent;
+
     private void Start()
     {
+        parent = transform.parent.GetComponent<EEnemyController>();
         playerLastPos = GameObject.Find("Player").transform.position;
         myPos = transform.position;
         range = 1f;
@@ -55,7 +56,7 @@ public class BombController : MonoBehaviour
 
             if (d2 + range >= distance)
             {
-                playerManager.PlayerDiscountHp(bombDamage, myPos.x);
+                playerManager.PlayerDiscountHp(parent.GetMySpecialDamage(), myPos.x);
                 LogPrintSystem.SystemLogPrint(transform, "Hit Bomb", ELogType.EnemyAI);
             }
             

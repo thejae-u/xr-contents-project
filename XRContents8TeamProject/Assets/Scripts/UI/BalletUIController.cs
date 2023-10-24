@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class BalletUIController : MonoBehaviour
 {
+    public Transform bulletPos;
     public Image[] bullet;
 
     public int Ammo { get; private set; }
@@ -26,7 +27,16 @@ public class BalletUIController : MonoBehaviour
         }
     }
 
-    public void SetAmmo(bool isDiscount )
+    private void Update()
+    {
+        if (bulletPos != null)
+        {
+            Vector3 mousePosition = Input.mousePosition;
+            bulletPos.transform.position = new Vector3(mousePosition.x - 70, mousePosition.y, 0);
+        }
+    }
+
+    public void SetAmmo(bool isDiscount)
     {
         if(isDiscount)
         {
@@ -34,7 +44,7 @@ public class BalletUIController : MonoBehaviour
         }
         else
         {
-            Ammo++;
+            Ammo = maxAmmo;
         }
 
         Ammo = Mathf.Clamp(Ammo, 0, maxAmmo);

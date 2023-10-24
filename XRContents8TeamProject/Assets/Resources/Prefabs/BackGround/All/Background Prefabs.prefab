@@ -678,41 +678,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5520075357097475433}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6780629811186752726
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2647323781778671583}
-  m_Layer: 0
-  m_Name: Background
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2647323781778671583
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6780629811186752726}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.460001, y: 2.647827, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7646929430174699368}
-  - {fileID: 8479763347860394379}
-  - {fileID: 6770175739142007676}
-  - {fileID: 7484870927582362329}
-  m_Father: {fileID: 6743310316018420422}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7059359183393190262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1007,7 +972,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2647323781778671583}
   - {fileID: 7482661764895475989}
   - {fileID: 6907509850380051559}
   m_Father: {fileID: 0}
@@ -1104,6 +1068,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1162,6 +1138,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7139351940693188946, guid: f495a577272026c4896461ba8e8d4f20, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139351940693188946, guid: f495a577272026c4896461ba8e8d4f20, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139351940693188946, guid: f495a577272026c4896461ba8e8d4f20, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 8081613081870609639, guid: f495a577272026c4896461ba8e8d4f20, type: 3}
       propertyPath: m_Name
       value: Background_Grass05_50x80
@@ -1187,6 +1175,18 @@ PrefabInstance:
     - target: {fileID: 1616720033568162575, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_Name
       value: Background_Tree05_290x416 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 5362786511550453763, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_LocalScale.x
@@ -1302,6 +1302,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Grass01_30x60 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8003436443947318521, guid: 74fe17e4aad29cb4cbe4f088a6c57101, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003436443947318521, guid: 74fe17e4aad29cb4cbe4f088a6c57101, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003436443947318521, guid: 74fe17e4aad29cb4cbe4f088a6c57101, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1320,6 +1332,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7190626510627743978}
     m_Modifications:
+    - target: {fileID: 3861486871068380286, guid: d88760b8529f40b4dbd496a7753303eb, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3861486871068380286, guid: d88760b8529f40b4dbd496a7753303eb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3861486871068380286, guid: d88760b8529f40b4dbd496a7753303eb, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4473906764214121876, guid: d88760b8529f40b4dbd496a7753303eb, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4285713
@@ -1446,6 +1470,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7694453765908806725, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
       propertyPath: m_Name
       value: Background_Tree02_300x390 (5)
@@ -1513,8 +1549,16 @@ PrefabInstance:
       value: Background_Rock02_100x46 (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8952799415660189717, guid: 9324ffcc66711b1449c5ba0db0e68969, type: 3}
-      propertyPath: m_SortingOrder
+      propertyPath: m_SortingLayer
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8952799415660189717, guid: 9324ffcc66711b1449c5ba0db0e68969, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8952799415660189717, guid: 9324ffcc66711b1449c5ba0db0e68969, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1534,6 +1578,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4183360225348724342}
     m_Modifications:
+    - target: {fileID: 415724466181757200, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 415724466181757200, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 415724466181757200, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 3417460868710815524, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -51.28
@@ -1640,6 +1696,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7064014146715160914, guid: 06e8eda446e90614c9f866cdfa064d6e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7064014146715160914, guid: 06e8eda446e90614c9f866cdfa064d6e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7064014146715160914, guid: 06e8eda446e90614c9f866cdfa064d6e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1661,6 +1729,18 @@ PrefabInstance:
     - target: {fileID: 1616720033568162575, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_Name
       value: Background_Tree05_290x416 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 5362786511550453763, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_LocalScale.x
@@ -1776,6 +1856,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8797844637029607837, guid: 9d3706ecaf6edc54e85c2e622a00cbed, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797844637029607837, guid: 9d3706ecaf6edc54e85c2e622a00cbed, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797844637029607837, guid: 9d3706ecaf6edc54e85c2e622a00cbed, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1799,8 +1891,16 @@ PrefabInstance:
       value: Background_Bush01_298x136 (1)
       objectReference: {fileID: 0}
     - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 2730065320988061163, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1912,6 +2012,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7694453765908806725, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
       propertyPath: m_Name
       value: Background_Tree02_300x390 (3)
@@ -1977,6 +2089,18 @@ PrefabInstance:
     - target: {fileID: 3563935295828950182, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2052,6 +2176,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Tree06_614x826
       objectReference: {fileID: 0}
+    - target: {fileID: 7696652891600204964, guid: bc2910371c821824c923746fc66cc1b2, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696652891600204964, guid: bc2910371c821824c923746fc66cc1b2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696652891600204964, guid: bc2910371c821824c923746fc66cc1b2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2126,6 +2262,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Tree07_734x884
       objectReference: {fileID: 0}
+    - target: {fileID: 9107280742941392131, guid: 21044e517a9f93647860eb5ac70e0aac, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107280742941392131, guid: 21044e517a9f93647860eb5ac70e0aac, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107280742941392131, guid: 21044e517a9f93647860eb5ac70e0aac, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2144,6 +2292,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5886912020439030922}
     m_Modifications:
+    - target: {fileID: 268095512838054406, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 268095512838054406, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 268095512838054406, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7439979498325852708, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.399998
@@ -2258,6 +2418,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7694453765908806725, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
       propertyPath: m_Name
       value: Background_Tree02_300x390 (1)
@@ -2324,6 +2496,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8797844637029607837, guid: 9d3706ecaf6edc54e85c2e622a00cbed, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797844637029607837, guid: 9d3706ecaf6edc54e85c2e622a00cbed, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797844637029607837, guid: 9d3706ecaf6edc54e85c2e622a00cbed, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2386,6 +2570,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8514636039383871050, guid: dcd99625ff2389046b2f40fc369093e3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514636039383871050, guid: dcd99625ff2389046b2f40fc369093e3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514636039383871050, guid: dcd99625ff2389046b2f40fc369093e3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2404,6 +2600,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7184079923666527149}
     m_Modifications:
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4125436486272465802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
       propertyPath: m_Name
       value: Background_Tree03_466x570 (2)
@@ -2522,6 +2730,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2540,6 +2760,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7190626510627743978}
     m_Modifications:
+    - target: {fileID: 1449715447041588592, guid: 7020e253c10d2b04b8a11964fb6cdb84, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1449715447041588592, guid: 7020e253c10d2b04b8a11964fb6cdb84, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1449715447041588592, guid: 7020e253c10d2b04b8a11964fb6cdb84, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 2931716716555118036, guid: 7020e253c10d2b04b8a11964fb6cdb84, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4285713
@@ -2658,6 +2890,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Grass08_64x122
       objectReference: {fileID: 0}
+    - target: {fileID: 8047917789174577263, guid: 14520e4151bdb714f8a7b3918ed93073, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047917789174577263, guid: 14520e4151bdb714f8a7b3918ed93073, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047917789174577263, guid: 14520e4151bdb714f8a7b3918ed93073, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2679,6 +2923,18 @@ PrefabInstance:
     - target: {fileID: 1616720033568162575, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_Name
       value: Background_Tree05_290x416 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 5362786511550453763, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_LocalScale.x
@@ -2750,6 +3006,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8083102178978514582}
     m_Modifications:
+    - target: {fileID: 415724466181757200, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 415724466181757200, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 415724466181757200, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 3417460868710815524, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -29.184082
@@ -2812,6 +3080,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8083102178978514582}
     m_Modifications:
+    - target: {fileID: 415724466181757200, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 415724466181757200, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 415724466181757200, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 3417460868710815524, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 55.98999
@@ -2918,6 +3198,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2297890540660410558, guid: c8ec71eb3fddfc844b325151ba02e276, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2297890540660410558, guid: c8ec71eb3fddfc844b325151ba02e276, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2297890540660410558, guid: c8ec71eb3fddfc844b325151ba02e276, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2939,6 +3231,18 @@ PrefabInstance:
     - target: {fileID: 904214470980728690, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
       propertyPath: m_Name
       value: Background_Grass09_104x208 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174436818786700547, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174436818786700547, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174436818786700547, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 6821160515710943991, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3042,6 +3346,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Rock01_184x60 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3065,8 +3381,16 @@ PrefabInstance:
       value: Background_Bush01_298x136 (2)
       objectReference: {fileID: 0}
     - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 2730065320988061163, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3126,6 +3450,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4183360225348724342}
     m_Modifications:
+    - target: {fileID: 586351213602178226, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 586351213602178226, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 586351213602178226, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4876190727620009329, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
       propertyPath: m_Name
       value: Background_Stump01_350x66 (1)
@@ -3232,6 +3568,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3306,6 +3654,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Tree07_734x884 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9107280742941392131, guid: 21044e517a9f93647860eb5ac70e0aac, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107280742941392131, guid: 21044e517a9f93647860eb5ac70e0aac, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107280742941392131, guid: 21044e517a9f93647860eb5ac70e0aac, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3369,8 +3729,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7591799297838612822, guid: ab637800700ad7641a4f5266eae0f22e, type: 3}
-      propertyPath: m_SortingOrder
+      propertyPath: m_SortingLayer
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591799297838612822, guid: ab637800700ad7641a4f5266eae0f22e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591799297838612822, guid: ab637800700ad7641a4f5266eae0f22e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3390,6 +3758,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5520075357097475433}
     m_Modifications:
+    - target: {fileID: 3211133974854863782, guid: 5b890b660a959a04cbd707961fa66d71, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211133974854863782, guid: 5b890b660a959a04cbd707961fa66d71, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211133974854863782, guid: 5b890b660a959a04cbd707961fa66d71, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4276574333575739197, guid: 5b890b660a959a04cbd707961fa66d71, type: 3}
       propertyPath: m_Name
       value: Background_Grass06_64x64
@@ -3452,6 +3832,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7184079923666527149}
     m_Modifications:
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4125436486272465802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
       propertyPath: m_Name
       value: Background_Tree03_466x570
@@ -3578,6 +3970,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7694453765908806725, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
       propertyPath: m_Name
       value: Background_Tree02_300x390 (6)
@@ -3652,6 +4056,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3268189592339523076, guid: 6848ff698c61123428434863eef23900, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268189592339523076, guid: 6848ff698c61123428434863eef23900, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268189592339523076, guid: 6848ff698c61123428434863eef23900, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 5248648246233996748, guid: 6848ff698c61123428434863eef23900, type: 3}
       propertyPath: m_Name
       value: Background_Tree09_1018x1214
@@ -3714,6 +4130,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7164907592997332757, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
       propertyPath: m_Name
       value: Background_Mushroom01_74x56 (3)
@@ -3739,6 +4167,18 @@ PrefabInstance:
     - target: {fileID: 1616720033568162575, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_Name
       value: Background_Tree05_290x416 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 5362786511550453763, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_LocalScale.x
@@ -3810,6 +4250,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 943457466291864923}
     m_Modifications:
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4293221456893652579, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.929998
@@ -3872,6 +4324,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7184079923666527149}
     m_Modifications:
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4125436486272465802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
       propertyPath: m_Name
       value: Background_Tree03_466x570 (3)
@@ -3986,6 +4450,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7139351940693188946, guid: f495a577272026c4896461ba8e8d4f20, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139351940693188946, guid: f495a577272026c4896461ba8e8d4f20, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139351940693188946, guid: f495a577272026c4896461ba8e8d4f20, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 8081613081870609639, guid: f495a577272026c4896461ba8e8d4f20, type: 3}
       propertyPath: m_Name
       value: Background_Grass05_50x80
@@ -4008,6 +4484,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8083102178978514582}
     m_Modifications:
+    - target: {fileID: 1558972100511612582, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558972100511612582, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558972100511612582, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 3779043782528895844, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
       propertyPath: m_Name
       value: Background_Stump04_140x66
@@ -4074,6 +4562,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Bush01_298x136
       objectReference: {fileID: 0}
+    - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 2730065320988061163, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -42.03
@@ -4136,6 +4636,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Grass03_56x56
       objectReference: {fileID: 0}
+    - target: {fileID: 6558626907547773954, guid: a73410a884db11041b2964c127198fdb, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558626907547773954, guid: a73410a884db11041b2964c127198fdb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558626907547773954, guid: a73410a884db11041b2964c127198fdb, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 8422779855010354253, guid: a73410a884db11041b2964c127198fdb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 56.29
@@ -4194,6 +4706,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8083102178978514582}
     m_Modifications:
+    - target: {fileID: 586351213602178226, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 586351213602178226, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 586351213602178226, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4876190727620009329, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
       propertyPath: m_Name
       value: Background_Stump01_350x66 (2)
@@ -4308,6 +4832,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7694453765908806725, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
       propertyPath: m_Name
       value: Background_Tree02_300x390
@@ -4330,6 +4866,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7184079923666527149}
     m_Modifications:
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 1833057741771574530, guid: 4d86f0622382f694eba50de905755128, type: 3}
       propertyPath: m_Name
       value: Background_Tree08_604x880 (3)
@@ -4407,6 +4955,18 @@ PrefabInstance:
     - target: {fileID: 1616720033568162575, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_Name
       value: Background_Tree05_290x416
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 5362786511550453763, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_LocalScale.x
@@ -4522,6 +5082,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Grass10_94x134 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6949174628099789523, guid: 4dfd3023edc12d645899657e36274d76, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6949174628099789523, guid: 4dfd3023edc12d645899657e36274d76, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6949174628099789523, guid: 4dfd3023edc12d645899657e36274d76, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4584,6 +5156,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Grass10_94x134 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6949174628099789523, guid: 4dfd3023edc12d645899657e36274d76, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6949174628099789523, guid: 4dfd3023edc12d645899657e36274d76, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6949174628099789523, guid: 4dfd3023edc12d645899657e36274d76, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4645,6 +5229,18 @@ PrefabInstance:
     - target: {fileID: 1856589667590952857, guid: bcee80e06cafbaa499a312c5062bba99, type: 3}
       propertyPath: m_Name
       value: Background_Mushroom03_56x80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183047277033937410, guid: bcee80e06cafbaa499a312c5062bba99, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183047277033937410, guid: bcee80e06cafbaa499a312c5062bba99, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183047277033937410, guid: bcee80e06cafbaa499a312c5062bba99, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4716,6 +5312,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7694453765908806725, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
       propertyPath: m_Name
       value: Background_Tree02_300x390 (4)
@@ -4738,6 +5346,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 943457466291864923}
     m_Modifications:
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4293221456893652579, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 52.61
@@ -4852,6 +5472,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7694453765908806725, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
       propertyPath: m_Name
       value: Background_Tree02_300x390 (5)
@@ -4926,6 +5558,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7694453765908806725, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
       propertyPath: m_Name
       value: Background_Tree02_300x390
@@ -4948,6 +5592,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3188915888656345072}
     m_Modifications:
+    - target: {fileID: 268095512838054406, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 268095512838054406, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 268095512838054406, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7439979498325852708, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.399994
@@ -5055,8 +5711,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5120,6 +5784,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Grass04_60x72
       objectReference: {fileID: 0}
+    - target: {fileID: 8449224713094962858, guid: 14bf757377e533841b53fb4f07e1d6e9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449224713094962858, guid: 14bf757377e533841b53fb4f07e1d6e9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449224713094962858, guid: 14bf757377e533841b53fb4f07e1d6e9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5181,6 +5857,18 @@ PrefabInstance:
     - target: {fileID: 4840691566503505147, guid: 37c3d09499111d74c8b370886deb4b38, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941717517867216286, guid: 37c3d09499111d74c8b370886deb4b38, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941717517867216286, guid: 37c3d09499111d74c8b370886deb4b38, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941717517867216286, guid: 37c3d09499111d74c8b370886deb4b38, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5251,6 +5939,18 @@ PrefabInstance:
     - target: {fileID: 205767984705010253, guid: 6848ff698c61123428434863eef23900, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268189592339523076, guid: 6848ff698c61123428434863eef23900, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268189592339523076, guid: 6848ff698c61123428434863eef23900, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268189592339523076, guid: 6848ff698c61123428434863eef23900, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 5248648246233996748, guid: 6848ff698c61123428434863eef23900, type: 3}
       propertyPath: m_Name
@@ -5330,6 +6030,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Leaf03_434x292
       objectReference: {fileID: 0}
+    - target: {fileID: 5811666251271735556, guid: b90512e61010c4d4598c0a4b0732e063, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811666251271735556, guid: b90512e61010c4d4598c0a4b0732e063, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811666251271735556, guid: b90512e61010c4d4598c0a4b0732e063, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5392,6 +6104,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5410,6 +6134,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 943457466291864923}
     m_Modifications:
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4293221456893652579, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 20.060001
@@ -5477,8 +6213,16 @@ PrefabInstance:
       value: Background_Bush01_298x136 (1)
       objectReference: {fileID: 0}
     - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 2730065320988061163, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5578,6 +6322,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7164907592997332757, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
       propertyPath: m_Name
       value: Background_Mushroom01_74x56 (2)
@@ -5639,6 +6395,18 @@ PrefabInstance:
     - target: {fileID: 510156661228746472, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 7164907592997332757, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
       propertyPath: m_Name
@@ -5706,6 +6474,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Grass01_30x60
       objectReference: {fileID: 0}
+    - target: {fileID: 8003436443947318521, guid: 74fe17e4aad29cb4cbe4f088a6c57101, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003436443947318521, guid: 74fe17e4aad29cb4cbe4f088a6c57101, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003436443947318521, guid: 74fe17e4aad29cb4cbe4f088a6c57101, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5724,6 +6504,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7184079923666527149}
     m_Modifications:
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 1833057741771574530, guid: 4d86f0622382f694eba50de905755128, type: 3}
       propertyPath: m_Name
       value: Background_Tree08_604x880 (1)
@@ -5842,6 +6634,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8797844637029607837, guid: 9d3706ecaf6edc54e85c2e622a00cbed, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797844637029607837, guid: 9d3706ecaf6edc54e85c2e622a00cbed, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797844637029607837, guid: 9d3706ecaf6edc54e85c2e622a00cbed, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5916,6 +6720,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Tree07_734x884
       objectReference: {fileID: 0}
+    - target: {fileID: 9107280742941392131, guid: 21044e517a9f93647860eb5ac70e0aac, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107280742941392131, guid: 21044e517a9f93647860eb5ac70e0aac, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107280742941392131, guid: 21044e517a9f93647860eb5ac70e0aac, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5934,6 +6750,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7184079923666527149}
     m_Modifications:
+    - target: {fileID: 3861486871068380286, guid: d88760b8529f40b4dbd496a7753303eb, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3861486871068380286, guid: d88760b8529f40b4dbd496a7753303eb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3861486871068380286, guid: d88760b8529f40b4dbd496a7753303eb, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4473906764214121876, guid: d88760b8529f40b4dbd496a7753303eb, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4285713
@@ -6052,6 +6880,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Grass10_94x134
       objectReference: {fileID: 0}
+    - target: {fileID: 6949174628099789523, guid: 4dfd3023edc12d645899657e36274d76, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6949174628099789523, guid: 4dfd3023edc12d645899657e36274d76, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6949174628099789523, guid: 4dfd3023edc12d645899657e36274d76, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6127,8 +6967,16 @@ PrefabInstance:
       value: Background_Leaf04_240x168
       objectReference: {fileID: 0}
     - target: {fileID: 4181692410449329672, guid: 8ec47f25a1a558d4aa6850a7231f6016, type: 3}
-      propertyPath: m_SortingOrder
+      propertyPath: m_SortingLayer
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181692410449329672, guid: 8ec47f25a1a558d4aa6850a7231f6016, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181692410449329672, guid: 8ec47f25a1a558d4aa6850a7231f6016, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6200,6 +7048,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8585694708918295743, guid: 6511da9a3ff2e49478a1219118bb5ff2, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585694708918295743, guid: 6511da9a3ff2e49478a1219118bb5ff2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585694708918295743, guid: 6511da9a3ff2e49478a1219118bb5ff2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 8701064026436695439, guid: 6511da9a3ff2e49478a1219118bb5ff2, type: 3}
       propertyPath: m_Name
       value: Background_Leaf01_466x458
@@ -6262,6 +7122,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2179887861882681263, guid: ee035fb1dac090243b2da48da78bbc25, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179887861882681263, guid: ee035fb1dac090243b2da48da78bbc25, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179887861882681263, guid: ee035fb1dac090243b2da48da78bbc25, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 3239881389804868726, guid: ee035fb1dac090243b2da48da78bbc25, type: 3}
       propertyPath: m_Name
       value: Background_Grass07_80x150
@@ -6287,6 +7159,18 @@ PrefabInstance:
     - target: {fileID: 1616720033568162575, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_Name
       value: Background_Tree05_290x416
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 5362786511550453763, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_LocalScale.x
@@ -6402,6 +7286,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Grass01_30x60 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8003436443947318521, guid: 74fe17e4aad29cb4cbe4f088a6c57101, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003436443947318521, guid: 74fe17e4aad29cb4cbe4f088a6c57101, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003436443947318521, guid: 74fe17e4aad29cb4cbe4f088a6c57101, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6464,6 +7360,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6482,6 +7390,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4183360225348724342}
     m_Modifications:
+    - target: {fileID: 415724466181757200, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 415724466181757200, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 415724466181757200, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 3417460868710815524, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -29.91
@@ -6544,6 +7464,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7190626510627743978}
     m_Modifications:
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4125436486272465802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
       propertyPath: m_Name
       value: Background_Tree03_466x570 (1)
@@ -6658,6 +7590,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7164907592997332757, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
       propertyPath: m_Name
       value: Background_Mushroom01_74x56 (2)
@@ -6736,6 +7680,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4345418135729788027, guid: 5d870856e8a5b2c4c91a8106194ecacd, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345418135729788027, guid: 5d870856e8a5b2c4c91a8106194ecacd, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345418135729788027, guid: 5d870856e8a5b2c4c91a8106194ecacd, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6806,6 +7762,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7694453765908806725, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
       propertyPath: m_Name
       value: Background_Tree02_300x390 (2)
@@ -6828,6 +7796,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8083102178978514582}
     m_Modifications:
+    - target: {fileID: 586351213602178226, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 586351213602178226, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 586351213602178226, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4876190727620009329, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
       propertyPath: m_Name
       value: Background_Stump01_350x66
@@ -6942,6 +7922,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4008662075577637080, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4008662075577637080, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4008662075577637080, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 6988945532243047842, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
       propertyPath: m_Name
       value: Background_Mushroom04_134x142 (1)
@@ -7008,6 +8000,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7026,6 +8030,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7997057947951292356}
     m_Modifications:
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4293221456893652579, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 52.610016
@@ -7088,6 +8104,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7184079923666527149}
     m_Modifications:
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4125436486272465802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
       propertyPath: m_Name
       value: Background_Tree03_466x570 (1)
@@ -7165,6 +8193,18 @@ PrefabInstance:
     - target: {fileID: 1496913018414624480, guid: a73410a884db11041b2964c127198fdb, type: 3}
       propertyPath: m_Name
       value: Background_Grass03_56x56 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558626907547773954, guid: a73410a884db11041b2964c127198fdb, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558626907547773954, guid: a73410a884db11041b2964c127198fdb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558626907547773954, guid: a73410a884db11041b2964c127198fdb, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 8422779855010354253, guid: a73410a884db11041b2964c127198fdb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7268,6 +8308,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8797844637029607837, guid: 9d3706ecaf6edc54e85c2e622a00cbed, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797844637029607837, guid: 9d3706ecaf6edc54e85c2e622a00cbed, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797844637029607837, guid: 9d3706ecaf6edc54e85c2e622a00cbed, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7330,6 +8382,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5941717517867216286, guid: 37c3d09499111d74c8b370886deb4b38, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941717517867216286, guid: 37c3d09499111d74c8b370886deb4b38, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941717517867216286, guid: 37c3d09499111d74c8b370886deb4b38, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7348,6 +8412,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5520075357097475433}
     m_Modifications:
+    - target: {fileID: 2578359931380313014, guid: 35c8d25e0fbcff446b15566bd3753239, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2578359931380313014, guid: 35c8d25e0fbcff446b15566bd3753239, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2578359931380313014, guid: 35c8d25e0fbcff446b15566bd3753239, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4970204283301735270, guid: 35c8d25e0fbcff446b15566bd3753239, type: 3}
       propertyPath: m_Name
       value: Background_Grass02_56x30
@@ -7450,6 +8526,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7164907592997332757, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
       propertyPath: m_Name
       value: Background_Mushroom01_74x56 (1)
@@ -7472,6 +8560,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8083102178978514582}
     m_Modifications:
+    - target: {fileID: 1558972100511612582, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558972100511612582, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558972100511612582, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 3779043782528895844, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
       propertyPath: m_Name
       value: Background_Stump04_140x66 (1)
@@ -7534,6 +8634,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7184079923666527149}
     m_Modifications:
+    - target: {fileID: 1449715447041588592, guid: 7020e253c10d2b04b8a11964fb6cdb84, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1449715447041588592, guid: 7020e253c10d2b04b8a11964fb6cdb84, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1449715447041588592, guid: 7020e253c10d2b04b8a11964fb6cdb84, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 2931716716555118036, guid: 7020e253c10d2b04b8a11964fb6cdb84, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4285713
@@ -7612,6 +8724,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Tree05_290x416 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 5362786511550453763, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4285713
@@ -7682,6 +8806,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7190626510627743978}
     m_Modifications:
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 1833057741771574530, guid: 4d86f0622382f694eba50de905755128, type: 3}
       propertyPath: m_Name
       value: Background_Tree08_604x880 (3)
@@ -7812,6 +8948,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Tree07_734x884 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9107280742941392131, guid: 21044e517a9f93647860eb5ac70e0aac, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107280742941392131, guid: 21044e517a9f93647860eb5ac70e0aac, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107280742941392131, guid: 21044e517a9f93647860eb5ac70e0aac, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7874,6 +9022,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Rock01_184x60
       objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7935,6 +9095,18 @@ PrefabInstance:
     - target: {fileID: 5358740031168008088, guid: ab637800700ad7641a4f5266eae0f22e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591799297838612822, guid: ab637800700ad7641a4f5266eae0f22e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591799297838612822, guid: ab637800700ad7641a4f5266eae0f22e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591799297838612822, guid: ab637800700ad7641a4f5266eae0f22e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8006,6 +9178,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7694453765908806725, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
       propertyPath: m_Name
       value: Background_Tree02_300x390 (3)
@@ -8072,6 +9256,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Grass04_60x72
       objectReference: {fileID: 0}
+    - target: {fileID: 8449224713094962858, guid: 14bf757377e533841b53fb4f07e1d6e9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449224713094962858, guid: 14bf757377e533841b53fb4f07e1d6e9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449224713094962858, guid: 14bf757377e533841b53fb4f07e1d6e9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8090,6 +9286,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4183360225348724342}
     m_Modifications:
+    - target: {fileID: 586351213602178226, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 586351213602178226, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 586351213602178226, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4876190727620009329, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
       propertyPath: m_Name
       value: Background_Stump01_350x66
@@ -8152,6 +9360,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7190626510627743978}
     m_Modifications:
+    - target: {fileID: 1449715447041588592, guid: 7020e253c10d2b04b8a11964fb6cdb84, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1449715447041588592, guid: 7020e253c10d2b04b8a11964fb6cdb84, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1449715447041588592, guid: 7020e253c10d2b04b8a11964fb6cdb84, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 2931716716555118036, guid: 7020e253c10d2b04b8a11964fb6cdb84, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4285713
@@ -8270,6 +9490,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8331,6 +9563,18 @@ PrefabInstance:
     - target: {fileID: 4071974261703924023, guid: 56d274b1b6696e84eba8b3d76fdc79f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344756383552064178, guid: 56d274b1b6696e84eba8b3d76fdc79f0, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344756383552064178, guid: 56d274b1b6696e84eba8b3d76fdc79f0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344756383552064178, guid: 56d274b1b6696e84eba8b3d76fdc79f0, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8407,8 +9651,16 @@ PrefabInstance:
       value: Background_Tree06_614x826 (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7696652891600204964, guid: bc2910371c821824c923746fc66cc1b2, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696652891600204964, guid: bc2910371c821824c923746fc66cc1b2, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696652891600204964, guid: bc2910371c821824c923746fc66cc1b2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8428,6 +9680,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7184079923666527149}
     m_Modifications:
+    - target: {fileID: 3861486871068380286, guid: d88760b8529f40b4dbd496a7753303eb, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3861486871068380286, guid: d88760b8529f40b4dbd496a7753303eb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3861486871068380286, guid: d88760b8529f40b4dbd496a7753303eb, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4473906764214121876, guid: d88760b8529f40b4dbd496a7753303eb, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4285713
@@ -8494,68 +9758,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4473906764214121876, guid: d88760b8529f40b4dbd496a7753303eb, type: 3}
   m_PrefabInstance: {fileID: 4854162198569459289}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &4878399945259649110
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2647323781778671583}
-    m_Modifications:
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 230.39998
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4606978787746636454, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_Name
-      value: background roop image (3)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
---- !u!4 &7484870927582362329 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-  m_PrefabInstance: {fileID: 4878399945259649110}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4893034435610377304
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8604,6 +9806,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7164907592997332757, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
       propertyPath: m_Name
       value: Background_Mushroom01_74x56 (3)
@@ -8626,6 +9840,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7184079923666527149}
     m_Modifications:
+    - target: {fileID: 1449715447041588592, guid: 7020e253c10d2b04b8a11964fb6cdb84, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1449715447041588592, guid: 7020e253c10d2b04b8a11964fb6cdb84, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1449715447041588592, guid: 7020e253c10d2b04b8a11964fb6cdb84, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 2931716716555118036, guid: 7020e253c10d2b04b8a11964fb6cdb84, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4285713
@@ -8744,6 +9970,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8762,6 +10000,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3188915888656345072}
     m_Modifications:
+    - target: {fileID: 4706544999310636838, guid: feba28ec0c6eb264e8bd41ac7fde3062, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706544999310636838, guid: feba28ec0c6eb264e8bd41ac7fde3062, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706544999310636838, guid: feba28ec0c6eb264e8bd41ac7fde3062, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 6540747003092858945, guid: feba28ec0c6eb264e8bd41ac7fde3062, type: 3}
       propertyPath: m_Name
       value: Background_Butterfly02_50x130
@@ -8824,6 +10074,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7190626510627743978}
     m_Modifications:
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 1833057741771574530, guid: 4d86f0622382f694eba50de905755128, type: 3}
       propertyPath: m_Name
       value: Background_Tree08_604x880 (2)
@@ -8942,6 +10204,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8514636039383871050, guid: dcd99625ff2389046b2f40fc369093e3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514636039383871050, guid: dcd99625ff2389046b2f40fc369093e3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514636039383871050, guid: dcd99625ff2389046b2f40fc369093e3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9004,6 +10278,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5344756383552064178, guid: 56d274b1b6696e84eba8b3d76fdc79f0, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344756383552064178, guid: 56d274b1b6696e84eba8b3d76fdc79f0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344756383552064178, guid: 56d274b1b6696e84eba8b3d76fdc79f0, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9022,6 +10308,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7184079923666527149}
     m_Modifications:
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 1833057741771574530, guid: 4d86f0622382f694eba50de905755128, type: 3}
       propertyPath: m_Name
       value: Background_Tree08_604x880 (2)
@@ -9140,6 +10438,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7591799297838612822, guid: ab637800700ad7641a4f5266eae0f22e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591799297838612822, guid: ab637800700ad7641a4f5266eae0f22e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591799297838612822, guid: ab637800700ad7641a4f5266eae0f22e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9214,6 +10524,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Tree04_410x646
       objectReference: {fileID: 0}
+    - target: {fileID: 5318850110314848014, guid: b505de837ff1c4e4d87c9ed30029651c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318850110314848014, guid: b505de837ff1c4e4d87c9ed30029651c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318850110314848014, guid: b505de837ff1c4e4d87c9ed30029651c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9275,6 +10597,18 @@ PrefabInstance:
     - target: {fileID: 4692533408500954477, guid: 9324ffcc66711b1449c5ba0db0e68969, type: 3}
       propertyPath: m_Name
       value: Background_Rock02_100x46
+      objectReference: {fileID: 0}
+    - target: {fileID: 8952799415660189717, guid: 9324ffcc66711b1449c5ba0db0e68969, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8952799415660189717, guid: 9324ffcc66711b1449c5ba0db0e68969, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8952799415660189717, guid: 9324ffcc66711b1449c5ba0db0e68969, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9346,6 +10680,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3268189592339523076, guid: 6848ff698c61123428434863eef23900, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268189592339523076, guid: 6848ff698c61123428434863eef23900, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268189592339523076, guid: 6848ff698c61123428434863eef23900, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 5248648246233996748, guid: 6848ff698c61123428434863eef23900, type: 3}
       propertyPath: m_Name
       value: Background_Tree09_1018x1214
@@ -9411,6 +10757,18 @@ PrefabInstance:
     - target: {fileID: 4563043532530403761, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
       propertyPath: m_Name
       value: Background_Rock01_184x60 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9486,6 +10844,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Tree12_308x1005
       objectReference: {fileID: 0}
+    - target: {fileID: 7407124200532470985, guid: 3b09b552b96f14441b984b07493c2693, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407124200532470985, guid: 3b09b552b96f14441b984b07493c2693, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407124200532470985, guid: 3b09b552b96f14441b984b07493c2693, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9504,6 +10874,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5886912020439030922}
     m_Modifications:
+    - target: {fileID: 268095512838054406, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 268095512838054406, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 268095512838054406, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7439979498325852708, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 52.14
@@ -9569,6 +10951,18 @@ PrefabInstance:
     - target: {fileID: 904214470980728690, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
       propertyPath: m_Name
       value: Background_Grass09_104x208
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174436818786700547, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174436818786700547, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174436818786700547, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 6821160515710943991, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9672,6 +11066,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Rock01_184x60 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9735,8 +11141,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5344756383552064178, guid: 56d274b1b6696e84eba8b3d76fdc79f0, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344756383552064178, guid: 56d274b1b6696e84eba8b3d76fdc79f0, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344756383552064178, guid: 56d274b1b6696e84eba8b3d76fdc79f0, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9800,6 +11214,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8514636039383871050, guid: dcd99625ff2389046b2f40fc369093e3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514636039383871050, guid: dcd99625ff2389046b2f40fc369093e3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514636039383871050, guid: dcd99625ff2389046b2f40fc369093e3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9809,68 +11235,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7794439139103617721, guid: dcd99625ff2389046b2f40fc369093e3, type: 3}
   m_PrefabInstance: {fileID: 5565538981604408507}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &5652947005304372711
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2647323781778671583}
-    m_Modifications:
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4606978787746636454, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_Name
-      value: background roop image
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
---- !u!4 &7646929430174699368 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-  m_PrefabInstance: {fileID: 5652947005304372711}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5680880054627387238
 PrefabInstance:
@@ -9920,6 +11284,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4008662075577637080, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4008662075577637080, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4008662075577637080, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 6988945532243047842, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
       propertyPath: m_Name
       value: Background_Mushroom04_134x142
@@ -9942,6 +11318,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7190626510627743978}
     m_Modifications:
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4125436486272465802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
       propertyPath: m_Name
       value: Background_Tree03_466x570
@@ -10060,6 +11448,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Grass01_30x60 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8003436443947318521, guid: 74fe17e4aad29cb4cbe4f088a6c57101, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003436443947318521, guid: 74fe17e4aad29cb4cbe4f088a6c57101, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003436443947318521, guid: 74fe17e4aad29cb4cbe4f088a6c57101, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10069,68 +11469,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1997833666862219845, guid: 74fe17e4aad29cb4cbe4f088a6c57101, type: 3}
   m_PrefabInstance: {fileID: 5875589560037622979}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &5891340818170897156
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2647323781778671583}
-    m_Modifications:
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 76.799995
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4606978787746636454, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_Name
-      value: background roop image (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
---- !u!4 &8479763347860394379 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-  m_PrefabInstance: {fileID: 5891340818170897156}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5931037392650057662
 PrefabInstance:
@@ -10192,6 +11530,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4008662075577637080, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4008662075577637080, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4008662075577637080, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 6988945532243047842, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
       propertyPath: m_Name
       value: Background_Mushroom04_134x142 (2)
@@ -10219,8 +11569,16 @@ PrefabInstance:
       value: Background_Bush01_298x136 (2)
       objectReference: {fileID: 0}
     - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 2730065320988061163, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10332,6 +11690,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3268189592339523076, guid: 6848ff698c61123428434863eef23900, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268189592339523076, guid: 6848ff698c61123428434863eef23900, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268189592339523076, guid: 6848ff698c61123428434863eef23900, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 5248648246233996748, guid: 6848ff698c61123428434863eef23900, type: 3}
       propertyPath: m_Name
       value: Background_Tree09_1018x1214 (1)
@@ -10354,6 +11724,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3188915888656345072}
     m_Modifications:
+    - target: {fileID: 268095512838054406, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 268095512838054406, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 268095512838054406, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7439979498325852708, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 67.82001
@@ -10472,6 +11854,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4345418135729788027, guid: 5d870856e8a5b2c4c91a8106194ecacd, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345418135729788027, guid: 5d870856e8a5b2c4c91a8106194ecacd, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345418135729788027, guid: 5d870856e8a5b2c4c91a8106194ecacd, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10533,6 +11927,18 @@ PrefabInstance:
     - target: {fileID: 1856589667590952857, guid: bcee80e06cafbaa499a312c5062bba99, type: 3}
       propertyPath: m_Name
       value: Background_Mushroom03_56x80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183047277033937410, guid: bcee80e06cafbaa499a312c5062bba99, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183047277033937410, guid: bcee80e06cafbaa499a312c5062bba99, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183047277033937410, guid: bcee80e06cafbaa499a312c5062bba99, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10596,6 +12002,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7064014146715160914, guid: 06e8eda446e90614c9f866cdfa064d6e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7064014146715160914, guid: 06e8eda446e90614c9f866cdfa064d6e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7064014146715160914, guid: 06e8eda446e90614c9f866cdfa064d6e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10614,6 +12032,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8083102178978514582}
     m_Modifications:
+    - target: {fileID: 586351213602178226, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 586351213602178226, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 586351213602178226, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4876190727620009329, guid: b457cf75c1ee9ed48b53295ad55fd7d8, type: 3}
       propertyPath: m_Name
       value: Background_Stump01_350x66 (1)
@@ -10676,6 +12106,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5886912020439030922}
     m_Modifications:
+    - target: {fileID: 2264567605232538388, guid: 768bad4847690c74f9126de5d2444062, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2264567605232538388, guid: 768bad4847690c74f9126de5d2444062, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2264567605232538388, guid: 768bad4847690c74f9126de5d2444062, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 5462536625648087437, guid: 768bad4847690c74f9126de5d2444062, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24.669998
@@ -10742,6 +12184,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Bush01_298x136
       objectReference: {fileID: 0}
+    - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 911605281799685207, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 2730065320988061163, guid: 88ec41abd5221fe49be39945424ec1d3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -42.030006
@@ -10800,6 +12254,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7190626510627743978}
     m_Modifications:
+    - target: {fileID: 3861486871068380286, guid: d88760b8529f40b4dbd496a7753303eb, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3861486871068380286, guid: d88760b8529f40b4dbd496a7753303eb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3861486871068380286, guid: d88760b8529f40b4dbd496a7753303eb, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4473906764214121876, guid: d88760b8529f40b4dbd496a7753303eb, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4285713
@@ -10918,6 +12384,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10979,6 +12457,18 @@ PrefabInstance:
     - target: {fileID: 3563935295828950182, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11042,6 +12532,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Grass01_30x60
       objectReference: {fileID: 0}
+    - target: {fileID: 8003436443947318521, guid: 74fe17e4aad29cb4cbe4f088a6c57101, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003436443947318521, guid: 74fe17e4aad29cb4cbe4f088a6c57101, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003436443947318521, guid: 74fe17e4aad29cb4cbe4f088a6c57101, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11103,6 +12605,18 @@ PrefabInstance:
     - target: {fileID: 7794439139103617721, guid: dcd99625ff2389046b2f40fc369093e3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514636039383871050, guid: dcd99625ff2389046b2f40fc369093e3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514636039383871050, guid: dcd99625ff2389046b2f40fc369093e3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514636039383871050, guid: dcd99625ff2389046b2f40fc369093e3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11174,6 +12688,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7694453765908806725, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
       propertyPath: m_Name
       value: Background_Tree02_300x390 (4)
@@ -11196,6 +12722,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7190626510627743978}
     m_Modifications:
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 1833057741771574530, guid: 4d86f0622382f694eba50de905755128, type: 3}
       propertyPath: m_Name
       value: Background_Tree08_604x880
@@ -11270,6 +12808,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1985112107820085556}
     m_Modifications:
+    - target: {fileID: 3211133974854863782, guid: 5b890b660a959a04cbd707961fa66d71, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211133974854863782, guid: 5b890b660a959a04cbd707961fa66d71, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211133974854863782, guid: 5b890b660a959a04cbd707961fa66d71, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4276574333575739197, guid: 5b890b660a959a04cbd707961fa66d71, type: 3}
       propertyPath: m_Name
       value: Background_Grass06_64x64 (1)
@@ -11372,6 +12922,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7164907592997332757, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
       propertyPath: m_Name
       value: Background_Mushroom01_74x56 (1)
@@ -11438,6 +13000,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Grass08_64x122
       objectReference: {fileID: 0}
+    - target: {fileID: 8047917789174577263, guid: 14520e4151bdb714f8a7b3918ed93073, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047917789174577263, guid: 14520e4151bdb714f8a7b3918ed93073, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047917789174577263, guid: 14520e4151bdb714f8a7b3918ed93073, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11456,6 +13030,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2420626361349014711}
     m_Modifications:
+    - target: {fileID: 1692682251224669156, guid: 447a3d0d2bc858648b3269042ce35d8f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692682251224669156, guid: 447a3d0d2bc858648b3269042ce35d8f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692682251224669156, guid: 447a3d0d2bc858648b3269042ce35d8f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 2599462983411063818, guid: 447a3d0d2bc858648b3269042ce35d8f, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4285713
@@ -11586,6 +13172,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Leaf03_434x292 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5811666251271735556, guid: b90512e61010c4d4598c0a4b0732e063, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811666251271735556, guid: b90512e61010c4d4598c0a4b0732e063, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811666251271735556, guid: b90512e61010c4d4598c0a4b0732e063, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11644,6 +13242,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468865824343617875, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7164907592997332757, guid: 172dc788511d4134b89288fe55e77c1c, type: 3}
       propertyPath: m_Name
       value: Background_Mushroom01_74x56
@@ -11666,6 +13276,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1985112107820085556}
     m_Modifications:
+    - target: {fileID: 2578359931380313014, guid: 35c8d25e0fbcff446b15566bd3753239, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2578359931380313014, guid: 35c8d25e0fbcff446b15566bd3753239, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2578359931380313014, guid: 35c8d25e0fbcff446b15566bd3753239, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4970204283301735270, guid: 35c8d25e0fbcff446b15566bd3753239, type: 3}
       propertyPath: m_Name
       value: Background_Grass02_56x30
@@ -11780,6 +13402,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7694453765908806725, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
       propertyPath: m_Name
       value: Background_Tree02_300x390 (2)
@@ -11805,6 +13439,18 @@ PrefabInstance:
     - target: {fileID: 904214470980728690, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
       propertyPath: m_Name
       value: Background_Grass09_104x208
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174436818786700547, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174436818786700547, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174436818786700547, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 6821160515710943991, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11904,6 +13550,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2179887861882681263, guid: ee035fb1dac090243b2da48da78bbc25, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179887861882681263, guid: ee035fb1dac090243b2da48da78bbc25, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179887861882681263, guid: ee035fb1dac090243b2da48da78bbc25, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 3239881389804868726, guid: ee035fb1dac090243b2da48da78bbc25, type: 3}
       propertyPath: m_Name
       value: Background_Grass07_80x150
@@ -11926,6 +13584,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5886912020439030922}
     m_Modifications:
+    - target: {fileID: 4706544999310636838, guid: feba28ec0c6eb264e8bd41ac7fde3062, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706544999310636838, guid: feba28ec0c6eb264e8bd41ac7fde3062, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706544999310636838, guid: feba28ec0c6eb264e8bd41ac7fde3062, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 6540747003092858945, guid: feba28ec0c6eb264e8bd41ac7fde3062, type: 3}
       propertyPath: m_Name
       value: Background_Butterfly02_50x130
@@ -11988,6 +13658,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7190626510627743978}
     m_Modifications:
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 1833057741771574530, guid: 4d86f0622382f694eba50de905755128, type: 3}
       propertyPath: m_Name
       value: Background_Tree08_604x880 (1)
@@ -12106,6 +13788,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12124,6 +13818,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3188915888656345072}
     m_Modifications:
+    - target: {fileID: 4706544999310636838, guid: feba28ec0c6eb264e8bd41ac7fde3062, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706544999310636838, guid: feba28ec0c6eb264e8bd41ac7fde3062, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706544999310636838, guid: feba28ec0c6eb264e8bd41ac7fde3062, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 6540747003092858945, guid: feba28ec0c6eb264e8bd41ac7fde3062, type: 3}
       propertyPath: m_Name
       value: Background_Butterfly02_50x130 (1)
@@ -12226,6 +13932,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4008662075577637080, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4008662075577637080, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4008662075577637080, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 6988945532243047842, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
       propertyPath: m_Name
       value: Background_Mushroom04_134x142
@@ -12300,6 +14018,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8585694708918295743, guid: 6511da9a3ff2e49478a1219118bb5ff2, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585694708918295743, guid: 6511da9a3ff2e49478a1219118bb5ff2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585694708918295743, guid: 6511da9a3ff2e49478a1219118bb5ff2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 8701064026436695439, guid: 6511da9a3ff2e49478a1219118bb5ff2, type: 3}
       propertyPath: m_Name
       value: Background_Leaf01_466x458
@@ -12325,6 +14055,18 @@ PrefabInstance:
     - target: {fileID: 904214470980728690, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
       propertyPath: m_Name
       value: Background_Grass09_104x208 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174436818786700547, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174436818786700547, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174436818786700547, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 6821160515710943991, guid: 026eaa5aad73ab44ebfbee0f714eb5b9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12428,6 +14170,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12502,6 +14256,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Tree12_308x1005
       objectReference: {fileID: 0}
+    - target: {fileID: 7407124200532470985, guid: 3b09b552b96f14441b984b07493c2693, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407124200532470985, guid: 3b09b552b96f14441b984b07493c2693, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407124200532470985, guid: 3b09b552b96f14441b984b07493c2693, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12564,6 +14330,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12582,6 +14360,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7184079923666527149}
     m_Modifications:
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 821890685414905418, guid: 4d86f0622382f694eba50de905755128, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 1833057741771574530, guid: 4d86f0622382f694eba50de905755128, type: 3}
       propertyPath: m_Name
       value: Background_Tree08_604x880
@@ -12656,6 +14446,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4183360225348724342}
     m_Modifications:
+    - target: {fileID: 1558972100511612582, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558972100511612582, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558972100511612582, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 3779043782528895844, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
       propertyPath: m_Name
       value: Background_Stump04_140x66 (1)
@@ -12774,6 +14576,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Tree12_308x1005 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7407124200532470985, guid: 3b09b552b96f14441b984b07493c2693, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407124200532470985, guid: 3b09b552b96f14441b984b07493c2693, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407124200532470985, guid: 3b09b552b96f14441b984b07493c2693, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12848,6 +14662,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Tree06_614x826
       objectReference: {fileID: 0}
+    - target: {fileID: 7696652891600204964, guid: bc2910371c821824c923746fc66cc1b2, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696652891600204964, guid: bc2910371c821824c923746fc66cc1b2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696652891600204964, guid: bc2910371c821824c923746fc66cc1b2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12909,6 +14735,18 @@ PrefabInstance:
     - target: {fileID: 3702654051189728711, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12973,8 +14811,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13046,6 +14892,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907409689907470847, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7694453765908806725, guid: 60ad884b63f76e749a2a3314516346c9, type: 3}
       propertyPath: m_Name
       value: Background_Tree02_300x390 (1)
@@ -13068,6 +14926,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2284614535680624744}
     m_Modifications:
+    - target: {fileID: 1692682251224669156, guid: 447a3d0d2bc858648b3269042ce35d8f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692682251224669156, guid: 447a3d0d2bc858648b3269042ce35d8f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692682251224669156, guid: 447a3d0d2bc858648b3269042ce35d8f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 2599462983411063818, guid: 447a3d0d2bc858648b3269042ce35d8f, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4285713
@@ -13142,6 +15012,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7997057947951292356}
     m_Modifications:
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4293221456893652579, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 20.059998
@@ -13248,6 +15130,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957058080358558779, guid: 8fc01ae5121712049be3cbfabf1383bd, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13318,6 +15212,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4008662075577637080, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4008662075577637080, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4008662075577637080, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 6988945532243047842, guid: 6986845fd3a17cd4485096d720c53257, type: 3}
       propertyPath: m_Name
       value: Background_Mushroom04_134x142 (1)
@@ -13340,6 +15246,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7190626510627743978}
     m_Modifications:
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4125436486272465802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
       propertyPath: m_Name
       value: Background_Tree03_466x570
@@ -13414,6 +15332,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7997057947951292356}
     m_Modifications:
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531308506298642642, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4293221456893652579, guid: 29c6286b13ec85e42932afc9107556f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.929993
@@ -13520,6 +15450,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7064014146715160914, guid: 06e8eda446e90614c9f866cdfa064d6e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7064014146715160914, guid: 06e8eda446e90614c9f866cdfa064d6e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7064014146715160914, guid: 06e8eda446e90614c9f866cdfa064d6e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13538,6 +15480,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3188915888656345072}
     m_Modifications:
+    - target: {fileID: 268095512838054406, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 268095512838054406, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 268095512838054406, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 7439979498325852708, guid: 71fc49afa4e0e664da2aed19ddcd171f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 52.140015
@@ -13600,6 +15554,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8083102178978514582}
     m_Modifications:
+    - target: {fileID: 2531960553046613112, guid: 2445fb71d89741048b43624e6a30c49f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531960553046613112, guid: 2445fb71d89741048b43624e6a30c49f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531960553046613112, guid: 2445fb71d89741048b43624e6a30c49f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 5777097607415366661, guid: 2445fb71d89741048b43624e6a30c49f, type: 3}
       propertyPath: m_Name
       value: Background_Stump03_204x52
@@ -13666,6 +15632,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Grass03_56x56 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6558626907547773954, guid: a73410a884db11041b2964c127198fdb, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558626907547773954, guid: a73410a884db11041b2964c127198fdb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558626907547773954, guid: a73410a884db11041b2964c127198fdb, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 8422779855010354253, guid: a73410a884db11041b2964c127198fdb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 38.67
@@ -13724,6 +15702,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4183360225348724342}
     m_Modifications:
+    - target: {fileID: 415724466181757200, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 415724466181757200, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 415724466181757200, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 3417460868710815524, guid: 865237d172e7d9041a1b48ef2b28321c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 55.989986
@@ -13786,6 +15776,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5886912020439030922}
     m_Modifications:
+    - target: {fileID: 4706544999310636838, guid: feba28ec0c6eb264e8bd41ac7fde3062, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706544999310636838, guid: feba28ec0c6eb264e8bd41ac7fde3062, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706544999310636838, guid: feba28ec0c6eb264e8bd41ac7fde3062, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 6540747003092858945, guid: feba28ec0c6eb264e8bd41ac7fde3062, type: 3}
       propertyPath: m_Name
       value: Background_Butterfly02_50x130 (1)
@@ -13904,6 +15906,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Tree04_410x646 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5318850110314848014, guid: b505de837ff1c4e4d87c9ed30029651c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318850110314848014, guid: b505de837ff1c4e4d87c9ed30029651c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318850110314848014, guid: b505de837ff1c4e4d87c9ed30029651c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13922,6 +15936,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4183360225348724342}
     m_Modifications:
+    - target: {fileID: 1558972100511612582, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558972100511612582, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558972100511612582, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 3779043782528895844, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
       propertyPath: m_Name
       value: Background_Stump04_140x66
@@ -14028,6 +16054,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Rock02_100x46
       objectReference: {fileID: 0}
+    - target: {fileID: 8952799415660189717, guid: 9324ffcc66711b1449c5ba0db0e68969, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8952799415660189717, guid: 9324ffcc66711b1449c5ba0db0e68969, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8952799415660189717, guid: 9324ffcc66711b1449c5ba0db0e68969, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14102,6 +16140,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Leaf03_434x292
       objectReference: {fileID: 0}
+    - target: {fileID: 5811666251271735556, guid: b90512e61010c4d4598c0a4b0732e063, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811666251271735556, guid: b90512e61010c4d4598c0a4b0732e063, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811666251271735556, guid: b90512e61010c4d4598c0a4b0732e063, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14163,6 +16213,18 @@ PrefabInstance:
     - target: {fileID: 1991597198191195050, guid: c8ec71eb3fddfc844b325151ba02e276, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2297890540660410558, guid: c8ec71eb3fddfc844b325151ba02e276, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2297890540660410558, guid: c8ec71eb3fddfc844b325151ba02e276, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2297890540660410558, guid: c8ec71eb3fddfc844b325151ba02e276, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14226,6 +16288,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14244,6 +16318,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4183360225348724342}
     m_Modifications:
+    - target: {fileID: 2531960553046613112, guid: 2445fb71d89741048b43624e6a30c49f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531960553046613112, guid: 2445fb71d89741048b43624e6a30c49f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531960553046613112, guid: 2445fb71d89741048b43624e6a30c49f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 5777097607415366661, guid: 2445fb71d89741048b43624e6a30c49f, type: 3}
       propertyPath: m_Name
       value: Background_Stump03_204x52
@@ -14362,6 +16448,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Tree06_614x826
       objectReference: {fileID: 0}
+    - target: {fileID: 7696652891600204964, guid: bc2910371c821824c923746fc66cc1b2, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696652891600204964, guid: bc2910371c821824c923746fc66cc1b2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696652891600204964, guid: bc2910371c821824c923746fc66cc1b2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14436,6 +16534,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Tree04_410x646 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5318850110314848014, guid: b505de837ff1c4e4d87c9ed30029651c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318850110314848014, guid: b505de837ff1c4e4d87c9ed30029651c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318850110314848014, guid: b505de837ff1c4e4d87c9ed30029651c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14454,6 +16564,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7190626510627743978}
     m_Modifications:
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4125436486272465802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
       propertyPath: m_Name
       value: Background_Tree03_466x570 (2)
@@ -14531,6 +16653,18 @@ PrefabInstance:
     - target: {fileID: 1616720033568162575, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_Name
       value: Background_Tree05_290x416 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 5362786511550453763, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_LocalScale.x
@@ -14646,6 +16780,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8514636039383871050, guid: dcd99625ff2389046b2f40fc369093e3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514636039383871050, guid: dcd99625ff2389046b2f40fc369093e3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8514636039383871050, guid: dcd99625ff2389046b2f40fc369093e3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14664,6 +16810,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8083102178978514582}
     m_Modifications:
+    - target: {fileID: 1558972100511612582, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558972100511612582, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558972100511612582, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 3779043782528895844, guid: d02b61fa715832742b37ef2fcc78eaf2, type: 3}
       propertyPath: m_Name
       value: Background_Stump04_140x66 (2)
@@ -14782,6 +16940,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Leaf04_240x168
       objectReference: {fileID: 0}
+    - target: {fileID: 4181692410449329672, guid: 8ec47f25a1a558d4aa6850a7231f6016, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181692410449329672, guid: 8ec47f25a1a558d4aa6850a7231f6016, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181692410449329672, guid: 8ec47f25a1a558d4aa6850a7231f6016, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14856,6 +17026,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Tree04_410x646
       objectReference: {fileID: 0}
+    - target: {fileID: 5318850110314848014, guid: b505de837ff1c4e4d87c9ed30029651c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318850110314848014, guid: b505de837ff1c4e4d87c9ed30029651c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318850110314848014, guid: b505de837ff1c4e4d87c9ed30029651c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14874,6 +17056,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3188915888656345072}
     m_Modifications:
+    - target: {fileID: 2264567605232538388, guid: 768bad4847690c74f9126de5d2444062, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2264567605232538388, guid: 768bad4847690c74f9126de5d2444062, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2264567605232538388, guid: 768bad4847690c74f9126de5d2444062, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 5462536625648087437, guid: 768bad4847690c74f9126de5d2444062, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24.669983
@@ -14936,6 +17130,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7184079923666527149}
     m_Modifications:
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662040200910356802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4125436486272465802, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
       propertyPath: m_Name
       value: Background_Tree03_466x570
@@ -15002,68 +17208,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5215376980116967084, guid: 57ca9818848b14644a096e5a0cb37e80, type: 3}
   m_PrefabInstance: {fileID: 8689892176453707171}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &8761870044252314099
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2647323781778671583}
-    m_Modifications:
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 153.59999
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4606978787746636454, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-      propertyPath: m_Name
-      value: background roop image (2)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
---- !u!4 &6770175739142007676 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2624495312987583119, guid: 4c2ca3d034599254983831c281b61bc1, type: 3}
-  m_PrefabInstance: {fileID: 8761870044252314099}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8829716307145140764
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15075,6 +17219,18 @@ PrefabInstance:
     - target: {fileID: 1496913018414624480, guid: a73410a884db11041b2964c127198fdb, type: 3}
       propertyPath: m_Name
       value: Background_Grass03_56x56
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558626907547773954, guid: a73410a884db11041b2964c127198fdb, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558626907547773954, guid: a73410a884db11041b2964c127198fdb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558626907547773954, guid: a73410a884db11041b2964c127198fdb, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 8422779855010354253, guid: a73410a884db11041b2964c127198fdb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15178,6 +17334,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Rock01_184x60
       objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15239,6 +17407,18 @@ PrefabInstance:
     - target: {fileID: 4563043532530403761, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
       propertyPath: m_Name
       value: Background_Rock01_184x60 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401430154598102837, guid: fb2f1f0407a1c264db60c71272156a44, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15303,8 +17483,16 @@ PrefabInstance:
       value: Background_Rock02_100x46 (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8952799415660189717, guid: 9324ffcc66711b1449c5ba0db0e68969, type: 3}
-      propertyPath: m_SortingOrder
+      propertyPath: m_SortingLayer
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8952799415660189717, guid: 9324ffcc66711b1449c5ba0db0e68969, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8952799415660189717, guid: 9324ffcc66711b1449c5ba0db0e68969, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15324,6 +17512,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1985112107820085556}
     m_Modifications:
+    - target: {fileID: 3211133974854863782, guid: 5b890b660a959a04cbd707961fa66d71, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211133974854863782, guid: 5b890b660a959a04cbd707961fa66d71, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211133974854863782, guid: 5b890b660a959a04cbd707961fa66d71, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4276574333575739197, guid: 5b890b660a959a04cbd707961fa66d71, type: 3}
       propertyPath: m_Name
       value: Background_Grass06_64x64
@@ -15442,6 +17642,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background_Tree06_614x826
       objectReference: {fileID: 0}
+    - target: {fileID: 7696652891600204964, guid: bc2910371c821824c923746fc66cc1b2, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696652891600204964, guid: bc2910371c821824c923746fc66cc1b2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696652891600204964, guid: bc2910371c821824c923746fc66cc1b2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15503,6 +17715,18 @@ PrefabInstance:
     - target: {fileID: 5116202847857864354, guid: 4dfd3023edc12d645899657e36274d76, type: 3}
       propertyPath: m_Name
       value: Background_Grass10_94x134
+      objectReference: {fileID: 0}
+    - target: {fileID: 6949174628099789523, guid: 4dfd3023edc12d645899657e36274d76, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6949174628099789523, guid: 4dfd3023edc12d645899657e36274d76, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6949174628099789523, guid: 4dfd3023edc12d645899657e36274d76, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15566,6 +17790,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779680104865885654, guid: 6204cb7313e0acc4c96936d121c57852, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15587,6 +17823,18 @@ PrefabInstance:
     - target: {fileID: 1616720033568162575, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_Name
       value: Background_Tree05_290x416 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 5362786511550453763, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_LocalScale.x
@@ -15658,6 +17906,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5520075357097475433}
     m_Modifications:
+    - target: {fileID: 3211133974854863782, guid: 5b890b660a959a04cbd707961fa66d71, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211133974854863782, guid: 5b890b660a959a04cbd707961fa66d71, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211133974854863782, guid: 5b890b660a959a04cbd707961fa66d71, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
+      objectReference: {fileID: 0}
     - target: {fileID: 4276574333575739197, guid: 5b890b660a959a04cbd707961fa66d71, type: 3}
       propertyPath: m_Name
       value: Background_Grass06_64x64 (1)
@@ -15723,6 +17983,18 @@ PrefabInstance:
     - target: {fileID: 1616720033568162575, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_Name
       value: Background_Tree05_290x416 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904474194172584729, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2135238147
       objectReference: {fileID: 0}
     - target: {fileID: 5362786511550453763, guid: e7c1d240354fe7644b2ca51ead234f0d, type: 3}
       propertyPath: m_LocalScale.x

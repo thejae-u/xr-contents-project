@@ -25,7 +25,7 @@ public class PlayerManager : MonoBehaviour
     private bool isJumping = false;
     private bool canJump = true;
     private bool isKnockback = false;
-
+    private bool canMove = true;
 
     // Player dodge(evasion) related
     [Header("플레이어 회피 거리")]
@@ -40,37 +40,52 @@ public class PlayerManager : MonoBehaviour
     private bool isDodgeDirRight;
 
     // Player shooting related
-    [Header("플레이어 공격력 조정")]
-    [SerializeField] public float playerAtk = 10.0f;
+    [Header("플레이어 노말 공격력 조정")]
+    [SerializeField] public float playerNormalAtk = 10.0f;
+    [Header("플레이어 사격 게이지에 따른 추가 공격력 조정")]
+    [SerializeField] public float playerBonusAtk = 5.0f;
     [Header("플레이어 한발당 사격 딜레이 조정")]
     [SerializeField] public float shotDelaySpeed = 1.0f;
-    [Header("플레이어 총알 속도 조정")]
-    [SerializeField] public float bulletSpeed = 30.0f;
-    [Header("플레이어 유효 사격 거리")]
-    [SerializeField] public float fireDistance = 15.0f;
     [Header("플레이어 최대 탄알")]
     [SerializeField] public int maxAmmo = 6;
     [Header("플레이어 한발당 재장전 시간")]
     [SerializeField] public float reloadTime = 0.7f;
+    [Header("플레이어 최대 발사 게이지")]
+    [SerializeField] public float maxGauge = 0.5f;
 
     private Rigidbody2D playerRigidbody;
     private GameObject playerHpUI;
-    private Animator animator;
+
+    public enum EPlayerState
+    {
+        Idle,
+        Move,
+        Jump,
+        Dodge,
+        Hit,
+        Dead
+    }
+
+    public EPlayerState state { get; private set; }
 
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         playerHpUI = GameObject.Find("HP");
     }
 
     private void Start()
     {
         playerRigidbody.gravityScale = playerGravityForce;
+        Cursor.visible = false;
+
+        state = EPlayerState.Idle;
     }
 
     private void Update()
     {
+        if (CameraController.Inst.IsNowCutScene) return;
+        
         PlayerViewMousePoint();
         PlayerMove();
 
@@ -89,6 +104,8 @@ public class PlayerManager : MonoBehaviour
         {
             PlayerJump();
         }
+
+        PlayerMoveLimit();
     }
 
     public float GetPlayerHp()
@@ -96,10 +113,17 @@ public class PlayerManager : MonoBehaviour
         return playerHp;
     }
 
+    public bool GetIsJumping()
+    {
+        return isJumping;
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (canJump)
+        {
             isJumping = false;
+        }
     }
 
     #region MOVEMENT
@@ -107,35 +131,18 @@ public class PlayerManager : MonoBehaviour
     {
         float moveDir = Input.GetAxis("Horizontal");
 
-        if (isPlayerViewDirRight)
+        if (isPlayerViewDirRight && moveDir != 0)
         {
             Vector3 dir = moveDir * Vector3.right;
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
-            }
+            transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
         }
-        else
+        else if (!isPlayerViewDirRight && moveDir != 0)
         {
             Vector3 dir = moveDir * Vector3.left;
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
-            }
+            transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
         }
     }
     #endregion
-
     #region JUMP
     void PlayerJump()
     {
@@ -143,7 +150,6 @@ public class PlayerManager : MonoBehaviour
         {
             playerRigidbody.AddForce(Vector2.up * playerJumpForce, ForceMode2D.Impulse);
             StartCoroutine(PlayerJumpResetTime());
-            //animator.SetBool("IsJump", true);
             isJumping = true;
         }
     }
@@ -157,31 +163,34 @@ public class PlayerManager : MonoBehaviour
     #endregion JUMP
 
     void PlayerDodge(bool dodgeDirRight)
-    {
-        LogPrintSystem.SystemLogPrint(transform, "회피 사용", ELogType.Player);
-
-        Sequence sequence = DOTween.Sequence();
-        canDodge = false;
-        Vector3 playerPos = transform.position;
-
-        if (dodgeDirRight)
+    { 
+        if (canMove)
         {
-            transform.DOMoveX(playerPos.x + dodgeDistance, 1.0f);
+            Sequence sequence = DOTween.Sequence();
+            LogPrintSystem.SystemLogPrint(transform, "회피 사용", ELogType.Player);
+
+            canDodge = false;
+            Vector3 playerPos = transform.position;
+
+            PlayerInvincibility(dodgeInvincibilityDuration);
+
+            if (dodgeDirRight)
+            {
+                transform.DOMoveX(playerPos.x + dodgeDistance, 1.0f);
+            }
+            else
+            {
+                transform.DOMoveX(playerPos.x - dodgeDistance, 1.0f);
+            }
+
+            sequence.SetDelay(dodgeCoolTime).OnComplete(() =>
+            {
+                LogPrintSystem.SystemLogPrint(transform, "회피 쿨타임 종료", ELogType.Player);
+                canDodge = true;
+            });
+
+            return;
         }
-        else
-        {
-            transform.DOMoveX(playerPos.x - dodgeDistance, 1.0f);
-        }
-
-        PlayerInvincibility(dodgeInvincibilityDuration);
-
-        sequence.SetDelay(dodgeCoolTime).OnComplete(() =>
-        {
-            LogPrintSystem.SystemLogPrint(transform, "회피 쿨타임 종료", ELogType.Player);
-            canDodge = true;
-        });
-
-        return;
     }
 
     public void PlayerDiscountHp(float damage, float enemyXPos)
@@ -189,16 +198,6 @@ public class PlayerManager : MonoBehaviour
         LogPrintSystem.SystemLogPrint(transform, "Call PlayerDiscountHp", ELogType.Player);
         if (!isInvincibility)
         {
-            Sequence sequence = DOTween.Sequence();
-
-            // Turns red when hit
-            transform.GetComponent<Renderer>().material.DOColor(Color.red, 0.1f);
-            LogPrintSystem.SystemLogPrint(transform, $"Player change Red", ELogType.Player);
-            sequence.SetDelay(1.0f).OnComplete(() =>
-            {
-                transform.GetComponent<Renderer>().material.DOColor(Color.white, 0.1f);
-            });
-
             playerHp -= damage;
 
             playerHpUI.GetComponent<hpUIController>().Sethp(damage);
@@ -209,49 +208,61 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    private void PlayerDeath()
+    {
+        if(playerHp <= 0)
+        {
+            // player Dead animation 실행 (delay 준다.)
+            // 게임 오버 씬으로 변경
+        }
+    }
+
     private void PlayerKnockback(float enemyXPos)
     {
         if (!isKnockback)
         {
-            Sequence sequence = DOTween.Sequence();
-
-            isKnockback = true;
-
-            // Knockback avatar
-            float playerXPos = transform.position.x;
-
-            if (playerXPos > enemyXPos) // 플레이어가 오른쪽에 있다면
+            if (canMove)
             {
-                transform.DOMoveX(transform.position.x + playerKnockbackDistance, playerHitInvincibilityDuration);
-                LogPrintSystem.SystemLogPrint(transform, $"넉백 시 플레이어와 적위치 : {playerXPos},{enemyXPos}", ELogType.Player);
-            }
-            else if (playerXPos < enemyXPos)
-            {
-                transform.DOMoveX(transform.position.x - playerKnockbackDistance, playerHitInvincibilityDuration);
-                LogPrintSystem.SystemLogPrint(transform, $"넉백 시 플레이어와 적위치 : {playerXPos},{enemyXPos}", ELogType.Player);
+                Sequence sequence = DOTween.Sequence();
+
+                isKnockback = true;
+
+                // Knockback avatar
+                float playerXPos = transform.position.x;
+
+                if (playerXPos > enemyXPos) // 플레이어가 오른쪽에 있다면
+                {
+                    transform.DOMoveX(transform.position.x + playerKnockbackDistance, playerHitInvincibilityDuration);
+                    LogPrintSystem.SystemLogPrint(transform, $"넉백 시 플레이어와 적위치 : {playerXPos},{enemyXPos}", ELogType.Player);
+                }
+                else if (playerXPos < enemyXPos)
+                {
+                    transform.DOMoveX(transform.position.x - playerKnockbackDistance, playerHitInvincibilityDuration);
+                    LogPrintSystem.SystemLogPrint(transform, $"넉백 시 플레이어와 적위치 : {playerXPos},{enemyXPos}", ELogType.Player);
+                }
             }
 
             PlayerInvincibility(playerHitInvincibilityDuration);
         }
     }
 
+    // 무적상태 호출
     void PlayerInvincibility(float Duration)
     {
-        Sequence sequence = DOTween.Sequence();
-        // 여기에 무적 상태로 만들어준다.
-        isInvincibility = true;
+        isInvincibility = true;        
         gameObject.layer = 3; // 3: PlayerInvincibility
         canJump = false;
+        LogPrintSystem.SystemLogPrint(transform, "플레이어 무적 상태", ELogType.Player);
 
+        Sequence sequence = DOTween.Sequence();
         sequence.SetDelay(Duration).OnComplete(() =>
         {
-            // 무적 상태 해제
             gameObject.layer = 6;
             canJump = true;
             isInvincibility = false;
             isKnockback = false;
+            LogPrintSystem.SystemLogPrint(transform, "플레이어 무적 상태 해제", ELogType.Player);
         });
-
     }
 
     void PlayerViewMousePoint()
@@ -274,5 +285,29 @@ public class PlayerManager : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, rad);
+    }
+
+    void PlayerMoveLimit()
+    {
+        Vector3 worldpos = Camera.main.WorldToViewportPoint(this.transform.position);
+        
+        if (worldpos.x < 0f)
+        {
+            canMove = false;
+            worldpos.x = 0f;
+        }
+
+        if(worldpos.x < 1f && worldpos.x > 0f)
+        {
+            canMove = true;
+        }
+
+        if (worldpos.x > 1f)
+        {
+            canMove = false;
+            worldpos.x = 1f;
+        }
+        
+        this.transform.position = Camera.main.ViewportToWorldPoint(worldpos);
     }
 }
