@@ -10,10 +10,12 @@ public class ExtinctionPlatFormController : MonoBehaviour
     [SerializeField] private float extinctionDelayTime = 1.5f; 
     [SerializeField] private float respawnPlatform = 3f;
 
-    [Header("흔들림 강도")]
-    [SerializeField] private float shakeStrength = 0.1f;
-    private float shakeDuration = 1.0f;
     private Vector3 initialPosition = Vector3.zero;
+
+    [Header("좌우로 움직일 거리")]
+    [SerializeField] private float targetX = 0.25f;
+    [Header("거리 이동 소요 시간")]
+    [SerializeField] private float moveDuration = 0.1f;
 
     private void Start()
     {
@@ -34,8 +36,7 @@ public class ExtinctionPlatFormController : MonoBehaviour
         {
             curTime += Time.deltaTime;
 
-            sequence = DOTween.Sequence();
-            transform.DOShakePosition(shakeDuration, shakeStrength, vibrato: 10, randomness: 90, fadeOut: false);
+            StartMoveAnimation();
 
             if (curTime > extinctionDelayTime)
             {
@@ -55,6 +56,14 @@ public class ExtinctionPlatFormController : MonoBehaviour
             transform.position = initialPosition;
             curTime = 0f;
             isPlayerColliding = false;
+        });
+    }
+
+    private void StartMoveAnimation()
+    {
+        transform.DOLocalMoveX(initialPosition.x + targetX, moveDuration).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            transform.DOLocalMoveX(initialPosition.x - targetX, 0.1f);
         });
     }
 }
