@@ -200,10 +200,14 @@ public abstract class TraceNode : INode
         float distance = (myTransform.position - playerTransform.position).magnitude;
         float traceRange = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
 
-        // For Jump Node
+        // isJumping in True -> Loop this node when End of jump
         float distanceForJump = Mathf.Abs(myTransform.position.x - playerTransform.position.x);
         var isJumping = blackboard.GetData<ReferenceValueT<bool>>("isJumping");
-        if (isJumping.Value) return ETraceState.PlayerTrace;
+        if (isJumping.Value)
+        {
+            LogPrintSystem.SystemLogPrint(myTransform, $"{isJumping} isJumping", ELogType.EnemyAI);
+            return ETraceState.PlayerTrace;
+        }
 
         // Distance of Player to Monster is Same -> Check Y Position -> need jump return
         if (distanceForJump <= myAttackRange && myType != EEliteType.Bomb)
@@ -224,6 +228,8 @@ public abstract class TraceNode : INode
         // Trace Logic
         if (myType != EEliteType.Rush)
         {
+            LogPrintSystem.SystemLogPrint(myTransform, "Trace Normal Monster", ELogType.EnemyAI);
+            LogPrintSystem.SystemLogPrint(myTransform, $"{playerRange + myAttackRange >= distance}", ELogType.EnemyAI);
             // Check Attack Range
             return playerRange + myAttackRange >= distance ? ETraceState.PlayerEnter : ETraceState.PlayerTrace;
         }

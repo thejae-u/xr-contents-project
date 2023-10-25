@@ -87,7 +87,6 @@ public class EnemyAnimationController : MonoBehaviour
                     Dead();
                     break;
                 case ENode.Hit:
-                    LogPrintSystem.SystemLogPrint(transform, "Hit Node Activate", ELogType.EnemyAI);
                     Hit();
                     break;
                 

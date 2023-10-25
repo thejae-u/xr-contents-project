@@ -38,8 +38,6 @@ namespace EnemyScripts
 
         [Header("넉백 거리를 조정")] [Range(0.1f, 3.0f)] 
         [SerializeField] private float knockbackPower;
-        
-        
 
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isAlive;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isNowAttack;
@@ -50,9 +48,12 @@ namespace EnemyScripts
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isTimerWait;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isTimerEnded;
 
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isHit;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isHitOn;
+        [HideInInspector] [SerializeField] private ReferenceValueT<float> playerDamage;
+        
         [SerializeField] private List<GameObject> timers;
         
-        private bool isHit;
 
         private Blackboard b;
         private SkeletonAnimation anim;
@@ -68,6 +69,10 @@ namespace EnemyScripts
 
             isTimerWait.Value = false;
             isTimerEnded.Value = false;
+
+            isHit.Value = false;
+            isHitOn.Value = false;
+            playerDamage.Value = 0.0f;
 
             b.AddData("isTimerWait", isTimerWait);
             b.AddData("isTimerEnded", isTimerEnded);
@@ -87,6 +92,13 @@ namespace EnemyScripts
             b.AddData("isJumping", isJumping);
             b.AddData("canJumpNextNode", canJumpNextNode);
             b.AddData("isGround", isGround);
+            
+            b.AddData("knockbackPower", knockbackPower);
+            b.AddData("hitTime", hitTime);
+            b.AddData("isHit", isHit);
+            b.AddData("isHitOn", isHitOn);
+            
+            b.AddData("playerDamage", playerDamage);
         }
 
         void Start()
@@ -97,10 +109,13 @@ namespace EnemyScripts
             var jump = new JumpNode();
 
             wait.enterPlayer = trace;
+            
             trace.playerEnter = attack;
             trace.playerExit = wait;
             trace.enterJump = jump;
+            
             jump.endJump = trace;
+            
             attack.outOfAttackRange = trace;
 
             fsmLife = new Fsm();
@@ -114,8 +129,17 @@ namespace EnemyScripts
 
         private void Update()
         {
+            if (CameraController.Inst.IsNowCutScene) return;
+
             if (isAlive.Value)
+            {
+                if (isHit) return;
+                
+                Flip();
+                fsm.Update();
                 fsmLife.Update();
+
+            }
             else
             {
                 if (DOTween.IsTweening(this))
@@ -123,29 +147,16 @@ namespace EnemyScripts
                     DOTween.Kill(this);
                 }
 
-                if (anim.AnimationName == "Monster_Dead" && anim.AnimationState.GetCurrent(0).IsComplete)
+                if (anim.AnimationName == "Monster_Dead")
                 {
-                    Destroy(gameObject);
-                }
+                    if(anim.AnimationState.GetCurrent(0).IsComplete)
+                        Destroy(gameObject);
+                    return;
+                } 
 
-                return;
-            }
-
-            Flip();
-
-            if (CameraController.Inst.IsNowCutScene) return;
-
-            if (anim.AnimationName == "Monster_Hit")
-            {
-                if (!anim.AnimationState.GetCurrent(0).IsComplete) return;
-                fsm.Update();
-            }
-            else
-            {
-                fsm.Update();
+                anim.AnimationState.SetAnimation(0, "Monster_Dead", false);
             }
         }
-
 
         private void OnCollisionStay2D(Collision2D other)
         {
@@ -165,7 +176,6 @@ namespace EnemyScripts
 
         private void OnDrawGizmos()
         {
-            
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, myAttackRange.Value);
 
@@ -185,22 +195,18 @@ namespace EnemyScripts
         {
             return b;
         }
-        
+
         public void DiscountHp(float damage)
         {
-            if (anim.AnimationName == "Monster_Hit") return;
-            
             b.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Hit;
-            
+
+            isHit.Value = true;
+
             myHp.Value -= damage;
-            LogPrintSystem.SystemLogPrint(transform, $"{damage} From Player -> remain {myHp.Value}", ELogType.EnemyAI);
+            LogPrintSystem.SystemLogPrint(transform, $"{damage} From Player -> remain {myHp.Value}",
+                ELogType.EnemyAI);
             Sequence sequence = DOTween.Sequence();
 
-            sequence.AppendCallback(() =>
-            {
-                isHit = true;
-            });
-            
             // 플레이어와 자신의 포지션을 빼준다 -> 정규화 해준다 -> 속도를 곱한다
             // 자신의 위치와 구한 벡터를 더해준다
             var myPos = transform.position;
@@ -209,15 +215,11 @@ namespace EnemyScripts
             var dirVector = (myPos - playerPos).normalized;
 
             myPos += dirVector * knockbackPower;
-            
-            sequence.Append(transform.DOMoveX(myPos.x, hitTime));
 
-            sequence.AppendCallback(() =>
+            transform.DOMoveX(myPos.x, hitTime).OnComplete(() =>
             {
-                isHit = false; 
-            });
-
-            sequence.Play().SetId(this);
+                isHit.Value = false;
+            }).SetId(this);
         }
     }
 }

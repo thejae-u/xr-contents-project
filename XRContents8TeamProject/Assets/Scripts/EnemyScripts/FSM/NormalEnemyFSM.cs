@@ -8,7 +8,7 @@ public class NormalTraceNode : TraceNode
 {
     public INode playerEnter;
     public INode playerExit;
-
+    
     public override INode Execute(Blackboard blackboard)
     {
         var type = Trace(blackboard);
@@ -69,7 +69,7 @@ public class NormalAttackNode : INode
     public INode Execute(Blackboard blackboard)
     {
         blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.NormalAttack;
-        
+
         var isNowAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
         
         if (isNowAttack.Value)

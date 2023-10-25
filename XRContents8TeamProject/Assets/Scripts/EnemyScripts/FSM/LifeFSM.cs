@@ -19,7 +19,6 @@ public class DeadNode : INode
         var myTransform = blackboard.GetData<Transform>("myTransform");
         blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Dead;
         blackboard.GetData<ReferenceValueT<bool>>("isAlive").Value = false;
-        LogPrintSystem.SystemLogPrint(myTransform, "Dead Node Activated", ELogType.EnemyAI);
         
         return Fsm.GuardNullNode(this, this);
     }

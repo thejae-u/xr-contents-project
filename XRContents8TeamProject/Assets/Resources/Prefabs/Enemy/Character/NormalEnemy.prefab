@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3382296089692677196}
   - component: {fileID: 1858022334905450255}
   - component: {fileID: 304279829443125611}
-  - component: {fileID: 6590199598380065912}
+  - component: {fileID: -1033932544416741396}
   m_Layer: 7
   m_Name: NormalEnemy
   m_TagString: NormalEnemy
@@ -236,7 +236,7 @@ MonoBehaviour:
   timers:
   - {fileID: 5434316715799226078}
   - {fileID: 5609475490914119966}
---- !u!114 &6590199598380065912
+--- !u!114 &-1033932544416741396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
