@@ -66,8 +66,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (remainMonster == 0 || playerManager.GetPlayerHp() <= 0)
-            SceneManager.LoadScene("GameoverScene");
+        //if (remainMonster == 0 || playerManager.GetPlayerHp() <= 0)
+        //  SceneManager.LoadScene("GameoverScene");
 
         Exit();
     }

@@ -142,6 +142,9 @@ namespace EnemyScripts
             }
             else
             {
+                transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+                transform.GetComponent<Collider2D>().enabled = false;
+                
                 if (DOTween.IsTweening(this))
                 {
                     DOTween.Kill(this);
