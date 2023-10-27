@@ -65,13 +65,6 @@ public class PlayerManager : MonoBehaviour
     [Header("플레이어 최대 발사 게이지")]
     [SerializeField] public float maxGauge = 0.5f;
 
-    // Spine Animation related
-    private SkeletonAnimation skeletonAnimation;
-    private AnimationReferenceAsset[] AnimClip;
-
-    private AnimationState animState;
-    private string CurrentAnimation;
-
     public enum EPlayerState
     {
         Idle,
@@ -100,6 +93,8 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
+        LogPrintSystem.SystemLogPrint(transform, $"playerManager State = {state}", ELogType.Player);
+
         if (CameraController.Inst.IsNowCutScene) return;
         
         PlayerViewMousePoint();
@@ -134,15 +129,7 @@ public class PlayerManager : MonoBehaviour
         return isJumping;
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (canJump)
-        {
-            state = EPlayerState.Idle;
 
-            isJumping = false;
-        }
-    }
 
     #region MOVEMENT
     void PlayerMove()
@@ -161,8 +148,10 @@ public class PlayerManager : MonoBehaviour
             Vector3 dir = moveDir * Vector3.left;
             transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
         }
-
-        state = EPlayerState.Idle;
+        else // moveDir == 0 
+        {
+            state = EPlayerState.Idle;
+        }
     }
     #endregion
     #region JUMP
@@ -182,7 +171,16 @@ public class PlayerManager : MonoBehaviour
     {
         canJump = false;
         yield return new WaitForSeconds(0.5f);
+        state = EPlayerState.Idle;
         canJump = true;
+    }  
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (canJump)
+        {
+            isJumping = false;
+        }
     }
     #endregion JUMP
 
@@ -308,12 +306,6 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, rad);
-    }
-
     void PlayerMoveLimit()
     {
         Vector3 worldpos = Camera.main.WorldToViewportPoint(this.transform.position);
@@ -336,5 +328,11 @@ public class PlayerManager : MonoBehaviour
         }
         
         this.transform.position = Camera.main.ViewportToWorldPoint(worldpos);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, rad);
     }
 }
