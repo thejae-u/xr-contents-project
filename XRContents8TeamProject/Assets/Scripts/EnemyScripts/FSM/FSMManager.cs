@@ -217,7 +217,7 @@ public abstract class TraceNode : INode
 
             float yPosCalc = Mathf.Abs(playerYPos - myYPos);
 
-            if (yPosCalc >= 5.0f)
+            if (yPosCalc >= 2.0f)
                 return ETraceState.NeedJump;
         }
 
