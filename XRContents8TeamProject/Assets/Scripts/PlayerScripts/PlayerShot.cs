@@ -63,7 +63,7 @@ public class PlayerShot : MonoBehaviour
             if (curAmmo > 0)
             {
                 curGauge += Time.deltaTime;
-                // 게이지가 차기 시작할 때 UI에 생성한 함수를 호출한다.
+                LogPrintSystem.SystemLogPrint(transform, $"playerShot : {curGauge}", ELogType.Player);
                 aimUIController.SetGauge();
             }
 

@@ -37,7 +37,7 @@ public class AimUIController : MonoBehaviour
     {
         Gauge.color = Color.white;
         Gauge.fillAmount = Gauge.fillAmount + fillGuage + Time.deltaTime;
-
+        LogPrintSystem.SystemLogPrint(transform, $"playerAim : {Gauge.fillAmount}", ELogType.Player);
         if (Gauge.fillAmount == 1)
         {
             isMaxGauge = true;

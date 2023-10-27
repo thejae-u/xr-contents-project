@@ -122,6 +122,8 @@ public class PlayerManager : MonoBehaviour
     {
         if (canJump)
         {
+            state = EPlayerState.Idle;
+
             isJumping = false;
         }
     }
@@ -129,6 +131,8 @@ public class PlayerManager : MonoBehaviour
     #region MOVEMENT
     void PlayerMove()
     {
+        state = EPlayerState.Move;
+
         float moveDir = Input.GetAxis("Horizontal");
 
         if (isPlayerViewDirRight && moveDir != 0)
@@ -141,6 +145,8 @@ public class PlayerManager : MonoBehaviour
             Vector3 dir = moveDir * Vector3.left;
             transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
         }
+
+        state = EPlayerState.Idle;
     }
     #endregion
     #region JUMP
@@ -148,6 +154,8 @@ public class PlayerManager : MonoBehaviour
     {
         if (!isJumping)
         {
+            state = EPlayerState.Jump;
+
             playerRigidbody.AddForce(Vector2.up * playerJumpForce, ForceMode2D.Impulse);
             StartCoroutine(PlayerJumpResetTime());
             isJumping = true;
@@ -166,6 +174,8 @@ public class PlayerManager : MonoBehaviour
     { 
         if (canMove)
         {
+            state = EPlayerState.Dodge;
+
             Sequence sequence = DOTween.Sequence();
             LogPrintSystem.SystemLogPrint(transform, "회피 사용", ELogType.Player);
 
@@ -195,7 +205,6 @@ public class PlayerManager : MonoBehaviour
 
     public void PlayerDiscountHp(float damage, float enemyXPos)
     {
-        LogPrintSystem.SystemLogPrint(transform, "Call PlayerDiscountHp", ELogType.Player);
         if (!isInvincibility)
         {
             playerHp -= damage;
@@ -212,7 +221,7 @@ public class PlayerManager : MonoBehaviour
     {
         if(playerHp <= 0)
         {
-            // player Dead animation 실행 (delay 준다.)
+            state = EPlayerState.Dead;
             // 게임 오버 씬으로 변경
         }
     }
@@ -223,6 +232,8 @@ public class PlayerManager : MonoBehaviour
         {
             if (canMove)
             {
+                state = EPlayerState.Hit;
+
                 Sequence sequence = DOTween.Sequence();
 
                 isKnockback = true;
