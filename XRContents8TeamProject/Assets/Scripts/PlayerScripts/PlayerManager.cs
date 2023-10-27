@@ -1,9 +1,13 @@
 using UnityEngine;
 using System.Collections;
 using DG.Tweening;
+using Spine.Unity;
 
 public class PlayerManager : MonoBehaviour
 {
+    private Rigidbody2D playerRigidbody;
+    private GameObject playerHpUI;
+
     // 플레이어 추적 범위
     public float MyRadius => rad;
     public float rad = 1.0f;
@@ -11,13 +15,17 @@ public class PlayerManager : MonoBehaviour
     // Player movement & ability related
     [Header("플레이어 체력 조정")]
     [SerializeField] private float playerHp = 100.0f;
+
     [Header("플레이어 이동 속도 조정")]
     [SerializeField] private float playerMoveSpeed = 5.0f;
+
     [Header("플레이어 점프 중력 * 점프 힘 조정")]
     [SerializeField] private float playerJumpForce = 20.0f;
     [SerializeField] private float playerGravityForce = 5.0f;
+
     [Header("플레이어 피격 시 무적 시간")]
     [SerializeField] private float playerHitInvincibilityDuration = 1.0f;
+
     [Header("플레이어 피격 시 넉백 거리")]
     [SerializeField] private float playerKnockbackDistance = 3.0f;
 
@@ -30,31 +38,39 @@ public class PlayerManager : MonoBehaviour
     // Player dodge(evasion) related
     [Header("플레이어 회피 거리")]
     [SerializeField] private float dodgeDistance = 4.0f;
+
     [Header("플레이어 회피 쿨타임")]
     [SerializeField] private float dodgeCoolTime = 3.0f;
-    private bool canDodge = true;
+
     [Header("플레이어 회피 사용 시 무적 시간(지속 시간) 조정")]
     [SerializeField] private float dodgeInvincibilityDuration = 1.5f;
 
+    private bool canDodge = true;
     private bool isInvincibility = false;
     private bool isDodgeDirRight;
 
     // Player shooting related
     [Header("플레이어 노말 공격력 조정")]
     [SerializeField] public float playerNormalAtk = 10.0f;
+
     [Header("플레이어 사격 게이지에 따른 추가 공격력 조정")]
     [SerializeField] public float playerBonusAtk = 5.0f;
+
     [Header("플레이어 한발당 사격 딜레이 조정")]
     [SerializeField] public float shotDelaySpeed = 1.0f;
+
     [Header("플레이어 최대 탄알")]
     [SerializeField] public int maxAmmo = 6;
-    [Header("플레이어 한발당 재장전 시간")]
-    [SerializeField] public float reloadTime = 0.7f;
+
     [Header("플레이어 최대 발사 게이지")]
     [SerializeField] public float maxGauge = 0.5f;
 
-    private Rigidbody2D playerRigidbody;
-    private GameObject playerHpUI;
+    // Spine Animation related
+    private SkeletonAnimation skeletonAnimation;
+    private AnimationReferenceAsset[] AnimClip;
+
+    private AnimationState animState;
+    private string CurrentAnimation;
 
     public enum EPlayerState
     {

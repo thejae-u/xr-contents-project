@@ -18,7 +18,10 @@ public class ExtinctionPlatFormController : MonoBehaviour
 
     private void Start()
     {
-        initialPosition = transform.position;
+        initialPosition = transform.TransformPoint(Vector3.zero);
+        initialPosition = transform.localPosition;
+
+        //initialPosition = transform.position; 자식이 아닌 경우
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -52,7 +55,8 @@ public class ExtinctionPlatFormController : MonoBehaviour
         sequence.SetDelay(respawnPlatform).OnComplete(() =>
         {
             gameObject.SetActive(true);
-            transform.position = initialPosition;
+            transform.localPosition = initialPosition;
+            //transform.position = initialPosition; 자식이 아닌 경우
             curTime = 0f;
             isPlayerColliding = false;
         });
