@@ -58,13 +58,13 @@ public class PlayerShot : MonoBehaviour
             aimUIController.SetWarningGauge();
         }
 
-        if (Input.GetMouseButton(0) && !isMaxGauge)
+        if (Input.GetMouseButton(0))
         {
             if (curAmmo > 0)
             {
                 curGauge += Time.deltaTime;
-                LogPrintSystem.SystemLogPrint(transform, $"playerShot : {curGauge}", ELogType.Player);
                 aimUIController.SetGauge();
+                LogPrintSystem.SystemLogPrint(transform, "에임 게이지 증가", ELogType.Player);
             }
 
             if (!isMaxGauge && curGauge >= playerManager.maxGauge)
@@ -83,12 +83,18 @@ public class PlayerShot : MonoBehaviour
 
             if (state == EShotState.None && curAmmo > 0)
             {
+                // StateShot -> BoltAction
                 StateShot();
             }
             else if (state == EShotState.Backforward && curAmmo > 0)
             {
                 // 재장전 중에 사격 버튼을 입력한 경우 장전을 취소한다.
-                sequenceBackforward.Kill();
+                // equenceBackforward.Kill();
+                if (DOTween.IsTweening(10))
+                {
+                    LogPrintSystem.SystemLogPrint(transform, "KILL TWEENER", ELogType.Player);
+                    DOTween.Kill(10);
+                }
                 isReloading = false;
 
                 LogPrintSystem.SystemLogPrint(transform, $"Reload Cancel", ELogType.Player);
@@ -101,6 +107,7 @@ public class PlayerShot : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F) && !isReloading)
         {
+            // StateBackforward -> Reloading -> StateForward
             StateBackforward();
             LogPrintSystem.SystemLogPrint(transform, "장전 실행", ELogType.Player);
         }
@@ -162,7 +169,7 @@ public class PlayerShot : MonoBehaviour
             sequenceBackforward.SetDelay(reverseDelay).OnComplete(() =>
             {
                 StateReloading();
-            });
+            }).SetId(10);
         }
     }
 

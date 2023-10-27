@@ -5,35 +5,155 @@ using static PlayerShot;
 
 public class PlayerShotAnimationController : MonoBehaviour
 {
+    #region Inspector
+    // PlayerState
+    public AnimationReferenceAsset Idle;
+    public AnimationReferenceAsset Move;
+    public AnimationReferenceAsset Jump;
+    public AnimationReferenceAsset Hit;
+    public AnimationReferenceAsset Dodge;
+    public AnimationReferenceAsset Dead;
+
+    // PlayerShotState
+    public AnimationReferenceAsset Backforward;
+    public AnimationReferenceAsset Reloading;
+    public AnimationReferenceAsset Forward;
+    public AnimationReferenceAsset Shot;
+    public AnimationReferenceAsset BoltAction;
+    #endregion
+
     private PlayerManager playerManager;
     private PlayerShot playerShot;
-
-    // 스파인 애니메이션을 위한 것
     private SkeletonAnimation skeletonAnimation;
-    public AnimationReferenceAsset[] animClip;
 
-    // 애니메이션에 대한 구조체
-    [SerializeField] private EPlayerState playerState;
-    [SerializeField] private EShotState playerShotState;
 
-    // 현재 처리되고 있는 애니메이션
-    private string currentAnimation;
-
-    void Start()
+    void Awake()
     {
-        playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
-        playerShot = GameObject.Find("Player").GetComponent<PlayerShot>();
+        playerManager = gameObject.GetComponent<PlayerManager>();
+        playerShot = gameObject.GetComponent<PlayerShot>();
         skeletonAnimation = GetComponent<SkeletonAnimation>();
-    } 
-
-    private void Move()
-    {
-        // move 상태일 때 애니메이션 적용
     }
 
-    private void AsyncAnimation(AnimationReferenceAsset animClip,bool loop,float timeScale)
+    void Update()
     {
-        // 해당 애니메이션으로 변경한다.
-        skeletonAnimation.state.SetAnimation(0,animClip,loop).TimeScale = timeScale;
+        switch (playerManager.state)
+        {
+            case EPlayerState.Idle:
+                AnimIdle();
+                break;
+            case EPlayerState.Move:
+                AnimMove();
+                break;
+            case EPlayerState.Jump:
+                AnimJump();
+                break;
+            case EPlayerState.Hit:
+                AnimHit();
+                break;
+            case EPlayerState.Dodge:
+                AnimDodge();
+                break;
+            case EPlayerState.Dead:
+                AnimDead();
+                break;
+        }
+
+        switch (playerShot.state)
+        {
+            case EShotState.None:
+                AnimNone();
+                break;
+            case EShotState.Backforward:
+                AnimBackforward();
+                break;
+            case EShotState.Reloading:
+                AnimReloading();
+                break;
+            case EShotState.Forward:
+                AnimForward();
+                break;
+            case EShotState.Shot:
+                AnimShot();
+                break;
+            case EShotState.BoltAction:
+                AnimBoltAction();
+                break;
+        }
+    }
+
+    // Player movement related
+    private void AnimIdle()
+    {
+        if (skeletonAnimation.AnimationName == "Idle") return;
+
+        skeletonAnimation.AnimationState.SetAnimation(0, Idle, true);
+    }
+    private void AnimMove()
+    {
+        if (skeletonAnimation.AnimationName == "Move") return;
+
+        skeletonAnimation.AnimationState.SetAnimation(0, Move, true);
+    }
+    private void AnimJump()
+    {
+        if (skeletonAnimation.AnimationName == "Jump") return;
+
+        skeletonAnimation.AnimationState.SetAnimation(0, Idle, true);
+    }
+    private void AnimHit()
+    {
+        if (skeletonAnimation.AnimationName == "Hit") return;
+
+        skeletonAnimation.AnimationState.SetAnimation(0, Idle, true);
+    }
+    private void AnimDodge()
+    {
+        if (skeletonAnimation.AnimationName == "Dodge") return;
+
+        skeletonAnimation.AnimationState.SetAnimation(0, Idle, true);
+    }
+    private void AnimDead()
+    {
+        if (skeletonAnimation.AnimationName == "Dead") return;
+
+        skeletonAnimation.AnimationState.SetAnimation(0, Idle, true);
+    }
+
+    // Player shooting related
+    private void AnimNone()
+    {
+        if (skeletonAnimation.AnimationName == "None") return;
+
+        skeletonAnimation.AnimationState.SetAnimation(1, "None", true);
+    }
+    private void AnimBackforward()
+    {
+        if (skeletonAnimation.AnimationName == "Backforward") return;
+
+        skeletonAnimation.AnimationState.SetAnimation(1, Backforward, false);
+    }
+    private void AnimReloading()
+    {
+        if (skeletonAnimation.AnimationName == "Reloading") return;
+
+        skeletonAnimation.AnimationState.SetAnimation(1, Reloading, false);
+    }
+    private void AnimForward()
+    {
+        if (skeletonAnimation.AnimationName == "Forward") return;
+
+        skeletonAnimation.AnimationState.SetAnimation(1, Forward, false);
+    }
+    private void AnimShot()
+    {
+        if (skeletonAnimation.AnimationName == "Shot") return;
+
+        skeletonAnimation.AnimationState.SetAnimation(1, Shot, false);
+    }
+    private void AnimBoltAction()
+    {
+        if (skeletonAnimation.AnimationName == "BoltAction") return;
+
+        skeletonAnimation.AnimationState.SetAnimation(1, BoltAction, false);
     }
 }

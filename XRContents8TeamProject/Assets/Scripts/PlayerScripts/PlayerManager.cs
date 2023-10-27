@@ -46,7 +46,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float dodgeInvincibilityDuration = 1.5f;
 
     private bool canDodge = true;
-    private bool isInvincibility = false;
+    public bool isInvincibility = false;
     private bool isDodgeDirRight;
 
     // Player shooting related
@@ -65,12 +65,9 @@ public class PlayerManager : MonoBehaviour
     [Header("플레이어 최대 발사 게이지")]
     [SerializeField] public float maxGauge = 0.5f;
 
-    // Spine Animation related
-    private SkeletonAnimation skeletonAnimation;
-    private AnimationReferenceAsset[] AnimClip;
+    // animation
+    private bool isDodge = false;
 
-    private AnimationState animState;
-    private string CurrentAnimation;
 
     public enum EPlayerState
     {
@@ -147,22 +144,25 @@ public class PlayerManager : MonoBehaviour
     #region MOVEMENT
     void PlayerMove()
     {
-        state = EPlayerState.Move;
-
-        float moveDir = Input.GetAxis("Horizontal");
-
-        if (isPlayerViewDirRight && moveDir != 0)
+        if (!isDodge)
         {
-            Vector3 dir = moveDir * Vector3.right;
-            transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
-        }
-        else if (!isPlayerViewDirRight && moveDir != 0)
-        {
-            Vector3 dir = moveDir * Vector3.left;
-            transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
-        }
+            state = EPlayerState.Move;
 
-        state = EPlayerState.Idle;
+            float moveDir = Input.GetAxis("Horizontal");
+
+            if (isPlayerViewDirRight && moveDir != 0)
+            {
+                Vector3 dir = moveDir * Vector3.right;
+                transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
+            }
+            else if (!isPlayerViewDirRight && moveDir != 0)
+            {
+                Vector3 dir = moveDir * Vector3.left;
+                transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
+            }
+
+            state = EPlayerState.Idle;
+        }
     }
     #endregion
     #region JUMP
@@ -190,6 +190,7 @@ public class PlayerManager : MonoBehaviour
     { 
         if (canMove)
         {
+            isDodge = true;
             state = EPlayerState.Dodge;
 
             Sequence sequence = DOTween.Sequence();
