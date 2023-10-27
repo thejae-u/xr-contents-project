@@ -63,8 +63,11 @@ public class PlayerShot : MonoBehaviour
             if (curAmmo > 0)
             {
                 curGauge += Time.deltaTime;
-                aimUIController.SetGauge();
-                LogPrintSystem.SystemLogPrint(transform, "에임 게이지 증가", ELogType.Player);
+                if (sequenceBoltAction == null)
+                {
+                    aimUIController.SetGauge();
+                    LogPrintSystem.SystemLogPrint(transform, "에임 게이지 증가", ELogType.Player);
+                }
             }
 
             if (!isMaxGauge && curGauge >= playerManager.maxGauge)
@@ -105,7 +108,7 @@ public class PlayerShot : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.F) && !isReloading)
+        if (Input.GetKeyDown(KeyCode.R) && !isReloading)
         {
             // StateBackforward -> Reloading -> StateForward
             StateBackforward();

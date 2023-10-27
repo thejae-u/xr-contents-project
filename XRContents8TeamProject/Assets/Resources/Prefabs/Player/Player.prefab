@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6607649661471559730}
-  - component: {fileID: 197114666532102079}
-  - component: {fileID: 4964331156947014229}
-  - component: {fileID: 8444904569608711496}
+  - component: {fileID: 4042768280036518515}
+  - component: {fileID: 4113693522542570993}
+  - component: {fileID: 5471782796121251530}
   - component: {fileID: 3401521922472138278}
   - component: {fileID: 5058585670143218601}
   - component: {fileID: 330303974747212952}
@@ -39,7 +39,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &197114666532102079
+--- !u!33 &4042768280036518515
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,7 +47,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759709160255606015}
   m_Mesh: {fileID: 0}
---- !u!23 &4964331156947014229
+--- !u!23 &4113693522542570993
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,7 +89,7 @@ MeshRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 1
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8444904569608711496
+--- !u!114 &5471782796121251530
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,76 +138,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed0c76a74b7748444b157e442249c9e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonAnimation: {fileID: 8444904569608711496}
-  useOverrideMixDuration: 0
-  overrideMixDuration: 0.2
-  useOverrideAttachmentThreshold: 1
-  attachmentThreshold: 0.5
-  useOverrideDrawOrderThreshold: 0
-  drawOrderThreshold: 0.5
-  trackControls:
-  - controls:
-    - animationName: 
-      loop: 0
-      key: 0
-      useCustomMixDuration: 0
-      mixDuration: 0
-    - animationName: 
-      loop: 0
-      key: 0
-      useCustomMixDuration: 0
-      mixDuration: 0
-    - animationName: 
-      loop: 0
-      key: 0
-      useCustomMixDuration: 0
-      mixDuration: 0
-    - animationName: 
-      loop: 0
-      key: 0
-      useCustomMixDuration: 0
-      mixDuration: 0
-    - animationName: 
-      loop: 0
-      key: 0
-      useCustomMixDuration: 0
-      mixDuration: 0
-    - animationName: 
-      loop: 0
-      key: 0
-      useCustomMixDuration: 0
-      mixDuration: 0
-  - controls:
-    - animationName: 
-      loop: 0
-      key: 0
-      useCustomMixDuration: 0
-      mixDuration: 0
-    - animationName: 
-      loop: 0
-      key: 0
-      useCustomMixDuration: 0
-      mixDuration: 0
-    - animationName: 
-      loop: 0
-      key: 0
-      useCustomMixDuration: 0
-      mixDuration: 0
-    - animationName: 
-      loop: 0
-      key: 0
-      useCustomMixDuration: 0
-      mixDuration: 0
-    - animationName: 
-      loop: 0
-      key: 0
-      useCustomMixDuration: 0
-      mixDuration: 0
-    - animationName: 
-      loop: 0
-      key: 0
-      useCustomMixDuration: 0
-      mixDuration: 0
+  Idle: {fileID: 11400000, guid: f71e4cc47d853bb48b0004a6ed2c48d6, type: 2}
+  Move: {fileID: 11400000, guid: 094d82902e65a5d4fb565742210a5a80, type: 2}
+  Jump: {fileID: 11400000, guid: 099953b0f579b9644873d3a7af6a72c5, type: 2}
+  Hit: {fileID: 11400000, guid: ca16e4acade558c4dbb97148273b7f93, type: 2}
+  Dodge: {fileID: 11400000, guid: f64a873bbc130cf4eb9630a898d9def7, type: 2}
+  Dead: {fileID: 11400000, guid: 4c40209b5898f6842b0cec21db9c3c9d, type: 2}
+  Backforward: {fileID: 11400000, guid: 24af475b8fa45234b97f1432d2d294ca, type: 2}
+  Reloading: {fileID: 11400000, guid: 279ee774b672d494896d9e8bbf0a487d, type: 2}
+  Forward: {fileID: 11400000, guid: 6da4bac67658050449b1be8d0f01a4b4, type: 2}
+  Shot: {fileID: 11400000, guid: 57b7526a53a84b74aae21b77ae6bcb97, type: 2}
+  BoltAction: {fileID: 11400000, guid: 344e9a4831847ed46863721188f096b8, type: 2}
 --- !u!50 &5058585670143218601
 Rigidbody2D:
   serializedVersion: 4
@@ -292,11 +233,11 @@ MonoBehaviour:
   dodgeDistance: 6
   dodgeCoolTime: 3
   dodgeInvincibilityDuration: 1.5
+  isInvincibility: 0
   playerNormalAtk: 10
   playerBonusAtk: 5
   shotDelaySpeed: 1
   maxAmmo: 6
-  reloadTime: 0.5
   maxGauge: 0.5
 --- !u!114 &3854289692963828313
 MonoBehaviour:
@@ -312,6 +253,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3818357213670130502, guid: a6c05d3313c146b4285be02c4a3ae3c7, type: 3}
   isMaxGauge: 0
-  reverseDelay: 0.5
-  reloadingDelay: 0.5
-  forwardDelay: 0.5
+  reverseDelay: 1
+  reloadingDelay: 1
+  forwardDelay: 1

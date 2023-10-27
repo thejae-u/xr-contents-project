@@ -7,7 +7,7 @@ public class AimUIController : MonoBehaviour
     //public Image aimImage;
     public Image Gauge;
 
-    private float fillGuage;
+    private float fillGauge;
     private float fillMax;
     private Color currentColor;
 
@@ -17,7 +17,7 @@ public class AimUIController : MonoBehaviour
     private void Awake()
     {
         fillMax = GameObject.Find("Player").GetComponent<PlayerManager>().maxGauge;
-        fillGuage = fillMax / 100;
+        fillGauge = fillMax / 100;
 
         Gauge.fillAmount = 0;
     }
@@ -36,7 +36,8 @@ public class AimUIController : MonoBehaviour
     public void SetGauge()
     {
         Gauge.color = Color.white;
-        Gauge.fillAmount = Gauge.fillAmount + fillGuage + Time.deltaTime;
+        Gauge.fillAmount = Gauge.fillAmount + fillGauge + Time.deltaTime;
+     
         if (Gauge.fillAmount == 1)
         {
             isMaxGauge = true;
