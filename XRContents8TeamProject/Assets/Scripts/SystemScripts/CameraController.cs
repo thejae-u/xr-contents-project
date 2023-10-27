@@ -79,7 +79,7 @@ public class CameraController : MonoBehaviour
         if (target)
         {
             var v = cameras[0].transform.position;
-            v.x = target.position.x + 2.5f;
+            v.x = target.position.x + 5.5f;
             cameras[0].transform.position = Vector3.MoveTowards(cameras[0].transform.position, v, trackSpeed * Time.deltaTime);
         }
     }

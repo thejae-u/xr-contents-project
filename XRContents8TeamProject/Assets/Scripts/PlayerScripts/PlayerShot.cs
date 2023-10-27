@@ -99,7 +99,7 @@ public class PlayerShot : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && !isReloading)
+        if (Input.GetKeyDown(KeyCode.F) && !isReloading)
         {
             StateBackforward();
             LogPrintSystem.SystemLogPrint(transform, "장전 실행", ELogType.Player);
