@@ -9,7 +9,7 @@ public class EnemyAnimationController : MonoBehaviour
     private EEnemyController instElite;
     private NEnemyController instNormal;
     private SkeletonAnimation anim;
-        
+
     private void Start()
     {
         if (transform.CompareTag("EliteEnemy"))
@@ -48,10 +48,10 @@ public class EnemyAnimationController : MonoBehaviour
                     // Jump();
                     break;
                 case ENode.SpecialAttackReady:
-                     SpecialAttackWait();
+                    SpecialAttackWait();
                     break;
                 case ENode.SpecialAttack:
-                     SpecialAttack();
+                    SpecialAttack();
                     break;
                 case ENode.Groggy:
                     Groggy();
@@ -69,7 +69,7 @@ public class EnemyAnimationController : MonoBehaviour
         else
         {
             // Normal Enemy Animation Call
-            switch(instNormal.Data().GetData<ReferenceValueT<ENode>>("myNode").Value)
+            switch (instNormal.Data().GetData<ReferenceValueT<ENode>>("myNode").Value)
             {
                 case ENode.Idle:
                     Idle();
@@ -89,7 +89,7 @@ public class EnemyAnimationController : MonoBehaviour
                 case ENode.Hit:
                     Hit();
                     break;
-                
+
                 // Use Elite Only
                 case ENode.SpecialAttackReady:
                 case ENode.SpecialAttack:
@@ -100,53 +100,79 @@ public class EnemyAnimationController : MonoBehaviour
         }
     }
 
-    
+
     private void Idle()
     {
-        if (myType == EEliteType.None)
+        switch (myType)
         {
-            if (anim.AnimationName == "Monster_Idle") return;
-            anim.AnimationState.SetAnimation(0, "Monster_Idle", true);
-        }
-        else
-        {
-            if (anim.AnimationName == "Rush_Idle") return;
-            anim.AnimationState.SetAnimation(0, "Rush_Idle", true);
+            case EEliteType.None when anim.AnimationName == "Monster_Idle":
+                break;
+            case EEliteType.None:
+                anim.AnimationState.SetAnimation(0, "Monster_Idle", true);
+                break;
+            case EEliteType.Rush when anim.AnimationName == "Rush_Idle":
+                break;
+            case EEliteType.Rush:
+                anim.AnimationState.SetAnimation(0, "Rush_Idle", true);
+                break;
+            case EEliteType.Bomb when anim.AnimationName == "Throw_Idle":
+                break;
+            case EEliteType.Bomb:
+                anim.AnimationState.SetAnimation(0, "Throw_Idle", true);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
-    
+
     private void Move()
     {
-        if (myType == EEliteType.None)
+        switch (myType)
         {
-            if (anim.AnimationName == "Monster_Move") return;
-            anim.AnimationState.SetAnimation(0, "Monster_Move", true);
-        }
-        else
-        {
-            if (anim.AnimationName == "Rush_Move") return;
-            anim.AnimationState.SetAnimation(0, "Rush_Move", true);
+            case EEliteType.None when anim.AnimationName == "Monster_Move":
+                break;
+            case EEliteType.None:
+                anim.AnimationState.SetAnimation(0, "Monster_Move", true);
+                break;
+            case EEliteType.Rush when anim.AnimationName == "Rush_Move":
+                break;
+            case EEliteType.Rush:
+                anim.AnimationState.SetAnimation(0, "Rush_Move", true);
+                break;
+            case EEliteType.Bomb:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 
     private void Groggy()
     {
-        if (anim.AnimationName == "Rush_Groggy") return;
-        anim.AnimationState.SetAnimation(0, "Rush_Groggy", true);
+        switch (myType)
+        {
+            case EEliteType.Rush when anim.AnimationName == "Rush_Groggy":
+                break;
+            case EEliteType.Rush:
+                anim.AnimationState.SetAnimation(0, "Rush_Groggy", true);
+                break;
+            case EEliteType.Bomb when anim.AnimationName == "Throw_Groggy":
+                break;
+            case EEliteType.Bomb:
+                anim.AnimationState.SetAnimation(0, "Throw_Groggy", true);
+                break;
+            case EEliteType.None:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
     private void Attack()
     {
-        if (myType == EEliteType.None)
-        {
-            if (anim.AnimationName == "Monster_Atk") return;
-            anim.AnimationState.SetAnimation(0, "Monster_Atk", true);
-        }
-        else
-        {
-            if (anim.AnimationName == "") return;
-            anim.AnimationState.SetAnimation(0, "", true);
-        }
+        if (myType != EEliteType.None) return;
+
+        if (anim.AnimationName == "Monster_Atk") return;
+        anim.AnimationState.SetAnimation(0, "Monster_Atk", true);
     }
 
     private void Jump()
@@ -157,35 +183,71 @@ public class EnemyAnimationController : MonoBehaviour
 
     private void SpecialAttackWait()
     {
-        if (myType == EEliteType.None)
+        switch (myType)
         {
-            if (anim.AnimationName == "Monster_Atk_Ready") return;
-            anim.AnimationState.SetAnimation(0, "Monster_Atk_Ready", true);
-        }
-        else
-        {
-            if (anim.AnimationName == "Rush_SpecialATK_Ready") return;
-            anim.AnimationState.SetAnimation(0, "Rush_SpecialATK_Ready", true);
+            case EEliteType.None when anim.AnimationName == "Monster_Atk_Ready":
+                return;
+            case EEliteType.None:
+                anim.AnimationState.SetAnimation(0, "Monster_Atk_Ready", true);
+                break;
+            case EEliteType.Rush when anim.AnimationName == "Rush_SpecialATK_Ready":
+                break;
+            case EEliteType.Rush:
+                anim.AnimationState.SetAnimation(0, "Rush_SpecialATK_Ready", true);
+                break;
+            case EEliteType.Bomb when anim.AnimationName == "Throw_SpecialATK_Ready":
+                break;
+            case EEliteType.Bomb:
+                anim.AnimationState.SetAnimation(0, "Throw_SpecialATK_Ready", true);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 
+
     private void SpecialAttack()
     {
-        if (anim.AnimationName == "Rush_SpecialATK") return;
-        anim.AnimationState.SetAnimation(0, "Rush_SpecialATK", false);
+        switch (myType)
+        {
+            case EEliteType.None:
+                break;
+            case EEliteType.Rush when anim.AnimationName == "Rush_SpecialATK":
+                break;
+            case EEliteType.Rush:
+                anim.AnimationState.SetAnimation(0, "Rush_SpecialATK", false);
+                break;
+            case EEliteType.Bomb when anim.AnimationName == "Throw_SpecialATK":
+                break;
+            case EEliteType.Bomb:
+                anim.AnimationState.SetAnimation(0, "Throw_SpecialATK", false);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
     private void Dead()
     {
-        if (myType == EEliteType.None)
+        switch (myType)
         {
-            if (anim.AnimationName == "Monster_Dead") return;
-            anim.AnimationState.SetAnimation(0, "Monster_Dead", false);
-        }
-        else
-        {
-            if (anim.AnimationName == "Rush_Dead") return;
-            anim.AnimationState.SetAnimation(0, "Rush_Dead", false);
+            case EEliteType.None when anim.AnimationName == "Monster_Dead":
+                break;
+            case EEliteType.None:
+                anim.AnimationState.SetAnimation(0, "Monster_Dead", false);
+                break;
+            case EEliteType.Rush when anim.AnimationName == "Rush_Dead":
+                break;
+            case EEliteType.Rush:
+                anim.AnimationState.SetAnimation(0, "Rush_Dead", false);
+                break;
+            case EEliteType.Bomb when anim.AnimationName == "Throw_Dead":
+                break;
+            case EEliteType.Bomb:
+                anim.AnimationState.SetAnimation(0, "Throw_Dead", false);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 
