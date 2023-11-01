@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 
 public class BackgroundScroller : MonoBehaviour
@@ -22,5 +18,4 @@ public class BackgroundScroller : MonoBehaviour
         pos.y = pos.y * y / 50;
         mat.SetVector("_att", pos);
     }
-
 }
