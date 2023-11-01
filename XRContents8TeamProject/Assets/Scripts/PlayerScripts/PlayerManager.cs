@@ -2,11 +2,13 @@ using UnityEngine;
 using System.Collections;
 using DG.Tweening;
 using Spine.Unity;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
     private Rigidbody2D playerRigidbody;
     private GameObject playerHpUI;
+    public Image tutorialtImg;
 
     // 플레이어 추적 범위
     public float MyRadius => rad;
@@ -337,5 +339,20 @@ public class PlayerManager : MonoBehaviour
         }
         
         this.transform.position = Camera.main.ViewportToWorldPoint(worldpos);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Tutorial"))
+        {
+            tutorialtImg.gameObject.SetActive(true);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Tutorial"))
+        {
+            tutorialtImg.gameObject.SetActive(false);
+        }
     }
 }

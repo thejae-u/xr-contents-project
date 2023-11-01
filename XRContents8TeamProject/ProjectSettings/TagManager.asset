@@ -9,6 +9,7 @@ TagManager:
   - NormalEnemy
   - EliteEnemy
   - Enemy
+  - Tutorial
   layers:
   - Default
   - TransparentFX
