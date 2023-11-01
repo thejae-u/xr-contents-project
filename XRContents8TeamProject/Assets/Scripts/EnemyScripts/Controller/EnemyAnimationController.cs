@@ -30,6 +30,8 @@ public class EnemyAnimationController : MonoBehaviour
 
     private void Update()
     {
+        if (CameraController.Inst.IsNowCutScene) return;
+        
         if (myType != EEliteType.None)
         {
             // Elite Enemy Animation Call
@@ -42,7 +44,7 @@ public class EnemyAnimationController : MonoBehaviour
                     Move();
                     break;
                 case ENode.NormalAttack:
-                    // Attack();
+                    Attack();
                     break;
                 case ENode.Jump:
                     // Jump();
@@ -150,6 +152,8 @@ public class EnemyAnimationController : MonoBehaviour
     {
         switch (myType)
         {
+            case EEliteType.None:
+                break;
             case EEliteType.Rush when anim.AnimationName == "Rush_Groggy":
                 break;
             case EEliteType.Rush:
@@ -160,8 +164,6 @@ public class EnemyAnimationController : MonoBehaviour
             case EEliteType.Bomb:
                 anim.AnimationState.SetAnimation(0, "Throw_Groggy", true);
                 break;
-            case EEliteType.None:
-                break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
@@ -169,10 +171,23 @@ public class EnemyAnimationController : MonoBehaviour
 
     private void Attack()
     {
-        if (myType != EEliteType.None) return;
-
-        if (anim.AnimationName == "Monster_Atk") return;
-        anim.AnimationState.SetAnimation(0, "Monster_Atk", true);
+        switch (myType)
+        {
+            case EEliteType.None when anim.AnimationName == "Monster_Atk":
+                break;
+            case EEliteType.None:
+                anim.AnimationState.SetAnimation(0, "Monster_Atk", true);
+                break;
+            case EEliteType.Rush when anim.AnimationName == "Rush_ATK":
+                break;
+            case EEliteType.Rush:
+                anim.AnimationState.SetAnimation(0, "Rush_ATK", true);
+                break;
+            case EEliteType.Bomb:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
     private void Jump()

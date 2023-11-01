@@ -1,0 +1,55 @@
+
+Background_Redbird03.png
+size: 287,40
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+앉아있는 붉은새2_
+  rotate: false
+  xy: 88, 2
+  size: 39, 36
+  orig: 67, 64
+  offset: 18, 10
+  index: -1
+앉아있는 붉은새2_1
+  rotate: false
+  xy: 129, 3
+  size: 38, 35
+  orig: 67, 64
+  offset: 19, 10
+  index: -1
+앉아있는 붉은새2_2
+  rotate: false
+  xy: 169, 3
+  size: 38, 35
+  orig: 67, 64
+  offset: 19, 10
+  index: -1
+앉아있는 붉은새2_3
+  rotate: false
+  xy: 2, 3
+  size: 41, 35
+  orig: 67, 64
+  offset: 15, 10
+  index: -1
+앉아있는 붉은새2_4
+  rotate: false
+  xy: 45, 3
+  size: 41, 35
+  orig: 67, 64
+  offset: 15, 10
+  index: -1
+앉아있는 붉은새2_5
+  rotate: false
+  xy: 248, 4
+  size: 37, 34
+  orig: 67, 64
+  offset: 19, 10
+  index: -1
+앉아있는 붉은새2_6
+  rotate: false
+  xy: 209, 4
+  size: 37, 34
+  orig: 67, 64
+  offset: 19, 10
+  index: -1

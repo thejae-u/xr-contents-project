@@ -1,132 +1,258 @@
 
 Rush_M.png
-size: 758,526
+size: 1515,528
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-arm1_L
+skin1/arm1_L
   rotate: true
-  xy: 306, 10
+  xy: 2, 8
   size: 137, 213
   orig: 147, 307
   offset: 1, 93
   index: -1
-arm1_R
+skin1/arm1_R
   rotate: true
-  xy: 132, 5
+  xy: 217, 3
   size: 142, 172
   orig: 144, 172
   offset: 1, 0
   index: -1
-arm2_L
+skin1/arm2_L
   rotate: false
-  xy: 376, 154
+  xy: 995, 156
   size: 148, 128
   orig: 207, 134
   offset: 52, 6
   index: -1
-arm2_R
-  rotate: false
-  xy: 526, 155
+skin1/arm2_R
+  rotate: true
+  xy: 1386, 422
   size: 104, 127
   orig: 105, 128
   offset: 1, 1
   index: -1
-body
+skin1/body
   rotate: false
-  xy: 2, 149
+  xy: 378, 151
   size: 372, 375
   orig: 372, 478
   offset: 0, 102
   index: -1
-face
+skin1/face
   rotate: false
-  xy: 521, 284
+  xy: 995, 286
   size: 235, 240
   orig: 238, 243
   offset: 2, 2
   index: -1
-face_damage
-  rotate: true
-  xy: 376, 284
+skin1/face_damage
+  rotate: false
+  xy: 994, 88
   size: 124, 66
   orig: 170, 106
   offset: 27, 14
   index: -1
-face_incapacitate, dead
-  rotate: true
-  xy: 444, 290
-  size: 118, 69
-  orig: 170, 98
-  offset: 29, 7
+skin1/face_incapacitate, dead
+  rotate: false
+  xy: 1120, 110
+  size: 122, 44
+  orig: 461, 98
+  offset: 29, 18
   index: -1
-foot_L
-  rotate: true
-  xy: 733, 195
+skin1/foot_L
+  rotate: false
+  xy: 1082, 16
   size: 42, 23
   orig: 48, 25
   offset: 4, 2
   index: -1
-foot_R
-  rotate: true
-  xy: 733, 239
+skin1/foot_R
+  rotate: false
+  xy: 1037, 16
   size: 43, 23
   orig: 48, 25
   offset: 3, 2
   index: -1
-hand_L
+skin1/hand_L
   rotate: true
-  xy: 2, 2
+  xy: 1248, 153
   size: 145, 128
   orig: 147, 128
   offset: 2, 0
   index: -1
-hand_R
-  rotate: true
-  xy: 376, 410
+skin1/hand_R
+  rotate: false
+  xy: 714, 2
   size: 114, 134
   orig: 117, 143
   offset: 1, 1
   index: -1
-leg1_L
+skin1/leg1_L
   rotate: false
-  xy: 598, 36
+  xy: 1433, 51
   size: 67, 85
   orig: 104, 88
   offset: 36, 2
   index: -1
-leg1_R
+skin1/leg1_R
   rotate: true
-  xy: 632, 123
+  xy: 1120, 41
   size: 67, 86
   orig: 104, 88
   offset: 36, 1
   index: -1
-leg2_L
+skin1/leg2_L
   rotate: false
-  xy: 667, 10
+  xy: 1371, 9
   size: 51, 57
   orig: 55, 58
   offset: 1, 1
   index: -1
-leg2_R
-  rotate: true
-  xy: 667, 69
+skin1/leg2_R
+  rotate: false
+  xy: 1317, 2
   size: 52, 57
   orig: 55, 58
   offset: 0, 1
   index: -1
-snort
+skin1/snort
   rotate: true
-  xy: 632, 192
+  xy: 1244, 61
   size: 90, 99
   orig: 90, 100
   offset: 0, 1
   index: -1
-tail
+skin2/snort
   rotate: true
-  xy: 521, 24
+  xy: 1244, 61
+  size: 90, 99
+  orig: 90, 100
+  offset: 0, 1
+  index: -1
+skin1/tail
+  rotate: true
+  xy: 914, 18
   size: 128, 75
   orig: 133, 77
   offset: 1, 2
+  index: -1
+skin2/arm1_L
+  rotate: false
+  xy: 1232, 300
+  size: 152, 226
+  orig: 156, 319
+  offset: 3, 91
+  index: -1
+skin2/arm1_R
+  rotate: true
+  xy: 391, 7
+  size: 142, 170
+  orig: 144, 172
+  offset: 1, 1
+  index: -1
+skin2/arm2_L
+  rotate: false
+  xy: 563, 11
+  size: 149, 138
+  orig: 207, 138
+  offset: 51, 0
+  index: -1
+skin2/arm2_R
+  rotate: false
+  xy: 1145, 156
+  size: 101, 128
+  orig: 107, 146
+  offset: 6, 18
+  index: -1
+skin2/body
+  rotate: false
+  xy: 2, 147
+  size: 374, 379
+  orig: 374, 482
+  offset: 0, 103
+  index: -1
+skin2/face
+  rotate: false
+  xy: 752, 236
+  size: 241, 290
+  orig: 242, 291
+  offset: 0, 0
+  index: -1
+skin2/face_damage
+  rotate: false
+  xy: 991, 41
+  size: 119, 45
+  orig: 170, 98
+  offset: 28, 13
+  index: -1
+skin2/face_incapacitate, dead
+  rotate: false
+  xy: 752, 166
+  size: 170, 68
+  orig: 170, 98
+  offset: 0, 0
+  index: -1
+skin2/foot_L
+  rotate: true
+  xy: 1208, 61
+  size: 47, 24
+  orig: 48, 25
+  offset: 0, 1
+  index: -1
+skin2/foot_R
+  rotate: false
+  xy: 991, 16
+  size: 44, 23
+  orig: 48, 25
+  offset: 3, 2
+  index: -1
+skin2/hand_L
+  rotate: true
+  xy: 1378, 138
+  size: 146, 128
+  orig: 147, 128
+  offset: 1, 0
+  index: -1
+skin2/hand_R
+  rotate: false
+  xy: 1386, 286
+  size: 115, 134
+  orig: 117, 143
+  offset: 0, 1
+  index: -1
+skin2/leg1_L
+  rotate: false
+  xy: 924, 148
+  size: 68, 86
+  orig: 104, 88
+  offset: 36, 1
+  index: -1
+skin2/leg1_R
+  rotate: true
+  xy: 1345, 68
+  size: 68, 86
+  orig: 104, 88
+  offset: 36, 1
+  index: -1
+skin2/leg2_L
+  rotate: false
+  xy: 1263, 2
+  size: 52, 57
+  orig: 55, 58
+  offset: 1, 1
+  index: -1
+skin2/leg2_R
+  rotate: false
+  xy: 1208, 2
+  size: 53, 57
+  orig: 55, 58
+  offset: 0, 1
+  index: -1
+skin2/tail
+  rotate: true
+  xy: 830, 18
+  size: 146, 82
+  orig: 146, 82
+  offset: 0, 0
   index: -1
