@@ -39,52 +39,52 @@ public class PlayerShotAnimationController : MonoBehaviour
             return;
     }
 
-    //void Update()
-    //{
-    //    switch (playerManager.state)
-    //    {
-    //        case EPlayerState.Idle:
-    //            AnimIdle();
-    //            break;
-    //        case EPlayerState.Move:
-    //            AnimMove();
-    //            break;
-    //        case EPlayerState.Jump:
-    //            AnimJump();
-    //            break;
-    //        case EPlayerState.Hit:
-    //            AnimHit();
-    //            break;
-    //        case EPlayerState.Dodge:
-    //            AnimDodge();
-    //            break;
-    //        case EPlayerState.Dead:
-    //            AnimDead();
-    //            break;
-    //    }
+    void Update()
+    {
+        switch (playerManager.state)
+        {
+            case EPlayerState.Idle:
+                AnimIdle();
+                break;
+            case EPlayerState.Move:
+                AnimMove();
+                break;
+            case EPlayerState.Jump:
+                AnimJump();
+                break;
+            case EPlayerState.Hit:
+                AnimHit();
+                break;
+            case EPlayerState.Dodge:
+                AnimDodge();
+                break;
+            case EPlayerState.Dead:
+                AnimDead();
+                break;
+        }
 
-    //    switch (playerShot.state)
-    //    {
-    //        case EShotState.None:
-    //            AnimNone();
-    //            break;
-    //        case EShotState.Backforward:
-    //            AnimBackforward();
-    //            break;
-    //        case EShotState.Reloading:
-    //            AnimReloading();
-    //            break;
-    //        case EShotState.Forward:
-    //            AnimForward();
-    //            break;
-    //        case EShotState.Shot:
-    //            AnimShot();
-    //            break;
-    //        case EShotState.BoltAction:
-    //            AnimBoltAction();
-    //            break;
-    //    }
-    //}
+        switch (playerShot.state)
+        {
+            case EShotState.None:
+                AnimNone();
+                break;
+            case EShotState.Backforward:
+                AnimBackforward();
+                break;
+            case EShotState.Reloading:
+                AnimReloading();
+                break;
+            case EShotState.Forward:
+                AnimForward();
+                break;
+            case EShotState.Shot:
+                AnimShot();
+                break;
+            case EShotState.BoltAction:
+                AnimBoltAction();
+                break;
+        }
+    }
 
     // Player movement related
     private void AnimIdle()

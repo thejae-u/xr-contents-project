@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using DG.Tweening;
+using Spine;
 using Spine.Unity;
 using UnityEngine.UI;
 
@@ -70,6 +71,14 @@ public class PlayerManager : MonoBehaviour
     // animation
     private bool isDodge = false;
 
+    public SkeletonAnimation skeletonAnimation;
+
+    [SpineBone(dataField: "skeletonAnimation")]
+    public string boneName;
+    public Camera cam;
+
+    public Bone bone;
+
     public enum EPlayerState
     {
         Idle,
@@ -94,6 +103,8 @@ public class PlayerManager : MonoBehaviour
         Cursor.visible = false;
 
         state = EPlayerState.Idle;
+
+        skeletonAnimation.state.SetAnimation(2, "Aim", true);
     }
 
     private void Update()
@@ -101,6 +112,7 @@ public class PlayerManager : MonoBehaviour
         if (CameraController.Inst.IsNowCutScene) return;
         
         PlayerViewMousePoint();
+
         PlayerMove();
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKey(KeyCode.A) && canDodge)
@@ -250,7 +262,7 @@ public class PlayerManager : MonoBehaviour
             LogPrintSystem.SystemLogPrint(transform, "플레이어 무적 상태 해제", ELogType.Player);
         });
     }
-    #endregion
+    #endregion[
 
     void PlayerDodge(bool dodgeDirRight)
     {
@@ -297,24 +309,26 @@ public class PlayerManager : MonoBehaviour
 
     void PlayerViewMousePoint()
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (mousePosition.x < transform.position.x)
-        {
-            transform.eulerAngles = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
-            isPlayerViewDirRight = false;
-        }
-        else
-        {
-            transform.eulerAngles = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
-            isPlayerViewDirRight = true;
-        }
-    }
+        var mousePosition = Input.mousePosition;
+        var worldMousePosition = cam.ScreenToWorldPoint(mousePosition);
+        var skeletonSpacePoint = skeletonAnimation.transform.InverseTransformPoint(worldMousePosition);
+        skeletonSpacePoint.x *= skeletonAnimation.Skeleton.ScaleX;
+        skeletonSpacePoint.y *= skeletonAnimation.Skeleton.ScaleY;
+        bone.SetLocalPosition(skeletonSpacePoint);
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, rad);
+        //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        //if (mousePosition.x < transform.position.x)
+        //{
+        //    transform.eulerAngles = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
+        //    isPlayerViewDirRight = false;
+        //}
+        //else
+        //{
+        //    transform.eulerAngles = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
+        //    isPlayerViewDirRight = true;
+        //}
     }
 
     void PlayerMoveLimit()
@@ -341,6 +355,13 @@ public class PlayerManager : MonoBehaviour
         this.transform.position = Camera.main.ViewportToWorldPoint(worldpos);
     }
 
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, rad);
+    }
+
+    // 튜토리얼 표지판
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Tutorial"))
