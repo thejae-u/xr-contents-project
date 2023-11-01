@@ -19,7 +19,7 @@ public class PlayerShot : MonoBehaviour
 
     private bool isReloading = false;
     private bool isDiscountBullet;
-    public bool isMaxGauge = false;
+    public bool isPlayerCheckMaxGauge = false;
 
     [Header("총 딜레이 관련")]
     [SerializeField] private float reverseDelay = 0.3f;
@@ -62,19 +62,12 @@ public class PlayerShot : MonoBehaviour
         {
             if (curAmmo > 0)
             {
-                curGauge += Time.deltaTime;
                 if (sequenceBoltAction == null)
-                {
+                {             
                     aimUIController.SetGauge();
+
                     LogPrintSystem.SystemLogPrint(transform, "에임 게이지 증가", ELogType.Player);
                 }
-            }
-
-            if (!isMaxGauge && curGauge >= playerManager.maxGauge)
-            {
-                isMaxGauge = true;
-
-                LogPrintSystem.SystemLogPrint(transform, $"{curGauge} => MAXGAUGE", ELogType.Player);
             }
         }
 
@@ -154,7 +147,7 @@ public class PlayerShot : MonoBehaviour
             LogPrintSystem.SystemLogPrint(transform, "볼트 액션 종료", ELogType.Player);
             sequenceBoltAction = null;
 
-            isMaxGauge = false;
+            isPlayerCheckMaxGauge = false;
         });
     }
     #endregion

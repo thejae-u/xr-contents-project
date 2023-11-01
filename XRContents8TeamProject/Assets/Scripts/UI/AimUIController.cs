@@ -11,7 +11,7 @@ public class AimUIController : MonoBehaviour
     private Color currentColor;
 
     public bool isReadyWarningGauge = false;
-    private bool isMaxGauge = false;
+    private bool PlayerCheckMaxGauge = false;
 
     private void Awake()
     {
@@ -25,21 +25,18 @@ public class AimUIController : MonoBehaviour
     {
         Vector3 mousePosition = Input.mousePosition;
         aimingPoint.transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
-
-        if (isMaxGauge)
-        {
-            Gauge.color = Color.yellow;
-        }
     }
 
     public void SetGauge()
     {
-        Gauge.color = Color.white;
         Gauge.fillAmount = Gauge.fillAmount + fillGauge + Time.deltaTime;
-     
+        Gauge.color = Color.white;
+
         if (Gauge.fillAmount == 1)
         {
-            isMaxGauge = true;
+            Gauge.color = Color.yellow;
+            PlayerCheckMaxGauge = true;
+            PlayerCheckMaxGauge = GameObject.Find("Player").GetComponent<PlayerShot>().isPlayerCheckMaxGauge;
         }
     }
 
@@ -68,7 +65,7 @@ public class AimUIController : MonoBehaviour
     {
         Gauge.fillAmount = 0;
 
-        isMaxGauge = false;
+        PlayerCheckMaxGauge = false;
         Gauge.color = Color.white;
     }
 }

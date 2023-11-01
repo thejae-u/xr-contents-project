@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
     }
     void Start()
     {
-        isBounsDamage = playerShot.isMaxGauge;
+        isBounsDamage = playerShot.isPlayerCheckMaxGauge;
         LogPrintSystem.SystemLogPrint(transform, $"bounsDamage : {isBounsDamage}", ELogType.Player);
     }
 
