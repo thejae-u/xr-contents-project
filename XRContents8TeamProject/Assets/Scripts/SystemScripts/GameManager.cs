@@ -92,7 +92,6 @@ public class GameManager : MonoBehaviour
 
     public void HitPlayer()
     {
-        if (playerManager.isInvincibility) return;
         Color newColor = Color.white;
         newColor.a = 1f;
         bloodImage.color = newColor;

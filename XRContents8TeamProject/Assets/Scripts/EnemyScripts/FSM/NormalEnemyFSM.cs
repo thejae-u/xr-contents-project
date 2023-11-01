@@ -69,8 +69,11 @@ public class NormalAttackNode : INode
     public INode Execute(Blackboard blackboard)
     {
         blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.NormalAttack;
+        var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType").Value;
 
         var isNowAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
+        
+        var anim = blackboard.GetData<Transform>("myTransform").GetComponent<SkeletonAnimation>();
         
         if (isNowAttack.Value)
             return Fsm.GuardNullNode(this, this);
@@ -96,8 +99,11 @@ public class NormalAttackNode : INode
         }
         
         isNowAttack.Value = true;
+
+        if (player.isInvincibility) return Fsm.GuardNullNode(this, this);
         
         player.PlayerDiscountHp(attackDamage, myTransform.position.x);
+
         GameManager.Inst.HitPlayer();
 
         sequence.SetDelay(1.5f).OnComplete(() =>

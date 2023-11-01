@@ -221,9 +221,14 @@ public class EliteRushAttackNode : INode
 
         if (playerRange + myAttackRange.Value >= distance)
         {
-            playerTransform.GetComponent<PlayerManager>().PlayerDiscountHp(mySpecialAttackDamage.Value,
-                myTransform.position.x);
-            LogPrintSystem.SystemLogPrint(myTransform, $"Damage to Player {mySpecialAttackDamage.Value}", ELogType.EnemyAI);
+            if (!playerTransform.GetComponent<PlayerManager>().isInvincibility)
+            {
+                playerTransform.GetComponent<PlayerManager>().PlayerDiscountHp(mySpecialAttackDamage.Value,
+                    myTransform.position.x);
+                LogPrintSystem.SystemLogPrint(myTransform, $"Damage to Player {mySpecialAttackDamage.Value}",
+                    ELogType.EnemyAI);
+            }
+
             return true;
         }
         

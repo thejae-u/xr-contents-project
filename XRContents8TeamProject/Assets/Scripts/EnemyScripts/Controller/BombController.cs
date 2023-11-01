@@ -56,8 +56,11 @@ public class BombController : MonoBehaviour
 
             if (d2 + range >= distance)
             {
-                playerManager.PlayerDiscountHp(parent.GetMySpecialDamage(), myPos.x);
-                LogPrintSystem.SystemLogPrint(transform, "Hit Bomb", ELogType.EnemyAI);
+                if (!player.GetComponent<PlayerManager>().isInvincibility)
+                {
+                    playerManager.PlayerDiscountHp(parent.GetMySpecialDamage(), myPos.x);
+                    LogPrintSystem.SystemLogPrint(transform, "Hit Bomb", ELogType.EnemyAI);
+                }
             }
             
             Destroy(gameObject);

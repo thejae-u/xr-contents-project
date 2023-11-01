@@ -174,14 +174,18 @@ public class EnemyAnimationController : MonoBehaviour
         switch (myType)
         {
             case EEliteType.None when anim.AnimationName == "Monster_Atk":
+                if (anim.AnimationState.GetCurrent(0).IsComplete)
+                    anim.AnimationState.SetAnimation(0, "Monster_Atk", false);
                 break;
             case EEliteType.None:
-                anim.AnimationState.SetAnimation(0, "Monster_Atk", true);
+                anim.AnimationState.SetAnimation(0, "Monster_Atk", false);
                 break;
             case EEliteType.Rush when anim.AnimationName == "Rush_ATK":
+                if (anim.AnimationState.GetCurrent(0).IsComplete)
+                    anim.AnimationState.SetAnimation(0, "Rush_ATK", false);
                 break;
             case EEliteType.Rush:
-                anim.AnimationState.SetAnimation(0, "Rush_ATK", true);
+                anim.AnimationState.SetAnimation(0, "Rush_ATK", false);
                 break;
             case EEliteType.Bomb:
                 break;
