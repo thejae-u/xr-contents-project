@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class AimUIController : MonoBehaviour
 {
     public Transform aimingPoint;
-    //public Image aimImage;
     public Image Gauge;
 
     private float fillGauge;

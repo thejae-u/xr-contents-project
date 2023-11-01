@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour
 {
     private Rigidbody2D playerRigidbody;
     private GameObject playerHpUI;
+    public GameObject playerAim;
     public Image tutorialtImg;
 
     // 플레이어 추적 범위
@@ -69,8 +70,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public float maxGauge = 0.5f;
 
     // animation
-    private bool isDodge = false;
-
     public SkeletonAnimation skeletonAnimation;
 
     [SpineBone(dataField: "skeletonAnimation")]
@@ -95,6 +94,7 @@ public class PlayerManager : MonoBehaviour
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
         playerHpUI = GameObject.Find("HP");
+        playerAim = transform.GetChild(0).gameObject;
     }
 
     private void Start()
@@ -157,25 +157,22 @@ public class PlayerManager : MonoBehaviour
     #region MOVEMENT
     void PlayerMove()
     {
-        if (!isDodge)
+        state = EPlayerState.Move;
+
+        float moveDir = Input.GetAxis("Horizontal");
+
+        if (isPlayerViewDirRight && moveDir != 0)
         {
-            state = EPlayerState.Move;
-
-            float moveDir = Input.GetAxis("Horizontal");
-
-            if (isPlayerViewDirRight && moveDir != 0)
-            {
-                Vector3 dir = moveDir * Vector3.right;
-                transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
-            }
-            else if (!isPlayerViewDirRight && moveDir != 0)
-            {
-                Vector3 dir = moveDir * Vector3.left;
-                transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
-            }
-
-            state = EPlayerState.Idle;
+            Vector3 dir = moveDir * Vector3.right;
+            transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
         }
+        else if (!isPlayerViewDirRight && moveDir != 0)
+        {
+            Vector3 dir = moveDir * Vector3.left;
+            transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
+        }
+
+        state = EPlayerState.Idle;
     }
     #endregion
     #region JUMP
@@ -268,7 +265,6 @@ public class PlayerManager : MonoBehaviour
     {
         if (canMove)
         {
-            isDodge = true;
             state = EPlayerState.Dodge;
 
             Sequence sequence = DOTween.Sequence();
@@ -309,26 +305,25 @@ public class PlayerManager : MonoBehaviour
 
     void PlayerViewMousePoint()
     {
-
         var mousePosition = Input.mousePosition;
         var worldMousePosition = cam.ScreenToWorldPoint(mousePosition);
-        var skeletonSpacePoint = skeletonAnimation.transform.InverseTransformPoint(worldMousePosition);
-        skeletonSpacePoint.x *= skeletonAnimation.Skeleton.ScaleX;
-        skeletonSpacePoint.y *= skeletonAnimation.Skeleton.ScaleY;
-        bone.SetLocalPosition(skeletonSpacePoint);
+        //var skeletonSpacePoint = skeletonAnimation.transform.InverseTransformPoint(worldMousePosition);
+        //skeletonSpacePoint.x *= skeletonAnimation.Skeleton.ScaleX;
+        //skeletonSpacePoint.y *= skeletonAnimation.Skeleton.ScaleY;
+        //bone.SetLocalPosition(skeletonSpacePoint);
 
-        //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        playerAim.transform.position = worldMousePosition;
 
-        //if (mousePosition.x < transform.position.x)
-        //{
-        //    transform.eulerAngles = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
-        //    isPlayerViewDirRight = false;
-        //}
-        //else
-        //{
-        //    transform.eulerAngles = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
-        //    isPlayerViewDirRight = true;
-        //}
+        if (worldMousePosition.x < transform.position.x)
+        {
+            transform.eulerAngles = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
+            isPlayerViewDirRight = false;
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
+            isPlayerViewDirRight = true;
+        }
     }
 
     void PlayerMoveLimit()

@@ -1463,6 +1463,10 @@ PrefabInstance:
       value: aim
       objectReference: {fileID: 0}
     - target: {fileID: 5871502387009047570, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
+      propertyPath: playerAim
+      value: 
+      objectReference: {fileID: 1905917983}
+    - target: {fileID: 5871502387009047570, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
       propertyPath: tutorialtImg
       value: 
       objectReference: {fileID: 735570732}
@@ -1817,7 +1821,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632996736}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f726fb798ad621458c431cb9966d91d, type: 3}
   m_Name: 
