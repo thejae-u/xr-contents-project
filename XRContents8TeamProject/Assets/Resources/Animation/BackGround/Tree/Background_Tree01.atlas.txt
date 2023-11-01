@@ -1,0 +1,13 @@
+
+Background_Tree01.png
+size: 459,644
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Tree11_910x1320
+  rotate: false
+  xy: 2, 2
+  size: 455, 640
+  orig: 455, 660
+  offset: 0, 0
+  index: -1

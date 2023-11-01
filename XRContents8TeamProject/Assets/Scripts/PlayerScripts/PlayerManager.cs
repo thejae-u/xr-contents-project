@@ -68,7 +68,6 @@ public class PlayerManager : MonoBehaviour
     // animation
     private bool isDodge = false;
 
-
     public enum EPlayerState
     {
         Idle,
@@ -185,41 +184,7 @@ public class PlayerManager : MonoBehaviour
         canJump = true;
     }
     #endregion JUMP
-
-    void PlayerDodge(bool dodgeDirRight)
-    { 
-        if (canMove)
-        {
-            isDodge = true;
-            state = EPlayerState.Dodge;
-
-            Sequence sequence = DOTween.Sequence();
-            LogPrintSystem.SystemLogPrint(transform, "회피 사용", ELogType.Player);
-
-            canDodge = false;
-            Vector3 playerPos = transform.position;
-
-            PlayerInvincibility(dodgeInvincibilityDuration);
-
-            if (dodgeDirRight)
-            {
-                transform.DOMoveX(playerPos.x + dodgeDistance, 1.0f);
-            }
-            else
-            {
-                transform.DOMoveX(playerPos.x - dodgeDistance, 1.0f);
-            }
-
-            sequence.SetDelay(dodgeCoolTime).OnComplete(() =>
-            {
-                LogPrintSystem.SystemLogPrint(transform, "회피 쿨타임 종료", ELogType.Player);
-                canDodge = true;
-            });
-
-            return;
-        }
-    }
-
+    #region HIT
     public void PlayerDiscountHp(float damage, float enemyXPos)
     {
         if (!isInvincibility)
@@ -231,15 +196,6 @@ public class PlayerManager : MonoBehaviour
             LogPrintSystem.SystemLogPrint(transform, $"{damage}From Enemy -> Remain PlayerHP{playerHp}", ELogType.Player);
 
             PlayerKnockback(enemyXPos);
-        }
-    }
-
-    private void PlayerDeath()
-    {
-        if(playerHp <= 0)
-        {
-            state = EPlayerState.Dead;
-            // 게임 오버 씬으로 변경
         }
     }
 
@@ -291,6 +247,50 @@ public class PlayerManager : MonoBehaviour
             isKnockback = false;
             LogPrintSystem.SystemLogPrint(transform, "플레이어 무적 상태 해제", ELogType.Player);
         });
+    }
+    #endregion
+
+    void PlayerDodge(bool dodgeDirRight)
+    {
+        if (canMove)
+        {
+            isDodge = true;
+            state = EPlayerState.Dodge;
+
+            Sequence sequence = DOTween.Sequence();
+            LogPrintSystem.SystemLogPrint(transform, "회피 사용", ELogType.Player);
+
+            canDodge = false;
+            Vector3 playerPos = transform.position;
+
+            PlayerInvincibility(dodgeInvincibilityDuration);
+
+            if (dodgeDirRight)
+            {
+                transform.DOMoveX(playerPos.x + dodgeDistance, 1.0f);
+            }
+            else
+            {
+                transform.DOMoveX(playerPos.x - dodgeDistance, 1.0f);
+            }
+
+            sequence.SetDelay(dodgeCoolTime).OnComplete(() =>
+            {
+                LogPrintSystem.SystemLogPrint(transform, "회피 쿨타임 종료", ELogType.Player);
+                canDodge = true;
+            });
+
+            return;
+        }
+    }
+
+    private void PlayerDeath()
+    {
+        if (playerHp <= 0)
+        {
+            state = EPlayerState.Dead;
+            // 게임 오버 씬으로 변경
+        }
     }
 
     void PlayerViewMousePoint()

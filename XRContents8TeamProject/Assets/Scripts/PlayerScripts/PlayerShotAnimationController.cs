@@ -5,6 +5,10 @@ using static PlayerShot;
 
 public class PlayerShotAnimationController : MonoBehaviour
 {
+    private PlayerManager playerManager;
+    private PlayerShot playerShot;
+    private SkeletonAnimation skeletonAnimation;
+
     #region Inspector
     // PlayerState
     public AnimationReferenceAsset Idle;
@@ -22,11 +26,6 @@ public class PlayerShotAnimationController : MonoBehaviour
     public AnimationReferenceAsset BoltAction;
     #endregion
 
-    private PlayerManager playerManager;
-    private PlayerShot playerShot;
-    private SkeletonAnimation skeletonAnimation;
-
-
     void Awake()
     {
         playerManager = gameObject.GetComponent<PlayerManager>();
@@ -34,52 +33,58 @@ public class PlayerShotAnimationController : MonoBehaviour
         skeletonAnimation = GetComponent<SkeletonAnimation>();
     }
 
-    void Update()
+    private void Start()
     {
-        switch (playerManager.state)
-        {
-            case EPlayerState.Idle:
-                AnimIdle();
-                break;
-            case EPlayerState.Move:
-                AnimMove();
-                break;
-            case EPlayerState.Jump:
-                AnimJump();
-                break;
-            case EPlayerState.Hit:
-                AnimHit();
-                break;
-            case EPlayerState.Dodge:
-                AnimDodge();
-                break;
-            case EPlayerState.Dead:
-                AnimDead();
-                break;
-        }
-
-        switch (playerShot.state)
-        {
-            case EShotState.None:
-                AnimNone();
-                break;
-            case EShotState.Backforward:
-                AnimBackforward();
-                break;
-            case EShotState.Reloading:
-                AnimReloading();
-                break;
-            case EShotState.Forward:
-                AnimForward();
-                break;
-            case EShotState.Shot:
-                AnimShot();
-                break;
-            case EShotState.BoltAction:
-                AnimBoltAction();
-                break;
-        }
+        if (skeletonAnimation == null)
+            return;
     }
+
+    //void Update()
+    //{
+    //    switch (playerManager.state)
+    //    {
+    //        case EPlayerState.Idle:
+    //            AnimIdle();
+    //            break;
+    //        case EPlayerState.Move:
+    //            AnimMove();
+    //            break;
+    //        case EPlayerState.Jump:
+    //            AnimJump();
+    //            break;
+    //        case EPlayerState.Hit:
+    //            AnimHit();
+    //            break;
+    //        case EPlayerState.Dodge:
+    //            AnimDodge();
+    //            break;
+    //        case EPlayerState.Dead:
+    //            AnimDead();
+    //            break;
+    //    }
+
+    //    switch (playerShot.state)
+    //    {
+    //        case EShotState.None:
+    //            AnimNone();
+    //            break;
+    //        case EShotState.Backforward:
+    //            AnimBackforward();
+    //            break;
+    //        case EShotState.Reloading:
+    //            AnimReloading();
+    //            break;
+    //        case EShotState.Forward:
+    //            AnimForward();
+    //            break;
+    //        case EShotState.Shot:
+    //            AnimShot();
+    //            break;
+    //        case EShotState.BoltAction:
+    //            AnimBoltAction();
+    //            break;
+    //    }
+    //}
 
     // Player movement related
     private void AnimIdle()
@@ -154,6 +159,6 @@ public class PlayerShotAnimationController : MonoBehaviour
     {
         if (skeletonAnimation.AnimationName == "BoltAction") return;
 
-        skeletonAnimation.AnimationState.SetAnimation(1, BoltAction, false);
+       skeletonAnimation.AnimationState.SetAnimation(1, BoltAction, false);
     }
 }
