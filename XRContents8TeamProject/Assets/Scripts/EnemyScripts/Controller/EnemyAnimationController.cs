@@ -91,9 +91,11 @@ public class EnemyAnimationController : MonoBehaviour
                 case ENode.Hit:
                     Hit();
                     break;
-
-                // Use Elite Only
                 case ENode.SpecialAttackReady:
+                    SpecialAttackWait();
+                    break;
+                
+                // Use Elite Only
                 case ENode.SpecialAttack:
                 case ENode.Groggy:
                 default:
