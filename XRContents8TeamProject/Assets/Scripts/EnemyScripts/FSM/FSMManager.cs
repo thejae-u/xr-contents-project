@@ -119,82 +119,19 @@ public class WaitNode : INode
     {
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
-        var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType");
         var isGround = blackboard.GetData<ReferenceValueT<bool>>("isGround");
-        
-        if (!blackboard.GetData<ReferenceValueT<bool>>("isTimerEnded").Value &&
-            blackboard.GetData<ReferenceValueT<EEliteType>>("myType").Value == EEliteType.None)
-        {
-            var myPos = Camera.main.WorldToViewportPoint(myTransform.position);
+        var myNode = blackboard.GetData<ReferenceValueT<ENode>>("myNode");
 
-            if (myPos.x > 0.1f && myPos.x < 0.9f)
-                blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.SpecialAttackReady;
-            else
-                blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Idle;
-        }
-        else
-            blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Idle;
+        myNode.Value = ENode.Idle;
         
         if (!isGround.Value) return Fsm.GuardNullNode(this, this);
         
-        if (myType.Value == EEliteType.None)
-        {
-            myTransform.position = new Vector3(myTransform.position.x, myTransform.position.y, 0);
-            var myPos = Camera.main.WorldToViewportPoint(myTransform.position);
-
-            if (myPos.x > 0.1f && myPos.x < 0.9f)
-            {
-                var waitTime = blackboard.GetData<ReferenceValueT<float>>("waitTime");
-                var isTimerWait = blackboard.GetData<ReferenceValueT<bool>>("isTimerWait");
-                var isTimerEnded = blackboard.GetData<ReferenceValueT<bool>>("isTimerEnded");
-
-                if (!isTimerEnded.Value)
-                {
-                    var timer = myTransform.GetComponentInChildren<WeakTimeController>(true);
-
-                    if (!isTimerWait.Value)
-                    {
-                        myTransform.GetComponent<NEnemyController>().TimerSwitch();
-                        LogPrintSystem.SystemLogPrint(myTransform, "Timer Init Call", ELogType.EnemyAI);
-                        timer.Init(waitTime);
-                        isTimerWait.Value = true;
-                        return Fsm.GuardNullNode(this, this);
-                    }
-
-                    if (!timer.IsEnded) return Fsm.GuardNullNode(this, this);
-
-                    if (!isTimerEnded.Value)
-                    {
-                        isTimerEnded.Value = true;
-                    }
-
-                    // timer.IsAttacked ? do Something : do SomeThing
-
-                    timer.Checked();
-                }
-            }
-        }
-
         float d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
         float d2 = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
 
         float distance = (myTransform.position - playerTransform.position).magnitude;
 
-        if (d1 + d2 >= distance)
-        {
-            if (myType == EEliteType.None)
-            {
-                var isTimerEnded = blackboard.GetData<ReferenceValueT<bool>>("isTimerEnded");
-                if (!isTimerEnded.Value)
-                {
-                    return Fsm.GuardNullNode(this, this);
-                }
-            }
-
-            return Fsm.GuardNullNode(this, enterPlayer);
-        }
-
-        return Fsm.GuardNullNode(this, this);
+        return Fsm.GuardNullNode(this, d1 + d2 >= distance ? enterPlayer : this);
     }
 }
 

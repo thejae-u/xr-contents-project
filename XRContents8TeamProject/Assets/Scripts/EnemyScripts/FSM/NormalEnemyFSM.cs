@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using EnemyScripts;
 using Spine.Unity;
 using UnityEngine;
 
@@ -8,12 +9,10 @@ public class NormalTraceNode : TraceNode
 {
     public INode playerEnter;
     public INode playerExit;
-    
+
     public override INode Execute(Blackboard blackboard)
     {
         var type = Trace(blackboard);
-
-        blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Trace;
 
         // Trace Logic
         var myTransform = blackboard.GetData<Transform>("myTransform");
@@ -21,6 +20,45 @@ public class NormalTraceNode : TraceNode
         var myPos = myTransform.position;
         var playerPos = playerTransform.position;
         var myMoveSpeed = blackboard.GetData<ReferenceValueT<float>>("myMoveSpeed");
+        var myNode = blackboard.GetData<ReferenceValueT<ENode>>("myNode");
+        var isTimerEnded = blackboard.GetData<ReferenceValueT<bool>>("isTimerEnded");
+        var waitTime = blackboard.GetData<ReferenceValueT<float>>("waitTime");
+        var isTimerWait = blackboard.GetData<ReferenceValueT<bool>>("isTimerWait");
+        var myPosToCamera = Camera.main.WorldToViewportPoint(myPos);
+
+        if (myPosToCamera.x > 0.1f && myPosToCamera.x < 0.9f)
+        {
+            if (!isTimerEnded.Value)
+            {
+                myNode.Value = ENode.SpecialAttackReady;
+
+                if (!isTimerEnded.Value)
+                {
+                    var timer = myTransform.GetComponentInChildren<WeakTimeController>(true);
+
+                    if (!isTimerWait.Value)
+                    {
+                        myTransform.GetComponent<NEnemyController>().TimerSwitch();
+                        timer.Init(waitTime);
+                        isTimerWait.Value = true;
+                        return Fsm.GuardNullNode(this, this);
+                    }
+
+                    if (!timer.IsEnded) return Fsm.GuardNullNode(this, this);
+
+                    if (!isTimerEnded.Value)
+                    {
+                        isTimerEnded.Value = true;
+                    }
+
+                    // timer.IsAttacked ? do Something : do SomeThing
+
+                    timer.Checked();
+                }
+            }
+        }
+
+        myNode.Value = ENode.Trace;
 
         Vector2 rayCastPos = myPos;
         float rayDistance = 1.5f;
