@@ -177,9 +177,14 @@ public class EnemyAnimationController : MonoBehaviour
         {
             case EEliteType.None when anim.AnimationName == "Monster_Atk":
                 if (anim.AnimationState.GetCurrent(0).IsComplete)
-                    anim.AnimationState.SetAnimation(0, "Monster_Atk", false);
+                {
+                    anim.timeScale = 1.0f;
+                    instNormal.Data().GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Idle;
+                }
+
                 break;
             case EEliteType.None:
+                anim.timeScale = 2.0f;
                 anim.AnimationState.SetAnimation(0, "Monster_Atk", false);
                 break;
             case EEliteType.Rush when anim.AnimationName == "Rush_ATK":

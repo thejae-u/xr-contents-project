@@ -37,35 +37,6 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public void FirstCameraTransition()
-    {
-        if (visited[0]) return;
-        cameras[0].gameObject.SetActive(false);
-        cameras[1].gameObject.SetActive(true);
-        
-        IsNowCutScene = true;
-        visited[0] = true;
-
-        Sequence sequence = DOTween.Sequence();
-        sequence.SetDelay(5.0f).OnComplete(CutSceneEnd);
-    }
-
-    private void CutSceneEnd()
-    {
-        foreach (var camera in cameras)
-        {
-            if(camera.transform.name == "PlayerFollowCamera")
-                camera.gameObject.SetActive(true);
-            else
-                camera.gameObject.SetActive(false);
-        }
-        
-        Sequence sequence = DOTween.Sequence();
-        sequence.SetDelay(3.0f).OnComplete(() =>
-        {
-            IsNowCutScene = false;
-        });
-    }
 
     private void Start()
     {

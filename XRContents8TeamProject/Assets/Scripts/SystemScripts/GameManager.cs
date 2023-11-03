@@ -87,7 +87,8 @@ public class GameManager : MonoBehaviour
     // Enemy Spawner
     public void EnemySpawn(int stage, int sector)
     {
-        stages[stage].sectors[sector].SetActive(true);
+        if (stages[stage].sectors.Count > sector)
+            stages[stage].sectors[sector].SetActive(true);
     }
 
     public void HitPlayer()

@@ -13,14 +13,16 @@ public class NormalTraceNode : TraceNode
     public override INode Execute(Blackboard blackboard)
     {
         var type = Trace(blackboard);
+        
+        var myNode = blackboard.GetData<ReferenceValueT<ENode>>("myNode");
 
-        // Trace Logic
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
         var myPos = myTransform.position;
         var playerPos = playerTransform.position;
+        
         var myMoveSpeed = blackboard.GetData<ReferenceValueT<float>>("myMoveSpeed");
-        var myNode = blackboard.GetData<ReferenceValueT<ENode>>("myNode");
+        
         var isTimerEnded = blackboard.GetData<ReferenceValueT<bool>>("isTimerEnded");
         var waitTime = blackboard.GetData<ReferenceValueT<float>>("waitTime");
         var isTimerWait = blackboard.GetData<ReferenceValueT<bool>>("isTimerWait");
@@ -82,8 +84,6 @@ public class NormalTraceNode : TraceNode
                 myPos.y, myPos.z);
         }
 
-        LogPrintSystem.SystemLogPrint(myTransform, "Now Tracing", ELogType.EnemyAI);
-
         switch (type)
         {
             case ETraceState.PlayerEnter:
@@ -110,9 +110,9 @@ public class NormalAttackNode : INode
         var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType").Value;
 
         var isNowAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
-        
+
         var anim = blackboard.GetData<Transform>("myTransform").GetComponent<SkeletonAnimation>();
-        
+
         if (isNowAttack.Value)
             return Fsm.GuardNullNode(this, this);
 
@@ -124,32 +124,30 @@ public class NormalAttackNode : INode
         var d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
         var d2 = blackboard.GetData<ReferenceValueT<float>>("myAttackRange").Value;
         var distance = (myTransform.position - playerTransform.position).magnitude;
-        
+
         var player = playerTransform.GetComponent<PlayerManager>();
 
         var attackDamage = blackboard.GetData<ReferenceValueT<float>>("myAttackDamage").Value;
-        
+
         var sequence = DOTween.Sequence();
 
         if (d1 + d2 < distance)
         {
             return Fsm.GuardNullNode(this, outOfAttackRange);
         }
-        
+
         isNowAttack.Value = true;
 
+        LogPrintSystem.SystemLogPrint(myTransform, $"Player Invincibility : {player.isInvincibility}",
+            ELogType.EnemyAI);
         if (player.isInvincibility) return Fsm.GuardNullNode(this, this);
-        
-        player.PlayerDiscountHp(attackDamage, myTransform.position.x);
 
+        player.PlayerDiscountHp(attackDamage, myTransform.position.x);
         GameManager.Inst.HitPlayer();
 
-        sequence.SetDelay(1.5f).OnComplete(() =>
-        {
-            isNowAttack.Value = false;
-        }).SetId(this);
+        sequence.SetDelay(1.5f).OnComplete(() => { isNowAttack.Value = false; }).SetId(this);
 
-        
+
         LogPrintSystem.SystemLogPrint(myTransform, $"{attackDamage} Damage to Player!!", ELogType.EnemyAI);
         return Fsm.GuardNullNode(this, this);
     }

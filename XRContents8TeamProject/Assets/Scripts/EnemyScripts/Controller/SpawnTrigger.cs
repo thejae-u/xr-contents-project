@@ -18,16 +18,22 @@ public class SpawnTrigger : MonoBehaviour
     private void Update()
     {
         if (!isRunning) return;
-        if (GameManager.Inst.stages[stageCount].sectors[sectorCount].transform.childCount > 0) return;
-        sectorCount++;
-        GameManager.Inst.EnemySpawn(stageCount, sectorCount);
+
+
+        if (GameManager.Inst.stages[stageCount].sectors.Count > sectorCount)
+        {
+            if (GameManager.Inst.stages[stageCount].sectors[sectorCount].transform.childCount > 0)
+                return;
+
+            sectorCount++;
+            GameManager.Inst.EnemySpawn(stageCount, sectorCount);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.transform.CompareTag("Player"))
         {
-            CameraController.Inst.FirstCameraTransition();
             GameManager.Inst.EnemySpawn(stageCount, sectorCount);
             isRunning = true;
         }
