@@ -7,11 +7,15 @@ using UnityEngine;
 public class SpawnTrigger : MonoBehaviour
 {
     public int stageCount;
-    private int sectorCount;
+    public bool isCameraStopTrigger;
+
+    public int SectorCount { get; private set; }
     private bool isRunning;
+    private CameraStopper stopper;
 
     private void Start()
     {
+        stopper = GameObject.Find("Camera_Stop").GetComponent<CameraStopper>();
         isRunning = false;
     }
 
@@ -20,13 +24,13 @@ public class SpawnTrigger : MonoBehaviour
         if (!isRunning) return;
 
 
-        if (GameManager.Inst.stages[stageCount].sectors.Count > sectorCount)
+        if (GameManager.Inst.stages[stageCount].sectors.Count > SectorCount)
         {
-            if (GameManager.Inst.stages[stageCount].sectors[sectorCount].transform.childCount > 0)
+            if (GameManager.Inst.stages[stageCount].sectors[SectorCount].transform.childCount > 0)
                 return;
 
-            sectorCount++;
-            GameManager.Inst.EnemySpawn(stageCount, sectorCount);
+            SectorCount++;
+            GameManager.Inst.EnemySpawn(stageCount, SectorCount);
         }
     }
 
@@ -34,7 +38,13 @@ public class SpawnTrigger : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
-            GameManager.Inst.EnemySpawn(stageCount, sectorCount);
+            if (isCameraStopTrigger)
+            {
+                Debug.Log("CameraStop");
+                stopper.CameraStop(stageCount, SectorCount);
+            }
+
+            GameManager.Inst.EnemySpawn(stageCount, SectorCount);
             isRunning = true;
         }
     }

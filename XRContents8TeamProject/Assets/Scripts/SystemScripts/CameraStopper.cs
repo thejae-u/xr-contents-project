@@ -5,12 +5,10 @@ using UnityEngine;
 
 public class CameraStopper : MonoBehaviour
 {
-    public List<GameObject> stopSections;
-
     private PlayerManager playerManager;
     private CameraController cameraController;
-    
-    private int curCount;
+
+    private int curStage;
     private int curSection;
 
     private void Start()
@@ -21,25 +19,18 @@ public class CameraStopper : MonoBehaviour
 
     private void Update()
     {
-        if (cameraController.IsCameraStop)
-        {
-            CheckEnemy();
-        }
-    }
-    
-    
-
-    public void StopCamera(int section)
-    {
-        cameraController.IsCameraStop = true;
-        curSection = section;
-    }
-
-    private void CheckEnemy()
-    {
-        if (stopSections[curSection].transform.childCount == 0)
+        if (!cameraController.IsCameraStop) return;
+        
+        if (GameManager.Inst.stages[curStage].sectors[curSection].transform.childCount == 0)
         {
             cameraController.IsCameraStop = false;
         }
+    }
+
+    public void CameraStop(int stageCount, int sectorCount)
+    {
+        cameraController.IsCameraStop = true;
+        curStage = stageCount;
+        curSection = sectorCount;
     }
 }
