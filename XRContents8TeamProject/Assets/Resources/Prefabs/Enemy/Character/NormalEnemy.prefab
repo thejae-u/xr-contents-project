@@ -140,15 +140,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myHp:
-    Value: 20
+    Value: 15
   myAttackDamage:
     Value: 5
   myTraceRange:
-    Value: 8
+    Value: 13
   myAttackRange:
     Value: 1
   myMoveSpeed:
-    Value: 2
+    Value: 5
   waitTime:
     Value: 1.5
   myType:
@@ -224,8 +224,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: -0.01937151, y: 0.050213218}
+  m_Size: {x: 0.55433226, y: 1.4742379}
   m_Direction: 0
 --- !u!50 &1739917333768553483
 Rigidbody2D:
@@ -253,7 +253,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!1001 &2844289294975609348
 PrefabInstance:
   m_ObjectHideFlags: 0
