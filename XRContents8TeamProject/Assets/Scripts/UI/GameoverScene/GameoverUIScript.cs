@@ -30,11 +30,11 @@ public class GameoverUIScript : MonoBehaviour
 
     public void OnRestartButtonClick()
     {
-        SceneManager.LoadScene("TestScene");
+        SceneManager.LoadScene("Scenes/DevelopScenes/TestScene2");
     }
 
     public void OnMenuButtonClick()
     {
-        SceneManager.LoadScene("MenuScene");
+        SceneManager.LoadScene("Scenes/MainGameScenes/MenuScene");
     }
 }
