@@ -45,19 +45,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stages:
-  - sectors: []
-  - sectors: []
-  - sectors: []
-  - sectors: []
-  - sectors: []
-  - sectors: []
-  - sectors: []
-  - sectors: []
-  - sectors: []
-  - sectors: []
-  - sectors: []
-  - sectors: []
-  - sectors: []
-  - sectors: []
-  bloodImage: {fileID: 340968717116515086, guid: 86398391d4916e84b8013e5bb09aa212, type: 3}
+  - sectors:
+    - {fileID: 0}
+  - sectors:
+    - {fileID: 0}
+  - sectors:
+    - {fileID: 0}
+  - sectors:
+    - {fileID: 0}
+  - sectors:
+    - {fileID: 0}
+    - {fileID: 0}
+  - sectors:
+    - {fileID: 0}
+    - {fileID: 0}
+  - sectors:
+    - {fileID: 0}
+  - sectors:
+    - {fileID: 0}
+    - {fileID: 0}
+  - sectors:
+    - {fileID: 0}
+    - {fileID: 0}
+  - sectors:
+    - {fileID: 0}
+  - sectors:
+    - {fileID: 0}
+    - {fileID: 0}
+  bloodImage: {fileID: 0}
   speed: 3
