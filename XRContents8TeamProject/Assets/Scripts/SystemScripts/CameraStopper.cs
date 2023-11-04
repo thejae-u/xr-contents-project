@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CameraStopper : MonoBehaviour
 {
+    [SerializeField] private List<GameObject> cameraTriggers;
     private PlayerManager playerManager;
     private CameraController cameraController;
 
@@ -20,10 +21,13 @@ public class CameraStopper : MonoBehaviour
     private void Update()
     {
         if (!cameraController.IsCameraStop) return;
-        
-        if (GameManager.Inst.stages[curStage].sectors[curSection].transform.childCount == 0)
+
+        if (GameManager.Inst.stages[curStage].sectors.Count > curSection)
         {
-            cameraController.IsCameraStop = false;
+            if (GameManager.Inst.stages[curStage].sectors[curSection].transform.childCount == 0)
+            {
+                cameraController.IsCameraStop = false;
+            }
         }
     }
 

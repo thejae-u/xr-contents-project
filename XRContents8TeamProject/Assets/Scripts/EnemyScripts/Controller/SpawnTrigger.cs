@@ -7,7 +7,6 @@ using UnityEngine;
 public class SpawnTrigger : MonoBehaviour
 {
     public int stageCount;
-    public bool isCameraStopTrigger;
 
     public int SectorCount { get; private set; }
     private bool isRunning;
@@ -38,12 +37,6 @@ public class SpawnTrigger : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
-            if (isCameraStopTrigger)
-            {
-                Debug.Log("CameraStop");
-                stopper.CameraStop(stageCount, SectorCount);
-            }
-
             GameManager.Inst.EnemySpawn(stageCount, SectorCount);
             isRunning = true;
         }
