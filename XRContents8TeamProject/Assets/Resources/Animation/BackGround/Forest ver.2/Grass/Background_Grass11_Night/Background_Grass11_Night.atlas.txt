@@ -1,0 +1,13 @@
+
+Background_Grass11.png
+size: 50,65
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Grass11_98x126
+  rotate: false
+  xy: 2, 2
+  size: 46, 61
+  orig: 49, 63
+  offset: 2, 0
+  index: -1

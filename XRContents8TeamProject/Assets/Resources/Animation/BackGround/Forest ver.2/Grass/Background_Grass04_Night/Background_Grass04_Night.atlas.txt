@@ -1,0 +1,13 @@
+
+Background_Grass04.png
+size: 51,70
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Grass04_106x140
+  rotate: false
+  xy: 2, 2
+  size: 47, 66
+  orig: 53, 70
+  offset: 2, 0
+  index: -1

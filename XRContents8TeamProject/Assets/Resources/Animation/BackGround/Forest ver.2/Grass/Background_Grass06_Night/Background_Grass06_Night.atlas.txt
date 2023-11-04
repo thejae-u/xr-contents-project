@@ -1,0 +1,13 @@
+
+Background_Grass06.png
+size: 47,36
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Grass06_90x66
+  rotate: false
+  xy: 2, 2
+  size: 43, 32
+  orig: 45, 33
+  offset: 1, 0
+  index: -1

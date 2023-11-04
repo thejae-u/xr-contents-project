@@ -1,0 +1,13 @@
+
+Background_Bush02.png
+size: 144,69
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Bush02_280x130
+  rotate: false
+  xy: 2, 2
+  size: 140, 65
+  orig: 140, 65
+  offset: 0, 0
+  index: -1

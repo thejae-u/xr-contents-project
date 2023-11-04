@@ -1,0 +1,13 @@
+
+Background_Grass05.png
+size: 29,44
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Grass05_50x80
+  rotate: false
+  xy: 2, 2
+  size: 25, 40
+  orig: 25, 40
+  offset: 0, 0
+  index: -1

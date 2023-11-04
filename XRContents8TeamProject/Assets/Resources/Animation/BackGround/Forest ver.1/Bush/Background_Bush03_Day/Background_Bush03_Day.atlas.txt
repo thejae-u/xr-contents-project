@@ -1,0 +1,13 @@
+
+Background_Bush03.png
+size: 94,62
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Bush03_180x116
+  rotate: false
+  xy: 2, 2
+  size: 90, 58
+  orig: 90, 58
+  offset: 0, 0
+  index: -1

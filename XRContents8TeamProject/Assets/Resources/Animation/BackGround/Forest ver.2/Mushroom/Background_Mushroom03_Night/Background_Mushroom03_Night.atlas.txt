@@ -1,0 +1,13 @@
+
+Background_Mushroom03.png
+size: 27,36
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Mushroom03_48x66
+  rotate: false
+  xy: 2, 2
+  size: 23, 32
+  orig: 24, 33
+  offset: 1, 0
+  index: -1

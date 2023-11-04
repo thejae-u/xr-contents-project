@@ -1,0 +1,13 @@
+
+Background_Mushroom02.png
+size: 38,46
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Mushroom02_80x90
+  rotate: false
+  xy: 2, 2
+  size: 34, 42
+  orig: 40, 45
+  offset: 4, 0
+  index: -1

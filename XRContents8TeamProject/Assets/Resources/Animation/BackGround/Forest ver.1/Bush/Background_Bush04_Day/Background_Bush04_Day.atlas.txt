@@ -1,0 +1,13 @@
+
+Background_Bush04.png
+size: 89,43
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Bush04_170x78
+  rotate: false
+  xy: 2, 2
+  size: 85, 39
+  orig: 85, 39
+  offset: 0, 0
+  index: -1

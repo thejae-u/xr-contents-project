@@ -1,0 +1,13 @@
+
+Background_Grass08.png
+size: 36,58
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Grass08_64x122
+  rotate: false
+  xy: 2, 2
+  size: 32, 54
+  orig: 32, 61
+  offset: 0, 0
+  index: -1
