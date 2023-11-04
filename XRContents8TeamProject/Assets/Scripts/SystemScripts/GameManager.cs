@@ -14,16 +14,20 @@ public class Stage
 public class GameManager : MonoBehaviour
 {
     private PlayerManager playerManager;
-    public List<Stage> stages;
     
+    // About Monster Spawn
+    public List<Stage> stages;
+    private int curStage;
+    private int curSector;
+    private int enemyCount;
+    
+    // About blood UI
     public Image bloodImage;
     private bool isCoroutineOn;
-
-    private int remainMonster;
     public float speed;
-
+    
     private static GameManager inst = null;
-
+    
     private void Awake()
     {
         if (inst == null)
@@ -56,22 +60,27 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        remainMonster = 0;
-
-        foreach (var stage in stages)
+        enemyCount = 0;
+        
+        foreach (var sector in stages[curStage].sectors)
         {
-            foreach (var sector in stage.sectors)
+            enemyCount += sector.transform.childCount;
+        }
+
+        Debug.Log($"{transform} : Remain Enemy Count is {enemyCount}");
+        if (stages[curStage].sectors.Count > curSector)
+        {
+            if (stages[curStage].sectors[curSector].transform.childCount == 0)
             {
-                remainMonster += sector.transform.childCount;
+                curSector++;
+                if (stages[curStage].sectors.Count > curSector)
+                    EnemySpawn(curStage, curSector);
             }
         }
 
-        //if (remainMonster == 0 || playerManager.GetPlayerHp() <= 0)
-        //  SceneManager.LoadScene("GameoverScene");
-
         Exit();
     }
-
+    
     private void Exit()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -84,11 +93,16 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    // Enemy Spawner
     public void EnemySpawn(int stage, int sector)
     {
-        if (stages[stage].sectors.Count > sector)
-            stages[stage].sectors[sector].SetActive(true);
+        curStage = stage;
+        curSector = sector;
+        stages[curStage].sectors[curSector].SetActive(true);
+    }
+
+    public int CheckEnemyCount()
+    {
+        return enemyCount;
     }
 
     public void HitPlayer()

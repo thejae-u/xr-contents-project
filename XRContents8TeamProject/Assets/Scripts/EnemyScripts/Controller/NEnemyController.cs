@@ -129,7 +129,6 @@ namespace EnemyScripts
 
         private void Update()
         {
-            Debug.Log(b.GetData<ReferenceValueT<ENode>>("myNode").Value);
             if (CameraController.Inst.IsNowCutScene) return;
 
             if (isAlive.Value)

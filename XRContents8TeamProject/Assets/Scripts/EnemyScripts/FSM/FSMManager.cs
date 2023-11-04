@@ -123,6 +123,7 @@ public class WaitNode : INode
         var myNode = blackboard.GetData<ReferenceValueT<ENode>>("myNode");
 
         myNode.Value = ENode.Idle;
+        LogPrintSystem.SystemLogPrint(myTransform, "Cur Node is Wait", ELogType.EnemyAI);
         
         if (!isGround.Value) return Fsm.GuardNullNode(this, this);
         
