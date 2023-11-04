@@ -186,7 +186,9 @@ MonoBehaviour:
   - {fileID: 33084923167932748}
   item:
   - {fileID: 8765382599825420896, guid: 6157ddceae9000647bea586861a660f7, type: 3}
+  - {fileID: 4982513225890881407, guid: ea94bbc19d300e64eb753b8afb2bd0fd, type: 3}
   - {fileID: 3682645959800414601, guid: 8b96618ea4444bf488117d660ed758f1, type: 3}
+  - {fileID: 131631069973698316, guid: 3b3876e462bccd0449fcf54c3afdb5d3, type: 3}
 --- !u!1001 &6662107820783396469
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,0 +1,20 @@
+
+Background_Tree01_Day.png
+size: 518,311
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Branch01_616x200
+  rotate: true
+  xy: 417, 3
+  size: 306, 99
+  orig: 308, 100
+  offset: 0, 0
+  index: -1
+Background_Tree06_614x826
+  rotate: true
+  xy: 2, 2
+  size: 307, 413
+  orig: 307, 413
+  offset: 0, 0
+  index: -1

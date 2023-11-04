@@ -1,0 +1,20 @@
+
+Background_Grass09_Day.png
+size: 364,108
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Branch01_616x200
+  rotate: false
+  xy: 2, 7
+  size: 306, 99
+  orig: 308, 100
+  offset: 0, 0
+  index: -1
+Background_Grass09_104x208
+  rotate: false
+  xy: 310, 2
+  size: 52, 104
+  orig: 52, 104
+  offset: 0, 0
+  index: -1
