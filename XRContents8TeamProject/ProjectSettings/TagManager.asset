@@ -20,7 +20,7 @@ TagManager:
   - Player
   - Enemy
   - Background
-  - 
+  - Effect
   - 
   - 
   - 
@@ -61,4 +61,7 @@ TagManager:
     locked: 0
   - name: Interactable
     uniqueID: 3003819757
+    locked: 0
+  - name: Effect
+    uniqueID: 1260435665
     locked: 0

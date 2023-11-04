@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using EnemyScripts;
+using Unity.Mathematics;
 
 public class BombController : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class BombController : MonoBehaviour
     [Header("폭탄의 각도를 조절")] 
     [SerializeField] private float bombDeg;
 
+    public GameObject particle;
+    private ParticleSystem BombParticleSystem;
+
     private Vector3[] wayPoints;
     
     // Player Last Position Set
@@ -20,15 +24,31 @@ public class BombController : MonoBehaviour
     private Vector3 myPos;
     private float range;
 
+    private bool isPlayingParticle;
+
     private EEnemyController parent;
 
     private void Start()
     {
         parent = transform.parent.GetComponent<EEnemyController>();
         playerLastPos = GameObject.Find("Player").transform.position;
+        BombParticleSystem = particle.GetComponent<ParticleSystem>();
         myPos = transform.position;
         range = 1f;
+        isPlayingParticle = false;
         Shoot();
+    }
+
+    private void Update()
+    {
+        if (!isPlayingParticle) return;
+
+        if (!BombParticleSystem.isPlaying)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Debug.Log("HELLO");
     }
 
     private void Shoot()
@@ -46,7 +66,9 @@ public class BombController : MonoBehaviour
         
         transform.DOPath(wayPoints, bombSpeed, PathType.CatmullRom, PathMode.Sidescroller2D).OnComplete(() =>
         {
-            LogPrintSystem.SystemLogPrint(transform, "BOOM!!", ELogType.EnemyAI);
+            isPlayingParticle = true;
+            Instantiate(particle, transform.position, Quaternion.identity);
+            BombParticleSystem.Play();
             var player = GameObject.Find("Player");
             var playerTransform = player.GetComponent<Transform>();
             var playerManager = player.GetComponent<PlayerManager>();
@@ -62,9 +84,8 @@ public class BombController : MonoBehaviour
                     LogPrintSystem.SystemLogPrint(transform, "Hit Bomb", ELogType.EnemyAI);
                 }
             }
-            
-            Destroy(gameObject);
         });
+        
     }
 
     private void OnDrawGizmos()

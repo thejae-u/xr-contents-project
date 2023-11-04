@@ -5151,7 +5151,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 000000000326457f5398afef29eb644c75068814eda60ab3
+  m_ApplyToSortingLayers: 000000000326457f5398afef29eb644c75068814eda60ab3d1b8204b
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -13460,63 +13460,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37084c737b11a214da8a25e50120c405, type: 3}
---- !u!1001 &1962320147
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3038698947737124828, guid: ea94bbc19d300e64eb753b8afb2bd0fd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 12.215
-      objectReference: {fileID: 0}
-    - target: {fileID: 3038698947737124828, guid: ea94bbc19d300e64eb753b8afb2bd0fd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.6448
-      objectReference: {fileID: 0}
-    - target: {fileID: 3038698947737124828, guid: ea94bbc19d300e64eb753b8afb2bd0fd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3038698947737124828, guid: ea94bbc19d300e64eb753b8afb2bd0fd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3038698947737124828, guid: ea94bbc19d300e64eb753b8afb2bd0fd, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3038698947737124828, guid: ea94bbc19d300e64eb753b8afb2bd0fd, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3038698947737124828, guid: ea94bbc19d300e64eb753b8afb2bd0fd, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3038698947737124828, guid: ea94bbc19d300e64eb753b8afb2bd0fd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3038698947737124828, guid: ea94bbc19d300e64eb753b8afb2bd0fd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3038698947737124828, guid: ea94bbc19d300e64eb753b8afb2bd0fd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4982513225890881407, guid: ea94bbc19d300e64eb753b8afb2bd0fd, type: 3}
-      propertyPath: m_Name
-      value: Item_Applebomb_516x639
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ea94bbc19d300e64eb753b8afb2bd0fd, type: 3}
 --- !u!1 &1982189605
 GameObject:
   m_ObjectHideFlags: 0
@@ -14775,4 +14718,3 @@ SceneRoots:
   - {fileID: 1449060274}
   - {fileID: 587100527}
   - {fileID: 601404324}
-  - {fileID: 1962320147}
