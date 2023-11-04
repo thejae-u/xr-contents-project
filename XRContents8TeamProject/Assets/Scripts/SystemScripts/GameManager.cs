@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,6 +15,11 @@ public class Stage
 public class GameManager : MonoBehaviour
 {
     private PlayerManager playerManager;
+
+    private int everyMonsterCount;
+    public Image blackImage;
+    private float fadeTime;
+    private bool isFade;
     
     // About Monster Spawn
     public List<Stage> stages;
@@ -56,11 +62,14 @@ public class GameManager : MonoBehaviour
     {
         playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
         isCoroutineOn = false;
+        fadeTime = 1.0f;
+        isFade = false;
     }
 
     private void Update()
     {
         enemyCount = 0;
+        everyMonsterCount = 0;
         
         foreach (var sector in stages[curStage].sectors)
         {
@@ -74,6 +83,44 @@ public class GameManager : MonoBehaviour
                 curSector++;
                 if (stages[curStage].sectors.Count > curSector)
                     EnemySpawn(curStage, curSector);
+            }
+        }
+
+        foreach (var stage in stages)
+        {
+            foreach (var sector in stage.sectors)
+            {
+                everyMonsterCount += sector.transform.childCount;
+            }
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            if (SceneManager.GetActiveScene().name == "TestScene2")
+            {
+                if (!isFade)
+                {
+                    isFade = true;
+                    Sequence sequence = DOTween.Sequence();
+                    sequence.Append(blackImage.DOFade(1.0f, fadeTime));
+
+                    sequence.OnComplete(() => { SceneManager.LoadScene("TestScene3"); });
+                }
+            }
+        }
+
+        if (everyMonsterCount == 0)
+        {
+            if (SceneManager.GetActiveScene().name == "TestScene2")
+            {
+                Sequence sequence = DOTween.Sequence();
+                sequence.Append(blackImage.DOFade(1.0f, fadeTime));
+
+                sequence.OnComplete(() =>
+                {
+                    SceneManager.LoadScene("TestScene3");
+                });
             }
         }
 
