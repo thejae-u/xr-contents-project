@@ -1542,7 +1542,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3401521922472138278, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6607649661471559730, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
@@ -14357,17 +14358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed0c76a74b7748444b157e442249c9e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Idle: {fileID: 0}
-  Move: {fileID: 0}
-  Jump: {fileID: 0}
-  Hit: {fileID: 0}
-  Dodge: {fileID: 0}
-  Dead: {fileID: 0}
-  Backforward: {fileID: 0}
-  Reloading: {fileID: 0}
-  Forward: {fileID: 0}
-  Shot: {fileID: 0}
-  BoltAction: {fileID: 0}
 --- !u!4 &2109551356
 Transform:
   m_ObjectHideFlags: 0
