@@ -1,0 +1,20 @@
+
+Background_Grass05_Night.png
+size: 87,45
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Bone01_130x72
+  rotate: false
+  xy: 2, 8
+  size: 58, 35
+  orig: 65, 36
+  offset: 4, 0
+  index: -1
+Background_Grass05_88x50
+  rotate: true
+  xy: 62, 2
+  size: 41, 23
+  orig: 44, 25
+  offset: 1, 0
+  index: -1

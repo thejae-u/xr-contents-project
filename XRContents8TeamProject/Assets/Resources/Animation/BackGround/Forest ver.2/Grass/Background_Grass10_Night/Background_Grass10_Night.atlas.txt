@@ -1,0 +1,20 @@
+
+Background_Grass10_Night.png
+size: 71,93
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Bone01_130x72
+  rotate: false
+  xy: 2, 56
+  size: 58, 35
+  orig: 65, 36
+  offset: 4, 0
+  index: -1
+Background_Grass10_122x140
+  rotate: true
+  xy: 2, 2
+  size: 52, 67
+  orig: 61, 70
+  offset: 6, 0
+  index: -1

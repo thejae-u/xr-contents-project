@@ -1,0 +1,20 @@
+
+Background_Bush03_Night.png
+size: 137,40
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Bone01_130x72
+  rotate: false
+  xy: 77, 3
+  size: 58, 35
+  orig: 65, 36
+  offset: 4, 0
+  index: -1
+Background_Bush03_146x78
+  rotate: false
+  xy: 2, 2
+  size: 73, 36
+  orig: 73, 39
+  offset: 0, 0
+  index: -1

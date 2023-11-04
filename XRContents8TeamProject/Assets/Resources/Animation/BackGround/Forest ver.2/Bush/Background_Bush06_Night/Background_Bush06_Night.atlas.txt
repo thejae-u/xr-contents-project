@@ -1,0 +1,20 @@
+
+Background_Bush06_Night.png
+size: 140,62
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Bone01_130x72
+  rotate: true
+  xy: 103, 2
+  size: 58, 35
+  orig: 65, 36
+  offset: 4, 0
+  index: -1
+Background_Bush06_198x118
+  rotate: false
+  xy: 2, 4
+  size: 99, 56
+  orig: 99, 59
+  offset: 0, 0
+  index: -1
