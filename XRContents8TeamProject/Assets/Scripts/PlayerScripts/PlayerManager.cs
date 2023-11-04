@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
+    private static PlayerManager instance = null;
+
     private Rigidbody2D playerRigidbody;
     private GameObject playerHpUI;
     public GameObject playerAim;
@@ -91,6 +93,16 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
         playerRigidbody = GetComponent<Rigidbody2D>();
         playerHpUI = GameObject.Find("HP");
         playerAim = transform.GetChild(0).gameObject;
@@ -134,6 +146,18 @@ public class PlayerManager : MonoBehaviour
         PlayerMoveLimit();
     }
 
+    public static PlayerManager Instance
+    {
+        get
+        {
+            if(instance == null)
+            {
+                return null;
+            }
+            return instance;
+        }
+    }
+
     public float GetPlayerHp()
     {
         return playerHp;
@@ -160,7 +184,6 @@ public class PlayerManager : MonoBehaviour
         state = EPlayerState.Move;
 
         float moveDir = Input.GetAxis("Horizontal");
-
         if (isPlayerViewDirRight && moveDir != 0)
         {
             Vector3 dir = moveDir * Vector3.right;

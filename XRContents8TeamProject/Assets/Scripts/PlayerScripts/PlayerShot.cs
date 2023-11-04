@@ -56,7 +56,7 @@ public class PlayerShot : MonoBehaviour
 
     private void Start()
     {
-        curAmmo = playerManager.maxAmmo;
+        //curAmmo = playerManager.maxAmmo;
         state = EShotState.None;
     }
 
