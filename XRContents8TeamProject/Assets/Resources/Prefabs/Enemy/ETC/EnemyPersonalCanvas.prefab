@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7123759590781948646}
   - component: {fileID: 7042220429256993258}
   - component: {fileID: 5542644123033540143}
-  - component: {fileID: 229662796257855342}
   m_Layer: 0
   m_Name: WeakTimer
   m_TagString: Untagged
@@ -59,7 +58,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2167b4b18e8f5c4d8bdcf17f344703d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 5
 --- !u!114 &5542644123033540143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,41 +88,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!58 &229662796257855342
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7342744491636423484}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1
 --- !u!1 &7800469204037596238
 GameObject:
   m_ObjectHideFlags: 0

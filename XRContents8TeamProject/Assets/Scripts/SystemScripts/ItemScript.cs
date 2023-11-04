@@ -10,13 +10,25 @@ public class ItemScript : MonoBehaviour
     }
 
     [SerializeField] private MyType type;
-    [SerializeField] private float value;
-
-    private PlayerManager player;
+    public GameObject collision;
+    public float value;
+    
+    private ItemColliderController collScript;
 
     private void Start()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerManager>();
+        collScript = collision.GetComponent<ItemColliderController>();
+    }
+
+    private void Update()
+    {
+        if (collision.activeSelf)
+        {
+            if (collScript.IsTimerEnd)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -26,18 +38,32 @@ public class ItemScript : MonoBehaviour
             switch (type)
             {
                 case MyType.Apple:
-                    // Increase HP
-                    // player.IncreaseHp(value);
+                    PlayerManager.Instance.PlayerRecovery(value);
+                    Destroy(gameObject);
                     break;
                 case MyType.Bomb:
-                    // Decrease HP
-                    // player.DecreaseHp(value);
+                    collision.SetActive(true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
-            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.transform.CompareTag("Bullet"))
+        {
+            switch (type)
+            {
+                case MyType.Apple:
+                    break;
+                case MyType.Bomb:
+                    collision.SetActive(true);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }
