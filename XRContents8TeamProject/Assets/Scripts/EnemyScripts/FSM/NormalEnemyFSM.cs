@@ -140,10 +140,12 @@ public class NormalAttackNode : INode
 
         LogPrintSystem.SystemLogPrint(myTransform, $"Player Invincibility : {player.isInvincibility}",
             ELogType.EnemyAI);
-        if (player.isInvincibility) return Fsm.GuardNullNode(this, this);
-
-        player.PlayerDiscountHp(attackDamage, myTransform.position.x);
-        GameManager.Inst.HitPlayer();
+        
+        if (!player.isInvincibility)
+        {
+            player.PlayerDiscountHp(attackDamage, myTransform.position.x);
+            GameManager.Inst.HitPlayer();
+        }
 
         sequence.SetDelay(1.5f).OnComplete(() => { isNowAttack.Value = false; }).SetId(this);
 

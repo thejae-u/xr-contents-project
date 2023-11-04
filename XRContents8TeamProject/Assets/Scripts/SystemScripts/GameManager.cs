@@ -67,7 +67,6 @@ public class GameManager : MonoBehaviour
             enemyCount += sector.transform.childCount;
         }
 
-        Debug.Log($"{transform} : Remain Enemy Count is {enemyCount}");
         if (stages[curStage].sectors.Count > curSector)
         {
             if (stages[curStage].sectors[curSector].transform.childCount == 0)

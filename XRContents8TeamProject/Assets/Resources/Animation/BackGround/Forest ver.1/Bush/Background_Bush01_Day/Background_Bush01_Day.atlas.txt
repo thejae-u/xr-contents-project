@@ -1,12 +1,19 @@
 
-Background_Bush01.png
-size: 153,72
+Background_Bush01_Day.png
+size: 461,103
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-Background_Bush01_298x136
+Background_Branch01_616x200
   rotate: false
   xy: 2, 2
+  size: 306, 99
+  orig: 308, 100
+  offset: 0, 0
+  index: -1
+Background_Bush01_298x136
+  rotate: false
+  xy: 310, 33
   size: 149, 68
   orig: 149, 68
   offset: 0, 0

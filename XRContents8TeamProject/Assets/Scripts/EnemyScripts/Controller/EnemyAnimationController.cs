@@ -241,7 +241,7 @@ public class EnemyAnimationController : MonoBehaviour
             case EEliteType.Rush when anim.AnimationName == "Rush_SpecialATK":
                 break;
             case EEliteType.Rush:
-                anim.AnimationState.SetAnimation(0, "Rush_SpecialATK", false);
+                anim.AnimationState.SetAnimation(0, "Rush_SpecialATK", true);
                 break;
             case EEliteType.Bomb when anim.AnimationName == "Throw_SpecialATK":
                 break;
