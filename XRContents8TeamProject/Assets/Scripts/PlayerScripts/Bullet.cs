@@ -13,6 +13,16 @@ public class Bullet : MonoBehaviour
     private NEnemyController nEnemyController;
     private EEnemyController eEnemyController;
 
+    [Header("Effect")]
+    private bool playerHit = true;
+    private bool playerStrongHit = true;
+
+    public GameObject hit;
+    public GameObject strongHit;
+
+    private ParticleSystem hitParticle;
+    private ParticleSystem strongHitParticle;
+
     private void Awake()
     {
         playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
@@ -22,6 +32,11 @@ public class Bullet : MonoBehaviour
     {
         isBounsDamage = playerShot.isPlayerCheckMaxGauge;
         LogPrintSystem.SystemLogPrint(transform, $"bounsDamage : {isBounsDamage}", ELogType.Player);
+
+        hitParticle = hit.GetComponent<ParticleSystem>();
+        strongHitParticle = strongHit.GetComponent<ParticleSystem>();
+        playerHit = false;
+        playerStrongHit = false;
     }
 
     private void Update()
@@ -33,6 +48,30 @@ public class Bullet : MonoBehaviour
             LogPrintSystem.SystemLogPrint(transform, "TimeOver Bullet Destroy", ELogType.Player);
 
             bulletCreateTime = 0;
+        }
+
+        // 게이지가 가득
+        if(isBounsDamage)
+        {
+            if (!playerStrongHit) return;
+
+            if (!strongHitParticle.isPlaying)
+            {
+                Instantiate(strongHit, transform.position, Quaternion.identity);
+            }
+
+            LogPrintSystem.SystemLogPrint(transform, "create strongHit effect", ELogType.Player);
+        }
+        else
+        {
+            if (!playerHit) return;
+
+            if (!hitParticle.isPlaying)
+            {
+                Instantiate(hit, transform.position, Quaternion.identity);
+            }
+
+            LogPrintSystem.SystemLogPrint(transform, "create hit effect", ELogType.Player);
         }
     }
 

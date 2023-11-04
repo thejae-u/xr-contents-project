@@ -19,14 +19,14 @@ public class PlayerShot : MonoBehaviour
 
     private bool isReloading = false;
     private bool isDiscountBullet;
-    public bool isPlayerCheckMaxGauge = false;
+    public bool isPlayerCheckMaxGauge;
 
     [Header("총 딜레이 관련")]
     [SerializeField] private float reverseDelay = 0.3f;
     [SerializeField] private float reloadingDelay = 0.3f;
     [SerializeField] private float forwardDelay = 0.3f;
 
-    // animation
+    [Header("animation")]
     public SkeletonAnimation skeletonAnimation;
     public AnimationReferenceAsset Backforward;
     public AnimationReferenceAsset Reloading;

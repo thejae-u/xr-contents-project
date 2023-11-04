@@ -123,7 +123,6 @@ GameObject:
   - component: {fileID: 5871502387009047570}
   - component: {fileID: 3854289692963828313}
   - component: {fileID: 5788969553251691976}
-  - component: {fileID: 5401740756785980593}
   - component: {fileID: 5348351362737829137}
   - component: {fileID: 4127726252360762716}
   m_Layer: 6
@@ -372,22 +371,6 @@ MonoBehaviour:
   flipBy180DegreeRotation: 0
   skeletonRenderer: {fileID: 5471782796121251530}
   skeletonGraphic: {fileID: 0}
---- !u!114 &5401740756785980593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759709160255606015}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f726fb798ad621458c431cb9966d91d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boneRoot: {fileID: 2875148344555391978}
-  flipBy180DegreeRotation: 0
-  skeletonRenderer: {fileID: 5471782796121251530}
-  skeletonGraphic: {fileID: 0}
 --- !u!61 &5348351362737829137
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -531,7 +514,7 @@ MonoBehaviour:
   scale: 0
   zPosition: 1
   overrideAlpha: 1
-  hierarchy: {fileID: 5401740756785980593}
+  hierarchy: {fileID: 0}
 --- !u!212 &2999359561327561443
 SpriteRenderer:
   m_ObjectHideFlags: 0
