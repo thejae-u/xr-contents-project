@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7153267300882541699}
   - component: {fileID: 7073701685698323351}
   - component: {fileID: 3512269964403840268}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: UI_Tutorial_guide
   m_TagString: Tutorial
   m_Icon: {fileID: 0}
