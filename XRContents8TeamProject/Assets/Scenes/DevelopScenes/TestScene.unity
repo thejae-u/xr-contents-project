@@ -1442,6 +1442,30 @@ PrefabInstance:
       propertyPath: Backforward
       value: 
       objectReference: {fileID: 11400000, guid: bf6428490d66a1343bc8fba5cc5f6b99, type: 2}
+    - target: {fileID: 3854289692963828313, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
+      propertyPath: Shot
+      value: 
+      objectReference: {fileID: 11400000, guid: b9992151a040ea749ab203079f2c937e, type: 2}
+    - target: {fileID: 3854289692963828313, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
+      propertyPath: Forward
+      value: 
+      objectReference: {fileID: 11400000, guid: e796b38a49c6d2349964a3cd857a534d, type: 2}
+    - target: {fileID: 3854289692963828313, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
+      propertyPath: Reloading
+      value: 
+      objectReference: {fileID: 11400000, guid: 42b384532333d1a45ab4b945e3094d11, type: 2}
+    - target: {fileID: 3854289692963828313, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
+      propertyPath: BoltAction
+      value: 
+      objectReference: {fileID: 11400000, guid: 082c77004386c124fa30e0216b093e97, type: 2}
+    - target: {fileID: 3854289692963828313, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
+      propertyPath: Backforward
+      value: 
+      objectReference: {fileID: 11400000, guid: bdec18796724ab34d99d4d945f37e9b5, type: 2}
+    - target: {fileID: 3854289692963828313, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
+      propertyPath: skeletonAnimation
+      value: 
+      objectReference: {fileID: 632996742}
     - target: {fileID: 4042768280036518515, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1967,7 +1991,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632996736}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f726fb798ad621458c431cb9966d91d, type: 3}
   m_Name: 

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Spine.Unity;
 using UnityEngine;
 
 public class PlayerShot : MonoBehaviour
@@ -14,7 +15,6 @@ public class PlayerShot : MonoBehaviour
     Sequence sequenceForward;
 
     private int curAmmo = 0;
-    private float curGauge = 0;
     private float lastFireTime = 0;
 
     private bool isReloading = false;
@@ -25,6 +25,15 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private float reverseDelay = 0.3f;
     [SerializeField] private float reloadingDelay = 0.3f;
     [SerializeField] private float forwardDelay = 0.3f;
+
+    // animation
+    public SkeletonAnimation skeletonAnimation;
+    public AnimationReferenceAsset Backforward;
+    public AnimationReferenceAsset Reloading;
+    public AnimationReferenceAsset Forward;
+    public AnimationReferenceAsset Shot;
+    public AnimationReferenceAsset BoltAction;
+    private bool isEmptyAnim;
 
     public enum EShotState
     {
@@ -73,7 +82,6 @@ public class PlayerShot : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            curGauge = 0;
             aimUIController.InitGauge();
             aimUIController.isReadyWarningGauge = false;
 
@@ -85,10 +93,10 @@ public class PlayerShot : MonoBehaviour
             else if (state == EShotState.Backforward && curAmmo > 0)
             {
                 // 재장전 중에 사격 버튼을 입력한 경우 장전을 취소한다.
-                // equenceBackforward.Kill();
                 if (DOTween.IsTweening(10))
                 {
                     LogPrintSystem.SystemLogPrint(transform, "KILL TWEENER", ELogType.Player);
+                    
                     DOTween.Kill(10);
                 }
                 isReloading = false;
@@ -107,6 +115,9 @@ public class PlayerShot : MonoBehaviour
             StateBackforward();
             LogPrintSystem.SystemLogPrint(transform, "장전 실행", ELogType.Player);
         }
+
+        // 현재 실행 중인 애니메이션이 종료되었다면 애니메이션 대기열을 비워준다.
+        //EmptyAnimation();
     }
 
     #region SHOOTING
@@ -115,6 +126,8 @@ public class PlayerShot : MonoBehaviour
         if (Time.time >= lastFireTime + playerManager.shotDelaySpeed)
         {
             state = EShotState.Shot;
+
+            CurrentAnimation(Shot, false);
 
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = new Vector3(mousePosition.x, mousePosition.y, mousePosition.z);
@@ -138,6 +151,7 @@ public class PlayerShot : MonoBehaviour
         sequenceBoltAction = DOTween.Sequence();
 
         state = EShotState.BoltAction;
+        NextAnimation(BoltAction, false, 0f);
         LogPrintSystem.SystemLogPrint(transform, "볼트 액션", ELogType.Player);
 
         float shotDelayTime = playerManager.shotDelaySpeed;
@@ -154,16 +168,20 @@ public class PlayerShot : MonoBehaviour
     #region RELOADING
     void StateBackforward()
     {
+        LogPrintSystem.SystemLogPrint(transform, "StateBackforward 실행", ELogType.Player);
         if (curAmmo < playerManager.maxAmmo)
         {
             state = EShotState.Backforward;
+            isReloading = true;
+
+            NextAnimation(Backforward,false,0);
+
             sequenceBackforward = DOTween.Sequence();
             LogPrintSystem.SystemLogPrint(transform, "노리쇠 후퇴", ELogType.Player);
 
-            isReloading = true;
-
             sequenceBackforward.SetDelay(reverseDelay).OnComplete(() =>
             {
+                NextAnimation(Reloading, false, 0);
                 StateReloading();
             }).SetId(10);
         }
@@ -174,11 +192,15 @@ public class PlayerShot : MonoBehaviour
         if (isReloading)
         {
             state = EShotState.Reloading;
+
+            //NextAnimation(Reloading, false, 0);
+
             sequenceReloading = DOTween.Sequence();
             LogPrintSystem.SystemLogPrint(transform, "탄알 삽입", ELogType.Player);
 
             sequenceReloading.SetDelay(reloadingDelay).OnComplete(() =>
             {
+                NextAnimation(Forward, false, 0);
                 StateForward();
             });
         }
@@ -189,6 +211,7 @@ public class PlayerShot : MonoBehaviour
         if (isReloading)
         {
             state = EShotState.Forward;
+
             sequenceForward = DOTween.Sequence();
             LogPrintSystem.SystemLogPrint(transform, "노리쇠 전진", ELogType.Player);
 
@@ -207,4 +230,33 @@ public class PlayerShot : MonoBehaviour
         }
     }
     #endregion
+
+    // 플레이어 사격은 stackindex 2번에서 관리
+
+    // SetAnimation : 애니메이션을 실행 -> 기존에 재생되는 것을 강제로 끊음
+    private void CurrentAnimation(AnimationReferenceAsset AnimClip,bool loop)
+    {
+        if (skeletonAnimation.AnimationName == AnimClip.name) return;
+        skeletonAnimation.AnimationState.SetAnimation(2, AnimClip, loop);
+        
+        LogPrintSystem.SystemLogPrint(transform, $"animation => {AnimClip}", ELogType.Player);
+    }
+
+    // AddAnimation: 현재 실행되고 있는 애니메이션이 종료되고 실행되는 애니메이션 delay는 끝나고 얼마만에 실행되는 지
+    private void NextAnimation(AnimationReferenceAsset AnimClip,bool loop, float delay)
+    {
+        if (skeletonAnimation.AnimationName == AnimClip.name) return;
+        skeletonAnimation.AnimationState.AddAnimation(2,AnimClip, loop, delay);
+
+        LogPrintSystem.SystemLogPrint(transform, $"next animation => {AnimClip}", ELogType.Player);
+    }
+
+    //skeletonAnimation.AnimationState.GetCurrent(2).IsComplete = true; 애니메이션이 끝났는지 bool형 반환
+    //private void EmptyAnimation()
+    //{
+    //    if(skeletonAnimation.AnimationState.GetCurrent(2).IsComplete)
+    //    {
+    //        skeletonAnimation.AnimationState.SetEmptyAnimation(2,0);
+    //    }
+    //}
 }

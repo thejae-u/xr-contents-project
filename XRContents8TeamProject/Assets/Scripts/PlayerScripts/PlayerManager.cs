@@ -75,7 +75,6 @@ public class PlayerManager : MonoBehaviour
     [SpineBone(dataField: "skeletonAnimation")]
     public string boneName;
     public Camera cam;
-
     public Bone bone;
 
     public enum EPlayerState
@@ -104,7 +103,8 @@ public class PlayerManager : MonoBehaviour
 
         state = EPlayerState.Idle;
 
-        skeletonAnimation.state.SetAnimation(2, "Aim", true);
+        skeletonAnimation.state.SetAnimation(0, "Move", true);
+        skeletonAnimation.state.SetAnimation(1, "Aim", true);     
     }
 
     private void Update()
@@ -307,11 +307,6 @@ public class PlayerManager : MonoBehaviour
     {
         var mousePosition = Input.mousePosition;
         var worldMousePosition = cam.ScreenToWorldPoint(mousePosition);
-        //var skeletonSpacePoint = skeletonAnimation.transform.InverseTransformPoint(worldMousePosition);
-        //skeletonSpacePoint.x *= skeletonAnimation.Skeleton.ScaleX;
-        //skeletonSpacePoint.y *= skeletonAnimation.Skeleton.ScaleY;
-        //bone.SetLocalPosition(skeletonSpacePoint);
-
         playerAim.transform.position = worldMousePosition;
 
         if (worldMousePosition.x < transform.position.x)
