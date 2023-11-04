@@ -20,7 +20,8 @@ public class PlayerManager : MonoBehaviour
 
     // Player movement & ability related
     [Header("플레이어 체력 조정")]
-    [SerializeField] private float playerHp = 100.0f;
+    [SerializeField] private float playerMaxHp = 100.0f; // 최대 체력
+    [SerializeField] private float playerHp = 100.0f;    // 현재 체력
 
     [Header("플레이어 이동 속도 조정")]
     [SerializeField] private float playerMoveSpeed = 5.0f;
@@ -110,6 +111,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
+        playerHp = playerMaxHp;
         playerRigidbody.gravityScale = playerGravityForce;
         Cursor.visible = false;
 
@@ -314,6 +316,18 @@ public class PlayerManager : MonoBehaviour
             });
 
             return;
+        }
+    }
+
+    public void PlayerRecovery(float amount)
+    {
+        if(playerMaxHp >= playerHp + amount)
+        {
+            playerHp += amount;
+        }
+        else
+        {
+            playerHp = playerMaxHp;
         }
     }
 
