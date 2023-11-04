@@ -17,6 +17,8 @@ public class BombController : MonoBehaviour
     public GameObject particle;
     private ParticleSystem BombParticleSystem;
 
+    private float speed;
+
     private Vector3[] wayPoints;
     
     // Player Last Position Set
@@ -35,12 +37,16 @@ public class BombController : MonoBehaviour
         BombParticleSystem = particle.GetComponent<ParticleSystem>();
         myPos = transform.position;
         range = 1f;
+        speed = 500.0f;
         isPlayingParticle = false;
         Shoot();
     }
 
     private void Update()
     {
+        speed += speed * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(0, 0, speed);
+        
         if (!isPlayingParticle) return;
 
         if (!BombParticleSystem.isPlaying)
@@ -81,7 +87,6 @@ public class BombController : MonoBehaviour
                 if (!player.GetComponent<PlayerManager>().isInvincibility)
                 {
                     playerManager.PlayerDiscountHp(parent.GetMySpecialDamage(), myPos.x);
-                    LogPrintSystem.SystemLogPrint(transform, "Hit Bomb", ELogType.EnemyAI);
                 }
             }
         });

@@ -53,9 +53,8 @@ public class InteractableObjectController : MonoBehaviour
 
             if (timer.IsAttacked)
             {
-                Instantiate(item[1].gameObject, transform.position, quaternion.identity);
-                /*Instantiate(isInteractable ? item[0].gameObject : item[1].gameObject, transform.position,
-                    Quaternion.identity);*/
+                Instantiate(isInteractable ? item[0].gameObject : item[1].gameObject, transform.position,
+                    Quaternion.identity);
                 transform.GetComponent<InteractableObjectController>().enabled = false;
             }
 
