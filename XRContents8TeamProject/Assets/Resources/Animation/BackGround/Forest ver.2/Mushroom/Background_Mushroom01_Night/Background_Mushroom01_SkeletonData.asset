@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
-  m_Name: Background_Mushroom01_Night_SkeletonData
+  m_Name: Background_Mushroom01_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: dcacb7c108026e2429f88ac98fb07e6f, type: 2}
+  - {fileID: 11400000, guid: c39b39d77cc81e245856b28b01f516d6, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: cb223aa750f76da4a88ba3ee4f751726, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: fbd6948bd1639be4c99e3d925d10bcac, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 0

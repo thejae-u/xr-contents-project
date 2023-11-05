@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
-  m_Name: Background_Mushroom01_Night_Atlas
+  m_Name: Background_Mushroom01_Atlas
   m_EditorClassIdentifier: 
-  atlasFile: {fileID: 4900000, guid: c711981f7fcbbfc40b0b02ecaab207fb, type: 3}
+  atlasFile: {fileID: 4900000, guid: 08c75161f249094409594e394c345035, type: 3}
   materials:
-  - {fileID: 2100000, guid: 1f99469da16b3414c9d0c9c91ede3562, type: 2}
+  - {fileID: 2100000, guid: e31d4af0065b7524585b72e46f721ff7, type: 2}
