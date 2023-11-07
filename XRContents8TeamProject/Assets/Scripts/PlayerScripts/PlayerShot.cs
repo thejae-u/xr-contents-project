@@ -61,62 +61,65 @@ public class PlayerShot : MonoBehaviour
 
     private void Update()
     {
-        if (curAmmo == 0)
+        if (PlayerManager.Instance.state != PlayerManager.EPlayerState.Dead)
         {
-            aimUIController.SetWarningGauge();
-        }
-
-        if (Input.GetMouseButton(0))
-        {
-            if (curAmmo > 0)
+            if (curAmmo == 0)
             {
-                if (sequenceBoltAction == null)
-                {             
-                    aimUIController.SetGauge();
-
-                    LogPrintSystem.SystemLogPrint(transform, "에임 게이지 증가", ELogType.Player);
-                }
+                aimUIController.SetWarningGauge();
             }
-        }
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            aimUIController.InitGauge();
-            aimUIController.isReadyWarningGauge = false;
-
-            if (state == EShotState.None && curAmmo > 0)
+            if (Input.GetMouseButton(0))
             {
-                // StateShot -> BoltAction
-                StateShot();
-            }
-            else if (state == EShotState.Backforward && curAmmo > 0)
-            {
-                // 재장전 중에 사격 버튼을 입력한 경우 장전을 취소한다.
-                if (DOTween.IsTweening(10))
+                if (curAmmo > 0)
                 {
-                    LogPrintSystem.SystemLogPrint(transform, "KILL TWEENER", ELogType.Player);
-                    
-                    DOTween.Kill(10);
+                    if (sequenceBoltAction == null)
+                    {
+                        aimUIController.SetGauge();
+
+                        LogPrintSystem.SystemLogPrint(transform, "에임 게이지 증가", ELogType.Player);
+                    }
                 }
-                isReloading = false;
-
-                LogPrintSystem.SystemLogPrint(transform, $"Reload Cancel", ELogType.Player);
-
-                StateForward();
-                state = EShotState.None;
-                StateShot();
             }
-        }
 
-        if (Input.GetKeyDown(KeyCode.R) && !isReloading)
-        {
-            // StateBackforward -> Reloading -> StateForward
-            StateBackforward();
-            LogPrintSystem.SystemLogPrint(transform, "장전 실행", ELogType.Player);
-        }
+            if (Input.GetMouseButtonUp(0))
+            {
+                aimUIController.InitGauge();
+                aimUIController.isReadyWarningGauge = false;
 
-        // 현재 실행 중인 애니메이션이 종료되었다면 애니메이션 대기열을 비워준다.
-        //EmptyAnimation();
+                if (state == EShotState.None && curAmmo > 0)
+                {
+                    // StateShot -> BoltAction
+                    StateShot();
+                }
+                else if (state == EShotState.Backforward && curAmmo > 0)
+                {
+                    // 재장전 중에 사격 버튼을 입력한 경우 장전을 취소한다.
+                    if (DOTween.IsTweening(10))
+                    {
+                        LogPrintSystem.SystemLogPrint(transform, "KILL TWEENER", ELogType.Player);
+
+                        DOTween.Kill(10);
+                    }
+                    isReloading = false;
+
+                    LogPrintSystem.SystemLogPrint(transform, $"Reload Cancel", ELogType.Player);
+
+                    StateForward();
+                    state = EShotState.None;
+                    StateShot();
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.R) && !isReloading)
+            {
+                // StateBackforward -> Reloading -> StateForward
+                StateBackforward();
+                LogPrintSystem.SystemLogPrint(transform, "장전 실행", ELogType.Player);
+            }
+
+            // 현재 실행 중인 애니메이션이 종료되었다면 애니메이션 대기열을 비워준다.
+            //EmptyAnimation();
+        }
     }
 
     #region SHOOTING
@@ -245,7 +248,7 @@ public class PlayerShot : MonoBehaviour
     private void NextAnimation(AnimationReferenceAsset AnimClip,bool loop, float delay)
     {
         if (skeletonAnimation.AnimationName == AnimClip.name) return;
-        skeletonAnimation.AnimationState.AddAnimation(2,AnimClip, loop, delay);
+        skeletonAnimation.AnimationState.AddAnimation(2, AnimClip, loop, delay);
 
         LogPrintSystem.SystemLogPrint(transform, $"next animation => {AnimClip}", ELogType.Player);
     }

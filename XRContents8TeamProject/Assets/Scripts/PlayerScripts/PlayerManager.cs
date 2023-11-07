@@ -102,7 +102,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -123,43 +123,58 @@ public class PlayerManager : MonoBehaviour
         Cursor.visible = false;
 
         state = EPlayerState.Idle;
-
         CurrentAnimation(0, Idle, true);
-        CurrentAnimation(1, Aim, true);  
+        CurrentAnimation(1, Aim, true);
     }
 
     private void Update()
     {
-        if (CameraController.Inst.IsNowCutScene) return;
-        
-        PlayerViewMousePoint();
+        LogPrintSystem.SystemLogPrint(transform, $"플레이어 상태 : {state}", ELogType.Player);
 
-        PlayerMove();
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKey(KeyCode.A) && canDodge)
+        if (state != EPlayerState.Dead)
         {
-            isDodgeDirRight = false;
-            PlayerDodge(isDodgeDirRight);
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKey(KeyCode.D) && canDodge)
-        {
-            isDodgeDirRight = true;
-            PlayerDodge(isDodgeDirRight);
-        }
+            if (CameraController.Inst.IsNowCutScene) return;
 
-        if (Input.GetKey(KeyCode.Space))
-        {
-            PlayerJump();
-        }
+            PlayerViewMousePoint();
 
-        PlayerMoveLimit();
+            float moveDir = Input.GetAxis("Horizontal");
+            if (moveDir == 0)
+            {
+                if (state != EPlayerState.Jump)
+                {
+                    CurrentAnimation(0, Idle, true);
+                }
+            }
+            else
+            {
+                PlayerMove(moveDir);
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKey(KeyCode.A) && canDodge)
+            {
+                isDodgeDirRight = false;
+                PlayerDodge(isDodgeDirRight);
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKey(KeyCode.D) && canDodge)
+            {
+                isDodgeDirRight = true;
+                PlayerDodge(isDodgeDirRight);
+            }
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                PlayerJump();
+            }
+
+            PlayerMoveLimit();
+        }
     }
 
     public static PlayerManager Instance
     {
         get
         {
-            if(instance == null)
+            if (instance == null)
             {
                 return null;
             }
@@ -171,7 +186,6 @@ public class PlayerManager : MonoBehaviour
     {
         return playerHp;
     }
-
     public bool GetIsJumping()
     {
         return isJumping;
@@ -182,28 +196,20 @@ public class PlayerManager : MonoBehaviour
         if (canJump)
         {
             state = EPlayerState.Idle;
-            CurrentAnimation(0, Idle, true);
             isJumping = false;
         }
     }
 
     #region MOVEMENT
-    void PlayerMove()
+    void PlayerMove(float moveDir)
     {
+        if (state == EPlayerState.Dead) return;
         state = EPlayerState.Move;
-        CurrentAnimation(0,Move,true);
-
-        float moveDir = Input.GetAxis("Horizontal");
-        if (isPlayerViewDirRight && moveDir != 0)
-        {
-            Vector3 dir = moveDir * Vector3.right;
-            transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
-        }
-        else if (!isPlayerViewDirRight && moveDir != 0)
-        {
-            Vector3 dir = moveDir * Vector3.left;
-            transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
-        }
+        CurrentAnimation(0, Move, true);
+        LogPrintSystem.SystemLogPrint(transform, "Move On", ELogType.Player);
+       
+        Vector2 playerMove = new Vector2(moveDir * playerMoveSpeed, playerRigidbody.velocity.y);
+        playerRigidbody.velocity = playerMove;
     }
     #endregion
     #region JUMP
@@ -237,8 +243,14 @@ public class PlayerManager : MonoBehaviour
             playerHpUI.GetComponent<hpUIController>().Sethp(damage);
 
             LogPrintSystem.SystemLogPrint(transform, $"{damage}From Enemy -> Remain PlayerHP{playerHp}", ELogType.Player);
-
-            PlayerKnockback(enemyXPos);
+            if (playerHp > 0)
+            {
+                PlayerKnockback(enemyXPos);
+            }
+            else
+            {
+                PlayerDeath();
+            }
         }
     }
 
@@ -276,7 +288,7 @@ public class PlayerManager : MonoBehaviour
     // 무적상태 호출
     void PlayerInvincibility(float Duration)
     {
-        isInvincibility = true;        
+        isInvincibility = true;
         gameObject.layer = 3; // 3: PlayerInvincibility
         canJump = false;
         LogPrintSystem.SystemLogPrint(transform, "플레이어 무적 상태", ELogType.Player);
@@ -328,7 +340,7 @@ public class PlayerManager : MonoBehaviour
 
     public void PlayerRecovery(float amount)
     {
-        if(playerMaxHp >= playerHp + amount)
+        if (playerMaxHp >= playerHp + amount)
         {
             playerHp += amount;
         }
@@ -340,11 +352,8 @@ public class PlayerManager : MonoBehaviour
 
     private void PlayerDeath()
     {
-        if (playerHp <= 0)
-        {
-            state = EPlayerState.Dead;
-            // 게임 오버 씬으로 변경
-        }
+        state = EPlayerState.Dead;
+        CurrentAnimation(0, Dead, false);
     }
 
     void PlayerViewMousePoint()
@@ -368,14 +377,14 @@ public class PlayerManager : MonoBehaviour
     void PlayerMoveLimit()
     {
         Vector3 worldpos = Camera.main.WorldToViewportPoint(this.transform.position);
-        
+
         if (worldpos.x < 0f)
         {
             canMove = false;
             worldpos.x = 0f;
         }
 
-        if(worldpos.x < 1f && worldpos.x > 0f)
+        if (worldpos.x < 1f && worldpos.x > 0f)
         {
             canMove = true;
         }
@@ -385,7 +394,7 @@ public class PlayerManager : MonoBehaviour
             canMove = false;
             worldpos.x = 1f;
         }
-        
+
         this.transform.position = Camera.main.ViewportToWorldPoint(worldpos);
     }
 
@@ -415,13 +424,14 @@ public class PlayerManager : MonoBehaviour
     private void CurrentAnimation(int trackindex, AnimationReferenceAsset AnimClip, bool loop)
     {
         if (skeletonAnimation.AnimationName == AnimClip.name) return;
+
         skeletonAnimation.AnimationState.SetAnimation(trackindex, AnimClip, loop);
 
         LogPrintSystem.SystemLogPrint(transform, $"animation => {AnimClip}", ELogType.Player);
     }
 
     // AddAnimation: 현재 실행되고 있는 애니메이션이 종료되고 실행되는 애니메이션 delay는 끝나고 얼마만에 실행되는 지
-    private void NextAnimation(int trackindex,AnimationReferenceAsset AnimClip, bool loop, float delay)
+    private void NextAnimation(int trackindex, AnimationReferenceAsset AnimClip, bool loop, float delay)
     {
         if (skeletonAnimation.AnimationName == AnimClip.name) return;
         skeletonAnimation.AnimationState.AddAnimation(trackindex, AnimClip, loop, delay);
