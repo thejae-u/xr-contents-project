@@ -50,8 +50,9 @@ public class Bullet : MonoBehaviour
             bulletCreateTime = 0;
         }
 
+        LogPrintSystem.SystemLogPrint(transform, $" 게이지 가득 참 상태 : {isBounsDamage}", ELogType.Player);
         // 게이지가 가득
-        if(isBounsDamage)
+        if (isBounsDamage)
         {
             if (!playerStrongHit) return;
 

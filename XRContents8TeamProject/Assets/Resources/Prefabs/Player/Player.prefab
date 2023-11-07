@@ -276,6 +276,13 @@ MonoBehaviour:
   maxAmmo: 6
   maxGauge: 0.1
   skeletonAnimation: {fileID: 5471782796121251530}
+  Idle: {fileID: 11400000, guid: 22d69ecfe01eaac41b9e55c8594124a0, type: 2}
+  Move: {fileID: 11400000, guid: 712c79f1d54d1234c9c353db09d23cf0, type: 2}
+  Jump: {fileID: 11400000, guid: 8f7e8df95ee4d064caec31b5a619676a, type: 2}
+  Hit: {fileID: 11400000, guid: 627bf8b99b9eda94f90bb9cd609efc15, type: 2}
+  Dodge: {fileID: 11400000, guid: c9242aa43efcb9145aae7df94def20e1, type: 2}
+  Dead: {fileID: 11400000, guid: 6a3c7c245a6435745bc2495325beb6ad, type: 2}
+  Aim: {fileID: 11400000, guid: c43c0a8dab15ee347a0fed8484739417, type: 2}
   boneName: aim
   cam: {fileID: 0}
 --- !u!114 &3854289692963828313
@@ -296,11 +303,11 @@ MonoBehaviour:
   reloadingDelay: 0.2
   forwardDelay: 0.2
   skeletonAnimation: {fileID: 5471782796121251530}
-  Backforward: {fileID: 11400000, guid: bdec18796724ab34d99d4d945f37e9b5, type: 2}
-  Reloading: {fileID: 11400000, guid: 42b384532333d1a45ab4b945e3094d11, type: 2}
-  Forward: {fileID: 11400000, guid: e796b38a49c6d2349964a3cd857a534d, type: 2}
-  Shot: {fileID: 11400000, guid: b9992151a040ea749ab203079f2c937e, type: 2}
-  BoltAction: {fileID: 11400000, guid: 082c77004386c124fa30e0216b093e97, type: 2}
+  Backforward: {fileID: 11400000, guid: ee6b42e1bd2dd8f45a1610b1141f66d6, type: 2}
+  Reloading: {fileID: 11400000, guid: b2a4a6d093d8a1446951c2819c3994a6, type: 2}
+  Forward: {fileID: 11400000, guid: 6ba8d09019fa37d4fb8632a7414b79e5, type: 2}
+  Shot: {fileID: 11400000, guid: cd4a4668715006942a38137032704c21, type: 2}
+  BoltAction: {fileID: 11400000, guid: d8bc14dd96105d741bc74bf37db17382, type: 2}
 --- !u!114 &5788969553251691976
 MonoBehaviour:
   m_ObjectHideFlags: 0

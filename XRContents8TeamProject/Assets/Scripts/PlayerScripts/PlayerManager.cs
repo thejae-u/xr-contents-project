@@ -11,7 +11,7 @@ public class PlayerManager : MonoBehaviour
 
     private Rigidbody2D playerRigidbody;
     private GameObject playerHpUI;
-    public GameObject playerAim;
+    private GameObject playerAim;
     public Image tutorialtImg;
 
     // 플레이어 추적 범위
@@ -72,8 +72,16 @@ public class PlayerManager : MonoBehaviour
     [Header("플레이어 최대 발사 게이지")]
     [SerializeField] public float maxGauge = 0.5f;
 
-    // animation
+    [Header("플레이어 애니메이션")]
     public SkeletonAnimation skeletonAnimation;
+    [SpineEvent] public string eventName;
+    public AnimationReferenceAsset Idle;
+    public AnimationReferenceAsset Move;
+    public AnimationReferenceAsset Jump;
+    public AnimationReferenceAsset Hit;
+    public AnimationReferenceAsset Dodge;
+    public AnimationReferenceAsset Dead;
+    public AnimationReferenceAsset Aim;
 
     [SpineBone(dataField: "skeletonAnimation")]
     public string boneName;
@@ -116,8 +124,8 @@ public class PlayerManager : MonoBehaviour
 
         state = EPlayerState.Idle;
 
-        skeletonAnimation.state.SetAnimation(0, "Move", true);
-        skeletonAnimation.state.SetAnimation(1, "Aim", true);     
+        CurrentAnimation(0, Idle, true);
+        CurrentAnimation(1, Aim, true);  
     }
 
     private void Update()
@@ -174,7 +182,7 @@ public class PlayerManager : MonoBehaviour
         if (canJump)
         {
             state = EPlayerState.Idle;
-
+            CurrentAnimation(0, Idle, true);
             isJumping = false;
         }
     }
@@ -183,6 +191,7 @@ public class PlayerManager : MonoBehaviour
     void PlayerMove()
     {
         state = EPlayerState.Move;
+        CurrentAnimation(0,Move,true);
 
         float moveDir = Input.GetAxis("Horizontal");
         if (isPlayerViewDirRight && moveDir != 0)
@@ -195,8 +204,6 @@ public class PlayerManager : MonoBehaviour
             Vector3 dir = moveDir * Vector3.left;
             transform.Translate(dir * playerMoveSpeed * Time.deltaTime);
         }
-
-        state = EPlayerState.Idle;
     }
     #endregion
     #region JUMP
@@ -205,6 +212,7 @@ public class PlayerManager : MonoBehaviour
         if (!isJumping)
         {
             state = EPlayerState.Jump;
+            CurrentAnimation(0, Jump, false);
 
             playerRigidbody.AddForce(Vector2.up * playerJumpForce, ForceMode2D.Impulse);
             StartCoroutine(PlayerJumpResetTime());
@@ -283,7 +291,7 @@ public class PlayerManager : MonoBehaviour
             LogPrintSystem.SystemLogPrint(transform, "플레이어 무적 상태 해제", ELogType.Player);
         });
     }
-    #endregion[
+    #endregion
 
     void PlayerDodge(bool dodgeDirRight)
     {
@@ -401,5 +409,23 @@ public class PlayerManager : MonoBehaviour
         {
             tutorialtImg.gameObject.SetActive(false);
         }
+    }
+
+    // SetAnimation : 애니메이션을 실행 -> 기존에 재생되는 것을 강제로 끊음
+    private void CurrentAnimation(int trackindex, AnimationReferenceAsset AnimClip, bool loop)
+    {
+        if (skeletonAnimation.AnimationName == AnimClip.name) return;
+        skeletonAnimation.AnimationState.SetAnimation(trackindex, AnimClip, loop);
+
+        LogPrintSystem.SystemLogPrint(transform, $"animation => {AnimClip}", ELogType.Player);
+    }
+
+    // AddAnimation: 현재 실행되고 있는 애니메이션이 종료되고 실행되는 애니메이션 delay는 끝나고 얼마만에 실행되는 지
+    private void NextAnimation(int trackindex,AnimationReferenceAsset AnimClip, bool loop, float delay)
+    {
+        if (skeletonAnimation.AnimationName == AnimClip.name) return;
+        skeletonAnimation.AnimationState.AddAnimation(trackindex, AnimClip, loop, delay);
+
+        LogPrintSystem.SystemLogPrint(transform, $"next animation => {AnimClip}", ELogType.Player);
     }
 }

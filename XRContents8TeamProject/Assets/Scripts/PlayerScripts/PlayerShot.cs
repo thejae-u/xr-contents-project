@@ -26,14 +26,13 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private float reloadingDelay = 0.3f;
     [SerializeField] private float forwardDelay = 0.3f;
 
-    [Header("animation")]
+    [Header("플레이어 사격 애니메이션")]
     public SkeletonAnimation skeletonAnimation;
     public AnimationReferenceAsset Backforward;
     public AnimationReferenceAsset Reloading;
     public AnimationReferenceAsset Forward;
     public AnimationReferenceAsset Shot;
     public AnimationReferenceAsset BoltAction;
-    private bool isEmptyAnim;
 
     public enum EShotState
     {
