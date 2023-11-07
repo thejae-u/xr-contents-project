@@ -61,7 +61,7 @@ public class PlayerShot : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerManager.Instance.state != PlayerManager.EPlayerState.Dead)
+        if (!PlayerManager.Instance.GetIsPlayerDead())
         {
             if (curAmmo == 0)
             {

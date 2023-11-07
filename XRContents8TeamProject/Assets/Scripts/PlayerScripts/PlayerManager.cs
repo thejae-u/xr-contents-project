@@ -36,11 +36,11 @@ public class PlayerManager : MonoBehaviour
     [Header("플레이어 피격 시 넉백 거리")]
     [SerializeField] private float playerKnockbackDistance = 3.0f;
 
-    private bool isPlayerViewDirRight = true;
     private bool isJumping = false;
     private bool canJump = true;
     private bool isKnockback = false;
     private bool canMove = true;
+    private bool isPlayerDead = false;
 
     // Player dodge(evasion) related
     [Header("플레이어 회피 거리")]
@@ -53,8 +53,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float dodgeInvincibilityDuration = 1.5f;
 
     private bool canDodge = true;
-    public bool isInvincibility = false;
     private bool isDodgeDirRight;
+    public bool isInvincibility = false;
 
     // Player shooting related
     [Header("플레이어 노말 공격력 조정")]
@@ -88,18 +88,6 @@ public class PlayerManager : MonoBehaviour
     public Camera cam;
     public Bone bone;
 
-    public enum EPlayerState
-    {
-        Idle,
-        Move,
-        Jump,
-        Dodge,
-        Hit,
-        Dead
-    }
-
-    public EPlayerState state { get; private set; }
-
     private void Awake()
     {
         if (instance == null)
@@ -122,16 +110,13 @@ public class PlayerManager : MonoBehaviour
         playerRigidbody.gravityScale = playerGravityForce;
         Cursor.visible = false;
 
-        state = EPlayerState.Idle;
         CurrentAnimation(0, Idle, true);
         CurrentAnimation(1, Aim, true);
     }
 
     private void Update()
     {
-        LogPrintSystem.SystemLogPrint(transform, $"플레이어 상태 : {state}", ELogType.Player);
-
-        if (state != EPlayerState.Dead)
+        if(!isPlayerDead)
         {
             if (CameraController.Inst.IsNowCutScene) return;
 
@@ -140,7 +125,7 @@ public class PlayerManager : MonoBehaviour
             float moveDir = Input.GetAxis("Horizontal");
             if (moveDir == 0)
             {
-                if (state != EPlayerState.Jump)
+                if (!isJumping)
                 {
                     CurrentAnimation(0, Idle, true);
                 }
@@ -190,12 +175,15 @@ public class PlayerManager : MonoBehaviour
     {
         return isJumping;
     }
+    public bool GetIsPlayerDead()
+    {
+        return isPlayerDead;
+    }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (canJump)
         {
-            state = EPlayerState.Idle;
             isJumping = false;
         }
     }
@@ -203,8 +191,6 @@ public class PlayerManager : MonoBehaviour
     #region MOVEMENT
     void PlayerMove(float moveDir)
     {
-        if (state == EPlayerState.Dead) return;
-        state = EPlayerState.Move;
         CurrentAnimation(0, Move, true);
         LogPrintSystem.SystemLogPrint(transform, "Move On", ELogType.Player);
        
@@ -217,7 +203,6 @@ public class PlayerManager : MonoBehaviour
     {
         if (!isJumping)
         {
-            state = EPlayerState.Jump;
             CurrentAnimation(0, Jump, false);
 
             playerRigidbody.AddForce(Vector2.up * playerJumpForce, ForceMode2D.Impulse);
@@ -260,8 +245,6 @@ public class PlayerManager : MonoBehaviour
         {
             if (canMove)
             {
-                state = EPlayerState.Hit;
-
                 Sequence sequence = DOTween.Sequence();
 
                 isKnockback = true;
@@ -309,8 +292,6 @@ public class PlayerManager : MonoBehaviour
     {
         if (canMove)
         {
-            state = EPlayerState.Dodge;
-
             Sequence sequence = DOTween.Sequence();
             LogPrintSystem.SystemLogPrint(transform, "회피 사용", ELogType.Player);
 
@@ -352,7 +333,8 @@ public class PlayerManager : MonoBehaviour
 
     private void PlayerDeath()
     {
-        state = EPlayerState.Dead;
+        isPlayerDead = true;
+        skeletonAnimation.ClearState();
         CurrentAnimation(0, Dead, false);
     }
 
@@ -365,12 +347,10 @@ public class PlayerManager : MonoBehaviour
         if (worldMousePosition.x < transform.position.x)
         {
             transform.eulerAngles = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
-            isPlayerViewDirRight = false;
         }
         else
         {
             transform.eulerAngles = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
-            isPlayerViewDirRight = true;
         }
     }
 
@@ -429,7 +409,6 @@ public class PlayerManager : MonoBehaviour
 
         LogPrintSystem.SystemLogPrint(transform, $"animation => {AnimClip}", ELogType.Player);
     }
-
     // AddAnimation: 현재 실행되고 있는 애니메이션이 종료되고 실행되는 애니메이션 delay는 끝나고 얼마만에 실행되는 지
     private void NextAnimation(int trackindex, AnimationReferenceAsset AnimClip, bool loop, float delay)
     {
