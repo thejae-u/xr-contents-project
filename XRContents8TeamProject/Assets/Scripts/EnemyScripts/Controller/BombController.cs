@@ -52,9 +52,7 @@ public class BombController : MonoBehaviour
         if (!BombParticleSystem.isPlaying)
         {
             Destroy(gameObject);
-            return;
         }
-        Debug.Log("HELLO");
     }
 
     private void Shoot()
@@ -75,6 +73,7 @@ public class BombController : MonoBehaviour
             isPlayingParticle = true;
             Instantiate(particle, transform.position, Quaternion.identity);
             BombParticleSystem.Play();
+            
             var player = GameObject.Find("Player");
             var playerTransform = player.GetComponent<Transform>();
             var playerManager = player.GetComponent<PlayerManager>();

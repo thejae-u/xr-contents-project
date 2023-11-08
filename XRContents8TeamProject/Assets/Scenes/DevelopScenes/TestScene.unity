@@ -638,7 +638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7269875616672671879, guid: 732fe3889b8ab134d8eb1dd2cea25453, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1204,13 +1204,7 @@ MonoBehaviour:
     soundData: {fileID: 0}
     soundType: 2
     playType: 0
-  origins:
-  - soundType: 0
-    origin: {fileID: 0}
-  - soundType: 1
-    origin: {fileID: 0}
-  - soundType: 2
-    origin: {fileID: 0}
+  origins: []
 --- !u!4 &444383898
 Transform:
   m_ObjectHideFlags: 0
@@ -1802,6 +1796,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1678874349427312567, guid: a3b5f6b1c6101fa4c83c2d7cbaf6d993, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308190424483359290, guid: a3b5f6b1c6101fa4c83c2d7cbaf6d993, type: 3}
+      propertyPath: initialFlipX
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8838251814723897379, guid: a3b5f6b1c6101fa4c83c2d7cbaf6d993, type: 3}
