@@ -42,10 +42,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (inst != null)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
     }
 
@@ -53,7 +50,9 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            return inst == null ? null : inst;
+            if (inst == null)
+                inst = new GameManager();
+            return inst;
         }
     }
     
@@ -86,11 +85,14 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        foreach (var stage in stages)
+        if (stages.Count > 0)
         {
-            foreach (var sector in stage.sectors)
+            foreach (var stage in stages)
             {
-                everyMonsterCount += sector.transform.childCount;
+                foreach (var sector in stage.sectors)
+                {
+                    everyMonsterCount += sector.transform.childCount;
+                }
             }
         }
 

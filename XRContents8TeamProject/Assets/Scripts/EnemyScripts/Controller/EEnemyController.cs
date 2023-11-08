@@ -230,12 +230,21 @@ namespace EnemyScripts
                     DOTween.Kill(this);
                 }
 
-                if (anim.AnimationName != "Rush_Dead")
-                    anim.AnimationState.SetAnimation(0, "Rush_Dead", false);
-
-                if (anim.AnimationName == "Rush_Dead" && anim.AnimationState.GetCurrent(0).IsComplete)
+                if (b.GetData<ReferenceValueT<EEliteType>>("myType").Value == EEliteType.Rush)
                 {
-                    Destroy(gameObject);
+                    if (anim.AnimationName != "Rush_Dead")
+                        anim.AnimationState.SetAnimation(0, "Rush_Dead", false);
+
+                    if (anim.AnimationName == "Rush_Dead" && anim.AnimationState.GetCurrent(0).IsComplete)
+                        Destroy(gameObject);
+                }
+                else
+                {
+                    if (anim.AnimationName != "Throw_Dead")
+                        anim.AnimationState.SetAnimation(0, "Throw_Dead", false);
+                    
+                    if(anim.AnimationName == "Throw_Dead" && anim.AnimationState.GetCurrent(0).IsComplete)
+                        Destroy(gameObject);
                 }
             }
             else
