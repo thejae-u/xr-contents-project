@@ -40,6 +40,8 @@ public class PlayerManager : MonoBehaviour
     private bool canJump = true;
     private bool isKnockback = false;
     private bool canMove = true;
+    private bool isHit = false;
+    private bool isDodge = false;
     private bool isPlayerDead = false;
 
     // Player dodge(evasion) related
@@ -125,13 +127,19 @@ public class PlayerManager : MonoBehaviour
             float moveDir = Input.GetAxis("Horizontal");
             if (moveDir == 0)
             {
-                if (!isJumping)
-                {
-                    CurrentAnimation(0, Idle, true);
-                }
+                if (isJumping) return;
+                if(isDodge) return;
+                if(isHit) return;
+
+                CurrentAnimation(0, Idle, true);
+                CurrentAnimation(1, Aim, true);
             }
             else
             {
+                if (isJumping) return;
+                if (isDodge) return;
+                if (isHit) return;
+
                 PlayerMove(moveDir);
             }
 
@@ -180,20 +188,11 @@ public class PlayerManager : MonoBehaviour
         return isPlayerDead;
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (canJump)
-        {
-            isJumping = false;
-        }
-    }
-
     #region MOVEMENT
     void PlayerMove(float moveDir)
     {
         CurrentAnimation(0, Move, true);
-        LogPrintSystem.SystemLogPrint(transform, "Move On", ELogType.Player);
-       
+
         Vector2 playerMove = new Vector2(moveDir * playerMoveSpeed, playerRigidbody.velocity.y);
         playerRigidbody.velocity = playerMove;
     }
@@ -203,19 +202,28 @@ public class PlayerManager : MonoBehaviour
     {
         if (!isJumping)
         {
+            Sequence playerJumpSequence = DOTween.Sequence();
+
+            isJumping=true;
+            canJump = false;
+
             CurrentAnimation(0, Jump, false);
 
             playerRigidbody.AddForce(Vector2.up * playerJumpForce, ForceMode2D.Impulse);
-            StartCoroutine(PlayerJumpResetTime());
-            isJumping = true;
+
+            playerJumpSequence.SetDelay(0.5f).OnComplete(() =>
+            {
+                canJump = true;
+            });
         }
     }
 
-    IEnumerator PlayerJumpResetTime()
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        canJump = false;
-        yield return new WaitForSeconds(0.5f);
-        canJump = true;
+        if (canJump)
+        {
+            isJumping = false;
+        }
     }
     #endregion JUMP
     #region HIT
@@ -230,6 +238,10 @@ public class PlayerManager : MonoBehaviour
             LogPrintSystem.SystemLogPrint(transform, $"{damage}From Enemy -> Remain PlayerHP{playerHp}", ELogType.Player);
             if (playerHp > 0)
             {
+                isHit = true;
+                skeletonAnimation.ClearState();
+                CurrentAnimation(0, Hit, false);
+                LogPrintSystem.SystemLogPrint(transform, "Hit state update", ELogType.Player);
                 PlayerKnockback(enemyXPos);
             }
             else
@@ -245,8 +257,6 @@ public class PlayerManager : MonoBehaviour
         {
             if (canMove)
             {
-                Sequence sequence = DOTween.Sequence();
-
                 isKnockback = true;
 
                 // Knockback avatar
@@ -263,7 +273,6 @@ public class PlayerManager : MonoBehaviour
                     LogPrintSystem.SystemLogPrint(transform, $"넉백 시 플레이어와 적위치 : {playerXPos},{enemyXPos}", ELogType.Player);
                 }
             }
-
             PlayerInvincibility(playerHitInvincibilityDuration);
         }
     }
@@ -283,6 +292,7 @@ public class PlayerManager : MonoBehaviour
             canJump = true;
             isInvincibility = false;
             isKnockback = false;
+            isHit = false;
             LogPrintSystem.SystemLogPrint(transform, "플레이어 무적 상태 해제", ELogType.Player);
         });
     }
@@ -292,8 +302,14 @@ public class PlayerManager : MonoBehaviour
     {
         if (canMove)
         {
+            isDodge = true;
             Sequence sequence = DOTween.Sequence();
             LogPrintSystem.SystemLogPrint(transform, "회피 사용", ELogType.Player);
+
+            skeletonAnimation.ClearState();
+            skeletonAnimation.AnimationState.SetAnimation(0, Dodge, false);
+            CurrentAnimation(0, Dodge, false);
+            LogPrintSystem.SystemLogPrint(transform, "Dodge 실행", ELogType.Player);
 
             canDodge = false;
             Vector3 playerPos = transform.position;
@@ -301,18 +317,21 @@ public class PlayerManager : MonoBehaviour
             PlayerInvincibility(dodgeInvincibilityDuration);
 
             if (dodgeDirRight)
-            {
+            { 
                 transform.DOMoveX(playerPos.x + dodgeDistance, 1.0f);
+                LogPrintSystem.SystemLogPrint(transform, "DOMoveX Right 실행", ELogType.Player);
             }
             else
             {
                 transform.DOMoveX(playerPos.x - dodgeDistance, 1.0f);
+                LogPrintSystem.SystemLogPrint(transform, "DOMoveX Left 실행", ELogType.Player);
             }
 
             sequence.SetDelay(dodgeCoolTime).OnComplete(() =>
             {
                 LogPrintSystem.SystemLogPrint(transform, "회피 쿨타임 종료", ELogType.Player);
                 canDodge = true;
+                isDodge = false;
             });
 
             return;
@@ -408,13 +427,5 @@ public class PlayerManager : MonoBehaviour
         skeletonAnimation.AnimationState.SetAnimation(trackindex, AnimClip, loop);
 
         LogPrintSystem.SystemLogPrint(transform, $"animation => {AnimClip}", ELogType.Player);
-    }
-    // AddAnimation: 현재 실행되고 있는 애니메이션이 종료되고 실행되는 애니메이션 delay는 끝나고 얼마만에 실행되는 지
-    private void NextAnimation(int trackindex, AnimationReferenceAsset AnimClip, bool loop, float delay)
-    {
-        if (skeletonAnimation.AnimationName == AnimClip.name) return;
-        skeletonAnimation.AnimationState.AddAnimation(trackindex, AnimClip, loop, delay);
-
-        LogPrintSystem.SystemLogPrint(transform, $"next animation => {AnimClip}", ELogType.Player);
     }
 }
