@@ -134,7 +134,8 @@ namespace EnemyScripts
             if (isAlive.Value)
             {
                 if (isHit) return;
-                
+
+                if (PlayerManager.Instance.GetIsPlayerDead()) return;
                 Flip();
                 fsm.Update();
                 fsmLife.Update();

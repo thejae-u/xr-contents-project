@@ -249,10 +249,10 @@ namespace EnemyScripts
             }
             else
             {
+                if (PlayerManager.Instance.GetIsPlayerDead()) return;
                 fsm.Update();
                 fsmLife.Update();
                 
-                // Flip X Rotation
                 Flip();
             }
         }
