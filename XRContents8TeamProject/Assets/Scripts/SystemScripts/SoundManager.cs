@@ -36,22 +36,11 @@ public class SoundManager : MonoBehaviour
     
     private static SoundManager inst = null;
 
-    public static SoundManager Inst
-    {
-        get
-        {
-            if (inst == null)
-                inst = new SoundManager();
-            return inst;
-        }
-    }
+    public static SoundManager Inst => inst;
 
     private void Awake()
     {
-        if (inst == null)
-            inst = this;
-        else
-            Destroy(gameObject);
+        inst = this;
     }
     
     #endregion
@@ -60,7 +49,7 @@ public class SoundManager : MonoBehaviour
     {
         createdObjs = new List<GameObject>();
     }
-
+    
     private Sound Find(string soundName)
     {
         foreach (var clip in sounds)
@@ -72,27 +61,43 @@ public class SoundManager : MonoBehaviour
         return null;
     }
 
-    public void SoundPlay(string soundName, GameObject obj)
+    public void Play(string soundName, GameObject obj)
     {
         var clip = Find(soundName);
         if (clip == null) return;
 
         var newObj = Instantiate(playPrefab, obj.transform);
-        newObj.GetComponent<PlayScript>().mySound = clip;
-        newObj.GetComponent<PlayScript>().Play();
+
+        newObj.transform.GetComponent<PlayScript>().Data.soundName = clip.soundName;
+        newObj.transform.GetComponent<PlayScript>().Data.soundData = clip.soundData;
+        newObj.transform.GetComponent<PlayScript>().Data.playType = clip.playType;
         
         createdObjs.Add(newObj);
     }
 
     public void DeleteSound(GameObject obj)
     {
-        var reqObj = obj.transform.GetComponent<PlayScript>().mySound;
-
-        for (int i = createdObjs.Count - 1; i >= 0; i++)
-        {
-            var myObj = createdObjs[i].transform.GetComponent<PlayScript>().mySound;
-            if (myObj.soundName == reqObj.soundName)
-                createdObjs.Remove(createdObjs[i]);
-        }
+       Sound reqObj = null;
+       
+       for (int i = 0; i < obj.transform.childCount; i++)
+       {
+           var child = obj.transform.GetChild(i);
+           Debug.Log(child.GetComponent<PlayScript>());
+           
+           if (child.GetComponent<AudioSource>() != null)
+               reqObj = child.GetComponent<PlayScript>().Data;
+       }
+       
+       if (reqObj == null) return;
+       
+       for (int i = createdObjs.Count - 1; i >= 0; i++)
+       {
+           var myObj = createdObjs[i].transform.GetComponent<PlayScript>().Data;
+           if (myObj.soundName == reqObj.soundName)
+           {
+               Destroy(createdObjs[i].gameObject);
+               createdObjs.Remove(createdObjs[i]);
+           }
+       }
     }
 }

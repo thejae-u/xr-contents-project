@@ -89,9 +89,12 @@ public class GameManager : MonoBehaviour
         {
             foreach (var stage in stages)
             {
-                foreach (var sector in stage.sectors)
+                if (stage.sectors.Count > 0)
                 {
-                    everyMonsterCount += sector.transform.childCount;
+                    foreach (var sector in stage.sectors)
+                    {
+                        //everyMonsterCount += sector.transform.childCount;
+                    }
                 }
             }
         }
@@ -99,6 +102,9 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.G))
         {
+
+            SoundManager.Inst.Play("BackgroundLoop", gameObject);
+            /*
             if (SceneManager.GetActiveScene().name == "TestScene2")
             {
                 if (!isFade)
@@ -110,6 +116,12 @@ public class GameManager : MonoBehaviour
                     sequence.OnComplete(() => { SceneManager.LoadScene("TestScene3"); });
                 }
             }
+            */
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            SoundManager.Inst.DeleteSound(gameObject);
         }
 
         if (everyMonsterCount == 0)

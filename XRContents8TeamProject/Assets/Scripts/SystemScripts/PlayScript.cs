@@ -5,15 +5,16 @@ using UnityEngine;
 
 public class PlayScript : MonoBehaviour
 {
-    public Sound mySound;
+    [SerializeField]
+    private Sound mySound;
 
+    public Sound Data => mySound;
     private AudioSource source;
 
     private bool isPlaying;
 
     private void Start()
     {
-        mySound = new Sound();
         source = transform.GetComponent<AudioSource>();
         isPlaying = false;
     }
