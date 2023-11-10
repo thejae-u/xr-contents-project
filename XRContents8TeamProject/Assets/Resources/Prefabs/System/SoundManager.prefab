@@ -52,3 +52,9 @@ MonoBehaviour:
   - soundName: PlayerShot
     soundData: {fileID: 0}
     playType: 0
+  - soundName: EnemyAttack
+    soundData: {fileID: 0}
+    playType: 0
+  - soundName: PlayerJump
+    soundData: {fileID: 0}
+    playType: 0

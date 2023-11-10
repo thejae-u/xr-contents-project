@@ -2607,6 +2607,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3685215242045580352, guid: 2434531a4755ab74f8e2eb2ea70ef81e, type: 3}
+      propertyPath: sounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685215242045580352, guid: 2434531a4755ab74f8e2eb2ea70ef81e, type: 3}
+      propertyPath: sounds.Array.data[2].soundName
+      value: EnemyAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685215242045580352, guid: 2434531a4755ab74f8e2eb2ea70ef81e, type: 3}
+      propertyPath: sounds.Array.data[3].soundName
+      value: PlayerJump
+      objectReference: {fileID: 0}
     - target: {fileID: 4690833771287026523, guid: 2434531a4755ab74f8e2eb2ea70ef81e, type: 3}
       propertyPath: m_Name
       value: SoundManager

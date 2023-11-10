@@ -82,7 +82,6 @@ public class SoundManager : MonoBehaviour
        for (int i = 0; i < obj.transform.childCount; i++)
        {
            var child = obj.transform.GetChild(i);
-           Debug.Log(child.GetComponent<PlayScript>());
            
            if (child.GetComponent<AudioSource>() != null)
                reqObj = child.GetComponent<PlayScript>().Data;
@@ -90,7 +89,7 @@ public class SoundManager : MonoBehaviour
        
        if (reqObj == null) return;
        
-       for (int i = createdObjs.Count - 1; i >= 0; i++)
+       for (int i = createdObjs.Count - 1; i >= 0; i--)
        {
            var myObj = createdObjs[i].transform.GetComponent<PlayScript>().Data;
            if (myObj.soundName == reqObj.soundName)

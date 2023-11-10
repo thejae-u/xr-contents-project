@@ -30,7 +30,9 @@ public class PlayScript : MonoBehaviour
                     Destroy(gameObject);
                     break;
                 case EPlayType.Loop:
-                    return;
+                    if (source.isPlaying) return;
+                    Play();
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
