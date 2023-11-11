@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
                 {
                     foreach (var sector in stage.sectors)
                     {
-                        //everyMonsterCount += sector.transform.childCount;
+                        everyMonsterCount += sector.transform.childCount;
                     }
                 }
             }

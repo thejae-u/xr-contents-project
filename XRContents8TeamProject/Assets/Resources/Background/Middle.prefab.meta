@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:XRContents8TeamProject/Assets/Resources/Background/Tilemap/Tilemap_fix/TileMap_fix_10.asset.meta
-guid: b8cf11503cba97041b44e45b1a487dae
-NativeFormatImporter:
-  externalObjects: {}
-  mainObjectFileID: 11400000
-========
-guid: a524dfbb58b9e64458ea9abce76502c4
+guid: 5bb1fdfafc7bee943af5e3d21f8dfe4a
 PrefabImporter:
   externalObjects: {}
->>>>>>>> feature/maindevelop:XRContents8TeamProject/Assets/Resources/Prefabs/BackGround/Middle.prefab.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

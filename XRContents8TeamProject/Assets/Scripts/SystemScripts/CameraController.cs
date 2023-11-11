@@ -10,6 +10,9 @@ public class CameraController : MonoBehaviour
     private List<bool> visited;
     private CinemachineVirtualCamera curCamera;
 
+    [Range(0.1f, 5.0f)]
+    public float shakeTime;
+
     public bool IsCameraStop { get; set; }
     public bool IsNowCutScene { get; private set; }
     public bool IsNowCameraShaking { get; private set; }
@@ -63,7 +66,7 @@ public class CameraController : MonoBehaviour
     {
         if (IsNowCameraShaking) return;
         IsNowCameraShaking = true;
-        curCamera.transform.DOShakePosition(2.0f).OnComplete(() =>
+        curCamera.transform.DOShakePosition(shakeTime).OnComplete(() =>
         {
             IsNowCameraShaking = false;
         });
