@@ -8,10 +8,12 @@ public class CameraController : MonoBehaviour
 {
     public List<CinemachineVirtualCamera> cameras;
     private List<bool> visited;
+    private CinemachineVirtualCamera curCamera;
 
     public bool IsCameraStop { get; set; }
     public bool IsNowCutScene { get; private set; }
-    
+    public bool IsNowCameraShaking { get; private set; }
+
     private Transform target;
     private float trackSpeed = 10;
 
@@ -27,6 +29,8 @@ public class CameraController : MonoBehaviour
         visited = new List<bool>();
         for (int i = 0; i < cameras.Count; i++)
             visited.Add(false);
+
+        curCamera = cameras[0];
     }
 
     public static CameraController Inst
@@ -43,7 +47,7 @@ public class CameraController : MonoBehaviour
         target = GameObject.Find("Player").transform;
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         if (IsCameraStop) return;
         
@@ -53,5 +57,15 @@ public class CameraController : MonoBehaviour
             v.x = target.position.x + 5.5f;
             cameras[0].transform.position = Vector3.MoveTowards(cameras[0].transform.position, v, trackSpeed * Time.deltaTime);
         }
+    }
+
+    public void ShakeCamera()
+    {
+        if (IsNowCameraShaking) return;
+        IsNowCameraShaking = true;
+        curCamera.transform.DOShakePosition(2.0f).OnComplete(() =>
+        {
+            IsNowCameraShaking = false;
+        });
     }
 }

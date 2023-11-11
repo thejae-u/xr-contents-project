@@ -2,14 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ESoundType
-{
-    // 사운드의 타입을 나눠서 작성
-    System,
-    Player,
-    Enemy,
-}
-
 public enum EPlayType
 {
     Once,
