@@ -296,6 +296,8 @@ public class EliteRushAttackNode : INode
             else
             {
                 InitSetting(blackboard);
+                CameraController.Inst.ShakeCamera();
+                LogPrintSystem.SystemLogPrint(myTransform, $"Hit camera", ELogType.EnemyAI);
                 Physics2D.IgnoreLayerCollision(enemyLayer, enemyLayer, false);
                 return Fsm.GuardNullNode(this, endAttack);
             }
@@ -318,6 +320,8 @@ public class EliteRushAttackNode : INode
             else
             {
                 InitSetting(blackboard);
+                LogPrintSystem.SystemLogPrint(myTransform, $"Hit camera", ELogType.EnemyAI);
+                CameraController.Inst.ShakeCamera();
                 Physics2D.IgnoreLayerCollision(enemyLayer, enemyLayer, false);
                 return Fsm.GuardNullNode(this, endAttack);
             }

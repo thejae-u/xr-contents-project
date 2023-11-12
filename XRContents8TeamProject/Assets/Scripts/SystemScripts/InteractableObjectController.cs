@@ -13,7 +13,7 @@ public class InteractableObjectController : MonoBehaviour
     
     private WeakTimeController timer;
     private bool isTimerEnded;
-    private bool istimerStarted;
+    private bool isTimerStarted;
 
     private bool isInteractable;
 
@@ -26,13 +26,13 @@ public class InteractableObjectController : MonoBehaviour
         myPos = transform.position;
         myCameraPos = Camera.main.WorldToViewportPoint(myPos);
         isTimerEnded = false;
-        istimerStarted = false;
+        isTimerStarted = false;
         isInteractable = Probability();
     }
 
     private void Update()
     {
-        if (!istimerStarted)
+        if (!isTimerStarted)
         {
             myCameraPos = Camera.main.WorldToViewportPoint(myPos);
             if (myCameraPos.x > 0.1f && myCameraPos.x < 0.9f)
@@ -44,7 +44,7 @@ public class InteractableObjectController : MonoBehaviour
                 }
 
                 timer.Init(waitTime);
-                istimerStarted = true;
+                isTimerStarted = true;
             }
         }
         else

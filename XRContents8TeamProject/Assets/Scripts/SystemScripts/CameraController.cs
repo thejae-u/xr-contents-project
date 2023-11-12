@@ -10,8 +10,8 @@ public class CameraController : MonoBehaviour
     private List<bool> visited;
     private CinemachineVirtualCamera curCamera;
 
-    [Range(0.1f, 5.0f)]
-    public float shakeTime;
+    [Header("카메라가 흔들리는 시간 조정")] [Range(0.1f, 5.0f)]
+    [SerializeField] private float shakeTime;
 
     public bool IsCameraStop { get; set; }
     public bool IsNowCutScene { get; private set; }
