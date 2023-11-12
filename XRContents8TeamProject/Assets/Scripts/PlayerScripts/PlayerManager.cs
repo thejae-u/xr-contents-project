@@ -55,7 +55,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float dodgeInvincibilityDuration = 1.5f;
 
     private bool canDodge = true;
-    private bool isDodgeDirRight;
+    private bool isPlayerDirRight; // 플레이어가 현재 바라보는 방향
+    private bool isDodgeDirRight;  // 키 입력에 따른 방향
     public bool isInvincibility = false;
 
     // Player shooting related
@@ -76,6 +77,7 @@ public class PlayerManager : MonoBehaviour
 
     [Header("플레이어 애니메이션")]
     public SkeletonAnimation skeletonAnimation;
+
     [SpineEvent] public string eventName;
     public AnimationReferenceAsset Idle;
     public AnimationReferenceAsset Move;
@@ -84,6 +86,8 @@ public class PlayerManager : MonoBehaviour
     public AnimationReferenceAsset Dodge;
     public AnimationReferenceAsset Dead;
     public AnimationReferenceAsset Aim;
+
+    private bool isAnimationBackwards; // 애니메이션 역재생 여부
 
     [SpineBone(dataField: "skeletonAnimation")]
     public string boneName;
@@ -146,11 +150,23 @@ public class PlayerManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKey(KeyCode.A) && canDodge)
             {
                 isDodgeDirRight = false;
+
+                if (isPlayerDirRight)
+                    isAnimationBackwards = true;
+                else
+                    isAnimationBackwards = false;
+
                 PlayerDodge(isDodgeDirRight);
             }
             else if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKey(KeyCode.D) && canDodge)
             {
                 isDodgeDirRight = true;
+
+                if (!isPlayerDirRight)
+                    isAnimationBackwards = true;
+                else
+                    isAnimationBackwards = false;
+
                 PlayerDodge(isDodgeDirRight);
             }
 
@@ -306,16 +322,12 @@ public class PlayerManager : MonoBehaviour
             Sequence sequence = DOTween.Sequence();
             LogPrintSystem.SystemLogPrint(transform, "회피 사용", ELogType.Player);
 
-            skeletonAnimation.ClearState();
-            skeletonAnimation.AnimationState.SetAnimation(0, Dodge, false);
-            CurrentAnimation(0, Dodge, false);
-            LogPrintSystem.SystemLogPrint(transform, "Dodge 실행", ELogType.Player);
-
             canDodge = false;
             Vector3 playerPos = transform.position;
 
             PlayerInvincibility(dodgeInvincibilityDuration);
 
+            // 이동 실행
             if (dodgeDirRight)
             { 
                 transform.DOMoveX(playerPos.x + dodgeDistance, 1.0f);
@@ -326,12 +338,40 @@ public class PlayerManager : MonoBehaviour
                 transform.DOMoveX(playerPos.x - dodgeDistance, 1.0f);
                 LogPrintSystem.SystemLogPrint(transform, "DOMoveX Left 실행", ELogType.Player);
             }
+ 
+            TrackEntry trackEntry = skeletonAnimation.AnimationState.SetAnimation(0, "Dodge", false);
+            float targetTime = 0f;
+
+            // 애니메이션 역재생
+            if (isAnimationBackwards)
+            {
+                trackEntry.TimeScale = 0f;
+                trackEntry.AnimationLast = 0f;
+                trackEntry.TrackTime = targetTime;
+                skeletonAnimation.ClearState();
+                skeletonAnimation.state.Apply(skeletonAnimation.skeleton);
+                targetTime -= Time.deltaTime;
+
+                if(targetTime <= 0f) 
+                {
+                    targetTime = trackEntry.AnimationEnd;
+                }
+
+            }
+            else
+            {      
+                skeletonAnimation.ClearState();
+                CurrentAnimation(0, Dodge, false);
+            }
+
+            LogPrintSystem.SystemLogPrint(transform, "Dodge Animation Play", ELogType.Player);
 
             sequence.SetDelay(dodgeCoolTime).OnComplete(() =>
             {
                 LogPrintSystem.SystemLogPrint(transform, "회피 쿨타임 종료", ELogType.Player);
                 canDodge = true;
                 isDodge = false;
+                trackEntry.TimeScale = 1f;
             });
 
             return;
@@ -366,10 +406,12 @@ public class PlayerManager : MonoBehaviour
         if (worldMousePosition.x < transform.position.x)
         {
             transform.eulerAngles = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
+            isPlayerDirRight = false;
         }
         else
         {
             transform.eulerAngles = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
+            isPlayerDirRight = true;
         }
     }
 
