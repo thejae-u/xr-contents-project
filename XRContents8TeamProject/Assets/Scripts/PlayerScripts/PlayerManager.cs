@@ -83,6 +83,7 @@ public class PlayerManager : MonoBehaviour
     public AnimationReferenceAsset Move;
     public AnimationReferenceAsset Jump;
     public AnimationReferenceAsset Hit;
+    public AnimationReferenceAsset BackwardDodge;
     public AnimationReferenceAsset Dodge;
     public AnimationReferenceAsset Dead;
     public AnimationReferenceAsset Aim;
@@ -339,24 +340,25 @@ public class PlayerManager : MonoBehaviour
                 LogPrintSystem.SystemLogPrint(transform, "DOMoveX Left 실행", ELogType.Player);
             }
  
-            TrackEntry trackEntry = skeletonAnimation.AnimationState.SetAnimation(0, "Dodge", false);
-            float targetTime = 0f;
+            //TrackEntry trackEntry = skeletonAnimation.AnimationState.SetAnimation(0, "Dodge", false);
+            //float targetTime = 0f;
 
             // 애니메이션 역재생
             if (isAnimationBackwards)
             {
-                trackEntry.TimeScale = 0f;
-                trackEntry.AnimationLast = 0f;
-                trackEntry.TrackTime = targetTime;
-                skeletonAnimation.ClearState();
-                skeletonAnimation.state.Apply(skeletonAnimation.skeleton);
-                targetTime -= Time.deltaTime;
+                //trackEntry.TimeScale = 0f;
+                //trackEntry.AnimationLast = 0f;
+                //trackEntry.TrackTime = targetTime;
+                //skeletonAnimation.ClearState();
+                //skeletonAnimation.state.Apply(skeletonAnimation.skeleton);
+                //targetTime -= Time.deltaTime;
 
-                if(targetTime <= 0f) 
-                {
-                    targetTime = trackEntry.AnimationEnd;
-                }
-
+                //if(targetTime <= 0f) 
+                //{
+                //    targetTime = trackEntry.AnimationEnd;
+                //}
+                //skeletonAnimation.ClearState();
+                //CurrentAnimation(0, BackwardDodge, false);
             }
             else
             {      
@@ -371,7 +373,7 @@ public class PlayerManager : MonoBehaviour
                 LogPrintSystem.SystemLogPrint(transform, "회피 쿨타임 종료", ELogType.Player);
                 canDodge = true;
                 isDodge = false;
-                trackEntry.TimeScale = 1f;
+                //trackEntry.TimeScale = 1f;
             });
 
             return;

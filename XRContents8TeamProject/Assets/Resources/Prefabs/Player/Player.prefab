@@ -123,7 +123,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b9688008bf4a33b429577cb5f5d7d08b, type: 2}
+  - {fileID: 2100000, guid: 2980d4a46db63d441b91255be4248cc9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -142,7 +142,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1281682217
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &5471782796121251530
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 50b902c7324253a419fd336ea27d8cfd, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: f94b676d6c9aaff45aef48314a66416b, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -207,8 +207,8 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 5
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!70 &330303974747212952
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -256,11 +256,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc162aba341813342b66b52971f56f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAim: {fileID: 0}
   tutorialtImg: {fileID: 0}
   rad: 1
-  playerMaxHp: 100
-  playerHp: 500000
+  playerMaxHp: 10000
+  playerHp: 10000
   playerMoveSpeed: 7
   playerJumpForce: 20
   playerGravityForce: 5
@@ -276,10 +275,12 @@ MonoBehaviour:
   maxAmmo: 6
   maxGauge: 0.1
   skeletonAnimation: {fileID: 5471782796121251530}
+  eventName: 
   Idle: {fileID: 11400000, guid: 22d69ecfe01eaac41b9e55c8594124a0, type: 2}
   Move: {fileID: 11400000, guid: 712c79f1d54d1234c9c353db09d23cf0, type: 2}
   Jump: {fileID: 11400000, guid: 8f7e8df95ee4d064caec31b5a619676a, type: 2}
   Hit: {fileID: 11400000, guid: 627bf8b99b9eda94f90bb9cd609efc15, type: 2}
+  BackwardDodge: {fileID: 0}
   Dodge: {fileID: 11400000, guid: c9242aa43efcb9145aae7df94def20e1, type: 2}
   Dead: {fileID: 11400000, guid: 6a3c7c245a6435745bc2495325beb6ad, type: 2}
   Aim: {fileID: 11400000, guid: c43c0a8dab15ee347a0fed8484739417, type: 2}
