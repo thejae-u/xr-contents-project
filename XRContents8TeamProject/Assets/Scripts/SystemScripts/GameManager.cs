@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     private bool isCoroutineOn;
     public float speed;
     
+    public bool IsNight { get; private set; }
+    
     private static GameManager inst = null;
     
     private void Awake()
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        IsNight = false;
         playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
         isCoroutineOn = false;
         fadeTime = 1.0f;

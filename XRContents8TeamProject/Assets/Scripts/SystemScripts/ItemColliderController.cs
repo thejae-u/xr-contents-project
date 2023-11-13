@@ -11,6 +11,7 @@ public class ItemColliderController : MonoBehaviour
 
     public bool IsTimerEnd { get; private set; }
 
+
     private void Start()
     {
         StartCoroutine(Timer());

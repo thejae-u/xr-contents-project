@@ -37,7 +37,6 @@ public class InteractableObjectController : MonoBehaviour
             myCameraPos = Camera.main.WorldToViewportPoint(myPos);
             if (myCameraPos.x > 0.1f && myCameraPos.x < 0.9f)
             {
-                Debug.Log($"{myPos.x}");
                 foreach (var timer in timers)
                 {
                     timer.SetActive(true);
@@ -53,9 +52,19 @@ public class InteractableObjectController : MonoBehaviour
 
             if (timer.IsAttacked)
             {
-                Instantiate(isInteractable ? item[0].gameObject : item[1].gameObject, transform.position,
-                    Quaternion.identity);
-                transform.GetComponent<InteractableObjectController>().enabled = false;
+                if (GameManager.Inst.IsNight)
+                {
+                    Instantiate(isInteractable ? item[2].gameObject : item[3].gameObject, transform.position,
+                        Quaternion.identity);
+                    transform.GetComponent<InteractableObjectController>().enabled = false;
+
+                }
+                else
+                {
+                    Instantiate(isInteractable ? item[0].gameObject : item[1].gameObject, transform.position,
+                        Quaternion.identity);
+                    transform.GetComponent<InteractableObjectController>().enabled = false;
+                }
             }
 
             timer.Checked();
