@@ -24,6 +24,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private List<Sound> sounds;
     private List<GameObject> createdObjs;
 
+    private long sid;
+
     #region Singleton
     
     private static SoundManager inst = null;
@@ -40,6 +42,7 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         createdObjs = new List<GameObject>();
+        sid = 0;
     }
     
     private Sound Find(string soundName)
@@ -60,6 +63,7 @@ public class SoundManager : MonoBehaviour
 
         var newObj = Instantiate(playPrefab, obj.transform);
 
+        newObj.name = $"{soundName} {sid++}";
         newObj.transform.GetComponent<PlayScript>().Data.soundName = clip.soundName;
         newObj.transform.GetComponent<PlayScript>().Data.soundData = clip.soundData;
         newObj.transform.GetComponent<PlayScript>().Data.playType = clip.playType;

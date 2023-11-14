@@ -27,7 +27,7 @@ public class PlayScript : MonoBehaviour
             {
                 case EPlayType.Once:
                     if (source.isPlaying) return;
-                    Destroy(gameObject);
+                    SoundManager.Inst.DeleteSound(gameObject);
                     break;
                 case EPlayType.Loop:
                     if (source.isPlaying) return;

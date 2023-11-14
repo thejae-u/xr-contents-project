@@ -71,6 +71,32 @@ public class GameManager : MonoBehaviour
         enemyCount = 0;
         everyMonsterCount = 0;
         
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+
+            //CameraController.Inst.ShakeCamera();
+            Debug.Log("HIT");
+            SoundManager.Inst.Play("BackgroundLoop", gameObject);
+            /*
+            if (SceneManager.GetActiveScene().name == "TestScene2")
+            {
+                if (!isFade)
+                {
+                    isFade = true;
+                    Sequence sequence = DOTween.Sequence();
+                    sequence.Append(blackImage.DOFade(1.0f, fadeTime));
+
+                    sequence.OnComplete(() => { SceneManager.LoadScene("TestScene3"); });
+                }
+            }
+            */
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            SoundManager.Inst.DeleteSound(gameObject);
+        }
+
         foreach (var sector in stages[curStage].sectors)
         {
             enemyCount += sector.transform.childCount;
@@ -102,30 +128,7 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-
-            CameraController.Inst.ShakeCamera();
-            //SoundManager.Inst.Play("BackgroundLoop", gameObject);
-            /*
-            if (SceneManager.GetActiveScene().name == "TestScene2")
-            {
-                if (!isFade)
-                {
-                    isFade = true;
-                    Sequence sequence = DOTween.Sequence();
-                    sequence.Append(blackImage.DOFade(1.0f, fadeTime));
-
-                    sequence.OnComplete(() => { SceneManager.LoadScene("TestScene3"); });
-                }
-            }
-            */
-        }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            SoundManager.Inst.DeleteSound(gameObject);
-        }
+        
 
         if (everyMonsterCount == 0)
         {
