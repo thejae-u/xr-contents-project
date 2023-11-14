@@ -179,6 +179,11 @@ public class GameManager : MonoBehaviour
             StartCoroutine(BloodTime(newColor));
     }
 
+    public List<Stage> GetEnemies()
+    {
+        return stages;
+    }
+
     private IEnumerator BloodTime(Color newColor)
     {
         isCoroutineOn = true;
