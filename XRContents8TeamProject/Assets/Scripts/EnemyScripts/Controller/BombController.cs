@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using EnemyScripts;
-using Unity.Mathematics;
 
 public class BombController : MonoBehaviour
 {
@@ -26,8 +25,6 @@ public class BombController : MonoBehaviour
     private Vector3 myPos;
     private float range;
 
-    private bool isPlayingParticle;
-
     private EEnemyController parent;
 
     private void Start()
@@ -38,7 +35,6 @@ public class BombController : MonoBehaviour
         myPos = transform.position;
         range = 1f;
         speed = 500.0f;
-        isPlayingParticle = false;
         Shoot();
     }
 
@@ -46,13 +42,6 @@ public class BombController : MonoBehaviour
     {
         speed += speed * Time.deltaTime;
         transform.rotation = Quaternion.Euler(0, 0, speed);
-        
-        if (!isPlayingParticle) return;
-
-        if (!BombParticleSystem.isPlaying)
-        {
-            Destroy(gameObject);
-        }
     }
 
     private void Shoot()
@@ -70,9 +59,7 @@ public class BombController : MonoBehaviour
         
         transform.DOPath(wayPoints, bombSpeed, PathType.CatmullRom, PathMode.Sidescroller2D).OnComplete(() =>
         {
-            isPlayingParticle = true;
-            Instantiate(particle, transform.position, Quaternion.identity);
-            BombParticleSystem.Play();
+            EffectController.Inst.PlayEffect(transform.position, "Bomb");
             
             var player = GameObject.Find("Player");
             var playerTransform = player.GetComponent<Transform>();
@@ -88,6 +75,8 @@ public class BombController : MonoBehaviour
                     playerManager.PlayerDiscountHp(parent.GetMySpecialDamage(), myPos.x);
                 }
             }
+            
+            Destroy(gameObject);
         });
         
     }

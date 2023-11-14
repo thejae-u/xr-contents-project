@@ -52,8 +52,6 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if (inst == null)
-                inst = new GameManager();
             return inst;
         }
     }
