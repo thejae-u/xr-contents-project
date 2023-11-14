@@ -32,6 +32,8 @@ public class ItemScript : MonoBehaviour
                     PlayerManager.Instance.PlayerRecovery(value);
                     break;
                 case EMyType.Bomb:
+                    // Play Effect
+                    EffectController.Inst.PlayEffect(transform.position, "Bomb");
                     PlayerManager.Instance.PlayerDiscountHp(value, transform.position.x);
                     break;
                 default:
@@ -52,6 +54,10 @@ public class ItemScript : MonoBehaviour
                 case EMyType.Apple:
                     break;
                 case EMyType.Bomb:
+                    // Play Effect
+                    EffectController.Inst.PlayEffect(transform.position, "Bomb");
+                    
+                    // Check Player & Enemy
                     var playerCollider = Physics2D.OverlapCircle(transform.position, range,
                         LayerMask.GetMask("Player"));
                     var enemiesCollider = Physics2D.OverlapCircleAll(transform.position, range,
