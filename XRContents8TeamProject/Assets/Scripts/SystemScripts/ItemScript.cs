@@ -6,24 +6,19 @@ using UnityEngine;
 
 public class ItemScript : MonoBehaviour
 {
-    enum MyType
+    enum EMyType
     {
         Apple,
         Bomb
     }
 
-    [SerializeField] private MyType type;
+    [SerializeField] private EMyType type;
     [SerializeField] private float value;
     
     private float range;
-    
-
-    private Transform playerTransform;
-    
 
     private void Start()
     {
-        playerTransform = GameObject.Find("Player").transform;
         range = 3.0f;
     }
 
@@ -33,10 +28,10 @@ public class ItemScript : MonoBehaviour
         {
             switch (type)
             {
-                case MyType.Apple:
+                case EMyType.Apple:
                     PlayerManager.Instance.PlayerRecovery(value);
                     break;
-                case MyType.Bomb:
+                case EMyType.Bomb:
                     PlayerManager.Instance.PlayerDiscountHp(value, transform.position.x);
                     break;
                 default:
@@ -54,9 +49,9 @@ public class ItemScript : MonoBehaviour
 
             switch (type)
             {
-                case MyType.Apple:
+                case EMyType.Apple:
                     break;
-                case MyType.Bomb:
+                case EMyType.Bomb:
                     var playerCollider = Physics2D.OverlapCircle(transform.position, range,
                         LayerMask.GetMask("Player"));
                     var enemiesCollider = Physics2D.OverlapCircleAll(transform.position, range,
