@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ItemScript : MonoBehaviour
 {
-    enum EMyType
+    private enum EMyType
     {
         Apple,
         Bomb

@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour
     {
         get
         {
-             return inst == null ? null : inst;
+            return inst;
         }
     }
 
