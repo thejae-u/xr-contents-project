@@ -13,9 +13,10 @@ public class PlayScript : MonoBehaviour
 
     private bool isPlaying;
 
-    private void Start()
+    private void Awake()
     {
         source = transform.GetComponent<AudioSource>();
+        Debug.Log(source);
         isPlaying = false;
     }
 

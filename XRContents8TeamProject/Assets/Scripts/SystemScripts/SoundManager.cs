@@ -67,31 +67,20 @@ public class SoundManager : MonoBehaviour
         newObj.transform.GetComponent<PlayScript>().Data.soundName = clip.soundName;
         newObj.transform.GetComponent<PlayScript>().Data.soundData = clip.soundData;
         newObj.transform.GetComponent<PlayScript>().Data.playType = clip.playType;
+        newObj.transform.GetComponent<PlayScript>().Play();
         
         createdObjs.Add(newObj);
     }
 
     public void DeleteSound(GameObject obj)
     {
-       Sound reqObj = null;
-       
-       for (int i = 0; i < obj.transform.childCount; i++)
-       {
-           var child = obj.transform.GetChild(i);
-           
-           if (child.GetComponent<AudioSource>() != null)
-               reqObj = child.GetComponent<PlayScript>().Data;
-       }
-       
-       if (reqObj == null) return;
-       
        for (int i = createdObjs.Count - 1; i >= 0; i--)
        {
-           var myObj = createdObjs[i].transform.GetComponent<PlayScript>().Data;
-           if (myObj.soundName == reqObj.soundName)
+           if (obj.name == createdObjs[i].name)
            {
-               Destroy(createdObjs[i].gameObject);
+               var delObj = createdObjs[i];
                createdObjs.Remove(createdObjs[i]);
+               Destroy(delObj);
            }
        }
     }

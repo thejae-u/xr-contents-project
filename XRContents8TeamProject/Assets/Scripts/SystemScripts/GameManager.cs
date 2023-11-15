@@ -74,9 +74,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
 
-            //CameraController.Inst.ShakeCamera();
-            Debug.Log("HIT");
-            SoundManager.Inst.Play("BackgroundLoop", gameObject);
+            CameraController.Inst.ShakeCamera();
+            //SoundManager.Inst.Play("PlayerShot", gameObject);
             /*
             if (SceneManager.GetActiveScene().name == "TestScene2")
             {
