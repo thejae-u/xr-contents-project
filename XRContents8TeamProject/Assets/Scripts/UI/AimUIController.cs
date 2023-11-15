@@ -11,16 +11,17 @@ public class AimUIController : MonoBehaviour
     private Color currentColor;
 
     public bool isReadyWarningGauge = false;
-    private bool PlayerCheckMaxGauge = false;
+    public bool isPlayerCheckMaxGauge;
 
     private void Awake()
     {
         fillMax = GameObject.Find("Player").GetComponent<PlayerManager>().maxGauge;
+    }
+    private void Start()
+    {
         fillGauge = fillMax / 100;
-
         Gauge.fillAmount = 0;
     }
-
     void Update()
     {
         Vector3 mousePosition = Input.mousePosition;
@@ -35,11 +36,11 @@ public class AimUIController : MonoBehaviour
         if (Gauge.fillAmount == 1)
         {
             Gauge.color = Color.yellow;
-            PlayerCheckMaxGauge = true;
-            PlayerCheckMaxGauge = GameObject.Find("Player").GetComponent<PlayerShot>().isPlayerCheckMaxGauge;
+            isPlayerCheckMaxGauge = true;
         }
     }
 
+    // 총알 없을 시 빨간색으로 변경
     public void SetWarningGauge()
     {
         if (!isReadyWarningGauge)
@@ -49,13 +50,13 @@ public class AimUIController : MonoBehaviour
             currentColor = Gauge.color;
             isReadyWarningGauge = true;
         }
-
+       
         if (Gauge.color.a > 0)
         {
             currentColor.a = Mathf.Clamp(currentColor.a - Time.deltaTime * 2f, 0.0f, 1.0f);
             Gauge.color = currentColor;
         }
-        else if (Gauge.color.a <= 0)
+        else
         {
             InitGauge();
         }
@@ -64,8 +65,8 @@ public class AimUIController : MonoBehaviour
     public void InitGauge()
     {
         Gauge.fillAmount = 0;
-
-        PlayerCheckMaxGauge = false;
+        isReadyWarningGauge = false;
+        
         Gauge.color = Color.white;
     }
 }

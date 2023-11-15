@@ -16,10 +16,10 @@ public class PlayerShot : MonoBehaviour
 
     private int curAmmo = 0;
     private float lastFireTime = 0;
+    public float curDamage = 0;
 
     private bool isReloading = false;
     private bool isDiscountBullet;
-    public bool isPlayerCheckMaxGauge;
 
     [Header("총 딜레이 관련")]
     [SerializeField] private float reverseDelay = 0.3f;
@@ -75,8 +75,6 @@ public class PlayerShot : MonoBehaviour
                     if (sequenceBoltAction == null)
                     {
                         aimUIController.SetGauge();
-
-                        LogPrintSystem.SystemLogPrint(transform, "에임 게이지 증가", ELogType.Player);
                     }
                 }
             }
@@ -84,7 +82,6 @@ public class PlayerShot : MonoBehaviour
             if (Input.GetMouseButtonUp(0))
             {
                 aimUIController.InitGauge();
-                aimUIController.isReadyWarningGauge = false;
 
                 if (state == EShotState.None && curAmmo > 0)
                 {
@@ -116,9 +113,6 @@ public class PlayerShot : MonoBehaviour
                 StateBackforward();
                 LogPrintSystem.SystemLogPrint(transform, "장전 실행", ELogType.Player);
             }
-
-            // 현재 실행 중인 애니메이션이 종료되었다면 애니메이션 대기열을 비워준다.
-            //EmptyAnimation();
         }
     }
 
@@ -135,7 +129,19 @@ public class PlayerShot : MonoBehaviour
             mousePosition = new Vector3(mousePosition.x, mousePosition.y, mousePosition.z);
             mousePosition.z = -Camera.main.transform.position.z;
 
-            GameObject bullet = Instantiate(bulletPrefab, Camera.main.ScreenToWorldPoint(mousePosition), Quaternion.identity);
+            if (aimUIController.isPlayerCheckMaxGauge)
+            {
+                EffectController.Inst.PlayEffect(Camera.main.ScreenToWorldPoint(mousePosition), "HitStrong");
+                curDamage = PlayerManager.Instance.playerMaxAtk;
+            }
+            else
+            {
+                EffectController.Inst.PlayEffect(Camera.main.ScreenToWorldPoint(mousePosition), "Hit");
+                curDamage = PlayerManager.Instance.playerNormalAtk;
+            }
+
+            aimUIController.isPlayerCheckMaxGauge = false;
+            Instantiate(bulletPrefab, Camera.main.ScreenToWorldPoint(mousePosition), Quaternion.identity);
 
             lastFireTime = Time.time;
             curAmmo--;
@@ -163,7 +169,7 @@ public class PlayerShot : MonoBehaviour
             LogPrintSystem.SystemLogPrint(transform, "볼트 액션 종료", ELogType.Player);
             sequenceBoltAction = null;
 
-            isPlayerCheckMaxGauge = false;
+            aimUIController.InitGauge();
         });
     }
     #endregion
@@ -176,7 +182,7 @@ public class PlayerShot : MonoBehaviour
             state = EShotState.Backforward;
             isReloading = true;
 
-            NextAnimation(Backforward,false,0);
+            NextAnimation(Backforward, false, 0);
 
             sequenceBackforward = DOTween.Sequence();
             LogPrintSystem.SystemLogPrint(transform, "노리쇠 후퇴", ELogType.Player);
@@ -194,8 +200,6 @@ public class PlayerShot : MonoBehaviour
         if (isReloading)
         {
             state = EShotState.Reloading;
-
-            //NextAnimation(Reloading, false, 0);
 
             sequenceReloading = DOTween.Sequence();
             LogPrintSystem.SystemLogPrint(transform, "탄알 삽입", ELogType.Player);
@@ -236,29 +240,20 @@ public class PlayerShot : MonoBehaviour
     // 플레이어 사격은 stackindex 2번에서 관리
 
     // SetAnimation : 애니메이션을 실행 -> 기존에 재생되는 것을 강제로 끊음
-    private void CurrentAnimation(AnimationReferenceAsset AnimClip,bool loop)
+    private void CurrentAnimation(AnimationReferenceAsset AnimClip, bool loop)
     {
         if (skeletonAnimation.AnimationName == AnimClip.name) return;
         skeletonAnimation.AnimationState.SetAnimation(2, AnimClip, loop);
-        
+
         LogPrintSystem.SystemLogPrint(transform, $"animation => {AnimClip}", ELogType.Player);
     }
 
     // AddAnimation: 현재 실행되고 있는 애니메이션이 종료되고 실행되는 애니메이션 delay는 끝나고 얼마만에 실행되는 지
-    private void NextAnimation(AnimationReferenceAsset AnimClip,bool loop, float delay)
+    private void NextAnimation(AnimationReferenceAsset AnimClip, bool loop, float delay)
     {
         if (skeletonAnimation.AnimationName == AnimClip.name) return;
         skeletonAnimation.AnimationState.AddAnimation(2, AnimClip, loop, delay);
 
         LogPrintSystem.SystemLogPrint(transform, $"next animation => {AnimClip}", ELogType.Player);
     }
-
-    //skeletonAnimation.AnimationState.GetCurrent(2).IsComplete = true; 애니메이션이 끝났는지 bool형 반환
-    //private void EmptyAnimation()
-    //{
-    //    if(skeletonAnimation.AnimationState.GetCurrent(2).IsComplete)
-    //    {
-    //        skeletonAnimation.AnimationState.SetEmptyAnimation(2,0);
-    //    }
-    //}
 }

@@ -19313,6 +19313,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: EffectManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8425012863967238447, guid: a052aaf555625c2478c2ff23c212a042, type: 3}
+      propertyPath: effects.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8425012863967238447, guid: a052aaf555625c2478c2ff23c212a042, type: 3}
+      propertyPath: effects.Array.data[5].effectObj
+      value: 
+      objectReference: {fileID: 1472122938329839181, guid: e7dfadb183c6bbf458eff02dd69fbc93, type: 3}
+    - target: {fileID: 8425012863967238447, guid: a052aaf555625c2478c2ff23c212a042, type: 3}
+      propertyPath: effects.Array.data[5].effectName
+      value: StrongHit
+      objectReference: {fileID: 0}
     - target: {fileID: 8779574285721952716, guid: a052aaf555625c2478c2ff23c212a042, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

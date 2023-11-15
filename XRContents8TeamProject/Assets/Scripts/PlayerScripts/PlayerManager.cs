@@ -64,7 +64,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public float playerNormalAtk = 10.0f;
 
     [Header("플레이어 사격 게이지에 따른 추가 공격력 조정")]
-    [SerializeField] public float playerBonusAtk = 5.0f;
+    [SerializeField] public float playerMaxAtk = 15.0f;
 
     [Header("플레이어 한발당 사격 딜레이 조정")]
     [SerializeField] public float shotDelaySpeed = 1.0f;
@@ -343,7 +343,8 @@ public class PlayerManager : MonoBehaviour
             // 애니메이션 역재생
             if (isAnimationBackwards)
             {
-                // 
+                skeletonAnimation.ClearState();
+                CurrentAnimation(0, BackwardDodge, false);
             }
             else
             {      
