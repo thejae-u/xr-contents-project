@@ -5,9 +5,8 @@ using Spine.Unity;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
-using Range = UnityEngine.SocialPlatforms.Range;
 
-public class CutSceneTestScript : MonoBehaviour
+public class CutSceneManager : MonoBehaviour
 {
     [Header("거리 조정")][Range(0.0f, 3.0f)]
     public float range;
@@ -15,8 +14,10 @@ public class CutSceneTestScript : MonoBehaviour
     [Header("속도 조정")][Range(0.0f, 5.0f)] 
     public float speed;
 
-    public GameObject globalLight;
-    public GameObject spotLight;
+    private GameObject globalLight = null;
+    private GameObject spotLight = null;
+
+    private bool isInitialized;
     
     private int curState;
     private bool isEndFirstAnim;
@@ -39,10 +40,25 @@ public class CutSceneTestScript : MonoBehaviour
         "Page10"
     };
 
+    private static CutSceneManager inst;
+
     private bool isStart;
+
+    public static CutSceneManager Inst
+    {
+        get
+        {
+            return inst;
+        }
+    }
 
     private void Awake()
     {
+        if (inst == null)
+            inst = this;
+        else
+            Destroy(gameObject);
+        
         anim = gameObject.GetComponent<SkeletonAnimation>();
 
         for (int i = 0; i < names.Length - 1; i++)
@@ -51,12 +67,14 @@ public class CutSceneTestScript : MonoBehaviour
                 continue;
             anim.AnimationState.Data.SetMix(names[i], names[i + 1], 0);
         }
-
+        
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
         curState = 0;
+        isInitialized = false;
         isEndFirstAnim = false;
         isStart = false;
 
@@ -65,6 +83,9 @@ public class CutSceneTestScript : MonoBehaviour
 
     private void Update()
     {
+        if (!isInitialized)
+            InitObject();
+        
         if (!isEndFirstAnim)
         {
             StartAnimation();
@@ -78,6 +99,15 @@ public class CutSceneTestScript : MonoBehaviour
         }
         
         GameStart();
+    }
+
+    private void InitObject()
+    {
+        if (SceneManager.GetActiveScene().name != "CutScene") return;
+
+        globalLight = GameObject.Find("Global");
+        spotLight = GameObject.Find("Spot");
+        isInitialized = true;
     }
 
     private void AnimationCall()
@@ -161,6 +191,11 @@ public class CutSceneTestScript : MonoBehaviour
                 isEndFirstAnim = true;
                 break;
         }
+    }
+
+    private void SecondStartAnimation()
+    {
+        
     }
 
     private void GameStart()
