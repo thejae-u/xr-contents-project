@@ -1,0 +1,20 @@
+
+Background_Pudding02_Dessert.png
+size: 134,74
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Bush02_206×150
+  rotate: false
+  xy: 2, 2
+  size: 103, 70
+  orig: 103, 75
+  offset: 0, 0
+  index: -1
+Background_Pudding02_66x50
+  rotate: true
+  xy: 107, 39
+  size: 33, 25
+  orig: 33, 25
+  offset: 0, 0
+  index: -1

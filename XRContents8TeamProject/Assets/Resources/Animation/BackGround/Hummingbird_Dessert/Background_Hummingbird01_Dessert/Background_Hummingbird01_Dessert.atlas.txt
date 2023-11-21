@@ -1,0 +1,48 @@
+
+Background_Hummingbird01_Dessert.png
+size: 407,111
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Hummingbird01_Dessert 1
+  rotate: false
+  xy: 360, 58
+  size: 45, 51
+  orig: 141, 302
+  offset: 49, 161
+  index: -1
+Hummingbird01_Dessert 2
+  rotate: false
+  xy: 296, 72
+  size: 62, 37
+  orig: 141, 302
+  offset: 39, 180
+  index: -1
+Hummingbird01_Dessert 3
+  rotate: true
+  xy: 325, 19
+  size: 51, 27
+  orig: 141, 302
+  offset: 38, 182
+  index: -1
+Hummingbird01_Dessert 4
+  rotate: true
+  xy: 296, 17
+  size: 53, 27
+  orig: 141, 302
+  offset: 51, 182
+  index: -1
+Hummingbird01_Dessert 5
+  rotate: true
+  xy: 354, 17
+  size: 39, 37
+  orig: 141, 302
+  offset: 62, 179
+  index: -1
+Hummingbird01_Dessert re 6
+  rotate: true
+  xy: 2, 2
+  size: 107, 292
+  orig: 141, 302
+  offset: 17, 4
+  index: -1

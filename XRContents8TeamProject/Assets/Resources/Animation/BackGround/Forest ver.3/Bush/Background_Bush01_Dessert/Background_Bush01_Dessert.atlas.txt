@@ -1,0 +1,20 @@
+
+Background_Bush01_Dessert.png
+size: 135,107
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Bush01_174×130
+  rotate: true
+  xy: 74, 18
+  size: 87, 59
+  orig: 87, 65
+  offset: 0, 0
+  index: -1
+Background_Bush02_206×150
+  rotate: true
+  xy: 2, 2
+  size: 103, 70
+  orig: 103, 75
+  offset: 0, 0
+  index: -1

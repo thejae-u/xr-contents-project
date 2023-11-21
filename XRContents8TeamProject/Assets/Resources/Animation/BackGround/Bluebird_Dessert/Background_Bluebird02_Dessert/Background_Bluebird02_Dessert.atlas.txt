@@ -1,0 +1,69 @@
+
+Background_Bluebird02_Dessert.png
+size: 123,114
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1_reverse
+  rotate: false
+  xy: 80, 77
+  size: 37, 35
+  orig: 66, 64
+  offset: 18, 12
+  index: -1
+2_reverse
+  rotate: false
+  xy: 2, 42
+  size: 37, 35
+  orig: 66, 64
+  offset: 18, 12
+  index: -1
+3_reverse
+  rotate: false
+  xy: 41, 41
+  size: 37, 36
+  orig: 66, 64
+  offset: 18, 12
+  index: -1
+4_reverse
+  rotate: false
+  xy: 2, 4
+  size: 37, 36
+  orig: 66, 64
+  offset: 18, 12
+  index: -1
+5_reverse
+  rotate: false
+  xy: 83, 2
+  size: 38, 36
+  orig: 66, 64
+  offset: 17, 12
+  index: -1
+6_reverse
+  rotate: false
+  xy: 80, 40
+  size: 40, 35
+  orig: 66, 64
+  offset: 14, 12
+  index: -1
+7_reverse
+  rotate: false
+  xy: 41, 3
+  size: 40, 35
+  orig: 66, 64
+  offset: 14, 12
+  index: -1
+8_reverse
+  rotate: false
+  xy: 2, 79
+  size: 37, 33
+  orig: 66, 64
+  offset: 17, 12
+  index: -1
+9_reverse
+  rotate: false
+  xy: 41, 79
+  size: 37, 33
+  orig: 66, 64
+  offset: 17, 12
+  index: -1

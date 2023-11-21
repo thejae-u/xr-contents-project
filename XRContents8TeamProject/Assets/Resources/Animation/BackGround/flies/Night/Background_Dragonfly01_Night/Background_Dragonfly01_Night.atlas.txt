@@ -1,0 +1,34 @@
+
+Background_Dragonfly01_Night.png
+size: 60,93
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Dragonfly01_Night 1
+  rotate: false
+  xy: 2, 31
+  size: 31, 31
+  orig: 36, 88
+  offset: 4, 55
+  index: -1
+Dragonfly01_Night 2
+  rotate: false
+  xy: 2, 64
+  size: 34, 27
+  orig: 36, 88
+  offset: 1, 59
+  index: -1
+Dragonfly01_Night 3
+  rotate: false
+  xy: 2, 2
+  size: 28, 27
+  orig: 36, 88
+  offset: 4, 59
+  index: -1
+Dragonfly01_Night 4
+  rotate: false
+  xy: 38, 21
+  size: 20, 70
+  orig: 36, 88
+  offset: 15, 0
+  index: -1

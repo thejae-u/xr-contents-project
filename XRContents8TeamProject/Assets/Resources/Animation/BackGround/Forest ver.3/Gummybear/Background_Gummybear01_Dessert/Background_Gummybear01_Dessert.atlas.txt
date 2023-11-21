@@ -1,0 +1,20 @@
+
+Background_Gummybear01_Dessert.png
+size: 91,115
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Bush01_174×130
+  rotate: false
+  xy: 2, 54
+  size: 87, 59
+  orig: 87, 65
+  offset: 0, 0
+  index: -1
+Background_Gummybear01_104x168
+  rotate: true
+  xy: 2, 2
+  size: 50, 83
+  orig: 52, 84
+  offset: 2, 0
+  index: -1

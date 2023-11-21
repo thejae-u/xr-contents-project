@@ -1,0 +1,34 @@
+
+Background_Butterfly03_Dessert.png
+size: 73,55
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Butterfly04_Dessert 1
+  rotate: false
+  xy: 59, 27
+  size: 12, 26
+  orig: 46, 75
+  offset: 13, 43
+  index: -1
+Butterfly04_Dessert 2
+  rotate: true
+  xy: 37, 2
+  size: 23, 29
+  orig: 46, 75
+  offset: 8, 41
+  index: -1
+Butterfly04_Dessert 3
+  rotate: false
+  xy: 2, 5
+  size: 33, 28
+  orig: 46, 75
+  offset: 3, 42
+  index: -1
+Butterfly04_Dessert 4
+  rotate: true
+  xy: 2, 35
+  size: 18, 55
+  orig: 46, 75
+  offset: 3, 0
+  index: -1
