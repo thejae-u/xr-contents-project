@@ -22,6 +22,33 @@ public class ItemScript : MonoBehaviour
         range = 3.0f;
     }
 
+    private void CheckRange()
+    {
+        EffectController.Inst.PlayEffect(transform.position, "Bomb");
+        var playerCollider = Physics2D.OverlapCircle(transform.position, range,
+            LayerMask.GetMask("Player"));
+        var enemiesCollider = Physics2D.OverlapCircleAll(transform.position, range,
+            LayerMask.GetMask("Enemy"));
+        if (playerCollider)
+            PlayerManager.Instance.PlayerDiscountHp(value, transform.position.x);
+
+        if (enemiesCollider.Length != 0)
+        {
+            foreach (Collider2D t in enemiesCollider)
+            {
+                if (t.transform.TryGetComponent<NEnemyController>(out var ne))
+                {
+                    ne.DiscountHp(value);
+                }
+
+                if (t.transform.TryGetComponent<EEnemyController>(out var ee))
+                {
+                    ee.DiscountHp(value);
+                }
+            }
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.transform.CompareTag("Player"))
@@ -34,7 +61,23 @@ public class ItemScript : MonoBehaviour
                 case EMyType.Bomb:
                     // Play Effect
                     EffectController.Inst.PlayEffect(transform.position, "Bomb");
-                    PlayerManager.Instance.PlayerDiscountHp(value, transform.position.x);
+                    CheckRange();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
+            Destroy(gameObject);
+        }
+        else if (other.transform.CompareTag("EliteEnemy") || other.transform.CompareTag("NormalEnemy"))
+        {
+            switch (type)
+            {
+                case EMyType.Apple:
+                    break;
+                case EMyType.Bomb:
+                    EffectController.Inst.PlayEffect(transform.position, "Bomb");
+                    CheckRange();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -58,28 +101,7 @@ public class ItemScript : MonoBehaviour
                     EffectController.Inst.PlayEffect(transform.position, "Bomb");
                     
                     // Check Player & Enemy
-                    var playerCollider = Physics2D.OverlapCircle(transform.position, range,
-                        LayerMask.GetMask("Player"));
-                    var enemiesCollider = Physics2D.OverlapCircleAll(transform.position, range,
-                        LayerMask.GetMask("Enemy"));
-                    if (playerCollider)
-                        PlayerManager.Instance.PlayerDiscountHp(value, transform.position.x);
-
-                    if (enemiesCollider.Length != 0)
-                    {
-                        foreach (Collider2D t in enemiesCollider)
-                        {
-                            if (t.transform.TryGetComponent<NEnemyController>(out var ne))
-                            {
-                                ne.DiscountHp(value);
-                            }
-
-                            if (t.transform.TryGetComponent<EEnemyController>(out var ee))
-                            {
-                                ee.DiscountHp(value);
-                            }
-                        }
-                    }
+                    CheckRange();
 
                     StartCoroutine(Destroyer());
                     break;
