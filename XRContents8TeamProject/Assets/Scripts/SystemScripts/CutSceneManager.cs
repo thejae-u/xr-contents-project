@@ -73,9 +73,9 @@ public class CutSceneManager : MonoBehaviour
 
     private void Start()
     {
-        curState = 0;
+        curState = 6;
         isInitialized = false;
-        isEndFirstAnim = false;
+        isEndFirstAnim = true;
         isStart = false;
 
         anim.AnimationState.SetAnimation(0, names[curState++], false);
@@ -83,6 +83,20 @@ public class CutSceneManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (SceneManager.GetActiveScene().name == "CutSceneNextTestScene")
+            {
+                SceneManager.LoadScene("CutScene");
+                
+                InitObject();
+                SecondStartAnimation();
+            }
+        }
+
+        if (SceneManager.GetActiveScene().name != "CutScene") return;
+            
+            
         if (!isInitialized)
             InitObject();
         
@@ -104,7 +118,7 @@ public class CutSceneManager : MonoBehaviour
     private void InitObject()
     {
         if (SceneManager.GetActiveScene().name != "CutScene") return;
-
+        
         globalLight = GameObject.Find("Global");
         spotLight = GameObject.Find("Spot");
         isInitialized = true;
@@ -159,11 +173,22 @@ public class CutSceneManager : MonoBehaviour
                     break;
                 
                 // Second CutScene
+                case "Book_Open_7" when anim.AnimationState.GetCurrent(0).IsComplete:
+                    AnimationCall();
+                    break;
                 case "Book_Open_7":
+                    break;
+                case "Page8" when anim.AnimationState.GetCurrent(0).IsComplete:
+                    AnimationCall();
                     break;
                 case "Page8":
                     break;
+                case "Page9" when anim.AnimationState.GetCurrent(0).IsComplete:
+                    AnimationCall();
+                    break;
                 case "Page9":
+                    break;
+                case "Page10" when anim.AnimationState.GetCurrent(0).IsComplete:
                     break;
                 case "Page10":
                     break;
@@ -195,7 +220,9 @@ public class CutSceneManager : MonoBehaviour
 
     private void SecondStartAnimation()
     {
-        
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        AnimationCall();
+        isStart = false;
     }
 
     private void GameStart()
@@ -208,7 +235,9 @@ public class CutSceneManager : MonoBehaviour
 
         spotLight.GetComponent<Light2D>().intensity = 0;
         globalLight.GetComponent<Light2D>().intensity = 0;
-        
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+
         SceneManager.LoadScene("TestScene2");
+        //SceneManager.LoadScene("CutSceneNextTestScene");
     }
 }
