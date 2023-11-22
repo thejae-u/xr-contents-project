@@ -8,10 +8,15 @@ public class CameraController : MonoBehaviour
 {
     public List<CinemachineVirtualCamera> cameras;
     private List<bool> visited;
+    private CinemachineVirtualCamera curCamera;
+
+    [Header("카메라가 흔들리는 시간 조정")] [Range(0.1f, 5.0f)]
+    [SerializeField] private float shakeTime;
 
     public bool IsCameraStop { get; set; }
     public bool IsNowCutScene { get; private set; }
-    
+    public bool IsNowCameraShaking { get; private set; }
+
     private Transform target;
     private float trackSpeed = 10;
 
@@ -27,52 +32,25 @@ public class CameraController : MonoBehaviour
         visited = new List<bool>();
         for (int i = 0; i < cameras.Count; i++)
             visited.Add(false);
+
+        curCamera = cameras[0];
     }
 
     public static CameraController Inst
     {
         get
         {
-             return inst == null ? null : inst;
+            return inst;
         }
     }
 
-    public void FirstCameraTransition()
-    {
-        if (visited[0]) return;
-        cameras[0].gameObject.SetActive(false);
-        cameras[1].gameObject.SetActive(true);
-        
-        IsNowCutScene = true;
-        visited[0] = true;
-
-        Sequence sequence = DOTween.Sequence();
-        sequence.SetDelay(5.0f).OnComplete(CutSceneEnd);
-    }
-
-    private void CutSceneEnd()
-    {
-        foreach (var camera in cameras)
-        {
-            if(camera.transform.name == "PlayerFollowCamera")
-                camera.gameObject.SetActive(true);
-            else
-                camera.gameObject.SetActive(false);
-        }
-        
-        Sequence sequence = DOTween.Sequence();
-        sequence.SetDelay(3.0f).OnComplete(() =>
-        {
-            IsNowCutScene = false;
-        });
-    }
 
     private void Start()
     {
         target = GameObject.Find("Player").transform;
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         if (IsCameraStop) return;
         
@@ -82,5 +60,15 @@ public class CameraController : MonoBehaviour
             v.x = target.position.x + 5.5f;
             cameras[0].transform.position = Vector3.MoveTowards(cameras[0].transform.position, v, trackSpeed * Time.deltaTime);
         }
+    }
+
+    public void ShakeCamera()
+    {
+        if (IsNowCameraShaking) return;
+        IsNowCameraShaking = true;
+        curCamera.transform.DOShakePosition(shakeTime).OnComplete(() =>
+        {
+            IsNowCameraShaking = false;
+        });
     }
 }

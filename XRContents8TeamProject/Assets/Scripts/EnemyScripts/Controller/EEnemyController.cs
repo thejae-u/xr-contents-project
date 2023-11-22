@@ -221,7 +221,6 @@ namespace EnemyScripts
 
         private void Update()
         {
-            Debug.Log($"{b.GetData<ReferenceValueT<ENode>>("myNode").Value}");
             if (CameraController.Inst.IsNowCutScene) return;
             
             if (!isAlive.Value)
@@ -231,20 +230,29 @@ namespace EnemyScripts
                     DOTween.Kill(this);
                 }
 
-                if (anim.AnimationName != "Rush_Dead")
-                    anim.AnimationState.SetAnimation(0, "Rush_Dead", false);
-
-                if (anim.AnimationName == "Rush_Dead" && anim.AnimationState.GetCurrent(0).IsComplete)
+                if (b.GetData<ReferenceValueT<EEliteType>>("myType").Value == EEliteType.Rush)
                 {
-                    Destroy(gameObject);
+                    if (anim.AnimationName != "Rush_Dead")
+                        anim.AnimationState.SetAnimation(0, "Rush_Dead", false);
+
+                    if (anim.AnimationName == "Rush_Dead" && anim.AnimationState.GetCurrent(0).IsComplete)
+                        Destroy(gameObject);
+                }
+                else
+                {
+                    if (anim.AnimationName != "Throw_Dead")
+                        anim.AnimationState.SetAnimation(0, "Throw_Dead", false);
+                    
+                    if(anim.AnimationName == "Throw_Dead" && anim.AnimationState.GetCurrent(0).IsComplete)
+                        Destroy(gameObject);
                 }
             }
             else
             {
+                if (PlayerManager.Instance.GetIsPlayerDead()) return;
                 fsm.Update();
                 fsmLife.Update();
                 
-                // Flip X Rotation
                 Flip();
             }
         }

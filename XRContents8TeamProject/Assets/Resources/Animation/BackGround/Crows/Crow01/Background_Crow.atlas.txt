@@ -1,0 +1,76 @@
+
+Background_Crow.png
+size: 637,376
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+날아가는 까마귀_1
+  rotate: false
+  xy: 560, 101
+  size: 75, 273
+  orig: 176, 375
+  offset: 42, 52
+  index: -1
+날아가는 까마귀_10
+  rotate: false
+  xy: 400, 100
+  size: 80, 274
+  orig: 176, 375
+  offset: 41, 53
+  index: -1
+날아가는 까마귀_2
+  rotate: true
+  xy: 359, 16
+  size: 80, 274
+  orig: 176, 375
+  offset: 41, 53
+  index: -1
+날아가는 까마귀_3
+  rotate: true
+  xy: 82, 2
+  size: 80, 275
+  orig: 176, 375
+  offset: 41, 54
+  index: -1
+날아가는 까마귀_4
+  rotate: false
+  xy: 242, 95
+  size: 76, 279
+  orig: 176, 375
+  offset: 41, 51
+  index: -1
+날아가는 까마귀_5
+  rotate: false
+  xy: 82, 84
+  size: 77, 290
+  orig: 176, 375
+  offset: 40, 43
+  index: -1
+날아가는 까마귀_6
+  rotate: false
+  xy: 2, 67
+  size: 78, 307
+  orig: 176, 375
+  offset: 38, 33
+  index: -1
+날아가는 까마귀_7
+  rotate: false
+  xy: 161, 87
+  size: 79, 287
+  orig: 176, 375
+  offset: 38, 51
+  index: -1
+날아가는 까마귀_8
+  rotate: false
+  xy: 320, 98
+  size: 78, 276
+  orig: 176, 375
+  offset: 39, 58
+  index: -1
+날아가는 까마귀_9
+  rotate: false
+  xy: 482, 100
+  size: 76, 274
+  orig: 176, 375
+  offset: 41, 55
+  index: -1

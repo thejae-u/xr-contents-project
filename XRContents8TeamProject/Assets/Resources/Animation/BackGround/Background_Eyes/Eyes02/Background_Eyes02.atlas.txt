@@ -1,0 +1,48 @@
+
+Background_Eyes02.png
+size: 34,27
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: true
+  xy: 2, 11
+  size: 14, 9
+  orig: 21, 16
+  offset: 4, 3
+  index: -1
+2
+  rotate: true
+  xy: 13, 11
+  size: 14, 6
+  orig: 21, 16
+  offset: 4, 3
+  index: -1
+3
+  rotate: false
+  xy: 18, 3
+  size: 14, 6
+  orig: 21, 16
+  offset: 4, 3
+  index: -1
+4
+  rotate: true
+  xy: 21, 11
+  size: 14, 4
+  orig: 21, 16
+  offset: 4, 3
+  index: -1
+5
+  rotate: false
+  xy: 2, 2
+  size: 14, 7
+  orig: 21, 16
+  offset: 4, 3
+  index: -1
+6
+  rotate: true
+  xy: 27, 18
+  size: 7, 5
+  orig: 21, 16
+  offset: 11, 3
+  index: -1

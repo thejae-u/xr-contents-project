@@ -13,16 +13,20 @@ public class BalletUIController : MonoBehaviour
     public Sprite drawBack;
     public Sprite drawFront;
 
+    public Sprite drawMouseBack;
+    public Sprite drawMouseFront;
+
     private void Awake()
     {
-        maxAmmo = bullet.Length;
+        maxAmmo = bullet.Length / 2;
         Ammo = maxAmmo;
 
         for(int i = 0; i < maxAmmo; i++)
         {
             if(Ammo > i)
             {
-                bullet[i].sprite = drawFront;
+                bullet[i].sprite = drawMouseFront;
+                bullet[i + 6].sprite = drawFront;
             }
         }
     }
@@ -38,7 +42,7 @@ public class BalletUIController : MonoBehaviour
 
     public void SetAmmo(bool isDiscount)
     {
-        if(isDiscount)
+        if (isDiscount)
         {
             Ammo--;
         }
@@ -50,10 +54,18 @@ public class BalletUIController : MonoBehaviour
         Ammo = Mathf.Clamp(Ammo, 0, maxAmmo);
 
         for (int i = 0; i < maxAmmo; i++)
-            bullet[i].sprite = drawBack;
+        {
+            bullet[i].sprite = drawMouseBack;
+            bullet[i + 6].sprite = drawBack;
+        }
 
         for (int i = 0; i < maxAmmo; i++)
+        {
             if (Ammo > i)
-                bullet[i].sprite = drawFront;
+            {
+                bullet[i].sprite = drawMouseFront;
+                bullet[i + 6].sprite = drawFront;
+            }
+        }
     }
 }

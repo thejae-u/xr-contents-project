@@ -1,0 +1,20 @@
+
+Background_Pudding03_Dessert.png
+size: 204,93
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Bush03_250×184
+  rotate: false
+  xy: 2, 2
+  size: 125, 89
+  orig: 125, 92
+  offset: 0, 0
+  index: -1
+Background_Pudding03_146x160
+  rotate: false
+  xy: 129, 11
+  size: 73, 80
+  orig: 73, 80
+  offset: 0, 0
+  index: -1

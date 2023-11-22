@@ -1,0 +1,20 @@
+
+Background_Bush02_Day.png
+size: 144,104
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Bush02_280x130
+  rotate: false
+  xy: 2, 37
+  size: 140, 65
+  orig: 140, 65
+  offset: 0, 0
+  index: -1
+Background_Butterfly01_66x160
+  rotate: true
+  xy: 2, 2
+  size: 33, 80
+  orig: 33, 80
+  offset: 0, 0
+  index: -1

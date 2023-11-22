@@ -1,0 +1,20 @@
+
+Background_Whippingtree03_Dessert.png
+size: 517,400
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Butterfly04_58x138
+  rotate: false
+  xy: 490, 329
+  size: 25, 69
+  orig: 29, 69
+  offset: 2, 0
+  index: -1
+Background_Whippingtree03_792x982
+  rotate: true
+  xy: 2, 2
+  size: 396, 486
+  orig: 396, 491
+  offset: 0, 0
+  index: -1

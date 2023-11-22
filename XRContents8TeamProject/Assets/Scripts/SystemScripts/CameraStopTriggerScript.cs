@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class CameraStopTriggerScript : MonoBehaviour
 {
-    public int mySectionNumber;
     private CameraStopper stopper;
-    
-    void Start()
+
+    private void Start()
     {
-        stopper = GameObject.Find("Camera_Stop").GetComponent<CameraStopper>();    
+        stopper = GameObject.Find("Camera_Stop").GetComponent<CameraStopper>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.transform.CompareTag("Player"))
         {
-            stopper.StopCamera(mySectionNumber);
+            stopper.CameraStop();
+            Destroy(gameObject);
         }
     }
 }

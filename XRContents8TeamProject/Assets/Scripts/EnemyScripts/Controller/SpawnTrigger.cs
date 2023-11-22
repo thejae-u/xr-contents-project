@@ -7,29 +7,21 @@ using UnityEngine;
 public class SpawnTrigger : MonoBehaviour
 {
     public int stageCount;
-    private int sectorCount;
-    private bool isRunning;
+    public int SectorCount { get; private set; }
+    
+    private CameraStopper stopper;
 
     private void Start()
     {
-        isRunning = false;
-    }
-
-    private void Update()
-    {
-        if (!isRunning) return;
-        if (GameManager.Inst.stages[stageCount].sectors[sectorCount].transform.childCount > 0) return;
-        sectorCount++;
-        GameManager.Inst.EnemySpawn(stageCount, sectorCount);
+        stopper = GameObject.Find("Camera_Stop").GetComponent<CameraStopper>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.transform.CompareTag("Player"))
         {
-            CameraController.Inst.FirstCameraTransition();
-            GameManager.Inst.EnemySpawn(stageCount, sectorCount);
-            isRunning = true;
+            GameManager.Inst.EnemySpawn(stageCount, SectorCount);
+            Destroy(gameObject);
         }
     }
 }

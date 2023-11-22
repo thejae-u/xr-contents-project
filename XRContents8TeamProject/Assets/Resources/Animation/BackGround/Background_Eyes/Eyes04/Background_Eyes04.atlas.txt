@@ -1,0 +1,48 @@
+
+Background_Eyes04.png
+size: 31,30
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: true
+  xy: 2, 16
+  size: 12, 11
+  orig: 21, 15
+  offset: 4, 3
+  index: -1
+2
+  rotate: true
+  xy: 15, 16
+  size: 12, 9
+  orig: 21, 15
+  offset: 4, 3
+  index: -1
+3
+  rotate: true
+  xy: 15, 2
+  size: 12, 6
+  orig: 21, 15
+  offset: 4, 3
+  index: -1
+4
+  rotate: true
+  xy: 26, 16
+  size: 12, 3
+  orig: 21, 15
+  offset: 4, 3
+  index: -1
+5
+  rotate: true
+  xy: 2, 2
+  size: 12, 11
+  orig: 21, 15
+  offset: 4, 3
+  index: -1
+6
+  rotate: true
+  xy: 23, 6
+  size: 8, 6
+  orig: 21, 15
+  offset: 8, 3
+  index: -1

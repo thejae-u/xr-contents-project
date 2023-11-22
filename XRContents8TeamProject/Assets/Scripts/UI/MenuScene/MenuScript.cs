@@ -8,7 +8,7 @@ public class MenuScript : MonoBehaviour
 {
     public void OnStartButtonClick()
     {
-        SceneManager.LoadScene("Scenes/TestScene");
+        SceneManager.LoadScene("Scenes/DevelopScenes/TestScene2");
     }
 
     private void Update()

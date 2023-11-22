@@ -1,0 +1,55 @@
+
+Background_Crow02.png
+size: 214,40
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+앉아있는 까마귀_
+  rotate: false
+  xy: 2, 3
+  size: 30, 35
+  orig: 80, 74
+  offset: 26, 20
+  index: -1
+앉아있는 까마귀_1
+  rotate: false
+  xy: 34, 5
+  size: 31, 33
+  orig: 80, 74
+  offset: 25, 20
+  index: -1
+앉아있는 까마귀_2
+  rotate: false
+  xy: 67, 5
+  size: 31, 33
+  orig: 80, 74
+  offset: 25, 20
+  index: -1
+앉아있는 까마귀_3
+  rotate: false
+  xy: 100, 3
+  size: 28, 35
+  orig: 80, 74
+  offset: 28, 20
+  index: -1
+앉아있는 까마귀_4
+  rotate: false
+  xy: 130, 3
+  size: 28, 35
+  orig: 80, 74
+  offset: 28, 20
+  index: -1
+앉아있는 까마귀_5
+  rotate: true
+  xy: 160, 2
+  size: 36, 26
+  orig: 80, 74
+  offset: 19, 20
+  index: -1
+앉아있는 까마귀_6
+  rotate: true
+  xy: 188, 2
+  size: 36, 24
+  orig: 80, 74
+  offset: 18, 20
+  index: -1

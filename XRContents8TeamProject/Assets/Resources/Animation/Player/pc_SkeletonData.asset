@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: pc_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: 4a3487f861db412459ea87740192ac8b, type: 2}
-  scale: 0.008
-  skeletonJSON: {fileID: 4900000, guid: 3ffb80ce4265ee749904a76b7e97ae8b, type: 3}
+  - {fileID: 11400000, guid: caee2588c30910340b0356f850d6aa56, type: 2}
+  scale: 0.01
+  skeletonJSON: {fileID: 4900000, guid: 2840507fff60b914d823292eb0f7060c, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 0
@@ -24,8 +24,26 @@ MonoBehaviour:
     multiplyMaterials: []
     screenMaterials: []
   skeletonDataModifiers: []
-  fromAnimation: []
-  toAnimation: []
-  duration: []
-  defaultMix: 0.2
-  controller: {fileID: 0}
+  fromAnimation:
+  - BackForward
+  - Reloading
+  - Shot
+  - Hit
+  - BackForward
+  - Move
+  toAnimation:
+  - Reloading
+  - Forward
+  - BoltAction
+  - Dead
+  - Forward
+  - Jump
+  duration:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  defaultMix: 0
+  controller: {fileID: 9100000, guid: 792313985b4c33e44820e98902ba2cd4, type: 2}
