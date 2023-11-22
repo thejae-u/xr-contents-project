@@ -1,0 +1,20 @@
+
+Background_Mushroom01_Day.png
+size: 340,103
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Branch01_616x200
+  rotate: false
+  xy: 2, 2
+  size: 306, 99
+  orig: 308, 100
+  offset: 0, 0
+  index: -1
+Background_Mushroom01_74x56
+  rotate: true
+  xy: 310, 64
+  size: 37, 28
+  orig: 37, 28
+  offset: 0, 0
+  index: -1

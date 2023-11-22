@@ -1,0 +1,34 @@
+
+Background_Chocolate02_Dessert.png
+size: 653,368
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 603, 317
+  size: 48, 49
+  orig: 48, 49
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 603, 282
+  size: 28, 33
+  orig: 28, 33
+  offset: 0, 0
+  index: -1
+3
+  rotate: false
+  xy: 603, 249
+  size: 21, 31
+  orig: 21, 31
+  offset: 0, 0
+  index: -1
+Background_Chocolatetree02_728×1240
+  rotate: true
+  xy: 2, 2
+  size: 364, 599
+  orig: 364, 620
+  offset: 0, 0
+  index: -1

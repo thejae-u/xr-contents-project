@@ -1,0 +1,34 @@
+
+Background_Butterfly04_Day.png
+size: 133,27
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Butterfly04_Day 1
+  rotate: true
+  xy: 113, 2
+  size: 23, 18
+  orig: 52, 75
+  offset: 13, 43
+  index: -1
+Butterfly04_Day 2
+  rotate: false
+  xy: 82, 7
+  size: 29, 18
+  orig: 52, 75
+  offset: 10, 41
+  index: -1
+Butterfly04_Day 3
+  rotate: false
+  xy: 52, 5
+  size: 28, 20
+  orig: 52, 75
+  offset: 13, 37
+  index: -1
+Butterfly04_Day 4
+  rotate: true
+  xy: 2, 2
+  size: 23, 48
+  orig: 52, 75
+  offset: 7, 0
+  index: -1

@@ -5,41 +5,21 @@ using UnityEngine;
 
 public class CameraStopper : MonoBehaviour
 {
-    public List<GameObject> stopSections;
-
-    private PlayerManager playerManager;
     private CameraController cameraController;
-    
-    private int curCount;
-    private int curSection;
 
     private void Start()
     {
-        playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
         cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
     }
 
     private void Update()
     {
-        if (cameraController.IsCameraStop)
-        {
-            CheckEnemy();
-        }
+        if (GameManager.Inst.CheckEnemyCount() == 0 && cameraController.IsCameraStop)
+            cameraController.IsCameraStop = false;
     }
-    
-    
 
-    public void StopCamera(int section)
+    public void CameraStop()
     {
         cameraController.IsCameraStop = true;
-        curSection = section;
-    }
-
-    private void CheckEnemy()
-    {
-        if (stopSections[curSection].transform.childCount == 0)
-        {
-            cameraController.IsCameraStop = false;
-        }
     }
 }

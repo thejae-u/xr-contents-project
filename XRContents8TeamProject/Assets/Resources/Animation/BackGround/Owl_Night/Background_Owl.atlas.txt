@@ -1,0 +1,55 @@
+
+Background_Owl.png
+size: 392,47
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+올빼미1
+  rotate: true
+  xy: 58, 2
+  size: 43, 53
+  orig: 107, 128
+  offset: 34, 40
+  index: -1
+올빼미2
+  rotate: true
+  xy: 113, 2
+  size: 43, 53
+  orig: 107, 128
+  offset: 34, 40
+  index: -1
+올빼미3
+  rotate: true
+  xy: 168, 2
+  size: 43, 53
+  orig: 107, 128
+  offset: 34, 40
+  index: -1
+올빼미4
+  rotate: true
+  xy: 223, 2
+  size: 43, 55
+  orig: 107, 128
+  offset: 34, 40
+  index: -1
+올빼미5
+  rotate: true
+  xy: 280, 2
+  size: 43, 54
+  orig: 107, 128
+  offset: 34, 40
+  index: -1
+올빼미6
+  rotate: true
+  xy: 336, 2
+  size: 43, 54
+  orig: 107, 128
+  offset: 34, 40
+  index: -1
+올빼미7
+  rotate: true
+  xy: 2, 2
+  size: 43, 54
+  orig: 107, 128
+  offset: 34, 40
+  index: -1

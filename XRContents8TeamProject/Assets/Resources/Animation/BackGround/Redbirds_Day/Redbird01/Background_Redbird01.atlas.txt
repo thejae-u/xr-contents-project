@@ -1,0 +1,76 @@
+
+Background_Redbird01.png
+size: 643,374
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+날아가는 붉은새_1
+  rotate: false
+  xy: 566, 100
+  size: 75, 272
+  orig: 185, 373
+  offset: 54, 57
+  index: -1
+날아가는 붉은새_10
+  rotate: false
+  xy: 484, 98
+  size: 80, 274
+  orig: 185, 373
+  offset: 53, 57
+  index: -1
+날아가는 붉은새_2
+  rotate: true
+  xy: 359, 11
+  size: 80, 273
+  orig: 185, 373
+  offset: 53, 58
+  index: -1
+날아가는 붉은새_3
+  rotate: false
+  xy: 401, 97
+  size: 81, 275
+  orig: 185, 373
+  offset: 53, 58
+  index: -1
+날아가는 붉은새_4
+  rotate: false
+  xy: 243, 88
+  size: 76, 284
+  orig: 185, 373
+  offset: 53, 50
+  index: -1
+날아가는 붉은새_5
+  rotate: false
+  xy: 164, 80
+  size: 77, 292
+  orig: 185, 373
+  offset: 52, 45
+  index: -1
+날아가는 붉은새_6
+  rotate: false
+  xy: 2, 63
+  size: 79, 309
+  orig: 185, 373
+  offset: 50, 35
+  index: -1
+날아가는 붉은새_7
+  rotate: false
+  xy: 83, 80
+  size: 79, 292
+  orig: 185, 373
+  offset: 50, 50
+  index: -1
+날아가는 붉은새_8
+  rotate: false
+  xy: 321, 93
+  size: 78, 279
+  orig: 185, 373
+  offset: 51, 59
+  index: -1
+날아가는 붉은새_9
+  rotate: true
+  xy: 83, 2
+  size: 76, 274
+  orig: 185, 373
+  offset: 53, 59
+  index: -1

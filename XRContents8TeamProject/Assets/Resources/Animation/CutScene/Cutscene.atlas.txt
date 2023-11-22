@@ -1,0 +1,206 @@
+
+Cutscene.png
+size: 2017,1691
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 1302, 1070
+  size: 478, 332
+  orig: 502, 355
+  offset: 5, 8
+  index: -1
+10
+  rotate: false
+  xy: 1111, 2
+  size: 652, 381
+  orig: 656, 397
+  offset: 1, 1
+  index: -1
+2
+  rotate: true
+  xy: 834, 823
+  size: 482, 351
+  orig: 541, 367
+  offset: 30, 1
+  index: -1
+3
+  rotate: false
+  xy: 1187, 735
+  size: 566, 333
+  orig: 644, 397
+  offset: 75, 49
+  index: -1
+4
+  rotate: true
+  xy: 2, 694
+  size: 482, 356
+  orig: 645, 397
+  offset: 134, 26
+  index: -1
+5
+  rotate: true
+  xy: 360, 555
+  size: 482, 360
+  orig: 541, 376
+  offset: 30, 1
+  index: -1
+6
+  rotate: false
+  xy: 2, 203
+  size: 581, 350
+  orig: 585, 366
+  offset: 1, 1
+  index: -1
+7
+  rotate: false
+  xy: 1300, 385
+  size: 484, 348
+  orig: 541, 365
+  offset: 28, 2
+  index: -1
+8
+  rotate: false
+  xy: 585, 25
+  size: 524, 363
+  orig: 752, 406
+  offset: 125, 30
+  index: -1
+9
+  rotate: false
+  xy: 722, 390
+  size: 576, 343
+  orig: 580, 360
+  offset: 1, 2
+  index: -1
+book_B
+  rotate: false
+  xy: 2, 1660
+  size: 355, 29
+  orig: 355, 36
+  offset: 0, 4
+  index: -1
+book_B_2
+  rotate: false
+  xy: 359, 1660
+  size: 117, 29
+  orig: 119, 33
+  offset: 1, 3
+  index: -1
+book_F
+  rotate: true
+  xy: 2, 1178
+  size: 353, 465
+  orig: 363, 470
+  offset: 3, 0
+  index: -1
+book_F copy
+  rotate: false
+  xy: 469, 1039
+  size: 363, 470
+  orig: 363, 470
+  offset: 0, 0
+  index: -1
+book_R
+  rotate: true
+  xy: 478, 1660
+  size: 29, 464
+  orig: 35, 465
+  offset: 5, 0
+  index: -1
+paper1
+  rotate: true
+  xy: 928, 1307
+  size: 288, 372
+  orig: 293, 373
+  offset: 2, 0
+  index: -1
+paper_B
+  rotate: false
+  xy: 944, 1597
+  size: 299, 92
+  orig: 302, 202
+  offset: 1, 6
+  index: -1
+paper_R
+  rotate: true
+  xy: 1245, 1597
+  size: 92, 372
+  orig: 111, 373
+  offset: 9, 0
+  index: -1
+paper_clean
+  rotate: true
+  xy: 1619, 1404
+  size: 285, 396
+  orig: 285, 396
+  offset: 0, 0
+  index: -1
+shadow1
+  rotate: true
+  xy: 2, 1533
+  size: 125, 467
+  orig: 125, 467
+  offset: 0, 0
+  index: -1
+shadow2
+  rotate: true
+  xy: 471, 1511
+  size: 147, 455
+  orig: 147, 455
+  offset: 0, 0
+  index: -1
+
+Cutscene2.png
+size: 1928,1949
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1920x1080
+  rotate: false
+  xy: 2, 2
+  size: 961, 541
+  orig: 961, 541
+  offset: 0, 0
+  index: -1
+1920x1080 copy
+  rotate: false
+  xy: 965, 2
+  size: 961, 541
+  orig: 961, 541
+  offset: 0, 0
+  index: -1
+Layer 1
+  rotate: false
+  xy: 2, 545
+  size: 1921, 1402
+  orig: 1921, 1402
+  offset: 0, 0
+  index: -1
+
+Cutscene3.png
+size: 1925,1406
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+multi
+  rotate: false
+  xy: 2, 2
+  size: 1921, 1402
+  orig: 1921, 1402
+  offset: 0, 0
+  index: -1
+
+Cutscene4.png
+size: 1468,1454
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+overlay
+  rotate: false
+  xy: 2, 2
+  size: 1464, 1450
+  orig: 1464, 1450
+  offset: 0, 0
+  index: -1

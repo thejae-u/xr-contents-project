@@ -1,0 +1,34 @@
+
+Background_Butterfly01_Night.png
+size: 59,67
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Butterfly01_Night 1
+  rotate: true
+  xy: 32, 2
+  size: 14, 25
+  orig: 40, 66
+  offset: 14, 34
+  index: -1
+Butterfly01_Night 2
+  rotate: true
+  xy: 2, 10
+  size: 23, 28
+  orig: 40, 66
+  offset: 8, 33
+  index: -1
+Butterfly01_Night 3
+  rotate: false
+  xy: 2, 35
+  size: 33, 30
+  orig: 40, 66
+  offset: 5, 30
+  index: -1
+Butterfly01_Night 4
+  rotate: false
+  xy: 37, 18
+  size: 19, 47
+  orig: 40, 66
+  offset: 2, 0
+  index: -1

@@ -13,6 +13,11 @@ public class BombController : MonoBehaviour
     [Header("폭탄의 각도를 조절")] 
     [SerializeField] private float bombDeg;
 
+    public GameObject particle;
+    private ParticleSystem BombParticleSystem;
+
+    private float speed;
+
     private Vector3[] wayPoints;
     
     // Player Last Position Set
@@ -26,9 +31,17 @@ public class BombController : MonoBehaviour
     {
         parent = transform.parent.GetComponent<EEnemyController>();
         playerLastPos = GameObject.Find("Player").transform.position;
+        BombParticleSystem = particle.GetComponent<ParticleSystem>();
         myPos = transform.position;
         range = 1f;
+        speed = 500.0f;
         Shoot();
+    }
+
+    private void Update()
+    {
+        speed += speed * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(0, 0, speed);
     }
 
     private void Shoot()
@@ -46,7 +59,8 @@ public class BombController : MonoBehaviour
         
         transform.DOPath(wayPoints, bombSpeed, PathType.CatmullRom, PathMode.Sidescroller2D).OnComplete(() =>
         {
-            LogPrintSystem.SystemLogPrint(transform, "BOOM!!", ELogType.EnemyAI);
+            EffectController.Inst.PlayEffect(transform.position, "Bomb");
+            
             var player = GameObject.Find("Player");
             var playerTransform = player.GetComponent<Transform>();
             var playerManager = player.GetComponent<PlayerManager>();
@@ -56,12 +70,15 @@ public class BombController : MonoBehaviour
 
             if (d2 + range >= distance)
             {
-                playerManager.PlayerDiscountHp(parent.GetMySpecialDamage(), myPos.x);
-                LogPrintSystem.SystemLogPrint(transform, "Hit Bomb", ELogType.EnemyAI);
+                if (!player.GetComponent<PlayerManager>().isInvincibility)
+                {
+                    playerManager.PlayerDiscountHp(parent.GetMySpecialDamage(), myPos.x);
+                }
             }
             
             Destroy(gameObject);
         });
+        
     }
 
     private void OnDrawGizmos()

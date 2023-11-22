@@ -117,59 +117,22 @@ public class WaitNode : INode
 
     public INode Execute(Blackboard blackboard)
     {
-        blackboard.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Idle;
-        
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
-        var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType");
         var isGround = blackboard.GetData<ReferenceValueT<bool>>("isGround");
+        var myNode = blackboard.GetData<ReferenceValueT<ENode>>("myNode");
+
+        myNode.Value = ENode.Idle;
+        LogPrintSystem.SystemLogPrint(myTransform, "Cur Node is Wait", ELogType.EnemyAI);
         
         if (!isGround.Value) return Fsm.GuardNullNode(this, this);
         
-        if (myType.Value == EEliteType.None)
-        {
-            
-            var waitTime = blackboard.GetData<ReferenceValueT<float>>("waitTime");
-            var isTimerWait = blackboard.GetData<ReferenceValueT<bool>>("isTimerWait");
-            var isTimerEnded = blackboard.GetData<ReferenceValueT<bool>>("isTimerEnded");
-
-            if (!isTimerEnded.Value)
-            {
-                var timer = myTransform.GetComponentInChildren<WeakTimeController>(true);
-
-                if (!isTimerWait.Value)
-                {
-                    myTransform.GetComponent<NEnemyController>().TimerSwitch();
-                    LogPrintSystem.SystemLogPrint(myTransform, "Timer Init Call", ELogType.EnemyAI);
-                    timer.Init(waitTime);
-                    isTimerWait.Value = true;
-                    return Fsm.GuardNullNode(this, this);
-                }
-
-                if (!timer.IsEnded) return Fsm.GuardNullNode(this, this);
-
-                if (!isTimerEnded.Value)
-                {
-                    isTimerEnded.Value = true;
-                }
-
-                // timer.IsAttacked ? do Something : do SomeThing
-
-                timer.Checked();
-            }
-        }
-
         float d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
         float d2 = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
 
         float distance = (myTransform.position - playerTransform.position).magnitude;
 
-        if (d1 + d2 >= distance)
-        {
-            return Fsm.GuardNullNode(this, enterPlayer);
-        }
-
-        return Fsm.GuardNullNode(this, this);
+        return Fsm.GuardNullNode(this, d1 + d2 >= distance ? enterPlayer : this);
     }
 }
 
@@ -200,10 +163,14 @@ public abstract class TraceNode : INode
         float distance = (myTransform.position - playerTransform.position).magnitude;
         float traceRange = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
 
-        // For Jump Node
+        // isJumping in True -> Loop this node when End of jump
         float distanceForJump = Mathf.Abs(myTransform.position.x - playerTransform.position.x);
         var isJumping = blackboard.GetData<ReferenceValueT<bool>>("isJumping");
-        if (isJumping.Value) return ETraceState.PlayerTrace;
+        if (isJumping.Value)
+        {
+            LogPrintSystem.SystemLogPrint(myTransform, $"{isJumping} isJumping", ELogType.EnemyAI);
+            return ETraceState.PlayerTrace;
+        }
 
         // Distance of Player to Monster is Same -> Check Y Position -> need jump return
         if (distanceForJump <= myAttackRange && myType != EEliteType.Bomb)
@@ -213,7 +180,7 @@ public abstract class TraceNode : INode
 
             float yPosCalc = Mathf.Abs(playerYPos - myYPos);
 
-            if (yPosCalc >= 5.0f)
+            if (yPosCalc >= 2.0f)
                 return ETraceState.NeedJump;
         }
 
@@ -224,6 +191,8 @@ public abstract class TraceNode : INode
         // Trace Logic
         if (myType != EEliteType.Rush)
         {
+            LogPrintSystem.SystemLogPrint(myTransform, "Trace Normal Monster", ELogType.EnemyAI);
+            LogPrintSystem.SystemLogPrint(myTransform, $"{playerRange + myAttackRange >= distance}", ELogType.EnemyAI);
             // Check Attack Range
             return playerRange + myAttackRange >= distance ? ETraceState.PlayerEnter : ETraceState.PlayerTrace;
         }
