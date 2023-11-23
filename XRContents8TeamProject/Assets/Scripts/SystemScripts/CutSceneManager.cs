@@ -73,9 +73,9 @@ public class CutSceneManager : MonoBehaviour
 
     private void Start()
     {
-        curState = 6;
+        curState = 0;
         isInitialized = false;
-        isEndFirstAnim = true;
+        isEndFirstAnim = false;
         isStart = false;
 
         anim.AnimationState.SetAnimation(0, names[curState++], false);
