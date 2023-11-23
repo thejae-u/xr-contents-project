@@ -112,6 +112,12 @@ public class PlayerShot : MonoBehaviour
                 // StateBackforward -> Reloading -> StateForward
                 StateBackforward();
                 LogPrintSystem.SystemLogPrint(transform, "장전 실행", ELogType.Player);
+            }            
+            if(Input.GetMouseButtonDown(1)  && !isReloading)
+            {
+                // StateBackforward -> Reloading -> StateForward
+                StateBackforward();
+                LogPrintSystem.SystemLogPrint(transform, "장전 실행", ELogType.Player);
             }
         }
     }
