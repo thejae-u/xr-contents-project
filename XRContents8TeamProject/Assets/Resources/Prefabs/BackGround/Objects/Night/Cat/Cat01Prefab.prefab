@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5927216745404318424
+--- !u!1 &5464623486211484317
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 449698713540387697}
-  - component: {fileID: 3727259361857757833}
-  - component: {fileID: 2460518319236052609}
-  - component: {fileID: 87687475947011662}
-  - component: {fileID: 8726581414906702291}
+  - component: {fileID: 6657567866233675432}
+  - component: {fileID: 879627479348163345}
+  - component: {fileID: 5680959375480605087}
+  - component: {fileID: 5937915402531616639}
+  - component: {fileID: 6488204922420508783}
   m_Layer: 0
-  m_Name: Spine GameObject (Background_Dragonfly02_Night)
+  m_Name: Cat01Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &449698713540387697
+--- !u!4 &6657567866233675432
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5927216745404318424}
+  m_GameObject: {fileID: 5464623486211484317}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.206, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3727259361857757833
+--- !u!33 &879627479348163345
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5927216745404318424}
+  m_GameObject: {fileID: 5464623486211484317}
   m_Mesh: {fileID: 0}
---- !u!23 &2460518319236052609
+--- !u!23 &5680959375480605087
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5927216745404318424}
+  m_GameObject: {fileID: 5464623486211484317}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: caaf23cbbd85b6c4dbf6f78aa3aba4a3, type: 2}
+  - {fileID: 2100000, guid: 867f96901f09a7541ae674f99fb92a7f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,21 +83,21 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2135238147
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &87687475947011662
+--- !u!114 &5937915402531616639
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5927216745404318424}
+  m_GameObject: {fileID: 5464623486211484317}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 802bc914d434b8d478a920d385df8eb0, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 5f59b33c044f6914abfec317ba251dba, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -122,13 +122,13 @@ MonoBehaviour:
   _animationName: animation
   loop: 1
   timeScale: 1
---- !u!114 &8726581414906702291
+--- !u!114 &6488204922420508783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5927216745404318424}
+  m_GameObject: {fileID: 5464623486211484317}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f21c9538588898a45a3da22bf4779ab3, type: 3}
