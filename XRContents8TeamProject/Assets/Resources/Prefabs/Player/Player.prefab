@@ -205,7 +205,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -270,7 +270,7 @@ MonoBehaviour:
   dodgeInvincibilityDuration: 1.5
   isInvincibility: 0
   playerNormalAtk: 15
-  playerBonusAtk: 5
+  playerMaxAtk: 15
   shotDelaySpeed: 0.5
   maxAmmo: 6
   maxGauge: 0.1
@@ -280,7 +280,7 @@ MonoBehaviour:
   Move: {fileID: 11400000, guid: 712c79f1d54d1234c9c353db09d23cf0, type: 2}
   Jump: {fileID: 11400000, guid: 8f7e8df95ee4d064caec31b5a619676a, type: 2}
   Hit: {fileID: 11400000, guid: 627bf8b99b9eda94f90bb9cd609efc15, type: 2}
-  BackwardDodge: {fileID: 0}
+  BackwardDodge: {fileID: 11400000, guid: cbbbcb360472a4d4d923c2fd80702802, type: 2}
   Dodge: {fileID: 11400000, guid: c9242aa43efcb9145aae7df94def20e1, type: 2}
   Dead: {fileID: 11400000, guid: 6a3c7c245a6435745bc2495325beb6ad, type: 2}
   Aim: {fileID: 11400000, guid: c43c0a8dab15ee347a0fed8484739417, type: 2}
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3818357213670130502, guid: a6c05d3313c146b4285be02c4a3ae3c7, type: 3}
-  isPlayerCheckMaxGauge: 0
+  curDamage: 0
   reverseDelay: 0.2
   reloadingDelay: 0.2
   forwardDelay: 0.2

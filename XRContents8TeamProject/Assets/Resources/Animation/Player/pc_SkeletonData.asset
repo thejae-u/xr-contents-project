@@ -24,26 +24,8 @@ MonoBehaviour:
     multiplyMaterials: []
     screenMaterials: []
   skeletonDataModifiers: []
-  fromAnimation:
-  - BackForward
-  - Reloading
-  - Shot
-  - Hit
-  - BackForward
-  - Move
-  toAnimation:
-  - Reloading
-  - Forward
-  - BoltAction
-  - Dead
-  - Forward
-  - Jump
-  duration:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  defaultMix: 0
-  controller: {fileID: 9100000, guid: 792313985b4c33e44820e98902ba2cd4, type: 2}
+  fromAnimation: []
+  toAnimation: []
+  duration: []
+  defaultMix: 0.2
+  controller: {fileID: 0}

@@ -17,11 +17,13 @@ public class AimUIController : MonoBehaviour
     {
         fillMax = GameObject.Find("Player").GetComponent<PlayerManager>().maxGauge;
     }
+
     private void Start()
     {
         fillGauge = fillMax / 100;
         Gauge.fillAmount = 0;
     }
+
     void Update()
     {
         Vector3 mousePosition = Input.mousePosition;

@@ -331,8 +331,11 @@ public class PlayerManager : MonoBehaviour
             // 이동 실행
             if (dodgeDirRight)
             { 
-                transform.DOMoveX(playerPos.x + dodgeDistance, 1.0f);
+                //transform.DOMoveX(playerPos.x + dodgeDistance, 1.0f);
                 LogPrintSystem.SystemLogPrint(transform, "DOMoveX Right 실행", ELogType.Player);
+
+                Vector2 rightDodge = new Vector2(playerPos.x + dodgeDistance,playerRigidbody.velocity.y);
+                playerRigidbody.AddForce(Vector2.right * playerMoveSpeed,ForceMode2D.Impulse);
             }
             else
             {
