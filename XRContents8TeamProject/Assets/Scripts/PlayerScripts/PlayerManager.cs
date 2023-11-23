@@ -78,7 +78,9 @@ public class PlayerManager : MonoBehaviour
     [Header("플레이어 애니메이션")]
     public SkeletonAnimation skeletonAnimation;
 
-    [SpineEvent] public string eventName;
+    /// <summary>
+    /// [SpineEvent] public string eventName;
+    /// </summary>
     public AnimationReferenceAsset Idle;
     public AnimationReferenceAsset Move;
     public AnimationReferenceAsset Jump;
@@ -332,18 +334,20 @@ public class PlayerManager : MonoBehaviour
             if (dodgeDirRight)
             { 
                 //transform.DOMoveX(playerPos.x + dodgeDistance, 1.0f);
-                LogPrintSystem.SystemLogPrint(transform, "DOMoveX Right 실행", ELogType.Player);
+                //LogPrintSystem.SystemLogPrint(transform, "DOMoveX Right 실행", ELogType.Player);
 
-                Vector2 rightDodge = new Vector2(playerPos.x + dodgeDistance,playerRigidbody.velocity.y);
+                //Vector2 rightDodge = new Vector2(playerPos.x + dodgeDistance,playerRigidbody.velocity.y);
                 playerRigidbody.AddForce(Vector2.right * playerMoveSpeed,ForceMode2D.Impulse);
             }
             else
             {
-                transform.DOMoveX(playerPos.x - dodgeDistance, 1.0f);
-                LogPrintSystem.SystemLogPrint(transform, "DOMoveX Left 실행", ELogType.Player);
+                //transform.DOMoveX(playerPos.x - dodgeDistance, 1.0f);
+                //LogPrintSystem.SystemLogPrint(transform, "DOMoveX Left 실행", ELogType.Player);
+
+                //Vector2 leftDodge = new Vector2(playerPos.x + dodgeDistance, playerRigidbody.velocity.y);
+                playerRigidbody.AddForce(Vector2.left * playerMoveSpeed, ForceMode2D.Impulse);
             }
  
-            // 애니메이션 역재생
             if (isAnimationBackwards)
             {
                 skeletonAnimation.ClearState();
