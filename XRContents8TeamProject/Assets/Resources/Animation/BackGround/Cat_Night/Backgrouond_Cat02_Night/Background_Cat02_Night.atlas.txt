@@ -1,0 +1,139 @@
+
+Background_Cat02_Night.png
+size: 46,514
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Cat02_Night 1
+  rotate: false
+  xy: 2, 229
+  size: 28, 43
+  orig: 126, 183
+  offset: 49, 82
+  index: -1
+Background_Cat02_Night 10
+  rotate: false
+  xy: 2, 320
+  size: 41, 33
+  orig: 126, 183
+  offset: 66, 59
+  index: -1
+Background_Cat02_Night 11
+  rotate: false
+  xy: 2, 50
+  size: 21, 53
+  orig: 126, 183
+  offset: 65, 41
+  index: -1
+Background_Cat02_Night 12
+  rotate: false
+  xy: 29, 99
+  size: 15, 51
+  orig: 126, 183
+  offset: 63, 41
+  index: -1
+Background_Cat02_Night 13
+  rotate: false
+  xy: 25, 51
+  size: 15, 46
+  orig: 126, 183
+  offset: 60, 42
+  index: -1
+Background_Cat02_Night 14
+  rotate: false
+  xy: 24, 2
+  size: 20, 46
+  orig: 126, 183
+  offset: 54, 45
+  index: -1
+Background_Cat02_Night 18
+  rotate: false
+  xy: 24, 2
+  size: 20, 46
+  orig: 126, 183
+  offset: 54, 45
+  index: -1
+Background_Cat02_Night 15
+  rotate: false
+  xy: 2, 274
+  size: 29, 44
+  orig: 126, 183
+  offset: 45, 46
+  index: -1
+Background_Cat02_Night 17
+  rotate: false
+  xy: 2, 274
+  size: 29, 44
+  orig: 126, 183
+  offset: 45, 46
+  index: -1
+Background_Cat02_Night 16
+  rotate: true
+  xy: 2, 355
+  size: 35, 40
+  orig: 126, 183
+  offset: 41, 53
+  index: -1
+Background_Cat02_Night 19
+  rotate: false
+  xy: 33, 267
+  size: 11, 51
+  orig: 126, 183
+  offset: 64, 41
+  index: -1
+Background_Cat02_Night 2
+  rotate: false
+  xy: 2, 184
+  size: 28, 43
+  orig: 126, 183
+  offset: 49, 82
+  index: -1
+Background_Cat02_Night 3
+  rotate: false
+  xy: 32, 215
+  size: 11, 50
+  orig: 126, 183
+  offset: 67, 39
+  index: -1
+Background_Cat02_Night 4
+  rotate: false
+  xy: 2, 2
+  size: 20, 46
+  orig: 126, 183
+  offset: 68, 42
+  index: -1
+Background_Cat02_Night 5
+  rotate: false
+  xy: 2, 105
+  size: 25, 45
+  orig: 126, 183
+  offset: 68, 43
+  index: -1
+Background_Cat02_Night 6
+  rotate: true
+  xy: 2, 392
+  size: 35, 40
+  orig: 126, 183
+  offset: 66, 50
+  index: -1
+Background_Cat02_Night 7
+  rotate: false
+  xy: 2, 429
+  size: 40, 38
+  orig: 126, 183
+  offset: 67, 52
+  index: -1
+Background_Cat02_Night 8
+  rotate: true
+  xy: 2, 469
+  size: 43, 37
+  orig: 126, 183
+  offset: 68, 53
+  index: -1
+Background_Cat02_Night 9
+  rotate: false
+  xy: 2, 152
+  size: 39, 30
+  orig: 126, 183
+  offset: 68, 58
+  index: -1
