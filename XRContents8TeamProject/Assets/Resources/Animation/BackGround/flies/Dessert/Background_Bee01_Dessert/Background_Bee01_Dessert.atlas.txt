@@ -1,5 +1,5 @@
 
-skeleton.png
+Background_Bee01_Dessert.png
 size: 102,30
 format: RGBA8888
 filter: Linear,Linear
