@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7633762581204530440
+--- !u!1 &1617123221034823010
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5043692901893741907}
-  - component: {fileID: 5764612023947546154}
-  - component: {fileID: 4630961229111923821}
-  - component: {fileID: 7323449464679611260}
-  - component: {fileID: 4842174673366174146}
+  - component: {fileID: 7709235692828812266}
+  - component: {fileID: 8022276379515257512}
+  - component: {fileID: 925563774766820507}
+  - component: {fileID: 2459398643806394919}
+  - component: {fileID: 8332807546683816011}
   m_Layer: 0
-  m_Name: Spine GameObject (Background_Whippingtree03_Dessert)
+  m_Name: Spine GameObject (Background_Butterfly04_Day)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5043692901893741907
+--- !u!4 &7709235692828812266
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7633762581204530440}
+  m_GameObject: {fileID: 1617123221034823010}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.96, y: -3.97, z: -5.714285}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5764612023947546154
+--- !u!33 &8022276379515257512
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7633762581204530440}
+  m_GameObject: {fileID: 1617123221034823010}
   m_Mesh: {fileID: 0}
---- !u!23 &4630961229111923821
+--- !u!23 &925563774766820507
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7633762581204530440}
+  m_GameObject: {fileID: 1617123221034823010}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be17e159b5f349f4fa6d8ffc408f7193, type: 2}
+  - {fileID: 2100000, guid: bf4dd395ba771594caa13383b7fd7edc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,23 +81,23 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: 2135238147
+  m_SortingLayer: 1
+  m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7323449464679611260
+--- !u!114 &2459398643806394919
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7633762581204530440}
+  m_GameObject: {fileID: 1617123221034823010}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 5a32be952c539ad4ea883800c2666bbb, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 61887e6c44e2c2544bfb782b7b38f8fd, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -122,13 +122,13 @@ MonoBehaviour:
   _animationName: animation
   loop: 1
   timeScale: 1
---- !u!114 &4842174673366174146
+--- !u!114 &8332807546683816011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7633762581204530440}
+  m_GameObject: {fileID: 1617123221034823010}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f21c9538588898a45a3da22bf4779ab3, type: 3}

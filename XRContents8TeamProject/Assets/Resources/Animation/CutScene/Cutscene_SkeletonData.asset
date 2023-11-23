@@ -16,12 +16,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4375dd020ec1b87489fd37933c01ceca, type: 2}
   scale: 0.0111
   skeletonJSON: {fileID: 4900000, guid: 0373449e2de65ff40b903ecb96a4637b, type: 3}
-  isUpgradingBlendModeMaterials: 1
+  isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 1
     applyAdditiveMaterial: 1
-    additiveMaterials: []
-    multiplyMaterials: []
+    additiveMaterials:
+    - pageName: Cutscene4.png
+      material: {fileID: 2100000, guid: 26a57a85927ad014383557c65a420284, type: 2}
+    multiplyMaterials:
+    - pageName: Cutscene.png
+      material: {fileID: 2100000, guid: e687d8c6bef88a448be3dafa3b83d3fb, type: 2}
+    - pageName: Cutscene3.png
+      material: {fileID: 2100000, guid: 53b84b7c337899441adf138379e8835d, type: 2}
     screenMaterials: []
   skeletonDataModifiers: []
   fromAnimation: []
