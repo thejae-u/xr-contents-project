@@ -32,6 +32,11 @@ public class InteractableObjectController : MonoBehaviour
 
     private void Update()
     {
+        MainLogic();
+    }
+
+    private void MainLogic()
+    {
         if (!isTimerStarted)
         {
             myCameraPos = Camera.main.WorldToViewportPoint(myPos);
@@ -64,6 +69,13 @@ public class InteractableObjectController : MonoBehaviour
                     Instantiate(isInteractable ? item[0].gameObject : item[1].gameObject, transform.position,
                         Quaternion.identity);
                     transform.GetComponent<InteractableObjectController>().enabled = false;
+                }
+            }
+            else
+            {
+                foreach (var timer in timers)
+                {
+                    timer.SetActive(false);
                 }
             }
 

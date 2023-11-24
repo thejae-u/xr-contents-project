@@ -18,14 +18,16 @@ public class BackgroundScroller : MonoBehaviour
         // Afternoon : first index of list
         // Night : second index of list
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.material = materials[0];
+        if (SceneManager.GetActiveScene().name == "TestScene2")
+            spriteRenderer.material = materials[0];
+        else if (SceneManager.GetActiveScene().name == "TestScene3")
+            spriteRenderer.material = materials[1];
+        else
+            spriteRenderer.material = materials[2];
     }
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name == "TestScene3")
-            spriteRenderer.material = materials[1];
-        
         mat = spriteRenderer.material;
         Vector2 pos = Camera.main.transform.position;
         pos.x = pos.x * x / 50;

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Farground
+  m_Name: Farground ver.3
   m_Shader: {fileID: -6465566751694194690, guid: 8ff157de76543b844b7a21b07199a810, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -28,7 +28,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BackgroundTexture:
-        m_Texture: {fileID: 2800000, guid: 67bb379c60e38e44999ffcdae0a4a90c, type: 3}
+        m_Texture: {fileID: 2800000, guid: ed7137c3f00880f45a9217a74b9f6c0b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
