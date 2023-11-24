@@ -18,9 +18,9 @@ public class BackgroundScroller : MonoBehaviour
         // Afternoon : first index of list
         // Night : second index of list
         spriteRenderer = GetComponent<SpriteRenderer>();
-        if (SceneManager.GetActiveScene().name == "TestScene2")
+        if (SceneManager.GetActiveScene().name == "Stage1")
             spriteRenderer.material = materials[0];
-        else if (SceneManager.GetActiveScene().name == "TestScene3")
+        else if (SceneManager.GetActiveScene().name == "Stage2")
             spriteRenderer.material = materials[1];
         else
             spriteRenderer.material = materials[2];

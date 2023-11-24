@@ -71,36 +71,33 @@ public class GameManager : MonoBehaviour
         enemyCount = 0;
         everyMonsterCount = 0;
         
-        if (Input.GetKeyDown(KeyCode.G))
+        CountRemainEnemy();
+        SpawnNextEnemy();
+
+        if (stages.Count > 0)
         {
-
-            CameraController.Inst.ShakeCamera();
-            //SoundManager.Inst.Play("PlayerShot", gameObject);
-            /*
-            if (SceneManager.GetActiveScene().name == "TestScene2")
-            {
-                if (!isFade)
-                {
-                    isFade = true;
-                    Sequence sequence = DOTween.Sequence();
-                    sequence.Append(blackImage.DOFade(1.0f, fadeTime));
-
-                    sequence.OnComplete(() => { SceneManager.LoadScene("TestScene3"); });
-                }
-            }
-            */
+            CheckRemainEnemy();
+            
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (everyMonsterCount == 0)
         {
-            SoundManager.Inst.DeleteSound(gameObject);
+            ChangeScene();
         }
+        
+        Exit();
+    }
 
+    private void CountRemainEnemy()
+    {
         foreach (var sector in stages[curStage].sectors)
         {
             enemyCount += sector.transform.childCount;
         }
+    }
 
+    private void SpawnNextEnemy()
+    {
         if (stages[curStage].sectors.Count > curSector)
         {
             if (stages[curStage].sectors[curSector].transform.childCount == 0)
@@ -110,40 +107,46 @@ public class GameManager : MonoBehaviour
                     EnemySpawn(curStage, curSector);
             }
         }
+    }
 
-        if (stages.Count > 0)
+    private void CheckRemainEnemy()
+    {
+        foreach (var stage in stages)
         {
-            foreach (var stage in stages)
+            if (stage.sectors.Count > 0)
             {
-                if (stage.sectors.Count > 0)
+                foreach (var sector in stage.sectors)
                 {
-                    foreach (var sector in stage.sectors)
-                    {
-                        if (sector == null) return;
-                        everyMonsterCount += sector.transform.childCount;
-                    }
+                    if (sector == null) return;
+                    everyMonsterCount += sector.transform.childCount;
                 }
             }
         }
+    }
 
-
-        
-
-        if (everyMonsterCount == 0)
+    private void ChangeScene()
+    {
+        if (SceneManager.GetActiveScene().name == "Stage1")
         {
-            if (SceneManager.GetActiveScene().name == "TestScene2")
-            {
-                Sequence sequence = DOTween.Sequence();
-                sequence.Append(blackImage.DOFade(1.0f, fadeTime));
+            Sequence sequence = DOTween.Sequence();
+            sequence.Append(blackImage.DOFade(1.0f, fadeTime));
 
-                sequence.OnComplete(() =>
-                {
-                    SceneManager.LoadScene("TestScene3");
-                });
-            }
+            sequence.OnComplete(() => { SceneManager.LoadScene("Stage2"); });
         }
+        else if (SceneManager.GetActiveScene().name == "Stage2")
+        {
+            Sequence sequence = DOTween.Sequence();
+            sequence.Append(blackImage.DOFade(1.0f, fadeTime));
 
-        Exit();
+            sequence.OnComplete(() => { SceneManager.LoadScene("Stage3"); });
+        }
+        else if (SceneManager.GetActiveScene().name == "Stage3")
+        {
+            Sequence sequence = DOTween.Sequence();
+            sequence.Append(blackImage.DOFade(1.0f, fadeTime));
+
+            sequence.OnComplete(() => { SceneManager.LoadScene("CutScene"); });
+        }
     }
     
     private void Exit()

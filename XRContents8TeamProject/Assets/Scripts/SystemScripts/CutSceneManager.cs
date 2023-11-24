@@ -14,6 +14,8 @@ public class CutSceneManager : MonoBehaviour
     [Header("속도 조정")][Range(0.0f, 5.0f)] 
     public float speed;
 
+    public GameObject uiCanvas;
+
     private GameObject globalLight = null;
     private GameObject spotLight = null;
 
@@ -78,46 +80,32 @@ public class CutSceneManager : MonoBehaviour
         isEndFirstAnim = false;
         isStart = false;
 
-        anim.AnimationState.SetAnimation(0, names[curState++], false);
+        ShowMenu();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (SceneManager.GetActiveScene().name == "CutSceneNextTestScene")
-            {
-                SceneManager.LoadScene("CutScene");
-                
-                InitObject();
-                SecondStartAnimation();
-            }
-        }
-
         if (SceneManager.GetActiveScene().name != "CutScene") return;
-            
-            
-        if (!isInitialized)
-            InitObject();
         
-        if (!isEndFirstAnim)
-        {
-            StartAnimation();
-            return;
-        }
-
+        
+        
+        CheckShowMenu();
+        
+        
         if (!isStart)
         {
             AnimationUpdate();
             return;
         }
         
+
+
         GameStart();
     }
 
     private void InitObject()
     {
-        if (SceneManager.GetActiveScene().name != "CutScene") return;
+        if (SceneManager.GetActiveScene().name != "MenuAndCutScene") return;
         
         globalLight = GameObject.Find("Global");
         spotLight = GameObject.Find("Spot");
@@ -196,26 +184,25 @@ public class CutSceneManager : MonoBehaviour
         }
     }
 
-    private void StartAnimation()
+    private void ShowMenu()
     {
-        switch (anim.AnimationName)
+        InitObject();
+        AnimationCall();
+    }
+
+    private void CheckShowMenu()
+    {
+        if (anim.AnimationName == "Start1" && anim.AnimationState.GetCurrent(0).IsComplete)
         {
-            case "Start1" when anim.AnimationState.GetCurrent(0).IsComplete:
-                AnimationCall();
-                break;
-            case "Start1":
-                break;
-            
-            case "Start2" when anim.AnimationState.GetCurrent(0).IsComplete: 
-                AnimationCall();
-                break;
-            case "Start2":
-                break;
-            
-            case "Book_Open_1":
-                isEndFirstAnim = true;
-                break;
+            uiCanvas.SetActive(true);
+            isStart = true;
         }
+    }
+
+    public void OnStartButtonClick()
+    {
+        AnimationCall();
+        uiCanvas.SetActive(false);
     }
 
     private void SecondStartAnimation()
@@ -237,6 +224,6 @@ public class CutSceneManager : MonoBehaviour
         globalLight.GetComponent<Light2D>().intensity = 0;
         gameObject.GetComponent<MeshRenderer>().enabled = false;
 
-        SceneManager.LoadScene("TestScene2");
+        SceneManager.LoadScene("Stage1");
     }
 }

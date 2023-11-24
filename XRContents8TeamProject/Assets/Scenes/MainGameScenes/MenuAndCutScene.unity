@@ -373,7 +373,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1052638423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,8 +491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 0.5
   speed: 3.6
-  globalLight: {fileID: 31581703}
-  spotLight: {fileID: 930625258}
+  uiCanvas: {fileID: 0}
 --- !u!114 &1116130023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,10 +550,11 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d8848830b5dc2244a900b68157bc408f, type: 2}
+  - {fileID: 2100000, guid: e687d8c6bef88a448be3dafa3b83d3fb, type: 2}
   - {fileID: 2100000, guid: 8b7027f84a1601141801ef4ef06c3361, type: 2}
   - {fileID: 2100000, guid: d8848830b5dc2244a900b68157bc408f, type: 2}
-  - {fileID: 2100000, guid: ea93f6ad65d2163498cd7b16bc24dd4e, type: 2}
-  - {fileID: 2100000, guid: c59374f1d54a71b49b7812f59f9d5c5c, type: 2}
+  - {fileID: 2100000, guid: 53b84b7c337899441adf138379e8835d, type: 2}
+  - {fileID: 2100000, guid: 26a57a85927ad014383557c65a420284, type: 2}
   - {fileID: 2100000, guid: d8848830b5dc2244a900b68157bc408f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -613,7 +613,7 @@ GameObject:
   - component: {fileID: 1190452376}
   - component: {fileID: 1190452375}
   m_Layer: 5
-  m_Name: SkipButton
+  m_Name: StartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -633,11 +633,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1052638426}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -50, y: -50}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 100}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1190452375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,7 +681,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1190452376}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1116130022}
+        m_TargetAssemblyTypeName: CutSceneManager, Assembly-CSharp
+        m_MethodName: OnStartButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1190452376
 MonoBehaviour:
   m_ObjectHideFlags: 0
