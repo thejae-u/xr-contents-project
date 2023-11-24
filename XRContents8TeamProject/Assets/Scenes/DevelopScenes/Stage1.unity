@@ -2255,6 +2255,18 @@ PrefabInstance:
       propertyPath: tutorialtImg
       value: 
       objectReference: {fileID: 908950172}
+    - target: {fileID: 5871502387009047570, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
+      propertyPath: dodgeDistance
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871502387009047570, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
+      propertyPath: playerKnockbackDistance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871502387009047570, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
+      propertyPath: dodgeInvincibilityDuration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6607649661471559730, guid: 36779e30685a5f84cb847c9711a4e905, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.32

@@ -52,7 +52,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float dodgeCoolTime = 3.0f;
 
     [Header("플레이어 회피 사용 시 무적 시간(지속 시간) 조정")]
-    [SerializeField] private float dodgeInvincibilityDuration = 1.5f;
+    [SerializeField] private float dodgeInvincibilityDuration = 1.0f;
 
     private bool canDodge = true;
     private bool isPlayerDirRight; // 플레이어가 현재 바라보는 방향
@@ -283,12 +283,14 @@ public class PlayerManager : MonoBehaviour
 
                 if (playerXPos > enemyXPos) // 플레이어가 오른쪽에 있다면
                 {
-                    transform.DOMoveX(transform.position.x + playerKnockbackDistance, playerHitInvincibilityDuration);
+                    playerRigidbody.velocity = new Vector2(playerKnockbackDistance, playerRigidbody.velocity.y);
+                    playerRigidbody.AddForce(Vector2.right * playerMoveSpeed, ForceMode2D.Impulse);
                     LogPrintSystem.SystemLogPrint(transform, $"넉백 시 플레이어와 적위치 : {playerXPos},{enemyXPos}", ELogType.Player);
                 }
                 else if (playerXPos < enemyXPos)
                 {
-                    transform.DOMoveX(transform.position.x - playerKnockbackDistance, playerHitInvincibilityDuration);
+                    playerRigidbody.velocity = new Vector2(-playerKnockbackDistance, playerRigidbody.velocity.y);
+                    playerRigidbody.AddForce(Vector2.left * playerMoveSpeed, ForceMode2D.Impulse);
                     LogPrintSystem.SystemLogPrint(transform, $"넉백 시 플레이어와 적위치 : {playerXPos},{enemyXPos}", ELogType.Player);
                 }
             }
@@ -334,12 +336,12 @@ public class PlayerManager : MonoBehaviour
             if (dodgeDirRight)
             {
                 playerRigidbody.velocity = new Vector2(dodgeDistance, playerRigidbody.velocity.y);
-                playerRigidbody.AddForce(Vector2.right,ForceMode2D.Impulse);
+                playerRigidbody.AddForce(Vector2.right * playerMoveSpeed, ForceMode2D.Impulse);
             }
             else
             {
                 playerRigidbody.velocity = new Vector2(-dodgeDistance, playerRigidbody.velocity.y);
-                playerRigidbody.AddForce(Vector2.left, ForceMode2D.Impulse);
+                playerRigidbody.AddForce(Vector2.left * playerMoveSpeed, ForceMode2D.Impulse);
             }
  
             if (isAnimationBackwards)
