@@ -328,7 +328,6 @@ public class PlayerManager : MonoBehaviour
             LogPrintSystem.SystemLogPrint(transform, "회피 사용", ELogType.Player);
 
             canDodge = false;
-            Vector3 playerPos = transform.position;
 
             PlayerInvincibility(dodgeInvincibilityDuration);
 
