@@ -8,6 +8,7 @@ public class PlayerShot : MonoBehaviour
     private PlayerManager playerManager;
     private AimUIController aimUIController;
     private BalletUIController bulletUIController;
+    private CameraShake cameraShake;
 
     Sequence sequenceBoltAction;
     Sequence sequenceBackforward;
@@ -51,6 +52,7 @@ public class PlayerShot : MonoBehaviour
         playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
         aimUIController = GameObject.Find("PlayerAim").GetComponent<AimUIController>();
         bulletUIController = GameObject.Find("PlayerAim").GetComponent<BalletUIController>();
+        cameraShake = GameObject.Find("PlayerFollowCamera").GetComponent<CameraShake>();
     }
 
     private void Start()
@@ -151,6 +153,9 @@ public class PlayerShot : MonoBehaviour
 
             lastFireTime = Time.time;
             curAmmo--;
+
+            /*Camera Shake*/
+            cameraShake.CameraShakeForTime(0.05f);
 
             /* UI */
             isDiscountBullet = true;

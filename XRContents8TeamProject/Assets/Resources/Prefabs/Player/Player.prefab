@@ -123,7 +123,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2980d4a46db63d441b91255be4248cc9, type: 2}
+  - {fileID: 2100000, guid: b9688008bf4a33b429577cb5f5d7d08b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: f94b676d6c9aaff45aef48314a66416b, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 50b902c7324253a419fd336ea27d8cfd, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -275,7 +275,6 @@ MonoBehaviour:
   maxAmmo: 6
   maxGauge: 0.1
   skeletonAnimation: {fileID: 5471782796121251530}
-  eventName: 
   Idle: {fileID: 11400000, guid: 9a464bb6874281a4e8467e9f92cc0ef2, type: 2}
   Move: {fileID: 11400000, guid: a4f35ffb5e335f940b56547161351bdd, type: 2}
   Jump: {fileID: 11400000, guid: 81a4050fe881b5445b6521acc8e5fb8f, type: 2}

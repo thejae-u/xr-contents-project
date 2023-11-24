@@ -46,7 +46,7 @@ public class PlayerManager : MonoBehaviour
 
     // Player dodge(evasion) related
     [Header("플레이어 회피 거리")]
-    [SerializeField] private float dodgeDistance = 4.0f;
+    [SerializeField] private float dodgeDistance = 8.0f;
 
     [Header("플레이어 회피 쿨타임")]
     [SerializeField] private float dodgeCoolTime = 3.0f;
@@ -332,20 +332,14 @@ public class PlayerManager : MonoBehaviour
 
             // 이동 실행
             if (dodgeDirRight)
-            { 
-                //transform.DOMoveX(playerPos.x + dodgeDistance, 1.0f);
-                //LogPrintSystem.SystemLogPrint(transform, "DOMoveX Right 실행", ELogType.Player);
-
-                //Vector2 rightDodge = new Vector2(playerPos.x + dodgeDistance,playerRigidbody.velocity.y);
-                playerRigidbody.AddForce(Vector2.right * playerMoveSpeed,ForceMode2D.Impulse);
+            {
+                playerRigidbody.velocity = new Vector2(dodgeDistance, playerRigidbody.velocity.y);
+                playerRigidbody.AddForce(Vector2.right,ForceMode2D.Impulse);
             }
             else
             {
-                //transform.DOMoveX(playerPos.x - dodgeDistance, 1.0f);
-                //LogPrintSystem.SystemLogPrint(transform, "DOMoveX Left 실행", ELogType.Player);
-
-                //Vector2 leftDodge = new Vector2(playerPos.x + dodgeDistance, playerRigidbody.velocity.y);
-                playerRigidbody.AddForce(Vector2.left * playerMoveSpeed, ForceMode2D.Impulse);
+                playerRigidbody.velocity = new Vector2(-dodgeDistance, playerRigidbody.velocity.y);
+                playerRigidbody.AddForce(Vector2.left, ForceMode2D.Impulse);
             }
  
             if (isAnimationBackwards)
