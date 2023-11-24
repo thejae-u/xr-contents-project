@@ -25,6 +25,7 @@ public class CutSceneManager : MonoBehaviour
     
     private int curState;
     private bool isEndFirstAnim;
+    private bool isEndFirstAnim2;
 
     private bool isPrevActive;
 
@@ -82,6 +83,7 @@ public class CutSceneManager : MonoBehaviour
         curState = 0;
         isInitialized = false;
         isEndFirstAnim = false;
+        isEndFirstAnim2 = false;
         isStart = false;
         isPrevActive = false;
 
@@ -92,7 +94,6 @@ public class CutSceneManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name != "MenuAndCutScene") return;
 
-
         if (!isEndFirstAnim)
         {
             CheckShowMenu();
@@ -101,12 +102,11 @@ public class CutSceneManager : MonoBehaviour
 
         ShowPageButton();
         
-        if (isStart)
-            GameStart();
-        else
-        {
+        if(!isEndFirstAnim2)
             AnimationUpdate();
-        }
+        
+        if(isStart)
+            GameStart();
     }
 
     private void InitObject()
@@ -122,32 +122,50 @@ public class CutSceneManager : MonoBehaviour
     {
         if (anim.AnimationState.GetCurrent(0).IsComplete)
         {
-
-            if (anim.AnimationName == "page6")
+            if (anim.AnimationName == "Page6")
             {
-                GameStart();
+                isStart = true;
                 return;
             }
-            anim.AnimationState.SetAnimation(0, curState > names.Length ? names[curState] : names[curState++], false);
+            
+            if (anim.AnimationName == "Page10")
+                return;
+
+            if (isPrevActive)
+            {
+                curState += 1;
+                isPrevActive = false;
+            }
+
+            anim.AnimationState.SetAnimation(0, names[curState++], false);
         }
     }
 
     public void OnPrevButtonClick()
     {
-        curState -= 1;
-        anim.AnimationState.SetAnimation(0, names[curState], false);
-        isPrevActive = true;
+        if (anim.AnimationState.GetCurrent(0).IsComplete)
+        {
+            curState -= 2;
+            anim.AnimationState.SetAnimation(0, names[curState], false);
+            isPrevActive = true;
+        }
     }
 
     private void AnimationCall()
     {
-        if (isPrevActive) curState += 1;
         anim.AnimationState.SetAnimation(0, names[curState], false);
         curState += 1;
     }
 
     private void ShowPageButton()
     {
+        if (isStart)
+        {
+            prevButton.SetActive(false);
+            nextButton.SetActive(false);
+            return;
+        }
+        
         switch (anim.AnimationName)
         {
             case "Start1":
@@ -179,6 +197,7 @@ public class CutSceneManager : MonoBehaviour
             if (anim.AnimationState.GetCurrent(0).IsComplete)
             {
                 AnimationCall();
+                isEndFirstAnim2 = true;
             }
         }
     }

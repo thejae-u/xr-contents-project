@@ -126,26 +126,40 @@ public class GameManager : MonoBehaviour
 
     private void ChangeScene()
     {
-        if (SceneManager.GetActiveScene().name == "Stage1")
+        if (SceneManager.GetActiveScene().name == "Stage1" && !isFade)
         {
+            isFade = true;
             Sequence sequence = DOTween.Sequence();
             sequence.Append(blackImage.DOFade(1.0f, fadeTime));
 
-            sequence.OnComplete(() => { SceneManager.LoadScene("Stage2"); });
+            sequence.OnComplete(() => 
+            {
+                SceneManager.LoadScene("Stage2");
+                isFade = false;
+            });
         }
-        else if (SceneManager.GetActiveScene().name == "Stage2")
+        else if (SceneManager.GetActiveScene().name == "Stage2" && !isFade)
         {
+            isFade = true;
             Sequence sequence = DOTween.Sequence();
             sequence.Append(blackImage.DOFade(1.0f, fadeTime));
 
-            sequence.OnComplete(() => { SceneManager.LoadScene("Stage3"); });
+            sequence.OnComplete(() =>
+            {
+                SceneManager.LoadScene("Stage3");
+                isFade = false;
+            });
         }
-        else if (SceneManager.GetActiveScene().name == "Stage3")
+        else if (SceneManager.GetActiveScene().name == "Stage3" && !isFade)
         {
+            isFade = true;
             Sequence sequence = DOTween.Sequence();
             sequence.Append(blackImage.DOFade(1.0f, fadeTime));
 
-            sequence.OnComplete(() => { SceneManager.LoadScene("CutScene"); });
+            sequence.OnComplete(() =>
+            {
+                SceneManager.LoadScene("CutScene");
+            });
         }
     }
     
