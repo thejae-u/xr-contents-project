@@ -194,8 +194,7 @@ public abstract class TraceNode : INode
             LogPrintSystem.SystemLogPrint(myTransform, "Trace Normal Monster", ELogType.EnemyAI);
             LogPrintSystem.SystemLogPrint(myTransform, $"{playerRange + myAttackRange >= distance}", ELogType.EnemyAI);
             // Check Attack Range
-
-            return ETraceState.PlayerTrace;
+            return playerRange + myAttackRange >= distance ? ETraceState.PlayerEnter : ETraceState.PlayerTrace; 
         }
 
         // Rush Monster Normal Attack Range Check
@@ -222,7 +221,6 @@ public abstract class TraceNode : INode
                 // Enable Rush Attack
                 if (!isOverRush.Value)
                 {
-                    
                     var camPos = Camera.main.WorldToViewportPoint(myTransform.position);
                     if (camPos.x < 1.0f && camPos.x > 0.1f)
                         return ETraceState.PlayerEnterRush;
