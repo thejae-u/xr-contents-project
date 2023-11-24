@@ -261,7 +261,7 @@ public class EliteRushAttackNode : INode
 
         
         
-        var effectPos = new Vector3(dir.x > 0 ? myPos.x - 0.5f : myPos.x + 0.5f, myPos.y - 5f , 0);
+        var effectPos = new Vector3(dir.x > 0 ? myPos.x - 0.5f : myPos.x + 0.5f, myPos.y - 1f , 0);
         EffectController.Inst.PlayEffect(effectPos, "RushSpecialAttack");
     }
 

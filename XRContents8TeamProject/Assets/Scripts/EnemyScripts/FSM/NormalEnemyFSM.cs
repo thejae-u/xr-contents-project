@@ -53,8 +53,6 @@ public class NormalTraceNode : TraceNode
                         isTimerEnded.Value = true;
                     }
 
-                    // timer.IsAttacked ? do Something : do SomeThing
-
                     timer.Checked();
                 }
             }

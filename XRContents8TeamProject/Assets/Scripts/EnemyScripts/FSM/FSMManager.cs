@@ -123,7 +123,6 @@ public class WaitNode : INode
         var myNode = blackboard.GetData<ReferenceValueT<ENode>>("myNode");
 
         myNode.Value = ENode.Idle;
-        LogPrintSystem.SystemLogPrint(myTransform, "Cur Node is Wait", ELogType.EnemyAI);
         
         if (!isGround.Value) return Fsm.GuardNullNode(this, this);
         
@@ -168,7 +167,6 @@ public abstract class TraceNode : INode
         var isJumping = blackboard.GetData<ReferenceValueT<bool>>("isJumping");
         if (isJumping.Value)
         {
-            LogPrintSystem.SystemLogPrint(myTransform, $"{isJumping} isJumping", ELogType.EnemyAI);
             return ETraceState.PlayerTrace;
         }
 
@@ -191,8 +189,6 @@ public abstract class TraceNode : INode
         // Trace Logic
         if (myType != EEliteType.Rush)
         {
-            LogPrintSystem.SystemLogPrint(myTransform, "Trace Normal Monster", ELogType.EnemyAI);
-            LogPrintSystem.SystemLogPrint(myTransform, $"{playerRange + myAttackRange >= distance}", ELogType.EnemyAI);
             // Check Attack Range
             return playerRange + myAttackRange >= distance ? ETraceState.PlayerEnter : ETraceState.PlayerTrace; 
         }
@@ -264,8 +260,6 @@ public class JumpNode : INode
         {
             isJumping.Value = false;
         });
-
-        LogPrintSystem.SystemLogPrint(myTransform, "Jump Execute", ELogType.EnemyAI);
 
         return Fsm.GuardNullNode(this, endJump);
     }

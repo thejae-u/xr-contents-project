@@ -3032,7 +3032,7 @@ MonoBehaviour:
   cameras:
   - {fileID: 390962331}
   - {fileID: 0}
-  shakeTime: 0
+  shakeTime: 0.5
 --- !u!114 &1480096047
 MonoBehaviour:
   m_ObjectHideFlags: 0
