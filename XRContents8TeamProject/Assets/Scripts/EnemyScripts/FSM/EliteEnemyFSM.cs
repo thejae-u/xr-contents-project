@@ -243,8 +243,10 @@ public class EliteRushAttackNode : INode
         var canSpecialAttackReady = blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttackReady");
         var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
         var specialAttackCooldown = blackboard.GetData<ReferenceValueT<float>>("specialAttackCooldown");
+        var playerTransform = blackboard.GetData<Transform>("playerTransform");
         
         var myPos = myTransform.position;
+        var dir = (playerTransform.position - myPos).normalized;
         myPos.z = 0.0f;
         
         isNowAttack.Value = false;
@@ -256,6 +258,11 @@ public class EliteRushAttackNode : INode
         {
             hasRemainAttackTime.Value = false;
         }).SetId(this);
+
+        
+        
+        var effectPos = new Vector3(dir.x > 0 ? myPos.x - 0.5f : myPos.x + 0.5f, myPos.y - 5f , 0);
+        EffectController.Inst.PlayEffect(effectPos, "RushSpecialAttack");
     }
 
     public INode Execute(Blackboard blackboard)

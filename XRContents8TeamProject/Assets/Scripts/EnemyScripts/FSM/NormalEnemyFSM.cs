@@ -120,10 +120,12 @@ public class NormalAttackNode : INode
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
 
+        var myPos = myTransform.position;
+
         // 거리 계산을 위한 변수
         var d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
         var d2 = blackboard.GetData<ReferenceValueT<float>>("myAttackRange").Value;
-        var distance = (myTransform.position - playerTransform.position).magnitude;
+        var distance = (myPos - playerTransform.position).magnitude;
 
         var player = playerTransform.GetComponent<PlayerManager>();
 
@@ -136,8 +138,16 @@ public class NormalAttackNode : INode
             return Fsm.GuardNullNode(this, outOfAttackRange);
         }
 
+        var dir = (playerTransform.position - myPos).normalized;
+
         isNowAttack.Value = true;
-        
+
+        if (myType == EEliteType.None)
+        {
+            var effectPos = new Vector3(dir.x > 0 ? myPos.x + d2 : myPos.x - d2, myPos.y, 0);
+            EffectController.Inst.PlayEffect(effectPos, "NormalMonsterAttack");
+        }
+
         if (!player.isInvincibility)
         {
             LogPrintSystem.SystemLogPrint(myTransform, $"{attackDamage} Damage to Player!!", ELogType.EnemyAI);
