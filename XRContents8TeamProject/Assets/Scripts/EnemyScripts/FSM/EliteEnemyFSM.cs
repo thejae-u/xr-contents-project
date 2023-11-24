@@ -56,7 +56,7 @@ public class EliteTraceNode : TraceNode
                     myPos.y, myPos.z);
             }
         }
-
+        
         switch (type)
         {
             // All monster Use, Bomb Monster's Normal Attack is Special Attack

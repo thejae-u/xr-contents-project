@@ -137,12 +137,10 @@ public class NormalAttackNode : INode
         }
 
         isNowAttack.Value = true;
-
-        LogPrintSystem.SystemLogPrint(myTransform, $"Player Invincibility : {player.isInvincibility}",
-            ELogType.EnemyAI);
         
         if (!player.isInvincibility)
         {
+            LogPrintSystem.SystemLogPrint(myTransform, $"{attackDamage} Damage to Player!!", ELogType.EnemyAI);
             player.PlayerDiscountHp(attackDamage, myTransform.position.x);
             GameManager.Inst.HitPlayer();
         }
@@ -150,7 +148,6 @@ public class NormalAttackNode : INode
         sequence.SetDelay(1.5f).OnComplete(() => { isNowAttack.Value = false; }).SetId(this);
 
 
-        LogPrintSystem.SystemLogPrint(myTransform, $"{attackDamage} Damage to Player!!", ELogType.EnemyAI);
         return Fsm.GuardNullNode(this, this);
     }
 }
