@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Spine.Unity;
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -57,6 +58,7 @@ public class InteractableObjectController : MonoBehaviour
 
             if (timer.IsAttacked)
             {
+                gameObject.GetComponent<SkeletonAnimation>().AnimationState.SetAnimation(0, "animation", false);
                 if (GameManager.Inst.IsNight)
                 {
                     Instantiate(isInteractable ? item[2].gameObject : item[3].gameObject, transform.position,

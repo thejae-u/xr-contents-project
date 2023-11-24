@@ -14,7 +14,9 @@ public class CutSceneManager : MonoBehaviour
     [Header("속도 조정")][Range(0.0f, 5.0f)] 
     public float speed;
 
-    public GameObject uiCanvas;
+    public GameObject startButton;
+    public GameObject nextButton;
+    public GameObject prevButton;
 
     private GameObject globalLight = null;
     private GameObject spotLight = null;
@@ -23,6 +25,8 @@ public class CutSceneManager : MonoBehaviour
     
     private int curState;
     private bool isEndFirstAnim;
+
+    private bool isPrevActive;
 
     private SkeletonAnimation anim;
 
@@ -79,28 +83,30 @@ public class CutSceneManager : MonoBehaviour
         isInitialized = false;
         isEndFirstAnim = false;
         isStart = false;
+        isPrevActive = false;
 
         ShowMenu();
     }
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name != "CutScene") return;
-        
-        
-        
-        CheckShowMenu();
-        
-        
-        if (!isStart)
+        if (SceneManager.GetActiveScene().name != "MenuAndCutScene") return;
+
+
+        if (!isEndFirstAnim)
         {
-            AnimationUpdate();
+            CheckShowMenu();
             return;
         }
+
+        ShowPageButton();
         
-
-
-        GameStart();
+        if (isStart)
+            GameStart();
+        else
+        {
+            AnimationUpdate();
+        }
     }
 
     private void InitObject()
@@ -112,74 +118,67 @@ public class CutSceneManager : MonoBehaviour
         isInitialized = true;
     }
 
+    public void OnNextButtonClick()
+    {
+        if (anim.AnimationState.GetCurrent(0).IsComplete)
+        {
+
+            if (anim.AnimationName == "page6")
+            {
+                GameStart();
+                return;
+            }
+            anim.AnimationState.SetAnimation(0, curState > names.Length ? names[curState] : names[curState++], false);
+        }
+    }
+
+    public void OnPrevButtonClick()
+    {
+        curState -= 1;
+        anim.AnimationState.SetAnimation(0, names[curState], false);
+        isPrevActive = true;
+    }
+
     private void AnimationCall()
     {
-        anim.AnimationState.SetAnimation(0, names[curState++], false);
+        if (isPrevActive) curState += 1;
+        anim.AnimationState.SetAnimation(0, names[curState], false);
+        curState += 1;
+    }
+
+    private void ShowPageButton()
+    {
+        switch (anim.AnimationName)
+        {
+            case "Start1":
+            case "Start2":
+                return;
+            case "Book_Open_1" when anim.AnimationState.GetCurrent(0).IsComplete:
+                prevButton.SetActive(false);
+                nextButton.SetActive(true);
+                return;
+            case "Book_Open_1":
+                return;
+            case "Page10" when anim.AnimationState.GetCurrent(0).IsComplete:
+                prevButton.SetActive(true);
+                nextButton.SetActive(false);
+                return;
+            case "Page10":
+                return;
+            default:
+                prevButton.SetActive(true);
+                nextButton.SetActive(true);
+                return;
+        }
     }
 
     private void AnimationUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (anim.AnimationName == "Start2")
         {
-            switch (anim.AnimationName)
+            if (anim.AnimationState.GetCurrent(0).IsComplete)
             {
-                // First CutScene
-                case "Book_Open_1" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    AnimationCall();
-                    break;
-                case "Book_Open_1":
-                    break;
-                
-                case "Page2" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    AnimationCall();
-                    break;
-                case "Page2":
-                    break;
-                
-                case "Page3" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    AnimationCall();
-                    break;
-                case "Page3":
-                    break;
-                
-                case "Page4" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    AnimationCall();
-                    break;
-                case "Page4":
-                    break;
-                
-                case "Page5" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    AnimationCall();
-                    break;
-                case "Page5":
-                    break;
-                
-                case "Page6" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    isStart = true;
-                    break;
-                case "Page6":
-                    break;
-                
-                // Second CutScene
-                case "Book_Open_7" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    AnimationCall();
-                    break;
-                case "Book_Open_7":
-                    break;
-                case "Page8" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    AnimationCall();
-                    break;
-                case "Page8":
-                    break;
-                case "Page9" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    AnimationCall();
-                    break;
-                case "Page9":
-                    break;
-                case "Page10" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    break;
-                case "Page10":
-                    break;
+                AnimationCall();
             }
         }
     }
@@ -192,23 +191,22 @@ public class CutSceneManager : MonoBehaviour
 
     private void CheckShowMenu()
     {
-        if (anim.AnimationName == "Start1" && anim.AnimationState.GetCurrent(0).IsComplete)
+        if (anim.AnimationState.GetCurrent(0).IsComplete)
         {
-            uiCanvas.SetActive(true);
-            isStart = true;
+            startButton.SetActive(true);
         }
     }
 
     public void OnStartButtonClick()
     {
+        startButton.SetActive(false);
         AnimationCall();
-        uiCanvas.SetActive(false);
+        isEndFirstAnim = true;
     }
 
     private void SecondStartAnimation()
     {
         gameObject.GetComponent<MeshRenderer>().enabled = true;
-        AnimationCall();
         isStart = false;
     }
 

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7795595013376242507}
   - component: {fileID: 6227396198925688279}
   - component: {fileID: 6379417030053601036}
-  - component: {fileID: 651234105359350500}
   m_Layer: 0
   m_Name: Tree01
   m_TagString: Untagged
@@ -119,28 +118,6 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: animation
-  loop: 1
+  _animationName: 
+  loop: 0
   timeScale: 1
---- !u!114 &651234105359350500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8650426041467801618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f21c9538588898a45a3da22bf4779ab3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rootMotionBoneName: root
-  transformPositionX: 1
-  transformPositionY: 1
-  rootMotionScaleX: 1
-  rootMotionScaleY: 1
-  rootMotionTranslateXPerY: 0
-  rootMotionTranslateYPerX: 0
-  rigidBody2D: {fileID: 0}
-  rigidBody: {fileID: 0}
-  animationTrackFlags: -1
