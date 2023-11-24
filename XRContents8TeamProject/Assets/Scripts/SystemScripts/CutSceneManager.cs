@@ -238,6 +238,5 @@ public class CutSceneManager : MonoBehaviour
         gameObject.GetComponent<MeshRenderer>().enabled = false;
 
         SceneManager.LoadScene("TestScene2");
-        //SceneManager.LoadScene("CutSceneNextTestScene");
     }
 }
