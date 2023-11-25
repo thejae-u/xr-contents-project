@@ -20,7 +20,6 @@ public class CutSceneManager : MonoBehaviour
     public GameObject skipButton;
     
     public GameObject nextButton;
-    public GameObject prevButton;
 
     private GameObject globalLight = null;
     private GameObject spotLight = null;
@@ -164,7 +163,6 @@ public class CutSceneManager : MonoBehaviour
         if (isStart)
         {
             skipButton.SetActive(false);
-            prevButton.SetActive(false);
             nextButton.SetActive(false);
             return;
         }
@@ -174,27 +172,22 @@ public class CutSceneManager : MonoBehaviour
             case "Start1":
             case "Start2":
                 skipButton.SetActive(false);
-                prevButton.SetActive(false);
                 nextButton.SetActive(false);
                 return;
             case "Book_Open_1" when anim.AnimationState.GetCurrent(0).IsComplete:
                 skipButton.SetActive(true);
-                prevButton.SetActive(false);
                 nextButton.SetActive(true);
                 return;
             case "Book_Open_1":
-                prevButton.SetActive(false);
                 return;
             case "Page10" when anim.AnimationState.GetCurrent(0).IsComplete:
                 skipButton.SetActive(false);
-                prevButton.SetActive(true);
                 nextButton.SetActive(false);
                 return;
             case "Page10":
                 nextButton.SetActive(false);
                 return;
             default:
-                prevButton.SetActive(true);
                 nextButton.SetActive(true);
                 return;
         }
