@@ -4955,6 +4955,7 @@ GameObject:
   - component: {fileID: 7815562040697187743}
   - component: {fileID: 6380908956425379648}
   - component: {fileID: 3772980928251979179}
+  - component: {fileID: 7047745172453167595}
   m_Layer: 0
   m_Name: E_Reaf_1Stage
   m_TagString: Untagged
@@ -9834,6 +9835,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &7047745172453167595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969787185377906453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a467c291dda0e428d4a1e01dbb1b51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3161024767541754820
 GameObject:
   m_ObjectHideFlags: 0

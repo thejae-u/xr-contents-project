@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7874172286231631070}
   - component: {fileID: 4703445127022792919}
   - component: {fileID: 598158911299619503}
-  - component: {fileID: 468147699954435452}
+  - component: {fileID: 1768091770063654582}
   m_Layer: 0
   m_Name: E_Hit_000
   m_TagString: Untagged
@@ -4830,7 +4830,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &468147699954435452
+--- !u!114 &1768091770063654582
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

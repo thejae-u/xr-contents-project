@@ -179,7 +179,6 @@ public class EnemyAnimationController : MonoBehaviour
                 if (anim.AnimationState.GetCurrent(0).IsComplete)
                 {
                     anim.timeScale = 1.0f;
-                    instNormal.Data().GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Idle;
                 }
 
                 break;
