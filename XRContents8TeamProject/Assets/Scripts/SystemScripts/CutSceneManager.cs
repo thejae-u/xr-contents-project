@@ -15,6 +15,10 @@ public class CutSceneManager : MonoBehaviour
     public float speed;
 
     public GameObject startButton;
+    public GameObject settingButton;
+    public GameObject exitButton;
+    public GameObject skipButton;
+    
     public GameObject nextButton;
     public GameObject prevButton;
 
@@ -161,6 +165,7 @@ public class CutSceneManager : MonoBehaviour
     {
         if (isStart)
         {
+            skipButton.SetActive(false);
             prevButton.SetActive(false);
             nextButton.SetActive(false);
             return;
@@ -172,12 +177,14 @@ public class CutSceneManager : MonoBehaviour
             case "Start2":
                 return;
             case "Book_Open_1" when anim.AnimationState.GetCurrent(0).IsComplete:
+                skipButton.SetActive(true);
                 prevButton.SetActive(false);
                 nextButton.SetActive(true);
                 return;
             case "Book_Open_1":
                 return;
             case "Page10" when anim.AnimationState.GetCurrent(0).IsComplete:
+                skipButton.SetActive(false);
                 prevButton.SetActive(true);
                 nextButton.SetActive(false);
                 return;
@@ -212,15 +219,45 @@ public class CutSceneManager : MonoBehaviour
     {
         if (anim.AnimationState.GetCurrent(0).IsComplete)
         {
-            startButton.SetActive(true);
+            ShowMenuButtons();
         }
     }
 
     public void OnStartButtonClick()
     {
-        startButton.SetActive(false);
+        OffMenuButtons();
         AnimationCall();
         isEndFirstAnim = true;
+    }
+
+    public void OnExitButtonClick()
+    {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
+    }
+
+    public void OnSkipButtonClick()
+    {
+        curState = 7;
+        AnimationCall();
+        skipButton.SetActive(false);
+    }
+
+    private void ShowMenuButtons()
+    {
+        startButton.SetActive(true);
+        settingButton.SetActive(true);
+        exitButton.SetActive(true);
+    }
+
+    private void OffMenuButtons()
+    {
+        startButton.SetActive(false);
+        settingButton.SetActive(false);
+        exitButton.SetActive(false);
     }
 
     private void SecondStartAnimation()
