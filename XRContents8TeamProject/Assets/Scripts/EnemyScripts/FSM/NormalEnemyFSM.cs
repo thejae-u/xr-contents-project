@@ -153,7 +153,7 @@ public class NormalAttackNode : INode
             GameManager.Inst.HitPlayer();
         }
 
-        sequence.SetDelay(1.5f).OnComplete(() => { isNowAttack.Value = false; }).SetId(this);
+        sequence.SetDelay(1.0f).OnComplete(() => { isNowAttack.Value = false; }).SetId(this);
 
 
         return Fsm.GuardNullNode(this, this);

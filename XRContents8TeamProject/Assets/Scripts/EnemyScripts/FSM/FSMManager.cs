@@ -218,7 +218,7 @@ public abstract class TraceNode : INode
                 if (!isOverRush.Value)
                 {
                     var camPos = Camera.main.WorldToViewportPoint(myTransform.position);
-                    if (camPos.x < 1.0f && camPos.x > 0.1f)
+                    if (camPos.x < 0.9f && camPos.x > 0.1f)
                         return ETraceState.PlayerEnterRush;
                     return ETraceState.PlayerTrace;
                 }
@@ -227,7 +227,7 @@ public abstract class TraceNode : INode
 
         // Rush Attack in Cooldown
         // Check Attack Range for Rush Monster
-        return playerRange + myAttackRange >= distance ? ETraceState.PlayerEnter : ETraceState.PlayerTrace;
+        return ETraceState.PlayerTrace;
     }
 
     public abstract INode Execute(Blackboard blackboard);

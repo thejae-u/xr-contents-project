@@ -37,7 +37,7 @@ public class EliteTraceNode : TraceNode
             float rayDistance = 1.5f;
             Vector2 dir = (playerPos - myPos).normalized;
 
-            rayCastPos.y -= 0.55f;
+            rayCastPos.y -= 0.6f;
             int layerMask = LayerMask.GetMask("Background");
 
             RaycastHit2D hit = Physics2D.Raycast(rayCastPos, Vector2.right * dir.x, rayDistance, layerMask);
