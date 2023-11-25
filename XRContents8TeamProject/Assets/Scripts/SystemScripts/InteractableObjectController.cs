@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Spine.Unity;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class InteractableObjectController : MonoBehaviour
@@ -58,6 +59,23 @@ public class InteractableObjectController : MonoBehaviour
 
             if (timer.IsAttacked)
             {
+                var newPos = new Vector3(transform.position.x, transform.position.y, 0);
+                switch (SceneManager.GetActiveScene().name)
+                {
+                    case "Stage1":
+                        EffectController.Inst.PlayEffect(newPos, "Reaf1");
+                        break;
+                    case "Stage2":
+                        EffectController.Inst.PlayEffect(newPos, "Reaf2");
+                        break;
+                    case "Stage3":
+                        newPos.y -= 2f;
+                        EffectController.Inst.PlayEffect(newPos, "Reaf3");
+                        break;
+                    default:
+                        throw new ArgumentException();
+                    
+                }
                 gameObject.GetComponent<SkeletonAnimation>().AnimationState.SetAnimation(0, "animation", false);
                 if (GameManager.Inst.IsNight)
                 {
