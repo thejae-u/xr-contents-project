@@ -31,8 +31,6 @@ public class CutSceneManager : MonoBehaviour
     private bool isEndFirstAnim;
     private bool isEndFirstAnim2;
 
-    private bool isPrevActive;
-
     private SkeletonAnimation anim;
 
     private readonly string[] names =
@@ -72,24 +70,30 @@ public class CutSceneManager : MonoBehaviour
         
         anim = gameObject.GetComponent<SkeletonAnimation>();
 
-        for (int i = 0; i < names.Length - 1; i++)
-        {
-            if (i < 2)
-                continue;
-            anim.AnimationState.Data.SetMix(names[i], names[i + 1], 0);
-        }
+        DeleteMixAnimation();
         
         DontDestroyOnLoad(gameObject);
     }
 
+    private void DeleteMixAnimation()
+    {
+        for (int i = 0; i < names.Length - 1; i++)
+        {
+            for (int j = 0; j < names.Length - 1; j++)
+            {
+                if (j == i) continue;
+                anim.AnimationState.Data.SetMix(names[i], names[j], 0);
+            }
+        }
+    }
+
     private void Start()
     {
-        curState = 0;
+        curState = -1;
         isInitialized = false;
         isEndFirstAnim = false;
         isEndFirstAnim2 = false;
         isStart = false;
-        isPrevActive = false;
 
         ShowMenu();
     }
@@ -126,22 +130,17 @@ public class CutSceneManager : MonoBehaviour
     {
         if (anim.AnimationState.GetCurrent(0).IsComplete)
         {
-            if (anim.AnimationName == "Page6")
+            switch (anim.AnimationName)
             {
-                isStart = true;
-                return;
+                case "Page6":
+                    isStart = true;
+                    return;
+                case "Page10":
+                    return;
+                default:
+                    AnimationCall();
+                    break;
             }
-            
-            if (anim.AnimationName == "Page10")
-                return;
-
-            if (isPrevActive)
-            {
-                curState += 1;
-                isPrevActive = false;
-            }
-
-            anim.AnimationState.SetAnimation(0, names[curState++], false);
         }
     }
 
@@ -149,16 +148,15 @@ public class CutSceneManager : MonoBehaviour
     {
         if (anim.AnimationState.GetCurrent(0).IsComplete)
         {
-            curState -= 2;
+            curState -= 1;
             anim.AnimationState.SetAnimation(0, names[curState], false);
-            isPrevActive = true;
         }
     }
 
     private void AnimationCall()
     {
-        anim.AnimationState.SetAnimation(0, names[curState], false);
         curState += 1;
+        anim.AnimationState.SetAnimation(0, names[curState], false);
     }
 
     private void ShowPageButton()
@@ -241,7 +239,7 @@ public class CutSceneManager : MonoBehaviour
 
     public void OnSkipButtonClick()
     {
-        curState = 7;
+        curState = 6;
         AnimationCall();
         skipButton.SetActive(false);
     }
