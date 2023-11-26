@@ -30,11 +30,12 @@ public class GameoverUIScript : MonoBehaviour
 
     public void OnRestartButtonClick()
     {
-        SceneManager.LoadScene("Scenes/DevelopScenes/TestScene2");
+        SceneManager.LoadScene("Stage1");
     }
 
     public void OnMenuButtonClick()
     {
-        SceneManager.LoadScene("Scenes/MainGameScenes/MenuScene");
+        CutSceneCounter.Inst.SettingGameOver();
+        SceneManager.LoadScene("MenuAndCutScene");
     }
 }

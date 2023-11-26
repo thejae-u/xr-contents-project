@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Spine.Unity;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CutSceneManager : MonoBehaviour
 {
@@ -21,14 +23,12 @@ public class CutSceneManager : MonoBehaviour
     
     public GameObject nextButton;
 
-    private GameObject globalLight = null;
-    private GameObject spotLight = null;
+    public Image blackImage;
 
-    private bool isInitialized;
+    public GameObject globalLight;
+    public GameObject spotLight;
     
-    private int curState;
-    private bool isEndFirstAnim;
-    private bool isEndFirstAnim2;
+    private CutSceneCounter Inst = CutSceneCounter.Inst;
 
     private SkeletonAnimation anim;
 
@@ -48,32 +48,6 @@ public class CutSceneManager : MonoBehaviour
         "Page10"
     };
 
-    private static CutSceneManager inst;
-
-    private bool isStart;
-
-    public static CutSceneManager Inst
-    {
-        get
-        {
-            return inst;
-        }
-    }
-
-    private void Awake()
-    {
-        if (inst == null)
-            inst = this;
-        else
-            Destroy(gameObject);
-        
-        anim = gameObject.GetComponent<SkeletonAnimation>();
-
-        DeleteMixAnimation();
-        
-        DontDestroyOnLoad(gameObject);
-    }
-
     private void DeleteMixAnimation()
     {
         for (int i = 0; i < names.Length - 1; i++)
@@ -86,55 +60,68 @@ public class CutSceneManager : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        anim = gameObject.GetComponent<SkeletonAnimation>();
+        AnimationCall();
+    }
+
     private void Start()
     {
-        curState = -1;
-        isInitialized = false;
-        isEndFirstAnim = false;
-        isEndFirstAnim2 = false;
-        isStart = false;
-
-        ShowMenu();
+        DeleteMixAnimation();
     }
+
+    private void DEBUGS()
+    {
+        LogPrintSystem.SystemLogPrint(transform, $"isCurState : {Inst.CurState}", ELogType.EnemyAI);
+        LogPrintSystem.SystemLogPrint(transform, $"isEndFirstAnim : {Inst.IsEndFirstAnim}", ELogType.EnemyAI);
+        LogPrintSystem.SystemLogPrint(transform, $"isEndSecondAnim : {Inst.IsEndSecondAnim}", ELogType.EnemyAI);
+        LogPrintSystem.SystemLogPrint(transform, $"isStart : {Inst.IsStart}", ELogType.EnemyAI);
+        LogPrintSystem.SystemLogPrint(transform, $"isFade : {Inst.IsFade}", ELogType.EnemyAI);
+    }
+
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name != "MenuAndCutScene") return;
-
-        if (!isEndFirstAnim)
+        DEBUGS();
+        if (!Inst.IsEndFirstAnim)
         {
             CheckShowMenu();
             return;
         }
 
+        if (!Inst.IsEndSecondAnim)
+        {
+            SetStartAnimation();
+            return;
+        }
+        
         ShowPageButton();
         
-        if(!isEndFirstAnim2)
-            AnimationUpdate();
         
-        if(isStart)
+        if(Inst.IsStart)
             GameStart();
-    }
-
-    private void InitObject()
-    {
-        if (SceneManager.GetActiveScene().name != "MenuAndCutScene") return;
-        
-        globalLight = GameObject.Find("Global");
-        spotLight = GameObject.Find("Spot");
-        isInitialized = true;
     }
 
     public void OnNextButtonClick()
     {
+        nextButton.SetActive(false);
+        
         if (anim.AnimationState.GetCurrent(0).IsComplete)
         {
             switch (anim.AnimationName)
             {
                 case "Page6":
-                    isStart = true;
+                    Inst.IsStart = true;
                     return;
                 case "Page10":
+                    Sequence sequence = DOTween.Sequence();
+                    sequence.Append(blackImage.DOFade(1.0f, speed / 4.0f)).OnComplete(() =>
+                    {
+                        CutSceneCounter.Inst.CurState = -1;
+                        AnimationCall();
+                    });
+                    
                     return;
                 default:
                     AnimationCall();
@@ -143,24 +130,24 @@ public class CutSceneManager : MonoBehaviour
         }
     }
 
-    public void OnPrevButtonClick()
+    private void AnimationCall()
+    {
+        CutSceneCounter.Inst.CurState += 1;
+        anim.AnimationState.SetAnimation(0, names[CutSceneCounter.Inst.CurState], false);
+    }
+
+    private void SetStartAnimation()
     {
         if (anim.AnimationState.GetCurrent(0).IsComplete)
         {
-            curState -= 1;
-            anim.AnimationState.SetAnimation(0, names[curState], false);
+            AnimationCall();
+            Inst.IsEndSecondAnim = true;
         }
-    }
-
-    private void AnimationCall()
-    {
-        curState += 1;
-        anim.AnimationState.SetAnimation(0, names[curState], false);
     }
 
     private void ShowPageButton()
     {
-        if (isStart)
+        if (Inst.IsStart)
         {
             skipButton.SetActive(false);
             nextButton.SetActive(false);
@@ -179,34 +166,10 @@ public class CutSceneManager : MonoBehaviour
                 return;
             case "Book_Open_1":
                 return;
-            case "Page10" when anim.AnimationState.GetCurrent(0).IsComplete:
-                nextButton.SetActive(false);
-                return;
-            case "Page10":
-                nextButton.SetActive(false);
-                return;
             default:
                 nextButton.SetActive(anim.AnimationState.GetCurrent(0).IsComplete);
                 return;
         }
-    }
-
-    private void AnimationUpdate()
-    {
-        if (anim.AnimationName == "Start2")
-        {
-            if (anim.AnimationState.GetCurrent(0).IsComplete)
-            {
-                AnimationCall();
-                isEndFirstAnim2 = true;
-            }
-        }
-    }
-
-    private void ShowMenu()
-    {
-        InitObject();
-        AnimationCall();
     }
 
     private void CheckShowMenu()
@@ -221,7 +184,7 @@ public class CutSceneManager : MonoBehaviour
     {
         OffMenuButtons();
         AnimationCall();
-        isEndFirstAnim = true;
+        Inst.IsEndFirstAnim = true;
     }
 
     public void OnExitButtonClick()
@@ -235,7 +198,7 @@ public class CutSceneManager : MonoBehaviour
 
     public void OnSkipButtonClick()
     {
-        curState = 6;
+        CutSceneCounter.Inst.CurState = 6;
         AnimationCall();
         skipButton.SetActive(false);
     }
@@ -253,15 +216,18 @@ public class CutSceneManager : MonoBehaviour
         settingButton.SetActive(false);
         exitButton.SetActive(false);
     }
-
-    private void SecondStartAnimation()
-    {
-        gameObject.GetComponent<MeshRenderer>().enabled = true;
-        isStart = false;
-    }
-
+    
     private void GameStart()
     {
+        if (!Inst.IsFade)
+        {
+            Sequence sequence = DOTween.Sequence();
+            sequence.Append(blackImage.DOFade(1.0f, speed / 4.0f));
+            
+            sequence.Play();
+            Inst.IsFade = true;
+        }
+        
         if (Camera.main.orthographicSize > range)
         {
             Camera.main.orthographicSize -= Time.deltaTime * speed;
@@ -270,7 +236,6 @@ public class CutSceneManager : MonoBehaviour
 
         spotLight.GetComponent<Light2D>().intensity = 0;
         globalLight.GetComponent<Light2D>().intensity = 0;
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
 
         SceneManager.LoadScene("Stage1");
     }

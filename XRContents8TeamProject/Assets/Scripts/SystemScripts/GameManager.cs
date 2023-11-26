@@ -70,6 +70,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (!CheckPlayerLife())
+        {
+            // plyaer Animation IsComplete -> Change Scene to GameOverScene
+            return;
+        }
         enemyCount = 0;
         everyMonsterCount = 0;
         
@@ -164,6 +169,7 @@ public class GameManager : MonoBehaviour
         else if (SceneManager.GetActiveScene().name == "Stage3" && !isFade)
         {
             isFade = true;
+            CutSceneCounter.Inst.SettingEndingScene();
             FadeOut("MenuAndCutScene");
         }
     }
