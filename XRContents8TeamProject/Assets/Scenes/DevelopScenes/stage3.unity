@@ -29151,10 +29151,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 1838014062153210882, guid: 2422a60c5d473bf489cda69cac140780, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1978862523572226025, guid: 2422a60c5d473bf489cda69cac140780, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -29306,10 +29302,6 @@ PrefabInstance:
     - target: {fileID: 3813005041080595330, guid: 2422a60c5d473bf489cda69cac140780, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3818984618452377703, guid: 2422a60c5d473bf489cda69cac140780, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3821628091885987959, guid: 2422a60c5d473bf489cda69cac140780, type: 3}
       propertyPath: m_Mesh
