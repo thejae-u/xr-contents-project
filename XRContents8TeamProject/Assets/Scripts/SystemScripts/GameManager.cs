@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
         isCoroutineOn = false;
         fadeTime = 1.0f;
         isFade = false;
+        blackImage.color = Color.black;
+        FadeIn();
     }
 
     private void Update()
@@ -77,7 +79,6 @@ public class GameManager : MonoBehaviour
         if (stages.Count > 0)
         {
             CheckRemainEnemy();
-            
         }
 
         if (everyMonsterCount == 0)
@@ -86,6 +87,11 @@ public class GameManager : MonoBehaviour
         }
         
         Exit();
+    }
+
+    private bool CheckPlayerLife()
+    {
+        return PlayerManager.Instance.GetPlayerHp() > 0;
     }
 
     private void CountRemainEnemy()
@@ -124,42 +130,41 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void FadeOut(string nextScene)
+    {
+        isFade = true;
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(blackImage.DOFade(1.0f, fadeTime));
+
+        sequence.OnComplete(() =>
+        {
+            SceneManager.LoadScene(nextScene);
+            isFade = false;
+        });
+    }
+
+    public void FadeIn()
+    {
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(blackImage.DOFade(0.0f, fadeTime));
+    }
+
     private void ChangeScene()
     {
         if (SceneManager.GetActiveScene().name == "Stage1" && !isFade)
         {
             isFade = true;
-            Sequence sequence = DOTween.Sequence();
-            sequence.Append(blackImage.DOFade(1.0f, fadeTime));
-
-            sequence.OnComplete(() => 
-            {
-                SceneManager.LoadScene("Stage2");
-                isFade = false;
-            });
+            FadeOut("Stage2");
         }
         else if (SceneManager.GetActiveScene().name == "Stage2" && !isFade)
         {
             isFade = true;
-            Sequence sequence = DOTween.Sequence();
-            sequence.Append(blackImage.DOFade(1.0f, fadeTime));
-
-            sequence.OnComplete(() =>
-            {
-                SceneManager.LoadScene("Stage3");
-                isFade = false;
-            });
+            FadeOut("Stage3");
         }
         else if (SceneManager.GetActiveScene().name == "Stage3" && !isFade)
         {
             isFade = true;
-            Sequence sequence = DOTween.Sequence();
-            sequence.Append(blackImage.DOFade(1.0f, fadeTime));
-
-            sequence.OnComplete(() =>
-            {
-                SceneManager.LoadScene("CutScene");
-            });
+            FadeOut("MenuAndCutScene");
         }
     }
     

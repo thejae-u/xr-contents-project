@@ -76,17 +76,21 @@ public class InteractableObjectController : MonoBehaviour
                         throw new ArgumentException();
                     
                 }
+                
                 gameObject.GetComponent<SkeletonAnimation>().AnimationState.SetAnimation(0, "animation", false);
+                newPos = myPos;
+                newPos.y = myPos.y + 3.0f;
+                
                 if (GameManager.Inst.IsNight)
                 {
-                    Instantiate(isInteractable ? item[2].gameObject : item[3].gameObject, transform.position,
+                    Instantiate(isInteractable ? item[2].gameObject : item[3].gameObject, newPos,
                         Quaternion.identity);
                     transform.GetComponent<InteractableObjectController>().enabled = false;
 
                 }
                 else
                 {
-                    Instantiate(isInteractable ? item[0].gameObject : item[1].gameObject, transform.position,
+                    Instantiate(isInteractable ? item[0].gameObject : item[1].gameObject, newPos,
                         Quaternion.identity);
                     transform.GetComponent<InteractableObjectController>().enabled = false;
                 }
