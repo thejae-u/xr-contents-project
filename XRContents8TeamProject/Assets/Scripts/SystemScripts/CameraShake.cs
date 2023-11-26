@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
-    [Header("카메라 흔들리는 강도 설정")]
-    [SerializeField] public float cameraShakeAmount;
-
+    float cameraShakeAmount;
     float shakeTime; // 카메라가 흔들리는 시간
     bool shakeEnabled;
     Vector3 cameraPosition;
@@ -29,9 +27,11 @@ public class CameraShake : MonoBehaviour
         }
     }
 
-    public void CameraShakeForTime(float time)
+    public void CameraShakeForTime(float time, float Amount)
     {
         shakeTime = time;
+        cameraShakeAmount = Amount;
+
         cameraPosition = transform.position;
         shakeEnabled = true;
     }

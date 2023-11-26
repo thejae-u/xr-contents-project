@@ -27,6 +27,10 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private float reloadingDelay = 0.3f;
     [SerializeField] private float forwardDelay = 0.3f;
 
+    [Header("사격 시 카메라 강도")]
+    [SerializeField] private float hit = 0.5f;
+    [SerializeField] private float hitStrong = 2.0f;
+
     [Header("플레이어 사격 애니메이션")]
     public SkeletonAnimation skeletonAnimation;
     public AnimationReferenceAsset Backforward;
@@ -141,11 +145,15 @@ public class PlayerShot : MonoBehaviour
             {
                 EffectController.Inst.PlayEffect(Camera.main.ScreenToWorldPoint(mousePosition), "HitStrong");
                 curDamage = PlayerManager.Instance.playerMaxAtk;
+
+                cameraShake.CameraShakeForTime(0.05f, hitStrong);
             }
             else
             {
                 EffectController.Inst.PlayEffect(Camera.main.ScreenToWorldPoint(mousePosition), "Hit");
                 curDamage = PlayerManager.Instance.playerNormalAtk;
+
+                cameraShake.CameraShakeForTime(0.05f, hit);
             }
 
             aimUIController.isPlayerCheckMaxGauge = false;
@@ -153,9 +161,6 @@ public class PlayerShot : MonoBehaviour
 
             lastFireTime = Time.time;
             curAmmo--;
-
-            /*Camera Shake*/
-            cameraShake.CameraShakeForTime(0.05f);
 
             /* UI */
             isDiscountBullet = true;
