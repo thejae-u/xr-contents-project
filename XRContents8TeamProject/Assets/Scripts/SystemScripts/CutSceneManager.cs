@@ -166,29 +166,27 @@ public class CutSceneManager : MonoBehaviour
             nextButton.SetActive(false);
             return;
         }
-        
+
         switch (anim.AnimationName)
         {
             case "Start1":
             case "Start2":
-                skipButton.SetActive(false);
                 nextButton.SetActive(false);
                 return;
             case "Book_Open_1" when anim.AnimationState.GetCurrent(0).IsComplete:
-                skipButton.SetActive(true);
                 nextButton.SetActive(true);
+                skipButton.SetActive(true);
                 return;
             case "Book_Open_1":
                 return;
             case "Page10" when anim.AnimationState.GetCurrent(0).IsComplete:
-                skipButton.SetActive(false);
                 nextButton.SetActive(false);
                 return;
             case "Page10":
                 nextButton.SetActive(false);
                 return;
             default:
-                nextButton.SetActive(true);
+                nextButton.SetActive(anim.AnimationState.GetCurrent(0).IsComplete);
                 return;
         }
     }
