@@ -23,7 +23,10 @@ public class PlayScript : MonoBehaviour
     {
         if (mySound.soundName == "PlayerFoot")
         {
-            source.mute = !PlayerManager.Instance.GetIsMoving();
+            if (!PlayerManager.Instance.GetIsMoving())
+            {
+                SoundManager.Inst.DeleteSound(gameObject);
+            }
         }
         
         if (isPlaying)

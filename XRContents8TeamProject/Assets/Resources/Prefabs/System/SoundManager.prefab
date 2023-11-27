@@ -71,23 +71,8 @@ MonoBehaviour:
     playType: 1
     soundType: 0
   - soundVolume: 0
-    soundName: GunShot1
-    soundData: {fileID: 8300000, guid: fd222eb1eda1acf4cbaa1e3e01bdae2f, type: 3}
-    playType: 0
-    soundType: 1
-  - soundVolume: 0
-    soundName: GunShot2
-    soundData: {fileID: 8300000, guid: fd222eb1eda1acf4cbaa1e3e01bdae2f, type: 3}
-    playType: 0
-    soundType: 1
-  - soundVolume: 0
-    soundName: GunShot3
-    soundData: {fileID: 8300000, guid: fd222eb1eda1acf4cbaa1e3e01bdae2f, type: 3}
-    playType: 0
-    soundType: 1
-  - soundVolume: 0
-    soundName: GunShot4
-    soundData: {fileID: 8300000, guid: fd222eb1eda1acf4cbaa1e3e01bdae2f, type: 3}
+    soundName: GunShot
+    soundData: {fileID: 8300000, guid: 9b52177d66ede8f4582c0365d312fd3d, type: 3}
     playType: 0
     soundType: 1
   - soundVolume: 0
