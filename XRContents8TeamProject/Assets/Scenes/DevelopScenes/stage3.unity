@@ -2023,11 +2023,6 @@ Transform:
   - {fileID: 752781711}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &624196369 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5637325000823173993, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
-  m_PrefabInstance: {fileID: 3295540160419746691}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &625146754
 GameObject:
   m_ObjectHideFlags: 0
@@ -18094,18 +18089,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EffectManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8425012863967238447, guid: a052aaf555625c2478c2ff23c212a042, type: 3}
-      propertyPath: effects.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8425012863967238447, guid: a052aaf555625c2478c2ff23c212a042, type: 3}
-      propertyPath: effects.Array.data[5].effectObj
-      value: 
-      objectReference: {fileID: 1472122938329839181, guid: e7dfadb183c6bbf458eff02dd69fbc93, type: 3}
-    - target: {fileID: 8425012863967238447, guid: a052aaf555625c2478c2ff23c212a042, type: 3}
-      propertyPath: effects.Array.data[5].effectName
-      value: StrongHit
-      objectReference: {fileID: 0}
     - target: {fileID: 8779574285721952716, guid: a052aaf555625c2478c2ff23c212a042, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -19041,6 +19024,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 320470865691114914, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 337714973503702750, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -19145,6 +19132,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1611680822195637645, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1621971706640801678, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -19238,6 +19229,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2449280800201432519, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463422138024445289, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
@@ -19409,6 +19404,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3884178152114864463, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3891628281047803140, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -19485,6 +19484,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4732630304313482983, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4736204760762931386, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -19557,6 +19560,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5652677845173446716, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5685886401855462942, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -19588,7 +19595,7 @@ PrefabInstance:
     - target: {fileID: 5834874643087858499, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
       propertyPath: timers.Array.data[0]
       value: 
-      objectReference: {fileID: 624196369}
+      objectReference: {fileID: 0}
     - target: {fileID: 5932816157223985841, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -19726,6 +19733,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7657634778267630206, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7786612112073880029, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
