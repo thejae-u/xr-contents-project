@@ -41032,6 +41032,34 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1509111131040111676, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
+      propertyPath: Shot
+      value: 
+      objectReference: {fileID: 11400000, guid: 226f1392ab4d2d44e8f2e2be04f22d60, type: 2}
+    - target: {fileID: 1509111131040111676, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
+      propertyPath: Forward
+      value: 
+      objectReference: {fileID: 11400000, guid: c65a0b9a89146f24b8345b7aa5d66c0c, type: 2}
+    - target: {fileID: 1509111131040111676, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
+      propertyPath: Reloading
+      value: 
+      objectReference: {fileID: 11400000, guid: fa0aa8822b48cf74d8581b4bd53e9409, type: 2}
+    - target: {fileID: 1509111131040111676, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
+      propertyPath: BoltAction
+      value: 
+      objectReference: {fileID: 11400000, guid: 60f28818a4dcabb42a24e19557f61bfd, type: 2}
+    - target: {fileID: 1509111131040111676, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
+      propertyPath: Backforward
+      value: 
+      objectReference: {fileID: 11400000, guid: 0c908c99102acf54f8bd265b30275676, type: 2}
+    - target: {fileID: 2235417434817830496, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b71ca3cb171bcf54a91640db481076e0, type: 2}
+    - target: {fileID: 4396589911709702799, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
+      propertyPath: skeletonDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cc32640fddf1eb14b9006f78b67b4c28, type: 2}
     - target: {fileID: 5471157827199835308, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.71
@@ -41073,13 +41101,45 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8932413184410073700, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
+      propertyPath: Aim
+      value: 
+      objectReference: {fileID: 11400000, guid: 415322cf01b3124459f2bb371ca2025a, type: 2}
+    - target: {fileID: 8932413184410073700, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
+      propertyPath: Hit
+      value: 
+      objectReference: {fileID: 11400000, guid: 9defaf605692ab449b3ca8aaa0e354ab, type: 2}
+    - target: {fileID: 8932413184410073700, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 2103213836}
     - target: {fileID: 8932413184410073700, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
+      propertyPath: Dead
+      value: 
+      objectReference: {fileID: 11400000, guid: 6b015de2ce438f14fb50afe6e98da536, type: 2}
+    - target: {fileID: 8932413184410073700, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
+      propertyPath: Idle
+      value: 
+      objectReference: {fileID: 11400000, guid: aaa0c1e25ef8b0942a8b603f95edb29d, type: 2}
+    - target: {fileID: 8932413184410073700, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
+      propertyPath: Jump
+      value: 
+      objectReference: {fileID: 11400000, guid: 1f622348cc8cd7745936f358eaf9fab8, type: 2}
+    - target: {fileID: 8932413184410073700, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
+      propertyPath: Move
+      value: 
+      objectReference: {fileID: 11400000, guid: 3826f1dc3f1a775459340dde20fe3d21, type: 2}
+    - target: {fileID: 8932413184410073700, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
+      propertyPath: Dodge
+      value: 
+      objectReference: {fileID: 11400000, guid: e1c70daded2eb8d46b75c2c7fca0832c, type: 2}
+    - target: {fileID: 8932413184410073700, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
       propertyPath: tutorialtImg
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8932413184410073700, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
+      propertyPath: BackwardDodge
+      value: 
+      objectReference: {fileID: 11400000, guid: 20ece24bb64f5eb4682272b74aa210b4, type: 2}
     - target: {fileID: 9151665924250788127, guid: 80ae287ba797d524e8f8fd31f4b1194e, type: 3}
       propertyPath: m_Name
       value: Player

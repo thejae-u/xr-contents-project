@@ -4,6 +4,7 @@ using DG.Tweening;
 using Spine;
 using Spine.Unity;
 using UnityEngine.UI;
+using System.Security.Cryptography;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class PlayerManager : MonoBehaviour
     [Header("플레이어 피격 시 넉백 거리")]
     [SerializeField] private float playerKnockbackDistance = 3.0f;
 
+    private bool isMoving = false;
     private bool isJumping = false;
     private bool canJump = true;
     private bool isKnockback = false;
@@ -135,6 +137,7 @@ public class PlayerManager : MonoBehaviour
             float moveDir = Input.GetAxis("Horizontal");
             if (moveDir == 0)
             {
+                isMoving = false;
                 if (isJumping) return;
                 if(isDodge) return;
                 if(isHit) return;
@@ -195,6 +198,10 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public bool GetIsMoving()
+    {
+        return isMoving;
+    }
     public float GetPlayerHp()
     {
         return playerHp;
@@ -215,8 +222,9 @@ public class PlayerManager : MonoBehaviour
     #region MOVEMENT
     void PlayerMove(float moveDir)
     {
+        isMoving = true;
         CurrentAnimation(0, Move, true);
-
+        SoundManager.Inst.Play("PlayerFoot");
         Vector2 playerMove = new Vector2(moveDir * playerMoveSpeed, playerRigidbody.velocity.y);
         playerRigidbody.velocity = playerMove;
     }
@@ -256,6 +264,22 @@ public class PlayerManager : MonoBehaviour
         if (!isInvincibility)
         {
             playerHp -= damage;
+
+            // 사운드 재생
+            int randNum = 0;
+            randNum = Random.Range(0, 2);
+            switch(randNum)
+            {
+                case 0:
+                    SoundManager.Inst.Play("PlayerHit1");
+                    break;
+                case 1:
+                    SoundManager.Inst.Play("PlayerHit2");
+                    break;
+                case 2:
+                    SoundManager.Inst.Play("PlayerHit3");
+                    break;
+            }
 
             playerHpUI.GetComponent<hpUIController>().SetDiscountHp(damage);
 
@@ -392,7 +416,7 @@ public class PlayerManager : MonoBehaviour
         skeletonAnimation.ClearState();
         CurrentAnimation(0, Dead, false);
 
-        SoundManager.Inst.Play("PlayerDead", transform.gameObject);
+        SoundManager.Inst.Play("PlayerDead");
 
         Sequence sequence = DOTween.Sequence();
         sequence.SetDelay(2.5f).OnComplete(() =>
