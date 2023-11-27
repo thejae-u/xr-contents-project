@@ -111,9 +111,6 @@ public class NormalAttackNode : INode
 
         var anim = blackboard.GetData<Transform>("myTransform").GetComponent<SkeletonAnimation>();
 
-        if (isNowAttack.Value)
-            return Fsm.GuardNullNode(this, this);
-
         // Attack On
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
@@ -155,7 +152,6 @@ public class NormalAttackNode : INode
 
         sequence.SetDelay(1.0f).OnComplete(() => { isNowAttack.Value = false; }).SetId(this);
 
-
-        return Fsm.GuardNullNode(this, this);
+        return Fsm.GuardNullNode(this, outOfAttackRange);
     }
 }

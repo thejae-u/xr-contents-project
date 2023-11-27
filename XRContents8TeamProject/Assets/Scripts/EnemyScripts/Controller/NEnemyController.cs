@@ -116,7 +116,7 @@ namespace EnemyScripts
             
             jump.endJump = trace;
             
-            attack.outOfAttackRange = trace;
+            attack.outOfAttackRange = wait;
 
             fsmLife = new Fsm();
             var alive = new AliveNode();

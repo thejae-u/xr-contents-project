@@ -121,6 +121,7 @@ public class WaitNode : INode
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
         var isGround = blackboard.GetData<ReferenceValueT<bool>>("isGround");
         var myNode = blackboard.GetData<ReferenceValueT<ENode>>("myNode");
+        var isNowAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
 
         myNode.Value = ENode.Idle;
         
@@ -131,6 +132,9 @@ public class WaitNode : INode
 
         float distance = (myTransform.position - playerTransform.position).magnitude;
 
+        if (isNowAttack.Value)
+            return Fsm.GuardNullNode(this, this);
+        
         return Fsm.GuardNullNode(this, d1 + d2 >= distance ? enterPlayer : this);
     }
 }
