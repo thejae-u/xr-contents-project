@@ -162,24 +162,8 @@ public class PlayerShot : MonoBehaviour
             lastFireTime = Time.time;
             curAmmo--;
 
-            // 사운드 재생
-            int randNum = 0;
-            randNum = Random.Range(0, 3);
-            switch (randNum)
-            {
-                case 0:
-                    SoundManager.Inst.Play("GunShot1", transform.gameObject);
-                    break;
-                case 1:
-                    SoundManager.Inst.Play("GunShot2", transform.gameObject);
-                    break;
-                case 2:
-                    SoundManager.Inst.Play("GunShot3", transform.gameObject);
-                    break;
-                case 3:
-                    SoundManager.Inst.Play("GunShot4", transform.gameObject);
-                    break;
-            }
+            SoundManager.Inst.Play("GunShot3");
+        
 
             /* UI */
             isDiscountBullet = true;
