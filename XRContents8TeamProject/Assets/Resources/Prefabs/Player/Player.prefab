@@ -123,7 +123,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b9688008bf4a33b429577cb5f5d7d08b, type: 2}
+  - {fileID: 2100000, guid: b71ca3cb171bcf54a91640db481076e0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 50b902c7324253a419fd336ea27d8cfd, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: cc32640fddf1eb14b9006f78b67b4c28, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -264,10 +264,10 @@ MonoBehaviour:
   playerJumpForce: 20
   playerGravityForce: 5
   playerHitInvincibilityDuration: 1
-  playerKnockbackDistance: 3
-  dodgeDistance: 6
+  playerKnockbackDistance: 4
+  dodgeDistance: 8
   dodgeCoolTime: 1
-  dodgeInvincibilityDuration: 1.5
+  dodgeInvincibilityDuration: 1
   isInvincibility: 0
   playerNormalAtk: 15
   playerMaxAtk: 15
@@ -275,14 +275,14 @@ MonoBehaviour:
   maxAmmo: 6
   maxGauge: 0.1
   skeletonAnimation: {fileID: 5471782796121251530}
-  Idle: {fileID: 11400000, guid: 9a464bb6874281a4e8467e9f92cc0ef2, type: 2}
-  Move: {fileID: 11400000, guid: a4f35ffb5e335f940b56547161351bdd, type: 2}
-  Jump: {fileID: 11400000, guid: 81a4050fe881b5445b6521acc8e5fb8f, type: 2}
-  Hit: {fileID: 11400000, guid: 0416a962906148c459f55f914f7f7441, type: 2}
-  BackwardDodge: {fileID: 11400000, guid: cbbbcb360472a4d4d923c2fd80702802, type: 2}
-  Dodge: {fileID: 11400000, guid: bebad50179fdf084a9e735a53bf2bb8f, type: 2}
-  Dead: {fileID: 11400000, guid: 35a97d2ea764c1341a851f51bc101865, type: 2}
-  Aim: {fileID: 11400000, guid: 3c6a823fbdf2a11449e599023096a984, type: 2}
+  Idle: {fileID: 11400000, guid: aaa0c1e25ef8b0942a8b603f95edb29d, type: 2}
+  Move: {fileID: 11400000, guid: 3826f1dc3f1a775459340dde20fe3d21, type: 2}
+  Jump: {fileID: 11400000, guid: 1f622348cc8cd7745936f358eaf9fab8, type: 2}
+  Hit: {fileID: 11400000, guid: 9defaf605692ab449b3ca8aaa0e354ab, type: 2}
+  BackwardDodge: {fileID: 11400000, guid: 20ece24bb64f5eb4682272b74aa210b4, type: 2}
+  Dodge: {fileID: 11400000, guid: e1c70daded2eb8d46b75c2c7fca0832c, type: 2}
+  Dead: {fileID: 11400000, guid: 6b015de2ce438f14fb50afe6e98da536, type: 2}
+  Aim: {fileID: 11400000, guid: 415322cf01b3124459f2bb371ca2025a, type: 2}
   boneName: aim
   cam: {fileID: 0}
 --- !u!114 &3854289692963828313
@@ -302,12 +302,14 @@ MonoBehaviour:
   reverseDelay: 0.2
   reloadingDelay: 0.2
   forwardDelay: 0.2
+  hit: 0.5
+  hitStrong: 2
   skeletonAnimation: {fileID: 5471782796121251530}
-  Backforward: {fileID: 11400000, guid: bdec18796724ab34d99d4d945f37e9b5, type: 2}
-  Reloading: {fileID: 11400000, guid: 42b384532333d1a45ab4b945e3094d11, type: 2}
-  Forward: {fileID: 11400000, guid: e796b38a49c6d2349964a3cd857a534d, type: 2}
-  Shot: {fileID: 11400000, guid: b9992151a040ea749ab203079f2c937e, type: 2}
-  BoltAction: {fileID: 11400000, guid: 082c77004386c124fa30e0216b093e97, type: 2}
+  Backforward: {fileID: 11400000, guid: 0c908c99102acf54f8bd265b30275676, type: 2}
+  Reloading: {fileID: 11400000, guid: fa0aa8822b48cf74d8581b4bd53e9409, type: 2}
+  Forward: {fileID: 11400000, guid: c65a0b9a89146f24b8345b7aa5d66c0c, type: 2}
+  Shot: {fileID: 11400000, guid: 226f1392ab4d2d44e8f2e2be04f22d60, type: 2}
+  BoltAction: {fileID: 11400000, guid: 60f28818a4dcabb42a24e19557f61bfd, type: 2}
 --- !u!114 &5788969553251691976
 MonoBehaviour:
   m_ObjectHideFlags: 0

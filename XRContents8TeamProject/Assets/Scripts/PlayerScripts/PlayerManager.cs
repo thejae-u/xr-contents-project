@@ -114,7 +114,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     private void Start()
-    {
+    { 
         playerHp = playerMaxHp;
         playerRigidbody.gravityScale = playerGravityForce;
         Cursor.visible = false;
@@ -252,7 +252,7 @@ public class PlayerManager : MonoBehaviour
         {
             playerHp -= damage;
 
-            playerHpUI.GetComponent<hpUIController>().Sethp(damage);
+            playerHpUI.GetComponent<hpUIController>().SetDiscountHp(damage);
 
             LogPrintSystem.SystemLogPrint(transform, $"{damage}From Enemy -> Remain PlayerHP{playerHp}", ELogType.Player);
             if (playerHp > 0)
@@ -372,10 +372,11 @@ public class PlayerManager : MonoBehaviour
         if (playerMaxHp >= playerHp + amount)
         {
             playerHp += amount;
+            playerHpUI.GetComponent<hpUIController>().SetRecoveryHP(amount);
         }
         else
         {
-            playerHp = playerMaxHp;
+            playerHp = playerMaxHp; // 회복 후 최대 체력이 오버되면 최대 체력으로 변경
         }
     }
 
@@ -385,7 +386,7 @@ public class PlayerManager : MonoBehaviour
         skeletonAnimation.ClearState();
         CurrentAnimation(0, Dead, false);
 
-        //SoundManager.Inst.Play(string soundName, GameObject obj);
+        SoundManager.Inst.Play("PlayerDead", transform.gameObject);
     }
 
     void PlayerViewMousePoint()
