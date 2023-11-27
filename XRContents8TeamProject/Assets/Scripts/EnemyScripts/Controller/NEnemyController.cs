@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Spine.Unity;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace EnemyScripts
 {
@@ -198,6 +199,20 @@ namespace EnemyScripts
 
         public void DiscountHp(float damage)
         {
+            switch (Random.Range(0, 3))
+            {
+                case 0:
+                    SoundManager.Inst.Play("NormalMonsterHit1");
+                    break;
+                case 1:
+                    SoundManager.Inst.Play("NormalMonsterHit2");
+                    break;
+                case 2:
+                    SoundManager.Inst.Play("NormalMonsterHit3");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
             b.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Hit;
 
             isHit.Value = true;

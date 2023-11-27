@@ -4,6 +4,7 @@ using DG.Tweening;
 using EnemyScripts;
 using Spine.Unity;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class NormalTraceNode : TraceNode
 {
@@ -43,6 +44,7 @@ public class NormalTraceNode : TraceNode
                         myTransform.GetComponent<NEnemyController>().TimerSwitch();
                         timer.Init(waitTime);
                         isTimerWait.Value = true;
+                        SoundManager.Inst.Play("NormalMonsterHowling");
                         return Fsm.GuardNullNode(this, this);
                     }
 
@@ -141,6 +143,37 @@ public class NormalAttackNode : INode
         {
             var effectPos = new Vector3(dir.x > 0 ? myPos.x + d2 : myPos.x - d2, myPos.y, 0);
             EffectController.Inst.PlayEffect(effectPos, "NormalMonsterAttack");
+            switch (Random.Range(0, 3))
+            {
+                case 0:
+                    SoundManager.Inst.Play("NormalMonsterAtk1");
+                    break;
+                case 1:
+                    SoundManager.Inst.Play("NormalMonsterAtk2");
+                    break;
+                case 2:
+                    SoundManager.Inst.Play("NormalMonsterAtk3");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+        else
+        {
+            switch (Random.Range(0, 3))
+            {
+                case 0:
+                    SoundManager.Inst.Play("RushMonsterAtk1");
+                    break;
+                case 1:
+                    SoundManager.Inst.Play("RushMonsterAtk2");
+                    break;
+                case 2:
+                    SoundManager.Inst.Play("RushMonsterAtk3");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         if (!player.isInvincibility)

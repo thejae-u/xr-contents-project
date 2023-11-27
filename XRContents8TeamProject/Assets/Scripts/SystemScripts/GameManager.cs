@@ -70,11 +70,17 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!CheckPlayerLife())
+        if (PlayerManager.Instance.GetIsPlayerDead())
         {
             // plyaer Animation IsComplete -> Change Scene to GameOverScene
+            if (PlayerManager.Instance.GetIsFinishGame())
+            {
+                SceneManager.LoadScene("GameoverScene");
+            }
+                
             return;
         }
+        
         enemyCount = 0;
         everyMonsterCount = 0;
         
@@ -92,11 +98,6 @@ public class GameManager : MonoBehaviour
         }
         
         Exit();
-    }
-
-    private bool CheckPlayerLife()
-    {
-        return PlayerManager.Instance.GetPlayerHp() > 0;
     }
 
     private void CountRemainEnemy()
@@ -152,6 +153,18 @@ public class GameManager : MonoBehaviour
     {
         Sequence sequence = DOTween.Sequence();
         sequence.Append(blackImage.DOFade(0.0f, fadeTime));
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Stage1":
+                SoundManager.Inst.Play("Bgm1");
+                break;
+            case "Stage2":
+                SoundManager.Inst.Play("Bgm2");
+                break;
+            case "stage3":
+                SoundManager.Inst.Play("Bgm3");
+                break;
+        }
     }
 
     private void ChangeScene()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Spine.Unity;
+using Random = UnityEngine.Random;
 
 namespace EnemyScripts
 {
@@ -271,6 +272,45 @@ namespace EnemyScripts
         {
             if (isSpecialAttackReady.Value)
                 return;
+            switch (myType.Value)
+            {
+                case EEliteType.Rush:
+                    switch (Random.Range(0, 4))
+                    {
+                        case 0:
+                            SoundManager.Inst.Play("RushMonsterHit1");
+                            break;
+                        case 1:
+                            SoundManager.Inst.Play("RushMonsterHit2");
+                            break;
+                        case 2:
+                            SoundManager.Inst.Play("RushMonsterHit3");
+                            break;
+                        case 3:
+                            SoundManager.Inst.Play("RushMonsterHit4");
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                    break;
+                case EEliteType.Bomb:
+                    switch (Random.Range(0, 2))
+                    {
+                        case 0:
+                            SoundManager.Inst.Play("BombMonsterHit1");
+                            break;
+                        case 1:
+                            SoundManager.Inst.Play("BombMonsterHit2");
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                    break;
+
+                case EEliteType.None:
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
             myHp.Value -= damage;
         }
 

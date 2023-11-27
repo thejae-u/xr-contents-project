@@ -112,6 +112,8 @@ public class EliteAttackReadyNode : INode
 
         myTransform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
         myTransform.GetComponent<Collider2D>().enabled = false;
+        
+        SoundManager.Inst.Play("RushMonsterBreath");
     }
 
     private void EndOfNode(Blackboard blackboard)

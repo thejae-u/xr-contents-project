@@ -32,6 +32,8 @@ public class CutSceneManager : MonoBehaviour
 
     private SkeletonAnimation anim;
 
+    private int soundCount;
+
     private readonly string[] names =
     {
         "Start1",
@@ -64,6 +66,11 @@ public class CutSceneManager : MonoBehaviour
     {
         anim = gameObject.GetComponent<SkeletonAnimation>();
         DeleteMixAnimation();
+    }
+
+    private void Start()
+    {
+        SoundManager.Inst.Play("BgmMenu");
         AnimationCall();
     }
 
@@ -103,6 +110,32 @@ public class CutSceneManager : MonoBehaviour
         
         if (anim.AnimationState.GetCurrent(0).IsComplete)
         {
+            switch (soundCount)
+            {
+                case 0:
+                    soundCount++;
+                    SoundManager.Inst.Play("BookPage1");
+                    break;
+                case 1:
+                    soundCount++;
+                    SoundManager.Inst.Play("BookPage2");
+                    break;
+                case 2:
+                    soundCount++;
+                    SoundManager.Inst.Play("BookPage3");
+                    break;
+                case 3:
+                    soundCount++;
+                    SoundManager.Inst.Play("BookPage4");
+                    break;
+                case 4:
+                    soundCount = 0;
+                    SoundManager.Inst.Play("BookPage5");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
             switch (anim.AnimationName)
             {
                 case "Page6":
@@ -150,6 +183,7 @@ public class CutSceneManager : MonoBehaviour
         {
             AnimationCall();
             Inst.IsEndSecondAnim = true;
+            SoundManager.Inst.Play("BookOpen");
         }
     }
 
@@ -242,6 +276,7 @@ public class CutSceneManager : MonoBehaviour
         {
             Sequence sequence = DOTween.Sequence();
             sequence.Append(blackImage.DOFade(1.0f, speed / 4.0f));
+            SoundManager.Inst.SoundFadeOut();
             
             sequence.Play();
             Inst.IsFade = true;

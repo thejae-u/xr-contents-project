@@ -21,6 +21,11 @@ public class PlayScript : MonoBehaviour
 
     private void Update()
     {
+        if (mySound.soundName == "PlayerFoot")
+        {
+            source.mute = !PlayerManager.Instance.GetIsMoving();
+        }
+        
         if (isPlaying)
         {
             switch (mySound.playType)
