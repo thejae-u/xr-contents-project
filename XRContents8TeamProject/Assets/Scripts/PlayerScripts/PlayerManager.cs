@@ -384,6 +384,8 @@ public class PlayerManager : MonoBehaviour
         isPlayerDead = true;
         skeletonAnimation.ClearState();
         CurrentAnimation(0, Dead, false);
+
+        //SoundManager.Inst.Play(string soundName, GameObject obj);
     }
 
     void PlayerViewMousePoint()

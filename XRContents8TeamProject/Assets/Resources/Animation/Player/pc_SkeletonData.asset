@@ -24,8 +24,11 @@ MonoBehaviour:
     multiplyMaterials: []
     screenMaterials: []
   skeletonDataModifiers: []
-  fromAnimation: []
-  toAnimation: []
-  duration: []
-  defaultMix: 0.2
+  fromAnimation:
+  - Shot
+  toAnimation:
+  - BoltAction
+  duration:
+  - 0
+  defaultMix: 0
   controller: {fileID: 0}
