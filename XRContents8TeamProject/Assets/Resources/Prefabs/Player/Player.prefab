@@ -258,8 +258,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialtImg: {fileID: 0}
   rad: 1
-  playerMaxHp: 10000
-  playerHp: 10000
+  playerMaxHp: 100
+  playerHp: 100
   playerMoveSpeed: 7
   playerJumpForce: 20
   playerGravityForce: 5
@@ -270,10 +270,10 @@ MonoBehaviour:
   dodgeInvincibilityDuration: 1
   isInvincibility: 0
   playerNormalAtk: 15
-  playerMaxAtk: 15
+  playerMaxAtk: 30
   shotDelaySpeed: 0.5
   maxAmmo: 6
-  maxGauge: 0.1
+  maxGauge: 2
   skeletonAnimation: {fileID: 5471782796121251530}
   Idle: {fileID: 11400000, guid: aaa0c1e25ef8b0942a8b603f95edb29d, type: 2}
   Move: {fileID: 11400000, guid: 3826f1dc3f1a775459340dde20fe3d21, type: 2}
