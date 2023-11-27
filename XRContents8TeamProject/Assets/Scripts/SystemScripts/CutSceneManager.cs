@@ -50,9 +50,9 @@ public class CutSceneManager : MonoBehaviour
 
     private void DeleteMixAnimation()
     {
-        for (int i = 0; i < names.Length - 1; i++)
+        for (int i = 0; i < names.Length; i++)
         {
-            for (int j = 0; j < names.Length - 1; j++)
+            for (int j = 0; j < names.Length; j++)
             {
                 if (j == i) continue;
                 anim.AnimationState.Data.SetMix(names[i], names[j], 0);
@@ -63,27 +63,21 @@ public class CutSceneManager : MonoBehaviour
     private void Awake()
     {
         anim = gameObject.GetComponent<SkeletonAnimation>();
-        AnimationCall();
-    }
-
-    private void Start()
-    {
         DeleteMixAnimation();
-    }
-
-    private void DEBUGS()
-    {
-        LogPrintSystem.SystemLogPrint(transform, $"isCurState : {Inst.CurState}", ELogType.EnemyAI);
-        LogPrintSystem.SystemLogPrint(transform, $"isEndFirstAnim : {Inst.IsEndFirstAnim}", ELogType.EnemyAI);
-        LogPrintSystem.SystemLogPrint(transform, $"isEndSecondAnim : {Inst.IsEndSecondAnim}", ELogType.EnemyAI);
-        LogPrintSystem.SystemLogPrint(transform, $"isStart : {Inst.IsStart}", ELogType.EnemyAI);
-        LogPrintSystem.SystemLogPrint(transform, $"isFade : {Inst.IsFade}", ELogType.EnemyAI);
+        AnimationCall();
     }
 
 
     private void Update()
     {
-        DEBUGS();
+        ControlNightIntensity();
+        
+        if (Inst.IsEndingOn)
+        {
+            Inst.IsEndingOn = false;
+            OffAllButtons();
+        }
+
         if (!Inst.IsEndFirstAnim)
         {
             CheckShowMenu();
@@ -119,14 +113,28 @@ public class CutSceneManager : MonoBehaviour
                     sequence.Append(blackImage.DOFade(1.0f, speed / 4.0f)).OnComplete(() =>
                     {
                         CutSceneCounter.Inst.CurState = -1;
+                        CutSceneCounter.Inst.SettingGameOver();
                         AnimationCall();
+                        sequence.Append(blackImage.DOFade(0.0f, speed / 4.0f));
                     });
-                    
                     return;
                 default:
                     AnimationCall();
                     break;
             }
+        }
+    }
+
+    private void ControlNightIntensity()
+    {
+        switch (anim.AnimationName)
+        {
+            case "Page9":
+                spotLight.GetComponent<Light2D>().intensity = 5.0f;
+                return;
+            default:
+                spotLight.GetComponent<Light2D>().intensity = 10.0f;       
+                return;        
         }
     }
 
@@ -153,6 +161,8 @@ public class CutSceneManager : MonoBehaviour
             nextButton.SetActive(false);
             return;
         }
+
+        if (!anim.AnimationState.GetCurrent(0).IsComplete) return;
 
         switch (anim.AnimationName)
         {
@@ -215,6 +225,15 @@ public class CutSceneManager : MonoBehaviour
         startButton.SetActive(false);
         settingButton.SetActive(false);
         exitButton.SetActive(false);
+    }
+
+    private void OffAllButtons()
+    {
+        startButton.SetActive(false);
+        settingButton.SetActive(false);
+        exitButton.SetActive(false);
+        nextButton.SetActive(false);
+        skipButton.SetActive(false);
     }
     
     private void GameStart()
