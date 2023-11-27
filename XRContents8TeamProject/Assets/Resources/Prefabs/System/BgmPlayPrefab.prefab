@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6169418100110869885}
   - component: {fileID: 285094273666793136}
   m_Layer: 0
-  m_Name: AudioPlayPrefab
+  m_Name: BgmPlayPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ AudioSource:
   m_GameObject: {fileID: 514068710101137338}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2158838656421218916, guid: 13bdd8a84471aba45afc8c48a63e39dd, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -142,6 +142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mySound:
+    soundVolume: 0
     soundName: 
     soundData: {fileID: 0}
     playType: 0
+    soundType: 0
