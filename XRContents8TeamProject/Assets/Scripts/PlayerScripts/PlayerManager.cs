@@ -222,9 +222,13 @@ public class PlayerManager : MonoBehaviour
     #region MOVEMENT
     void PlayerMove(float moveDir)
     {
-        isMoving = true;
+        if(isMoving == false)
+        {
+            isMoving = true;
+            SoundManager.Inst.Play("PlayerFoot");
+        }
         CurrentAnimation(0, Move, true);
-        SoundManager.Inst.Play("PlayerFoot");
+
         Vector2 playerMove = new Vector2(moveDir * playerMoveSpeed, playerRigidbody.velocity.y);
         playerRigidbody.velocity = playerMove;
     }

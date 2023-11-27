@@ -162,8 +162,7 @@ public class PlayerShot : MonoBehaviour
             lastFireTime = Time.time;
             curAmmo--;
 
-            SoundManager.Inst.Play("GunShot3");
-        
+            SoundManager.Inst.Play("GunShot");
 
             /* UI */
             isDiscountBullet = true;
