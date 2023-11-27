@@ -43,6 +43,7 @@ public class PlayerManager : MonoBehaviour
     private bool isHit = false;
     private bool isDodge = false;
     private bool isPlayerDead = false;
+    private bool isFinishGame = false;
 
     // Player dodge(evasion) related
     [Header("플레이어 회피 거리")]
@@ -205,6 +206,10 @@ public class PlayerManager : MonoBehaviour
     public bool GetIsPlayerDead()
     {
         return isPlayerDead;
+    }
+    public bool GetIsFinishGame()
+    {
+        return isFinishGame;
     }
 
     #region MOVEMENT
@@ -387,6 +392,8 @@ public class PlayerManager : MonoBehaviour
         CurrentAnimation(0, Dead, false);
 
         SoundManager.Inst.Play("PlayerDead", transform.gameObject);
+
+        isFinishGame = true;
     }
 
     void PlayerViewMousePoint()
