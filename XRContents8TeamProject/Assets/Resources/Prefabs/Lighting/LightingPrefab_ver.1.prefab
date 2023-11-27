@@ -1033,7 +1033,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.648
   m_Color: {r: 1, g: 0.97502774, b: 0.7877358, a: 1}
-  m_Intensity: 3.55
+  m_Intensity: 3.02
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 0326457f0326457f5398afef29eb644c75068814eda60ab34101d777
@@ -3985,7 +3985,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.409
   m_Color: {r: 1, g: 0.9539401, b: 0.6084906, a: 1}
-  m_Intensity: 4.88
+  m_Intensity: 3.02
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 000000000326457f5398afef29eb644c75068814eda60ab34101d777
