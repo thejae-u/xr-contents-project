@@ -55,9 +55,6 @@ MonoBehaviour:
   - soundName: Bgm3
     soundData: {fileID: 8300000, guid: fd222eb1eda1acf4cbaa1e3e01bdae2f, type: 3}
     playType: 1
-  - soundName: Bgm3
-    soundData: {fileID: 8300000, guid: fd222eb1eda1acf4cbaa1e3e01bdae2f, type: 3}
-    playType: 1
   - soundName: GunShot1
     soundData: {fileID: 8300000, guid: fd222eb1eda1acf4cbaa1e3e01bdae2f, type: 3}
     playType: 0
