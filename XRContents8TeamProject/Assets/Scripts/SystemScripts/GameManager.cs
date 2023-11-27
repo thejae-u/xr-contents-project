@@ -172,7 +172,7 @@ public class GameManager : MonoBehaviour
             case "Stage2":
                 SoundManager.Inst.Play("Bgm2");
                 break;
-            case "stage3":
+            case "Stage3":
                 SoundManager.Inst.Play("Bgm3");
                 break;
         }

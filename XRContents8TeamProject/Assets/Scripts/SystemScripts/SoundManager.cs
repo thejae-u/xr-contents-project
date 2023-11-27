@@ -104,16 +104,18 @@ public class SoundManager : MonoBehaviour
 
     public void DeleteSound(GameObject obj)
     {
-       for (int i = createdObjs.Count - 1; i >= 0; i--)
-       {
-           if (obj.name == createdObjs[i].name)
-           {
-               var delObj = createdObjs[i];
-               createdObjs.Remove(createdObjs[i]);
-               if (obj.activeSelf)
-                   Destroy(delObj);
-           }
-       }
+        Debug.Log($"{obj}");
+        for (int i = createdObjs.Count - 1; i >= 0; i--)
+        {
+            if (obj == null || createdObjs[i] == null) return;
+            if (obj.name == createdObjs[i].name)
+            {
+                var delObj = createdObjs[i];
+                createdObjs.Remove(createdObjs[i]);
+                if (delObj == null)return;
+                Destroy(delObj);
+            }
+        }
     }
 
     public void DeleteAllSound()
