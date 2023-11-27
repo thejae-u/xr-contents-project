@@ -6,9 +6,19 @@ public class SoundModulate : MonoBehaviour
 {
     public AudioMixer mixer;
 
-    public void AudioController(float sliderVal)
+    public void AudioMasterController(float sliderVal)
     {
         mixer.SetFloat("Master", Mathf.Log10(sliderVal) * 20);
+    }
+
+    public void AudioBGMController(float sliderVal)
+    {
+        mixer.SetFloat("BGM", Mathf.Log10(sliderVal) * 20);
+    }
+
+    public void AudioSFXController(float sliderVal)
+    {
+        mixer.SetFloat("SFX", Mathf.Log10(sliderVal) * 20);
     }
 
     // 버튼 하나로 소리 끄기

@@ -217,6 +217,8 @@ public class PlayerShot : MonoBehaviour
     {
         if (isReloading)
         {
+            SoundManager.Inst.Play("GunReload");
+
             state = EShotState.Reloading;
 
             sequenceReloading = DOTween.Sequence();

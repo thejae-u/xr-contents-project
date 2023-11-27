@@ -243,6 +243,7 @@ public class PlayerManager : MonoBehaviour
             isJumping=true;
             canJump = false;
 
+            SoundManager.Inst.Play("PlayerJump");
             CurrentAnimation(0, Jump, false);
 
             playerRigidbody.AddForce(Vector2.up * playerJumpForce, ForceMode2D.Impulse);
@@ -250,6 +251,7 @@ public class PlayerManager : MonoBehaviour
             playerJumpSequence.SetDelay(0.5f).OnComplete(() =>
             {
                 canJump = true;
+                SoundManager.Inst.Play("PlayerLanding");
             });
         }
     }
