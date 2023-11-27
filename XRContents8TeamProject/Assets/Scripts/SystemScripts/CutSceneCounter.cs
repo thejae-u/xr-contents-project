@@ -11,6 +11,8 @@ public class CutSceneCounter : MonoBehaviour
     public bool IsEndFirstAnim { get; set; }
     public bool IsEndSecondAnim { get; set; }
     public bool IsFade { get; set; }
+    
+    public bool IsEndingOn { get; set; }
 
     private static CutSceneCounter inst;
 
@@ -39,9 +41,10 @@ public class CutSceneCounter : MonoBehaviour
 
     public void SettingEndingScene()
     {
-        CurState -= 1;
         IsFade = false;
         IsStart = false;
+        IsEndFirstAnim = true;
+        IsEndSecondAnim = true;
     }
 
     public void SettingGameOver()
@@ -51,5 +54,6 @@ public class CutSceneCounter : MonoBehaviour
         IsStart = false;
         IsEndFirstAnim = false;
         IsEndSecondAnim = false;
+        IsEndingOn = true;
     }
 }
