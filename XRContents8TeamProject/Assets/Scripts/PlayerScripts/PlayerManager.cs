@@ -377,12 +377,13 @@ public class PlayerManager : MonoBehaviour
         if (playerMaxHp >= playerHp + amount)
         {
             playerHp += amount;
-            playerHpUI.GetComponent<hpUIController>().SetRecoveryHP(amount);
         }
         else
         {
             playerHp = playerMaxHp; // 회복 후 최대 체력이 오버되면 최대 체력으로 변경
         }
+        
+        playerHpUI.GetComponent<hpUIController>().SetRecoveryHP(amount);
     }
 
     private void PlayerDeath()
@@ -393,7 +394,12 @@ public class PlayerManager : MonoBehaviour
 
         SoundManager.Inst.Play("PlayerDead", transform.gameObject);
 
-        isFinishGame = true;
+        Sequence sequence = DOTween.Sequence();
+        sequence.SetDelay(2.5f).OnComplete(() =>
+        {
+            isFinishGame = true;
+        });
+
     }
 
     void PlayerViewMousePoint()

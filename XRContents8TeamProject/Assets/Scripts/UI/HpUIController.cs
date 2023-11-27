@@ -67,10 +67,7 @@ public class hpUIController : MonoBehaviour
 
         hp = Mathf.Clamp(hp, 0, hpMax);
 
-        for (int i = 0; i < heart.Length; i++)
-            heart[i].fillAmount = 0;
-
-        for (int i = 0; i < heart.Length; i++)
+        for (int i = 0; i < heart.Length; i++) // 각각의 하트를 확인
         {
             heart[i].fillAmount = 0;
 
@@ -78,7 +75,7 @@ public class hpUIController : MonoBehaviour
                 heart[i].fillAmount = 1;
 
             if ((int)hp == i)
-                heart[i].fillAmount = hp + (int)hp;
+                heart[i].fillAmount = hp % 1;
         }
     }
 }
