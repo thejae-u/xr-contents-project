@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
     private int everyMonsterCount;
     public Image blackImage;
     private float fadeTime;
-    private bool isFade;
+    private bool isFadeOut;
+    private bool isFadeIn;
     
     // About Monster Spawn
     public List<Stage> stages;
@@ -63,13 +64,20 @@ public class GameManager : MonoBehaviour
         playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
         isCoroutineOn = false;
         fadeTime = 1.0f;
-        isFade = false;
+        isFadeOut = false;
+        isFadeIn = false;
         blackImage.color = Color.black;
         FadeIn();
     }
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            FadeOut("Stage3");
+            SoundManager.Inst.DeleteAllSound();
+        }
+        
         if (PlayerManager.Instance.GetIsPlayerDead())
         {
             // plyaer Animation IsComplete -> Change Scene to GameOverScene
@@ -138,21 +146,24 @@ public class GameManager : MonoBehaviour
 
     public void FadeOut(string nextScene)
     {
-        isFade = true;
+        isFadeOut = true;
         Sequence sequence = DOTween.Sequence();
         sequence.Append(blackImage.DOFade(1.0f, fadeTime));
 
         sequence.OnComplete(() =>
         {
             SceneManager.LoadScene(nextScene);
-            isFade = false;
+            isFadeOut = false;
         });
     }
 
     public void FadeIn()
     {
+        if (isFadeIn) return;
+        
         Sequence sequence = DOTween.Sequence();
         sequence.Append(blackImage.DOFade(0.0f, fadeTime));
+        
         switch (SceneManager.GetActiveScene().name)
         {
             case "Stage1":
@@ -169,21 +180,24 @@ public class GameManager : MonoBehaviour
 
     private void ChangeScene()
     {
-        if (SceneManager.GetActiveScene().name == "Stage1" && !isFade)
+        if (SceneManager.GetActiveScene().name == "Stage1" && !isFadeOut)
         {
-            isFade = true;
+            isFadeOut = true;
             FadeOut("Stage2");
+            SoundManager.Inst.DeleteAllSound();
         }
-        else if (SceneManager.GetActiveScene().name == "Stage2" && !isFade)
+        else if (SceneManager.GetActiveScene().name == "Stage2" && !isFadeOut)
         {
-            isFade = true;
+            isFadeOut = true;
             FadeOut("Stage3");
+            SoundManager.Inst.DeleteAllSound();
         }
-        else if (SceneManager.GetActiveScene().name == "Stage3" && !isFade)
+        else if (SceneManager.GetActiveScene().name == "Stage3" && !isFadeOut)
         {
-            isFade = true;
+            isFadeOut = true;
             CutSceneCounter.Inst.SettingEndingScene();
             FadeOut("MenuAndCutScene");
+            SoundManager.Inst.DeleteAllSound();
         }
     }
     

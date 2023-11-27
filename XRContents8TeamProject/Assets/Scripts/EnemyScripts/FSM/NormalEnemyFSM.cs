@@ -44,7 +44,6 @@ public class NormalTraceNode : TraceNode
                         myTransform.GetComponent<NEnemyController>().TimerSwitch();
                         timer.Init(waitTime);
                         isTimerWait.Value = true;
-                        SoundManager.Inst.Play("NormalMonsterHowling");
                         return Fsm.GuardNullNode(this, this);
                     }
 

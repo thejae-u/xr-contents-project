@@ -49,6 +49,7 @@ public class PlayScript : MonoBehaviour
 
     public void Play()
     {
+        if (source.clip != null) return;
         source.clip = mySound.soundData;
         source.Play();
         isPlaying = true;

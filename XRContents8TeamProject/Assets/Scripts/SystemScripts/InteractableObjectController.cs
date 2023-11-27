@@ -59,7 +59,8 @@ public class InteractableObjectController : MonoBehaviour
 
             if (timer.IsAttacked)
             {
-                var newPos = new Vector3(transform.position.x, transform.position.y, 0);
+                var newPos = new Vector3(transform.position.x, transform.position.y + 5f, 0);
+                Debug.Log("CALL EFFECT");
                 switch (SceneManager.GetActiveScene().name)
                 {
                     case "Stage1":
@@ -69,12 +70,11 @@ public class InteractableObjectController : MonoBehaviour
                         EffectController.Inst.PlayEffect(newPos, "Reaf2");
                         break;
                     case "Stage3":
-                        newPos.y -= 2f;
+                        newPos.y = transform.position.y;
                         EffectController.Inst.PlayEffect(newPos, "Reaf3");
                         break;
                     default:
-                        throw new ArgumentException();
-                    
+                        throw new ArgumentOutOfRangeException();
                 }
                 
                 gameObject.GetComponent<SkeletonAnimation>().AnimationState.SetAnimation(0, "animation", false);

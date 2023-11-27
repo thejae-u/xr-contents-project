@@ -2023,6 +2023,11 @@ Transform:
   - {fileID: 752781711}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &624196369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5637325000823173993, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
+  m_PrefabInstance: {fileID: 3295540160419746691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &625146754
 GameObject:
   m_ObjectHideFlags: 0
@@ -19580,6 +19585,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5834874643087858499, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
+      propertyPath: timers.Array.data[0]
+      value: 
+      objectReference: {fileID: 624196369}
     - target: {fileID: 5932816157223985841, guid: 3ad6db70ef8131a48b545282dc34eaba, type: 3}
       propertyPath: m_Mesh
       value: 

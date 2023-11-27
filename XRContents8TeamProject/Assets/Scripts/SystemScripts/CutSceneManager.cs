@@ -106,6 +106,7 @@ public class CutSceneManager : MonoBehaviour
 
     public void OnNextButtonClick()
     {
+        SoundManager.Inst.Play("ButtonClick");
         nextButton.SetActive(false);
         
         if (anim.AnimationState.GetCurrent(0).IsComplete)
@@ -226,6 +227,7 @@ public class CutSceneManager : MonoBehaviour
 
     public void OnStartButtonClick()
     {
+        SoundManager.Inst.Play("ButtonClick");
         OffMenuButtons();
         AnimationCall();
         Inst.IsEndFirstAnim = true;
@@ -234,16 +236,20 @@ public class CutSceneManager : MonoBehaviour
     public void OnExitButtonClick()
     {
         #if UNITY_EDITOR
+        SoundManager.Inst.Play("ButtonClick");
         UnityEditor.EditorApplication.isPlaying = false;
         #else
+        SoundManager.Inst.Play("ButtonClick");
         Application.Quit();
         #endif
     }
 
     public void OnSkipButtonClick()
     {
+        SoundManager.Inst.Play("ButtonClick");
         CutSceneCounter.Inst.CurState = 6;
         AnimationCall();
+        SoundManager.Inst.Play("BookPage1");
         skipButton.SetActive(false);
     }
 

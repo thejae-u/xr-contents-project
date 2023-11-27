@@ -110,7 +110,7 @@ public class SoundManager : MonoBehaviour
            {
                var delObj = createdObjs[i];
                createdObjs.Remove(createdObjs[i]);
-               if (obj)
+               if (obj.activeSelf)
                    Destroy(delObj);
            }
        }
