@@ -1,166 +1,222 @@
 
 pc.png
-size: 614,237
+size: 363,972
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+1
+  rotate: false
+  xy: 157, 528
+  size: 76, 58
+  orig: 76, 58
+  offset: 0, 0
+  index: -1
+2
+  rotate: true
+  xy: 2, 72
+  size: 232, 102
+  orig: 234, 102
+  offset: 1, 0
+  index: -1
+3
+  rotate: false
+  xy: 106, 165
+  size: 226, 139
+  orig: 226, 139
+  offset: 0, 0
+  index: -1
+4
+  rotate: true
+  xy: 2, 306
+  size: 219, 151
+  orig: 219, 151
+  offset: 0, 0
+  index: -1
+5
+  rotate: true
+  xy: 155, 315
+  size: 210, 147
+  orig: 213, 147
+  offset: 0, 0
+  index: -1
+6
+  rotate: true
+  xy: 2, 527
+  size: 196, 153
+  orig: 197, 153
+  offset: 0, 0
+  index: -1
+7
+  rotate: true
+  xy: 157, 588
+  size: 135, 153
+  orig: 135, 153
+  offset: 0, 0
+  index: -1
+8
+  rotate: false
+  xy: 226, 817
+  size: 133, 153
+  orig: 133, 153
+  offset: 0, 0
+  index: -1
 arm1_L
   rotate: false
-  xy: 577, 166
+  xy: 304, 320
   size: 25, 69
   orig: 49, 69
   offset: 0, 0
   index: -1
 arm1_R
   rotate: false
-  xy: 560, 43
+  xy: 235, 534
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
   index: -1
 arm2_L
-  rotate: false
-  xy: 479, 121
+  rotate: true
+  xy: 312, 645
   size: 80, 45
   orig: 148, 65
   offset: 0, 14
   index: -1
 arm2_R
-  rotate: true
-  xy: 426, 94
+  rotate: false
+  xy: 289, 541
   size: 72, 45
   orig: 72, 46
   offset: 0, 0
   index: -1
 body
-  rotate: false
-  xy: 249, 40
+  rotate: true
+  xy: 226, 727
   size: 88, 126
   orig: 119, 126
   offset: 0, 0
   index: -1
 bullet
   rotate: false
-  xy: 347, 7
+  xy: 331, 323
   size: 28, 13
   orig: 28, 13
   offset: 0, 0
   index: -1
 case
-  rotate: false
-  xy: 295, 3
+  rotate: true
+  xy: 334, 216
   size: 50, 17
   orig: 50, 18
   offset: 0, 1
   index: -1
 case_back
   rotate: true
-  xy: 2, 4
+  xy: 338, 597
   size: 7, 14
   orig: 7, 14
   offset: 0, 0
   index: -1
 eye_Cl
-  rotate: true
-  xy: 384, 81
+  rotate: false
+  xy: 250, 80
   size: 85, 40
   orig: 88, 49
   offset: 2, 0
   index: -1
 eye_Op
   rotate: true
-  xy: 339, 77
+  xy: 304, 391
   size: 89, 43
   orig: 89, 43
   offset: 0, 0
   index: -1
 eye_Op_pupilX
   rotate: false
-  xy: 389, 2
+  xy: 160, 121
   size: 88, 42
   orig: 89, 43
   offset: 1, 0
   index: -1
 foot_L
-  rotate: false
-  xy: 392, 53
+  rotate: true
+  xy: 334, 268
   size: 53, 26
   orig: 110, 26
   offset: 0, 0
   index: -1
 foot_R
-  rotate: false
-  xy: 473, 95
+  rotate: true
+  xy: 312, 588
   size: 55, 24
   orig: 55, 24
   offset: 0, 0
   index: -1
 gun
   rotate: false
-  xy: 249, 168
-  size: 326, 67
-  orig: 326, 67
-  offset: 0, 0
+  xy: 2, 2
+  size: 334, 68
+  orig: 336, 76
+  offset: 2, 7
   index: -1
 gun_parts
-  rotate: false
-  xy: 295, 22
+  rotate: true
+  xy: 334, 122
   size: 92, 16
   orig: 92, 16
   offset: 0, 0
   index: -1
 hand_L
-  rotate: false
-  xy: 249, 2
+  rotate: true
+  xy: 205, 75
   size: 44, 36
   orig: 44, 36
   offset: 0, 0
   index: -1
 hand_R
   rotate: false
-  xy: 506, 50
+  xy: 106, 120
   size: 52, 43
   orig: 53, 44
   offset: 0, 1
   index: -1
 head
-  rotate: false
-  xy: 2, 13
+  rotate: true
+  xy: 2, 725
   size: 245, 222
   orig: 245, 222
   offset: 0, 0
   index: -1
 leg1_L
-  rotate: true
-  xy: 339, 46
+  rotate: false
+  xy: 331, 338
   size: 29, 51
   orig: 30, 51
   offset: 0, 0
   index: -1
 leg1_R
-  rotate: false
-  xy: 561, 121
+  rotate: true
+  xy: 160, 80
   size: 39, 43
   orig: 40, 43
   offset: 0, 0
   index: -1
 leg2_L
-  rotate: true
-  xy: 447, 47
+  rotate: false
+  xy: 304, 482
   size: 45, 57
   orig: 45, 57
   offset: 0, 0
   index: -1
 leg2_R
   rotate: true
-  xy: 479, 5
+  xy: 250, 123
   size: 40, 63
   orig: 40, 64
   offset: 0, 0
   index: -1
 lever
-  rotate: true
-  xy: 530, 97
+  rotate: false
+  xy: 338, 606
   size: 22, 37
   orig: 22, 37
   offset: 0, 0

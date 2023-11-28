@@ -1,0 +1,132 @@
+
+Background_Cat03_Night.png
+size: 142,170
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Cat03_Night 1
+  rotate: true
+  xy: 76, 67
+  size: 28, 52
+  orig: 76, 73
+  offset: 9, 7
+  index: -1
+Background_Cat03_Night 10
+  rotate: false
+  xy: 2, 71
+  size: 27, 27
+  orig: 76, 73
+  offset: 31, 11
+  index: -1
+Background_Cat03_Night 11
+  rotate: true
+  xy: 94, 2
+  size: 33, 36
+  orig: 76, 73
+  offset: 29, 10
+  index: -1
+Background_Cat03_Night 12
+  rotate: true
+  xy: 56, 37
+  size: 28, 37
+  orig: 76, 73
+  offset: 32, 14
+  index: -1
+Background_Cat03_Night 13
+  rotate: true
+  xy: 95, 37
+  size: 28, 43
+  orig: 76, 73
+  offset: 31, 12
+  index: -1
+Background_Cat03_Night 14
+  rotate: true
+  xy: 46, 4
+  size: 31, 46
+  orig: 76, 73
+  offset: 30, 11
+  index: -1
+Background_Cat03_Night 15
+  rotate: true
+  xy: 31, 68
+  size: 27, 43
+  orig: 76, 73
+  offset: 31, 15
+  index: -1
+Background_Cat03_Night 16
+  rotate: true
+  xy: 85, 97
+  size: 24, 50
+  orig: 76, 73
+  offset: 30, 13
+  index: -1
+Background_Cat03_Night 17
+  rotate: true
+  xy: 48, 126
+  size: 22, 42
+  orig: 76, 73
+  offset: 33, 15
+  index: -1
+Background_Cat03_Night 18
+  rotate: true
+  xy: 92, 123
+  size: 23, 45
+  orig: 76, 73
+  offset: 33, 15
+  index: -1
+Background_Cat03_Night 2
+  rotate: true
+  xy: 2, 38
+  size: 28, 52
+  orig: 76, 73
+  offset: 9, 7
+  index: -1
+Background_Cat03_Night 3
+  rotate: false
+  xy: 2, 5
+  size: 42, 31
+  orig: 76, 73
+  offset: 28, 10
+  index: -1
+Background_Cat03_Night 4
+  rotate: false
+  xy: 2, 100
+  size: 43, 27
+  orig: 76, 73
+  offset: 30, 9
+  index: -1
+Background_Cat03_Night 5
+  rotate: false
+  xy: 96, 148
+  size: 44, 20
+  orig: 76, 73
+  offset: 31, 9
+  index: -1
+Background_Cat03_Night 6
+  rotate: false
+  xy: 2, 152
+  size: 46, 16
+  orig: 76, 73
+  offset: 29, 11
+  index: -1
+Background_Cat03_Night 7
+  rotate: false
+  xy: 50, 150
+  size: 44, 18
+  orig: 76, 73
+  offset: 32, 8
+  index: -1
+Background_Cat03_Night 8
+  rotate: false
+  xy: 2, 129
+  size: 44, 21
+  orig: 76, 73
+  offset: 29, 9
+  index: -1
+Background_Cat03_Night 9
+  rotate: false
+  xy: 47, 97
+  size: 36, 27
+  orig: 76, 73
+  offset: 32, 8
+  index: -1

@@ -36,7 +36,24 @@ public class EffectController : MonoBehaviour
             if (effect.effectName == effectName)
             {
                 pos = new Vector3(pos.x, pos.y, 0);
-                var newObj = Instantiate(effect.effectObj, pos, Quaternion.identity);
+                GameObject newObj;
+
+                newObj = Instantiate(effect.effectObj, pos, Quaternion.identity);
+
+                newObj.transform.GetComponent<ParticleSystem>().Play();
+            }
+        }
+    }
+
+    public void PlayEffect(Vector3 pos, string effectName, Transform parent)
+    {
+        foreach (var effect in effects)
+        {
+            if (effect.effectName == effectName)
+            {
+                pos = new Vector3(pos.x, pos.y, 0);
+                var newObj = Instantiate(effect.effectObj, parent);
+                newObj.transform.position = pos;
 
                 newObj.transform.GetComponent<ParticleSystem>().Play();
             }

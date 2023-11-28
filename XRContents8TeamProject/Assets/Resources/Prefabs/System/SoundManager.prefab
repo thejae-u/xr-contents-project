@@ -26,10 +26,12 @@ Transform:
   m_GameObject: {fileID: 4690833771287026523}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.234488, y: -3.261692, z: -0.0022850782}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2963382427845782035}
+  - {fileID: 6932401502450380198}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3685215242045580352
@@ -44,17 +46,356 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f81bc6626aa2e429e071a613c90582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playPrefab: {fileID: 514068710101137338, guid: 4aef6fce290c83d409bf0bfc87e62a61, type: 3}
+  bgmPlayPrefab: {fileID: 1563799391910140427}
+  sfxPlayPrefab: {fileID: 6676412394133462462}
+  mixer: {fileID: 24100000, guid: 13bdd8a84471aba45afc8c48a63e39dd, type: 2}
   sounds:
-  - soundName: BackgroundLoop
-    soundData: {fileID: 0}
+  - soundVolume: 0
+    soundName: Bgm1
+    soundData: {fileID: 8300000, guid: d5cddd472b5341b4983841c18b944548, type: 3}
     playType: 1
-  - soundName: PlayerShot
-    soundData: {fileID: 0}
+    soundType: 0
+  - soundVolume: 0
+    soundName: Bgm2
+    soundData: {fileID: 8300000, guid: e89c8b255f8a8c84cbfc51fde435c17c, type: 3}
+    playType: 1
+    soundType: 0
+  - soundVolume: 0
+    soundName: Bgm3
+    soundData: {fileID: 8300000, guid: d955289681d06c94aa149b80fca6285b, type: 3}
+    playType: 1
+    soundType: 0
+  - soundVolume: 0
+    soundName: BgmMenu
+    soundData: {fileID: 8300000, guid: 3fc188062f711d3479bc0b247a9d4534, type: 3}
+    playType: 1
+    soundType: 0
+  - soundVolume: 0
+    soundName: GunShot
+    soundData: {fileID: 8300000, guid: 9b52177d66ede8f4582c0365d312fd3d, type: 3}
     playType: 0
-  - soundName: EnemyAttack
-    soundData: {fileID: 0}
+    soundType: 1
+  - soundVolume: 0
+    soundName: GunReload
+    soundData: {fileID: 8300000, guid: f819896ab7d244c44903ef5d4cd5d906, type: 3}
     playType: 0
-  - soundName: PlayerJump
-    soundData: {fileID: 0}
+    soundType: 1
+  - soundVolume: 0
+    soundName: Explosion1
+    soundData: {fileID: 8300000, guid: a53a9ec4158eaf9478234e9c3f4f7e6d, type: 3}
     playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: Explosion2
+    soundData: {fileID: 8300000, guid: 47f5eabca9a897f4b84505c5a9447977, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: Explosion3
+    soundData: {fileID: 8300000, guid: df1213aa0d94a9644bd2e12bf9a1ead8, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: BombMonsterHit1
+    soundData: {fileID: 8300000, guid: a5a4883906b434f45b6b5b6d0d6fc6f2, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: BombMonsterHit2
+    soundData: {fileID: 8300000, guid: a2aa23d29ccee9f4fbe4835c920527f8, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: BombMonsterDead
+    soundData: {fileID: 8300000, guid: 33c6c8d5b00430244a32dd0424dbcf96, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: NormalMonsterAtk1
+    soundData: {fileID: 8300000, guid: b13aa87637e991c48a0dd43705ddfb74, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: NormalMonsterAtk2
+    soundData: {fileID: 8300000, guid: 1a95abd3ad99f5840a7e77872beff0c4, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: NormalMonsterAtk3
+    soundData: {fileID: 8300000, guid: 0afdfd27e52b80444b9532ff9f1eb025, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: NormalMonsterHit1
+    soundData: {fileID: 8300000, guid: 6de055c6c1e79d043b24a092bcfe4238, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: NormalMonsterHit2
+    soundData: {fileID: 8300000, guid: b8c8a817a8f8b9749a44b3e394eccd1a, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: NormalMonsterHit3
+    soundData: {fileID: 8300000, guid: 78caa563e1c945f498ba51636662fcb8, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: NormalMonsterDead
+    soundData: {fileID: 8300000, guid: f7fbd8be226898d488fc9e18514e9704, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: NormalMonsterGrowl
+    soundData: {fileID: 8300000, guid: 1fc815294d3d584489ccd555ea8443f6, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: NormalMonsterHowling
+    soundData: {fileID: 8300000, guid: b43d740ed6437fb48bc968a6edf384d3, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: RushMonsterAtk1
+    soundData: {fileID: 8300000, guid: 4606df292cb7b9943b47be3f177b561f, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: RushMonsterAtk2
+    soundData: {fileID: 8300000, guid: ab4be40de8144b441bf40ad584070405, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: RushMonsterHit1
+    soundData: {fileID: 8300000, guid: e8dab168958bf0b47a69544d0abe3396, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: RushMonsterHit2
+    soundData: {fileID: 8300000, guid: 330ebf557d0b2924ab307d6a468277c5, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: RushMonsterHit3
+    soundData: {fileID: 8300000, guid: fc2127a590498164cbf865af2763a07c, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: RushMonsterHit4
+    soundData: {fileID: 8300000, guid: 1ed83ba85c654354082cfa9e261bc241, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: RushMonsterDead
+    soundData: {fileID: 8300000, guid: 33c6c8d5b00430244a32dd0424dbcf96, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: RushMonsterBreath
+    soundData: {fileID: 8300000, guid: f9819e27d20fd7c4b824b26557659aa5, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: PlayerFoot
+    soundData: {fileID: 8300000, guid: 379f2efbd33a18240a88bf24c311a7e4, type: 3}
+    playType: 1
+    soundType: 1
+  - soundVolume: 0
+    soundName: PlayerHit1
+    soundData: {fileID: 8300000, guid: 242566e1016a9c14cbc219d05648d3cf, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: PlayerHit2
+    soundData: {fileID: 8300000, guid: bbb52e0767001e141b22ec30751463fe, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: PlayerHit3
+    soundData: {fileID: 8300000, guid: bbb52e0767001e141b22ec30751463fe, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: PlayerDead
+    soundData: {fileID: 8300000, guid: 3fc0b669d4b19f14e8afeb2676eec280, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: PlayerJump
+    soundData: {fileID: 8300000, guid: 4e4ded6661ed2874dbe460a48767b546, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: PlayerLanding
+    soundData: {fileID: 8300000, guid: 2891a2d1a73d5c44e8ad96601b516e19, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: BookOpen
+    soundData: {fileID: 8300000, guid: 01ae3e4a38f9d8142a705cfe5dd8be3b, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: BookPage1
+    soundData: {fileID: 8300000, guid: e379316ba0ece8a44ad320b5ad6272ca, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: BookPage2
+    soundData: {fileID: 8300000, guid: eb811035f602847479cb65da12ab69a8, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: BookPage3
+    soundData: {fileID: 8300000, guid: d04578745aaeb12478aeccc5f5a678f7, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: BookPage4
+    soundData: {fileID: 8300000, guid: 2bfd322baf6b45742bf125274c7001de, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: BookPage5
+    soundData: {fileID: 8300000, guid: 00536b7d1affe0d4e8cdd8e967b5f211, type: 3}
+    playType: 0
+    soundType: 1
+  - soundVolume: 0
+    soundName: ButtonClick
+    soundData: {fileID: 8300000, guid: 9c930039ae8680042ae69bfdc855de04, type: 3}
+    playType: 0
+    soundType: 1
+--- !u!1001 &1338111725454372273
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8601121013557005868}
+    m_Modifications:
+    - target: {fileID: 514068710101137338, guid: 4aef6fce290c83d409bf0bfc87e62a61, type: 3}
+      propertyPath: m_Name
+      value: BgmPlayPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: 4aef6fce290c83d409bf0bfc87e62a61, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: 4aef6fce290c83d409bf0bfc87e62a61, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: 4aef6fce290c83d409bf0bfc87e62a61, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: 4aef6fce290c83d409bf0bfc87e62a61, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: 4aef6fce290c83d409bf0bfc87e62a61, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: 4aef6fce290c83d409bf0bfc87e62a61, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: 4aef6fce290c83d409bf0bfc87e62a61, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: 4aef6fce290c83d409bf0bfc87e62a61, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: 4aef6fce290c83d409bf0bfc87e62a61, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: 4aef6fce290c83d409bf0bfc87e62a61, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4aef6fce290c83d409bf0bfc87e62a61, type: 3}
+--- !u!1 &1563799391910140427 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 514068710101137338, guid: 4aef6fce290c83d409bf0bfc87e62a61, type: 3}
+  m_PrefabInstance: {fileID: 1338111725454372273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2963382427845782035 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4301466613386823586, guid: 4aef6fce290c83d409bf0bfc87e62a61, type: 3}
+  m_PrefabInstance: {fileID: 1338111725454372273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6594738216311433732
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8601121013557005868}
+    m_Modifications:
+    - target: {fileID: 514068710101137338, guid: ddb9aa744fc9db44eb83626db9a297af, type: 3}
+      propertyPath: m_Name
+      value: SfxPlayPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: ddb9aa744fc9db44eb83626db9a297af, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: ddb9aa744fc9db44eb83626db9a297af, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: ddb9aa744fc9db44eb83626db9a297af, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: ddb9aa744fc9db44eb83626db9a297af, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: ddb9aa744fc9db44eb83626db9a297af, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: ddb9aa744fc9db44eb83626db9a297af, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: ddb9aa744fc9db44eb83626db9a297af, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: ddb9aa744fc9db44eb83626db9a297af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: ddb9aa744fc9db44eb83626db9a297af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301466613386823586, guid: ddb9aa744fc9db44eb83626db9a297af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ddb9aa744fc9db44eb83626db9a297af, type: 3}
+--- !u!1 &6676412394133462462 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 514068710101137338, guid: ddb9aa744fc9db44eb83626db9a297af, type: 3}
+  m_PrefabInstance: {fileID: 6594738216311433732}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6932401502450380198 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4301466613386823586, guid: ddb9aa744fc9db44eb83626db9a297af, type: 3}
+  m_PrefabInstance: {fileID: 6594738216311433732}
+  m_PrefabAsset: {fileID: 0}

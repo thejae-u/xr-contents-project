@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
     private int everyMonsterCount;
     public Image blackImage;
     private float fadeTime;
-    private bool isFade;
+    private bool isFadeOut;
+    private bool isFadeIn;
     
     // About Monster Spawn
     public List<Stage> stages;
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
     
     private void Awake()
     {
+        SoundManager.Inst.DeleteAllSound();
         if (inst == null)
         {
             inst = this;
@@ -63,44 +65,91 @@ public class GameManager : MonoBehaviour
         playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
         isCoroutineOn = false;
         fadeTime = 1.0f;
-        isFade = false;
+        isFadeOut = false;
+        isFadeIn = false;
+        blackImage.color = Color.black;
+        FadeIn();
+    }
+
+    private void AdminActivator()
+    {
+        if (Input.GetKeyDown(KeyCode.F11))
+        {
+            CutSceneCounter.Inst.CurState = 7;
+            foreach (var stage in stages)
+            {
+                foreach (var sector in stage.sectors)
+                {
+                    sector.SetActive(true);
+                    for (int i = 0; i < sector.transform.childCount; i++)
+                    {
+                        Destroy(sector.transform.GetChild(i).gameObject);
+                    }
+                }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.F10))
+        {
+            SoundManager.Inst.DeleteAllSound();
+            DOTween.KillAll();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            CutSceneCounter.Inst.SettingGameOver();
+            SoundManager.Inst.DeleteAllSound();
+            DOTween.KillAll();
+            SceneManager.LoadScene("MenuAndCutScene");
+        }
     }
 
     private void Update()
     {
+        AdminActivator();
+        
+        if (PlayerManager.Instance.GetIsPlayerDead())
+        {
+            if (PlayerManager.Instance.GetIsFinishGame())
+            {
+                SoundManager.Inst.DeleteAllSound();
+                CutSceneCounter.Inst.SceneName = SceneManager.GetActiveScene().name;
+                SceneManager.LoadScene("GameoverScene");
+            }
+                
+            return;
+        }
+        
         enemyCount = 0;
         everyMonsterCount = 0;
         
-        if (Input.GetKeyDown(KeyCode.G))
+        CountRemainEnemy();
+        SpawnNextEnemy();
+
+        if (stages.Count > 0)
         {
-
-            CameraController.Inst.ShakeCamera();
-            //SoundManager.Inst.Play("PlayerShot", gameObject);
-            /*
-            if (SceneManager.GetActiveScene().name == "TestScene2")
-            {
-                if (!isFade)
-                {
-                    isFade = true;
-                    Sequence sequence = DOTween.Sequence();
-                    sequence.Append(blackImage.DOFade(1.0f, fadeTime));
-
-                    sequence.OnComplete(() => { SceneManager.LoadScene("TestScene3"); });
-                }
-            }
-            */
+            CheckRemainEnemy();
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (everyMonsterCount == 0)
         {
-            SoundManager.Inst.DeleteSound(gameObject);
+            ChangeScene();
         }
+        
+        Exit();
+    }
 
+    private void CountRemainEnemy()
+    {
         foreach (var sector in stages[curStage].sectors)
         {
             enemyCount += sector.transform.childCount;
         }
+    }
 
+    private void SpawnNextEnemy()
+    {
         if (stages[curStage].sectors.Count > curSector)
         {
             if (stages[curStage].sectors[curSector].transform.childCount == 0)
@@ -110,40 +159,81 @@ public class GameManager : MonoBehaviour
                     EnemySpawn(curStage, curSector);
             }
         }
+    }
 
-        if (stages.Count > 0)
+    private void CheckRemainEnemy()
+    {
+        foreach (var stage in stages)
         {
-            foreach (var stage in stages)
+            if (stage.sectors.Count > 0)
             {
-                if (stage.sectors.Count > 0)
+                foreach (var sector in stage.sectors)
                 {
-                    foreach (var sector in stage.sectors)
-                    {
-                        if (sector == null) return;
-                        everyMonsterCount += sector.transform.childCount;
-                    }
+                    if (sector == null) return;
+                    everyMonsterCount += sector.transform.childCount;
                 }
             }
         }
+    }
 
+    public void FadeOut(string nextScene)
+    {
+        isFadeOut = true;
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(blackImage.DOFade(1.0f, fadeTime));
 
-        
-
-        if (everyMonsterCount == 0)
+        sequence.OnComplete(() =>
         {
-            if (SceneManager.GetActiveScene().name == "TestScene2")
-            {
-                Sequence sequence = DOTween.Sequence();
-                sequence.Append(blackImage.DOFade(1.0f, fadeTime));
+            SceneManager.LoadScene(nextScene);
+        });
+    }
 
-                sequence.OnComplete(() =>
-                {
-                    SceneManager.LoadScene("TestScene3");
-                });
-            }
+    public void FadeIn()
+    {
+        if (isFadeIn) return;
+        
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(blackImage.DOFade(0.0f, fadeTime));
+        
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Stage1":
+                SoundManager.Inst.Play("Bgm1");
+                break;
+            case "Stage2":
+                SoundManager.Inst.Play("Bgm2");
+                break;
+            case "Stage3":
+                SoundManager.Inst.Play("Bgm3");
+                break;
         }
 
-        Exit();
+        isFadeIn = true;
+    }
+
+    private void ChangeScene()
+    {
+        if (SceneManager.GetActiveScene().name == "Stage1" && !isFadeOut)
+        {
+            isFadeOut = true;
+            FadeOut("Stage2");
+            SoundManager.Inst.DeleteAllSound();
+        }
+        else if (SceneManager.GetActiveScene().name == "Stage2" && !isFadeOut)
+        {
+            isFadeOut = true;
+            FadeOut("Stage3");
+            SoundManager.Inst.DeleteAllSound();
+        }
+        else if (SceneManager.GetActiveScene().name == "Stage3" && !isFadeOut)
+        {
+            Debug.Log("CALL STAGE END");
+            isFadeOut = true;
+            CutSceneCounter.Inst.SettingEndingScene();
+            FadeOut("MenuAndCutScene");   
+            Cursor.visible = true;
+            SoundManager.Inst.DeleteAllSound();
+        }
     }
     
     private void Exit()

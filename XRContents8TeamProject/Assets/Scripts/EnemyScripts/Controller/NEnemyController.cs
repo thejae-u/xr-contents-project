@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Spine.Unity;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace EnemyScripts
 {
@@ -51,8 +52,13 @@ namespace EnemyScripts
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isHit;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isHitOn;
         [HideInInspector] [SerializeField] private ReferenceValueT<float> playerDamage;
+        [HideInInspector] [SerializeField] private Transform playerTransform;
+        
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isHitPlayer;
         
         [SerializeField] private List<GameObject> timers;
+
+        private bool isCoroutineOn;
         
 
         private Blackboard b;
@@ -63,6 +69,10 @@ namespace EnemyScripts
             fsm = new Fsm();
             b = new Blackboard();
             anim = gameObject.GetComponent<SkeletonAnimation>();
+
+            playerTransform = GameObject.Find("Player").transform;
+
+            isHitPlayer.Value = false;
 
             isAlive.Value = true;
             myNode.Value = ENode.Idle;
@@ -77,6 +87,8 @@ namespace EnemyScripts
             b.AddData("isTimerWait", isTimerWait);
             b.AddData("isTimerEnded", isTimerEnded);
             b.AddData("waitTime", waitTime);
+            
+            b.AddData("isHitPlayer", isHitPlayer);
 
             b.AddData("myNode", myNode);
             b.AddData("isAlive", isAlive);
@@ -85,7 +97,7 @@ namespace EnemyScripts
             b.AddData("myAttackDamage", myAttackDamage);
             b.AddData("myTraceRange", myTraceRange);
             b.AddData("myAttackRange", myAttackRange);
-            b.AddData("playerTransform", GameObject.Find("Player").transform);
+            b.AddData("playerTransform", playerTransform);
             b.AddData("myMoveSpeed", myMoveSpeed);
             b.AddData("isNowAttack", isNowAttack);
             b.AddData("myType", myType);
@@ -103,6 +115,8 @@ namespace EnemyScripts
 
         void Start()
         {
+            isCoroutineOn = false;
+            
             var wait = new WaitNode();
             var trace = new NormalTraceNode();
             var attack = new NormalAttackNode();
@@ -116,7 +130,7 @@ namespace EnemyScripts
             
             jump.endJump = trace;
             
-            attack.outOfAttackRange = trace;
+            attack.outOfAttackRange = wait;
 
             fsmLife = new Fsm();
             var alive = new AliveNode();
@@ -127,9 +141,36 @@ namespace EnemyScripts
             fsm.Init(b, wait);
         }
 
+        private IEnumerator GuardNonDestroy()
+        {
+            isCoroutineOn = true;
+            yield return new WaitForSeconds(2.0f);
+            Destroy(gameObject);
+        }
+
         private void Update()
         {
             if (CameraController.Inst.IsNowCutScene) return;
+
+            if (myHp <= 0 && !isCoroutineOn)
+            {
+                StartCoroutine(GuardNonDestroy());
+            }
+
+            if (isNowAttack)
+            {
+                if (anim.AnimationState.GetCurrent(0).IsComplete && !PlayerManager.Instance.isInvincibility &&
+                    !isHitPlayer.Value)
+                {
+                    var myPos = transform.position;
+                    var dir = (playerTransform.position - myPos).normalized;
+                    var ePos = new Vector3(dir.x > 0 ? myPos.x + myAttackRange.Value * 1.5f : myPos.x - myAttackRange * 1.5f, myPos.y, 0);
+                    EffectController.Inst.PlayEffect(ePos, "NormalMonsterAttack");
+                    isHitPlayer.Value = false;
+                    PlayerManager.Instance.PlayerDiscountHp(myAttackDamage, transform.position.x);
+                    GameManager.Inst.HitPlayer();
+                }
+            }
 
             if (isAlive.Value)
             {
@@ -139,7 +180,6 @@ namespace EnemyScripts
                 Flip();
                 fsm.Update();
                 fsmLife.Update();
-
             }
             else
             {
@@ -198,6 +238,20 @@ namespace EnemyScripts
 
         public void DiscountHp(float damage)
         {
+            switch (Random.Range(0, 3))
+            {
+                case 0:
+                    SoundManager.Inst.Play("NormalMonsterHit1");
+                    break;
+                case 1:
+                    SoundManager.Inst.Play("NormalMonsterHit2");
+                    break;
+                case 2:
+                    SoundManager.Inst.Play("NormalMonsterHit3");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
             b.GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Hit;
 
             isHit.Value = true;

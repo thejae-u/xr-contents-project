@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using EnemyScripts;
+using Random = UnityEngine.Random;
 
 public class BombController : MonoBehaviour
 {
@@ -60,6 +61,7 @@ public class BombController : MonoBehaviour
         transform.DOPath(wayPoints, bombSpeed, PathType.CatmullRom, PathMode.Sidescroller2D).OnComplete(() =>
         {
             EffectController.Inst.PlayEffect(transform.position, "Bomb");
+            SoundManager.Inst.PlayBombSound();
             
             var player = GameObject.Find("Player");
             var playerTransform = player.GetComponent<Transform>();

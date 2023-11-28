@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Spine.Unity;
+using Random = UnityEngine.Random;
 
 namespace EnemyScripts
 {
@@ -82,11 +84,14 @@ namespace EnemyScripts
         private SkeletonAnimation anim;
         [SerializeField] private List<GameObject> timers;
 
+        private bool isCoroutineOn;
+
         private void Awake()
         {
             fsm = new Fsm();
             b = new Blackboard();
             anim = gameObject.GetComponent<SkeletonAnimation>();
+
             
             // First Node State Store
             b.AddData("myNode", myNode);
@@ -137,7 +142,7 @@ namespace EnemyScripts
             b.AddData("rushDirection", rushDirection);
             b.AddData("myRushSpeed", myRushSpeed);
             b.AddData("isOverRush", isOverRush);
-
+            
             // Jump
             b.AddData("isJumping", isJumping);
             b.AddData("canJumpNextNode", canJumpNextNode);
@@ -148,6 +153,8 @@ namespace EnemyScripts
 
         void Start()
         {
+            isCoroutineOn = false;
+            
             isAlive.Value = true;
             isGroggy.Value = false;
             isInGroggy.Value = false;
@@ -219,9 +226,21 @@ namespace EnemyScripts
             fsmLife.Init(b, alive);
         }
 
+        private IEnumerator GuardNonDestroy()
+        {
+            isCoroutineOn = true;
+            yield return new WaitForSeconds(2.0f);
+            Destroy(gameObject);
+        }
+
         private void Update()
         {
             if (CameraController.Inst.IsNowCutScene) return;
+
+            if (myHp.Value <= 0 && !isCoroutineOn)
+            {
+                StartCoroutine(GuardNonDestroy());
+            }
             
             if (!isAlive.Value)
             {
@@ -271,6 +290,45 @@ namespace EnemyScripts
         {
             if (isSpecialAttackReady.Value)
                 return;
+            switch (myType.Value)
+            {
+                case EEliteType.Rush:
+                    switch (Random.Range(0, 4))
+                    {
+                        case 0:
+                            SoundManager.Inst.Play("RushMonsterHit1");
+                            break;
+                        case 1:
+                            SoundManager.Inst.Play("RushMonsterHit2");
+                            break;
+                        case 2:
+                            SoundManager.Inst.Play("RushMonsterHit3");
+                            break;
+                        case 3:
+                            SoundManager.Inst.Play("RushMonsterHit4");
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                    break;
+                case EEliteType.Bomb:
+                    switch (Random.Range(0, 2))
+                    {
+                        case 0:
+                            SoundManager.Inst.Play("BombMonsterHit1");
+                            break;
+                        case 1:
+                            SoundManager.Inst.Play("BombMonsterHit2");
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                    break;
+
+                case EEliteType.None:
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
             myHp.Value -= damage;
         }
 

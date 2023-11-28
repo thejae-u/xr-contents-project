@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 public class GameoverUIScript : MonoBehaviour
 {
+    public GameObject arrowImage;
     private void Start()
     {
         Cursor.visible = true;
@@ -13,7 +16,16 @@ public class GameoverUIScript : MonoBehaviour
 
     private void Update()
     {
+        ChangeCursorPosition();
         Exit();
+    }
+
+    private void ChangeCursorPosition()
+    {
+        Vector3 mPos = Input.mousePosition;
+        var mVPos = Camera.main.ScreenToViewportPoint(mPos);
+        arrowImage.GetComponent<RectTransform>().anchoredPosition = mVPos.x > 0.5f ? 
+            new Vector2(64.0f, -240.0f) : new Vector2(-185.0f, -240.0f);
     }
 
     private void Exit()
@@ -30,11 +42,15 @@ public class GameoverUIScript : MonoBehaviour
 
     public void OnRestartButtonClick()
     {
-        SceneManager.LoadScene("Scenes/DevelopScenes/TestScene2");
+        SoundManager.Inst.Play("ButtonClick");
+        CutSceneCounter.Inst.SettingRestartScene();
+        SceneManager.LoadScene(CutSceneCounter.Inst.SceneName == null ? "Stage1" : CutSceneCounter.Inst.SceneName);
     }
 
     public void OnMenuButtonClick()
     {
-        SceneManager.LoadScene("Scenes/MainGameScenes/MenuScene");
+        SoundManager.Inst.Play("ButtonClick");
+        CutSceneCounter.Inst.SettingGameOver();
+        SceneManager.LoadScene("MenuAndCutScene");
     }
 }

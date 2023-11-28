@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3076393628031161901}
   - component: {fileID: 2602507684423280331}
   - component: {fileID: 7029250114115319902}
-  - component: {fileID: 3627213980571822874}
   m_Layer: 0
   m_Name: Spine GameObject (Background_Chocolatetree01_Dessert)
   m_TagString: Untagged
@@ -122,25 +121,3 @@ MonoBehaviour:
   _animationName: animation
   loop: 1
   timeScale: 1
---- !u!114 &3627213980571822874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6249220749122313538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f21c9538588898a45a3da22bf4779ab3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rootMotionBoneName: root
-  transformPositionX: 1
-  transformPositionY: 1
-  rootMotionScaleX: 1
-  rootMotionScaleY: 1
-  rootMotionTranslateXPerY: 0
-  rootMotionTranslateYPerX: 0
-  rigidBody2D: {fileID: 0}
-  rigidBody: {fileID: 0}
-  animationTrackFlags: -1

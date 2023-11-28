@@ -33,30 +33,23 @@ public class EliteTraceNode : TraceNode
 
         if (myType.Value == EEliteType.Rush)
         {
-            Vector2 rayCastPos = myPos;
-            float rayDistance = 1.5f;
-            Vector2 dir = (playerPos - myPos).normalized;
+            var myRd = myTransform.GetComponent<Rigidbody2D>();
+            var moveDir = (playerPos - myPos).normalized;
 
-            rayCastPos.y -= 0.55f;
-            int layerMask = LayerMask.GetMask("Background");
-
-            RaycastHit2D hit = Physics2D.Raycast(rayCastPos, Vector2.right * dir.x, rayDistance, layerMask);
-            Debug.DrawRay(rayCastPos, Vector2.right * (dir.x * rayDistance));
-
-            if (hit.collider != null)
+            if (moveDir.x > 0f)
             {
-                var myRd = myTransform.GetComponent<Rigidbody2D>();
-                myRd.velocity += Vector2.up * (myMoveSpeed / 1.5f);
+                moveDir.x = 1.0f;
+                Vector2 movePos = new Vector2(moveDir.x * myMoveSpeed.Value, myRd.velocity.y);
+                myRd.velocity = movePos;
             }
             else
             {
-                LogPrintSystem.SystemLogPrint(myTransform, "Move", ELogType.EnemyAI);
-                myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x, 
-                        playerPos.x, myMoveSpeed.Value * Time.deltaTime),
-                    myPos.y, myPos.z);
+                moveDir.x = -1.0f;
+                Vector2 movePos = new Vector2(moveDir.x * myMoveSpeed.Value, myRd.velocity.y);
+                myRd.velocity = movePos;
             }
         }
-
+        
         switch (type)
         {
             // All monster Use, Bomb Monster's Normal Attack is Special Attack
@@ -104,6 +97,7 @@ public class EliteAttackReadyNode : INode
     {
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var timers = blackboard.GetData<List<GameObject>>("timers");
+        var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType");
 
         foreach (var obj in timers)
         {
@@ -112,6 +106,9 @@ public class EliteAttackReadyNode : INode
 
         myTransform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
         myTransform.GetComponent<Collider2D>().enabled = false;
+
+        if (myType.Value == EEliteType.Rush)
+            SoundManager.Inst.Play("RushMonsterBreath");
     }
 
     private void EndOfNode(Blackboard blackboard)
@@ -121,6 +118,7 @@ public class EliteAttackReadyNode : INode
         myTransform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         myTransform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         myTransform.GetComponent<Collider2D>().enabled = true;
+        
     }
 
     public INode Execute(Blackboard blackboard)
@@ -243,8 +241,10 @@ public class EliteRushAttackNode : INode
         var canSpecialAttackReady = blackboard.GetData<ReferenceValueT<bool>>("canSpecialAttackReady");
         var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
         var specialAttackCooldown = blackboard.GetData<ReferenceValueT<float>>("specialAttackCooldown");
+        var playerTransform = blackboard.GetData<Transform>("playerTransform");
         
         var myPos = myTransform.position;
+        var dir = (playerTransform.position - myPos).normalized;
         myPos.z = 0.0f;
         
         isNowAttack.Value = false;
@@ -256,6 +256,7 @@ public class EliteRushAttackNode : INode
         {
             hasRemainAttackTime.Value = false;
         }).SetId(this);
+        
     }
 
     public INode Execute(Blackboard blackboard)
@@ -286,10 +287,19 @@ public class EliteRushAttackNode : INode
             {
                 pos = new Vector3(Mathf.MoveTowards(pos.x, 1.0f,
                     myRushSpeed.Value * Time.deltaTime), pos.y, 10.0f);
+                
                 if (CheckPlayer(blackboard))
                 {
                     InitSetting(blackboard);
                     Physics2D.IgnoreLayerCollision(enemyLayer, enemyLayer, false);
+
+                    if (pos.x >= 1.0f)
+                    {
+                        pos.x = 0.99f;
+                        var sPos = Camera.main.ViewportToWorldPoint(pos);
+                        myTransform.position = sPos;
+                    }
+                        
                     return Fsm.GuardNullNode(this, endAttack);
                 }
             }
@@ -297,7 +307,6 @@ public class EliteRushAttackNode : INode
             {
                 InitSetting(blackboard);
                 CameraController.Inst.ShakeCamera();
-                LogPrintSystem.SystemLogPrint(myTransform, $"Hit camera", ELogType.EnemyAI);
                 Physics2D.IgnoreLayerCollision(enemyLayer, enemyLayer, false);
                 return Fsm.GuardNullNode(this, endAttack);
             }
@@ -310,17 +319,25 @@ public class EliteRushAttackNode : INode
             {
                 pos = new Vector3(Mathf.MoveTowards(pos.x, 0.0f,
                     myRushSpeed.Value * Time.deltaTime), pos.y, 10.0f);
+                
                 if (CheckPlayer(blackboard))
                 {
                     InitSetting(blackboard);
                     Physics2D.IgnoreLayerCollision(enemyLayer, enemyLayer, false);
+
+                    if (pos.x <= 0.0f)
+                    {
+                        pos.x = 0.01f;
+                        var sPos = Camera.main.ViewportToWorldPoint(pos);
+                        myTransform.position = sPos;
+                    }
+
                     return Fsm.GuardNullNode(this, endAttack);
                 }
             }
             else
             {
                 InitSetting(blackboard);
-                LogPrintSystem.SystemLogPrint(myTransform, $"Hit camera", ELogType.EnemyAI);
                 CameraController.Inst.ShakeCamera();
                 Physics2D.IgnoreLayerCollision(enemyLayer, enemyLayer, false);
                 return Fsm.GuardNullNode(this, endAttack);

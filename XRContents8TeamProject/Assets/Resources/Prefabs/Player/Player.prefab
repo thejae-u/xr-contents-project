@@ -123,7 +123,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2980d4a46db63d441b91255be4248cc9, type: 2}
+  - {fileID: 2100000, guid: b71ca3cb171bcf54a91640db481076e0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: f94b676d6c9aaff45aef48314a66416b, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: cc32640fddf1eb14b9006f78b67b4c28, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -205,7 +205,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -258,32 +258,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialtImg: {fileID: 0}
   rad: 1
-  playerMaxHp: 10000
-  playerHp: 10000
+  playerMaxHp: 100
+  playerHp: 100
   playerMoveSpeed: 7
   playerJumpForce: 20
   playerGravityForce: 5
   playerHitInvincibilityDuration: 1
-  playerKnockbackDistance: 3
-  dodgeDistance: 6
+  playerKnockbackDistance: 4
+  dodgeDistance: 8
   dodgeCoolTime: 1
-  dodgeInvincibilityDuration: 1.5
+  dodgeInvincibilityDuration: 1
   isInvincibility: 0
   playerNormalAtk: 15
-  playerBonusAtk: 5
+  playerMaxAtk: 30
   shotDelaySpeed: 0.5
   maxAmmo: 6
-  maxGauge: 0.1
+  maxGauge: 2
   skeletonAnimation: {fileID: 5471782796121251530}
-  eventName: 
-  Idle: {fileID: 11400000, guid: 22d69ecfe01eaac41b9e55c8594124a0, type: 2}
-  Move: {fileID: 11400000, guid: 712c79f1d54d1234c9c353db09d23cf0, type: 2}
-  Jump: {fileID: 11400000, guid: 8f7e8df95ee4d064caec31b5a619676a, type: 2}
-  Hit: {fileID: 11400000, guid: 627bf8b99b9eda94f90bb9cd609efc15, type: 2}
-  BackwardDodge: {fileID: 0}
-  Dodge: {fileID: 11400000, guid: c9242aa43efcb9145aae7df94def20e1, type: 2}
-  Dead: {fileID: 11400000, guid: 6a3c7c245a6435745bc2495325beb6ad, type: 2}
-  Aim: {fileID: 11400000, guid: c43c0a8dab15ee347a0fed8484739417, type: 2}
+  Idle: {fileID: 11400000, guid: aaa0c1e25ef8b0942a8b603f95edb29d, type: 2}
+  Move: {fileID: 11400000, guid: 3826f1dc3f1a775459340dde20fe3d21, type: 2}
+  Jump: {fileID: 11400000, guid: 1f622348cc8cd7745936f358eaf9fab8, type: 2}
+  Hit: {fileID: 11400000, guid: 9defaf605692ab449b3ca8aaa0e354ab, type: 2}
+  BackwardDodge: {fileID: 11400000, guid: 20ece24bb64f5eb4682272b74aa210b4, type: 2}
+  Dodge: {fileID: 11400000, guid: e1c70daded2eb8d46b75c2c7fca0832c, type: 2}
+  Dead: {fileID: 11400000, guid: 6b015de2ce438f14fb50afe6e98da536, type: 2}
+  Aim: {fileID: 11400000, guid: 415322cf01b3124459f2bb371ca2025a, type: 2}
   boneName: aim
   cam: {fileID: 0}
 --- !u!114 &3854289692963828313
@@ -299,16 +298,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3818357213670130502, guid: a6c05d3313c146b4285be02c4a3ae3c7, type: 3}
-  isPlayerCheckMaxGauge: 0
+  curDamage: 0
   reverseDelay: 0.2
   reloadingDelay: 0.2
   forwardDelay: 0.2
+  hit: 0.5
+  hitStrong: 2
   skeletonAnimation: {fileID: 5471782796121251530}
-  Backforward: {fileID: 11400000, guid: ee6b42e1bd2dd8f45a1610b1141f66d6, type: 2}
-  Reloading: {fileID: 11400000, guid: b2a4a6d093d8a1446951c2819c3994a6, type: 2}
-  Forward: {fileID: 11400000, guid: 6ba8d09019fa37d4fb8632a7414b79e5, type: 2}
-  Shot: {fileID: 11400000, guid: cd4a4668715006942a38137032704c21, type: 2}
-  BoltAction: {fileID: 11400000, guid: d8bc14dd96105d741bc74bf37db17382, type: 2}
+  Backforward: {fileID: 11400000, guid: 0c908c99102acf54f8bd265b30275676, type: 2}
+  Reloading: {fileID: 11400000, guid: fa0aa8822b48cf74d8581b4bd53e9409, type: 2}
+  Forward: {fileID: 11400000, guid: c65a0b9a89146f24b8345b7aa5d66c0c, type: 2}
+  Shot: {fileID: 11400000, guid: 226f1392ab4d2d44e8f2e2be04f22d60, type: 2}
+  BoltAction: {fileID: 11400000, guid: 60f28818a4dcabb42a24e19557f61bfd, type: 2}
 --- !u!114 &5788969553251691976
 MonoBehaviour:
   m_ObjectHideFlags: 0

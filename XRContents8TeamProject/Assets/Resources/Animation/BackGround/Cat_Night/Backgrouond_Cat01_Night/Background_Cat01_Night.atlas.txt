@@ -1,0 +1,188 @@
+
+Background_Cat01_Night.png
+size: 340,95
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Background_Cat01_Night 1
+  rotate: false
+  xy: 142, 8
+  size: 43, 33
+  orig: 107, 104
+  offset: 20, 11
+  index: -1
+Background_Cat01_Night 10
+  rotate: true
+  xy: 74, 3
+  size: 36, 42
+  orig: 107, 104
+  offset: 49, 38
+  index: -1
+Background_Cat01_Night 11
+  rotate: true
+  xy: 2, 3
+  size: 34, 42
+  orig: 107, 104
+  offset: 50, 38
+  index: -1
+Background_Cat01_Night 12
+  rotate: false
+  xy: 212, 2
+  size: 32, 41
+  orig: 107, 104
+  offset: 45, 38
+  index: -1
+Background_Cat01_Night 13
+  rotate: false
+  xy: 46, 2
+  size: 26, 37
+  orig: 107, 104
+  offset: 46, 37
+  index: -1
+Background_Cat01_Night 14
+  rotate: false
+  xy: 187, 2
+  size: 23, 40
+  orig: 107, 104
+  offset: 47, 34
+  index: -1
+Background_Cat01_Night 15
+  rotate: false
+  xy: 118, 2
+  size: 22, 38
+  orig: 107, 104
+  offset: 46, 38
+  index: -1
+Background_Cat01_Night 16
+  rotate: false
+  xy: 316, 53
+  size: 22, 40
+  orig: 107, 104
+  offset: 44, 37
+  index: -1
+Background_Cat01_Night 17
+  rotate: false
+  xy: 307, 8
+  size: 23, 40
+  orig: 107, 104
+  offset: 46, 38
+  index: -1
+Background_Cat01_Night 18
+  rotate: false
+  xy: 246, 2
+  size: 24, 42
+  orig: 107, 104
+  offset: 46, 38
+  index: -1
+Background_Cat01_Night 19
+  rotate: false
+  xy: 292, 50
+  size: 22, 43
+  orig: 107, 104
+  offset: 44, 37
+  index: -1
+Background_Cat01_Night 2
+  rotate: true
+  xy: 272, 2
+  size: 43, 33
+  orig: 107, 104
+  offset: 20, 11
+  index: -1
+Background_Cat01_Night 20
+  rotate: false
+  xy: 267, 47
+  size: 23, 46
+  orig: 107, 104
+  offset: 43, 38
+  index: -1
+Background_Cat01_Night 21
+  rotate: false
+  xy: 194, 45
+  size: 23, 48
+  orig: 107, 104
+  offset: 43, 38
+  index: -1
+Background_Cat01_Night 22
+  rotate: false
+  xy: 171, 44
+  size: 21, 49
+  orig: 107, 104
+  offset: 44, 36
+  index: -1
+Background_Cat01_Night 23
+  rotate: false
+  xy: 250, 46
+  size: 15, 47
+  orig: 107, 104
+  offset: 45, 39
+  index: -1
+Background_Cat01_Night 24
+  rotate: false
+  xy: 153, 43
+  size: 16, 50
+  orig: 107, 104
+  offset: 44, 38
+  index: -1
+Background_Cat01_Night 25
+  rotate: false
+  xy: 20, 40
+  size: 13, 53
+  orig: 107, 104
+  offset: 44, 37
+  index: -1
+Background_Cat01_Night 26
+  rotate: false
+  xy: 61, 41
+  size: 14, 52
+  orig: 107, 104
+  offset: 44, 36
+  index: -1
+Background_Cat01_Night 3
+  rotate: false
+  xy: 99, 42
+  size: 14, 51
+  orig: 107, 104
+  offset: 45, 37
+  index: -1
+Background_Cat01_Night 4
+  rotate: false
+  xy: 115, 42
+  size: 13, 51
+  orig: 107, 104
+  offset: 49, 38
+  index: -1
+Background_Cat01_Night 5
+  rotate: false
+  xy: 2, 39
+  size: 16, 54
+  orig: 107, 104
+  offset: 50, 38
+  index: -1
+Background_Cat01_Night 6
+  rotate: false
+  xy: 77, 42
+  size: 20, 51
+  orig: 107, 104
+  offset: 50, 38
+  index: -1
+Background_Cat01_Night 7
+  rotate: false
+  xy: 130, 43
+  size: 21, 50
+  orig: 107, 104
+  offset: 50, 39
+  index: -1
+Background_Cat01_Night 8
+  rotate: false
+  xy: 35, 41
+  size: 24, 52
+  orig: 107, 104
+  offset: 50, 37
+  index: -1
+Background_Cat01_Night 9
+  rotate: false
+  xy: 219, 46
+  size: 29, 47
+  orig: 107, 104
+  offset: 49, 38
+  index: -1

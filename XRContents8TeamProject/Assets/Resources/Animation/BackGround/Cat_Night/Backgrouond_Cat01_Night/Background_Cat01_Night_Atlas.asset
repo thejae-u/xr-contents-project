@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
+  m_Name: Background_Cat01_Night_Atlas
+  m_EditorClassIdentifier: 
+  atlasFile: {fileID: 4900000, guid: 5edb2f1ca72ad7d4693bb4a742dd4dfe, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 867f96901f09a7541ae674f99fb92a7f, type: 2}

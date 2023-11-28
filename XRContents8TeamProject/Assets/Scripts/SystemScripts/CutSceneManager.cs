@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Spine.Unity;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CutSceneManager : MonoBehaviour
 {
@@ -14,219 +16,284 @@ public class CutSceneManager : MonoBehaviour
     [Header("속도 조정")][Range(0.0f, 5.0f)] 
     public float speed;
 
-    private GameObject globalLight = null;
-    private GameObject spotLight = null;
-
-    private bool isInitialized;
+    public GameObject startButton;
+    public GameObject settingButton;
+    public GameObject exitButton;
+    public GameObject skipButton;
     
-    private int curState;
-    private bool isEndFirstAnim;
+    public GameObject nextButton;
+
+    public Image blackImage;
+
+    public GameObject globalLight;
+    public GameObject spotLight;
+    
+    private CutSceneCounter Inst = CutSceneCounter.Inst;
 
     private SkeletonAnimation anim;
 
+    private int soundCount;
+
     private readonly string[] names =
     {
-        "Start1",
+        "Start",
         "Start2",
-        "Book_Open_1",
+        "Book_Open_Page1",
         "Page2",
         "Page3",
         "Page4",
         "Page5",
         "Page6",
-        "Book_Open_7",
+        "Book_Open_Page7",
         "Page8",
         "Page9",
         "Page10"
     };
 
-    private static CutSceneManager inst;
-
-    private bool isStart;
-
-    public static CutSceneManager Inst
+    private void DeleteMixAnimation()
     {
-        get
+        for (int i = 0; i < names.Length; i++)
         {
-            return inst;
+            for (int j = 0; j < names.Length; j++)
+            {
+                if (j == i) continue;
+                anim.AnimationState.Data.SetMix(names[i], names[j], 0);
+            }
         }
     }
 
     private void Awake()
     {
-        if (inst == null)
-            inst = this;
-        else
-            Destroy(gameObject);
-        
-        anim = gameObject.GetComponent<SkeletonAnimation>();
-
-        for (int i = 0; i < names.Length - 1; i++)
-        {
-            if (i < 2)
-                continue;
-            anim.AnimationState.Data.SetMix(names[i], names[i + 1], 0);
-        }
-        
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        curState = 6;
-        isInitialized = false;
-        isEndFirstAnim = true;
-        isStart = false;
+        anim = gameObject.GetComponent<SkeletonAnimation>();
+        DeleteMixAnimation();
+        SoundManager.Inst.Play("BgmMenu");
+        AnimationCall();
+        Cursor.visible = true;
+    }
 
-        anim.AnimationState.SetAnimation(0, names[curState++], false);
+    private void AdminActivator()
+    {
+        if(Input.GetKeyDown(KeyCode.F10))
+        {
+            CutSceneCounter.Inst.SettingGameOver();
+            SoundManager.Inst.DeleteAllSound();
+            DOTween.KillAll();
+            SceneManager.LoadScene("MenuAndCutScene");
+        }
+
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            CutSceneCounter.Inst.SettingRestartScene();
+            SoundManager.Inst.DeleteAllSound();
+            DOTween.KillAll();
+            SceneManager.LoadScene("Stage1");
+        }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        AdminActivator();
+        
+        if (Inst.IsEndingOn)
         {
-            if (SceneManager.GetActiveScene().name == "CutSceneNextTestScene")
-            {
-                SceneManager.LoadScene("CutScene");
-                
-                InitObject();
-                SecondStartAnimation();
-            }
+            Inst.IsEndingOn = false;
+            OffAllButtons();
         }
 
-        if (SceneManager.GetActiveScene().name != "CutScene") return;
-            
-            
-        if (!isInitialized)
-            InitObject();
-        
-        if (!isEndFirstAnim)
+        if (!Inst.IsEndFirstAnim)
         {
-            StartAnimation();
+            CheckShowMenu();
             return;
         }
 
-        if (!isStart)
+        if (!Inst.IsEndSecondAnim)
         {
-            AnimationUpdate();
+            SetStartAnimation();
             return;
         }
         
-        GameStart();
+        ShowPageButton();
+        
+        
+        if(Inst.IsStart)
+            GameStart();
     }
 
-    private void InitObject()
+    public void OnNextButtonClick()
     {
-        if (SceneManager.GetActiveScene().name != "CutScene") return;
+        SoundManager.Inst.Play("ButtonClick");
+        nextButton.SetActive(false);
         
-        globalLight = GameObject.Find("Global");
-        spotLight = GameObject.Find("Spot");
-        isInitialized = true;
+        if (anim.AnimationState.GetCurrent(0).IsComplete)
+        {
+            switch (soundCount)
+            {
+                case 0:
+                    soundCount++;
+                    SoundManager.Inst.Play("BookPage1");
+                    break;
+                case 1:
+                    soundCount++;
+                    SoundManager.Inst.Play("BookPage2");
+                    break;
+                case 2:
+                    soundCount++;
+                    SoundManager.Inst.Play("BookPage3");
+                    break;
+                case 3:
+                    soundCount++;
+                    SoundManager.Inst.Play("BookPage4");
+                    break;
+                case 4:
+                    soundCount = 0;
+                    SoundManager.Inst.Play("BookPage5");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
+            switch (anim.AnimationName)
+            {
+                case "Page6":
+                    Inst.IsStart = true;
+                    return;
+                case "Page10":
+                    Sequence sequence = DOTween.Sequence();
+                    sequence.Append(blackImage.DOFade(1.0f, speed / 4.0f)).OnComplete(() =>
+                    {
+                        CutSceneCounter.Inst.CurState = -1;
+                        CutSceneCounter.Inst.SettingGameOver();
+                        AnimationCall();
+                        sequence.Append(blackImage.DOFade(0.0f, speed / 4.0f));
+                    });
+                    return;
+                default:
+                    AnimationCall();
+                    break;
+            }
+        }
     }
 
     private void AnimationCall()
     {
-        anim.AnimationState.SetAnimation(0, names[curState++], false);
+        CutSceneCounter.Inst.CurState += 1;
+        anim.AnimationState.SetAnimation(0, names[CutSceneCounter.Inst.CurState], false);
     }
 
-    private void AnimationUpdate()
+    private void SetStartAnimation()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (anim.AnimationState.GetCurrent(0).IsComplete)
         {
-            switch (anim.AnimationName)
-            {
-                // First CutScene
-                case "Book_Open_1" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    AnimationCall();
-                    break;
-                case "Book_Open_1":
-                    break;
-                
-                case "Page2" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    AnimationCall();
-                    break;
-                case "Page2":
-                    break;
-                
-                case "Page3" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    AnimationCall();
-                    break;
-                case "Page3":
-                    break;
-                
-                case "Page4" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    AnimationCall();
-                    break;
-                case "Page4":
-                    break;
-                
-                case "Page5" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    AnimationCall();
-                    break;
-                case "Page5":
-                    break;
-                
-                case "Page6" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    isStart = true;
-                    break;
-                case "Page6":
-                    break;
-                
-                // Second CutScene
-                case "Book_Open_7" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    AnimationCall();
-                    break;
-                case "Book_Open_7":
-                    break;
-                case "Page8" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    AnimationCall();
-                    break;
-                case "Page8":
-                    break;
-                case "Page9" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    AnimationCall();
-                    break;
-                case "Page9":
-                    break;
-                case "Page10" when anim.AnimationState.GetCurrent(0).IsComplete:
-                    break;
-                case "Page10":
-                    break;
-            }
+            AnimationCall();
+            Inst.IsEndSecondAnim = true;
+            SoundManager.Inst.Play("BookOpen");
         }
     }
 
-    private void StartAnimation()
+    private void ShowPageButton()
     {
+        if (Inst.IsStart)
+        {
+            skipButton.SetActive(false);
+            nextButton.SetActive(false);
+            return;
+        }
+
+        if (!anim.AnimationState.GetCurrent(0).IsComplete) return;
+
         switch (anim.AnimationName)
         {
-            case "Start1" when anim.AnimationState.GetCurrent(0).IsComplete:
-                AnimationCall();
-                break;
-            case "Start1":
-                break;
-            
-            case "Start2" when anim.AnimationState.GetCurrent(0).IsComplete: 
-                AnimationCall();
-                break;
+            case "Start":
             case "Start2":
-                break;
-            
-            case "Book_Open_1":
-                isEndFirstAnim = true;
-                break;
+                nextButton.SetActive(false);
+                return;
+            case "Book_Open_Page1" when anim.AnimationState.GetCurrent(0).IsComplete:
+                nextButton.SetActive(true);
+                skipButton.SetActive(true);
+                return;
+            case "Book_Open_Page1":
+                return;
+            default:
+                nextButton.SetActive(anim.AnimationState.GetCurrent(0).IsComplete);
+                return;
         }
     }
 
-    private void SecondStartAnimation()
+    private void CheckShowMenu()
     {
-        gameObject.GetComponent<MeshRenderer>().enabled = true;
-        AnimationCall();
-        isStart = false;
+        if (anim.AnimationState.GetCurrent(0).IsComplete)
+        {
+            ShowMenuButtons();
+        }
     }
 
+    public void OnStartButtonClick()
+    {
+        SoundManager.Inst.Play("ButtonClick");
+        OffMenuButtons();
+        AnimationCall();
+        Inst.IsEndFirstAnim = true;
+    }
+
+    public void OnExitButtonClick()
+    {
+        #if UNITY_EDITOR
+        SoundManager.Inst.Play("ButtonClick");
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        SoundManager.Inst.Play("ButtonClick");
+        Application.Quit();
+        #endif
+    }
+
+    public void OnSkipButtonClick()
+    {
+        SoundManager.Inst.Play("ButtonClick");
+        CutSceneCounter.Inst.CurState = 6;
+        AnimationCall();
+        SoundManager.Inst.Play("BookPage1");
+        skipButton.SetActive(false);
+    }
+
+    private void ShowMenuButtons()
+    {
+        startButton.SetActive(true);
+        settingButton.SetActive(true);
+        exitButton.SetActive(true);
+    }
+
+    private void OffMenuButtons()
+    {
+        startButton.SetActive(false);
+        settingButton.SetActive(false);
+        exitButton.SetActive(false);
+    }
+
+    private void OffAllButtons()
+    {
+        startButton.SetActive(false);
+        settingButton.SetActive(false);
+        exitButton.SetActive(false);
+        nextButton.SetActive(false);
+        skipButton.SetActive(false);
+    }
+    
     private void GameStart()
     {
+        if (!Inst.IsFade)
+        {
+            Sequence sequence = DOTween.Sequence();
+            sequence.Append(blackImage.DOFade(1.0f, speed / 4.0f));
+            SoundManager.Inst.SoundFadeOut();
+            
+            sequence.Play();
+            Inst.IsFade = true;
+        }
+        
         if (Camera.main.orthographicSize > range)
         {
             Camera.main.orthographicSize -= Time.deltaTime * speed;
@@ -235,9 +302,7 @@ public class CutSceneManager : MonoBehaviour
 
         spotLight.GetComponent<Light2D>().intensity = 0;
         globalLight.GetComponent<Light2D>().intensity = 0;
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
 
-        SceneManager.LoadScene("TestScene2");
-        //SceneManager.LoadScene("CutSceneNextTestScene");
+        SceneManager.LoadScene("Stage1");
     }
 }
