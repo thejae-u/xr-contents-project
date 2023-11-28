@@ -64,12 +64,12 @@ public class CutSceneManager : MonoBehaviour
 
     private void Awake()
     {
-        anim = gameObject.GetComponent<SkeletonAnimation>();
-        DeleteMixAnimation();
     }
 
     private void Start()
     {
+        anim = gameObject.GetComponent<SkeletonAnimation>();
+        DeleteMixAnimation();
         SoundManager.Inst.Play("BgmMenu");
         AnimationCall();
         Cursor.visible = true;
@@ -83,6 +83,14 @@ public class CutSceneManager : MonoBehaviour
             SoundManager.Inst.DeleteAllSound();
             DOTween.KillAll();
             SceneManager.LoadScene("MenuAndCutScene");
+        }
+
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            CutSceneCounter.Inst.SettingRestartScene();
+            SoundManager.Inst.DeleteAllSound();
+            DOTween.KillAll();
+            SceneManager.LoadScene("Stage1");
         }
     }
 

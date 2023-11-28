@@ -133,14 +133,10 @@ public class NormalAttackNode : INode
             return Fsm.GuardNullNode(this, outOfAttackRange);
         }
 
-        var dir = (playerTransform.position - myPos).normalized;
-
         isNowAttack.Value = true;
 
         if (myType == EEliteType.None)
         {
-            var effectPos = new Vector3(dir.x > 0 ? myPos.x + d2 : myPos.x - d2, myPos.y, 0);
-            EffectController.Inst.PlayEffect(effectPos, "NormalMonsterAttack");
             switch (Random.Range(0, 3))
             {
                 case 0:
@@ -177,11 +173,9 @@ public class NormalAttackNode : INode
         if (!player.isInvincibility)
         {
             LogPrintSystem.SystemLogPrint(myTransform, $"{attackDamage} Damage to Player!!", ELogType.EnemyAI);
-            player.PlayerDiscountHp(attackDamage, myTransform.position.x);
-            GameManager.Inst.HitPlayer();
         }
 
-        sequence.SetDelay(1.0f).OnComplete(() => { isNowAttack.Value = false; }).SetId(this);
+        sequence.SetDelay(1.5f).OnComplete(() => { isNowAttack.Value = false; }).SetId(this);
 
         return Fsm.GuardNullNode(this, outOfAttackRange);
     }

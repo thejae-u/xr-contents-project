@@ -54,13 +54,14 @@ public class SoundManager : MonoBehaviour
         else
             Destroy(gameObject);   
         DontDestroyOnLoad(gameObject);
+
+        createdObjs = new List<GameObject>();
     }
     
     #endregion
 
     private void Start()
     {
-        createdObjs = new List<GameObject>();
         sid = 0;
     }
     
@@ -104,6 +105,7 @@ public class SoundManager : MonoBehaviour
 
     public void DeleteSound(GameObject obj)
     {
+        Debug.Log("DELETE CALL");
         for (int i = createdObjs.Count - 1; i >= 0; i--)
         {
             if (obj == null || createdObjs[i] == null) return;

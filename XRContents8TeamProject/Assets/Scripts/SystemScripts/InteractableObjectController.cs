@@ -59,19 +59,23 @@ public class InteractableObjectController : MonoBehaviour
 
             if (timer.IsAttacked)
             {
-                var newPos = new Vector3(transform.position.x, transform.position.y + 2.5f, 0);
+                var newPos = new Vector3(0, 0, 0);
                 switch (SceneManager.GetActiveScene().name)
                 {
                     case "Stage1":
-                        EffectController.Inst.PlayEffect(newPos, "Reaf1");
+                        newPos.x = transform.position.x;
+                        newPos.y = transform.position.y + 3f;
+                        EffectController.Inst.PlayEffect(newPos, "Reaf1", transform);
                         break;
                     case "Stage2":
-                        EffectController.Inst.PlayEffect(newPos, "Reaf2");
+                        newPos.x = transform.position.x - 1f;
+                        newPos.y = transform.position.y + 5f;
+                        EffectController.Inst.PlayEffect(newPos, "Reaf2", transform);
                         break;
                     case "Stage3":
                         newPos.x = transform.position.x + 3f;
-                        newPos.y = transform.position.y + 1.9f;
-                        EffectController.Inst.PlayEffect(newPos, "Reaf3");
+                        newPos.y = transform.position.y + 2f;
+                        EffectController.Inst.PlayEffect(newPos, "Reaf3", transform);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
