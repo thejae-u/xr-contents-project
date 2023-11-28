@@ -36,15 +36,15 @@ public class CutSceneManager : MonoBehaviour
 
     private readonly string[] names =
     {
-        "Start1",
+        "Start",
         "Start2",
-        "Book_Open_1",
+        "Book_Open_Page1",
         "Page2",
         "Page3",
         "Page4",
         "Page5",
         "Page6",
-        "Book_Open_7",
+        "Book_Open_Page7",
         "Page8",
         "Page9",
         "Page10"
@@ -72,12 +72,22 @@ public class CutSceneManager : MonoBehaviour
     {
         SoundManager.Inst.Play("BgmMenu");
         AnimationCall();
+        Cursor.visible = true;
     }
 
+    private void AdminActivator()
+    {
+        if(Input.GetKeyDown(KeyCode.F10))
+        {
+            CutSceneCounter.Inst.SettingGameOver();
+            SoundManager.Inst.DeleteAllSound();
+            SceneManager.LoadScene("MenuAndCutScene");
+        }
+    }
 
     private void Update()
     {
-        ControlNightIntensity();
+        AdminActivator();
         
         if (Inst.IsEndingOn)
         {
@@ -159,19 +169,6 @@ public class CutSceneManager : MonoBehaviour
         }
     }
 
-    private void ControlNightIntensity()
-    {
-        switch (anim.AnimationName)
-        {
-            case "Page9":
-                spotLight.GetComponent<Light2D>().intensity = 5.0f;
-                return;
-            default:
-                spotLight.GetComponent<Light2D>().intensity = 10.0f;       
-                return;        
-        }
-    }
-
     private void AnimationCall()
     {
         CutSceneCounter.Inst.CurState += 1;
@@ -201,15 +198,15 @@ public class CutSceneManager : MonoBehaviour
 
         switch (anim.AnimationName)
         {
-            case "Start1":
+            case "Start":
             case "Start2":
                 nextButton.SetActive(false);
                 return;
-            case "Book_Open_1" when anim.AnimationState.GetCurrent(0).IsComplete:
+            case "Book_Open_Page1" when anim.AnimationState.GetCurrent(0).IsComplete:
                 nextButton.SetActive(true);
                 skipButton.SetActive(true);
                 return;
-            case "Book_Open_1":
+            case "Book_Open_Page1":
                 return;
             default:
                 nextButton.SetActive(anim.AnimationState.GetCurrent(0).IsComplete);

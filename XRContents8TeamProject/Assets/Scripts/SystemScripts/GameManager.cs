@@ -71,9 +71,9 @@ public class GameManager : MonoBehaviour
         FadeIn();
     }
 
-    private void Update()
+    private void AdminActivator()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.F11))
         {
             CutSceneCounter.Inst.CurState = 7;
             foreach (var stage in stages)
@@ -88,12 +88,31 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.F10))
+        {
+            SoundManager.Inst.DeleteAllSound();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            CutSceneCounter.Inst.SettingGameOver();
+            SoundManager.Inst.DeleteAllSound();
+            SceneManager.LoadScene("MenuAndCutScene");
+        }
+    }
+
+    private void Update()
+    {
+        AdminActivator();
         
         if (PlayerManager.Instance.GetIsPlayerDead())
         {
             if (PlayerManager.Instance.GetIsFinishGame())
             {
                 SoundManager.Inst.DeleteAllSound();
+                CutSceneCounter.Inst.SceneName = SceneManager.GetActiveScene().name;
                 SceneManager.LoadScene("GameoverScene");
             }
                 

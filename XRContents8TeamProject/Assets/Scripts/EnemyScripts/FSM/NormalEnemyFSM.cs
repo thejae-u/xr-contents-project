@@ -28,6 +28,7 @@ public class NormalTraceNode : TraceNode
         var waitTime = blackboard.GetData<ReferenceValueT<float>>("waitTime");
         var isTimerWait = blackboard.GetData<ReferenceValueT<bool>>("isTimerWait");
         var myPosToCamera = Camera.main.WorldToViewportPoint(myPos);
+        var myRd = myTransform.GetComponent<Rigidbody2D>();
 
         if (myPosToCamera.x > 0.1f && myPosToCamera.x < 0.9f)
         {
@@ -35,6 +36,8 @@ public class NormalTraceNode : TraceNode
             {
                 myNode.Value = ENode.SpecialAttackReady;
 
+                myRd.constraints = RigidbodyConstraints2D.FreezePositionX;
+                
                 if (!isTimerEnded.Value)
                 {
                     var timer = myTransform.GetComponentInChildren<WeakTimeController>(true);
@@ -59,9 +62,11 @@ public class NormalTraceNode : TraceNode
             }
         }
 
+        myRd.constraints = RigidbodyConstraints2D.None;
+        myRd.constraints = RigidbodyConstraints2D.FreezeRotation;
+        
         myNode.Value = ENode.Trace;
 
-        var myRd = myTransform.GetComponent<Rigidbody2D>();
         var moveDir = (playerPos - myPos).normalized;
         
         if (moveDir.x > 0f)

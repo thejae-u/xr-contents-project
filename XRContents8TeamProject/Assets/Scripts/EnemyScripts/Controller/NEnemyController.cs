@@ -54,6 +54,8 @@ namespace EnemyScripts
         [HideInInspector] [SerializeField] private ReferenceValueT<float> playerDamage;
         
         [SerializeField] private List<GameObject> timers;
+
+        private bool isCoroutineOn;
         
 
         private Blackboard b;
@@ -64,6 +66,7 @@ namespace EnemyScripts
             fsm = new Fsm();
             b = new Blackboard();
             anim = gameObject.GetComponent<SkeletonAnimation>();
+
 
             isAlive.Value = true;
             myNode.Value = ENode.Idle;
@@ -104,6 +107,8 @@ namespace EnemyScripts
 
         void Start()
         {
+            isCoroutineOn = false;
+            
             var wait = new WaitNode();
             var trace = new NormalTraceNode();
             var attack = new NormalAttackNode();
@@ -128,9 +133,20 @@ namespace EnemyScripts
             fsm.Init(b, wait);
         }
 
+        private IEnumerator GuardNonDestroy()
+        {
+            isCoroutineOn = true;
+            yield return new WaitForSeconds(2.0f);
+            Destroy(gameObject);
+        }
+
         private void Update()
         {
             if (CameraController.Inst.IsNowCutScene) return;
+            if (myHp <= 0 && !isCoroutineOn)
+            {
+                StartCoroutine(GuardNonDestroy());
+            }
 
             if (isAlive.Value)
             {
@@ -140,7 +156,6 @@ namespace EnemyScripts
                 Flip();
                 fsm.Update();
                 fsmLife.Update();
-
             }
             else
             {

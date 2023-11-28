@@ -97,6 +97,7 @@ public class EliteAttackReadyNode : INode
     {
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var timers = blackboard.GetData<List<GameObject>>("timers");
+        var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType");
 
         foreach (var obj in timers)
         {
@@ -105,8 +106,9 @@ public class EliteAttackReadyNode : INode
 
         myTransform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
         myTransform.GetComponent<Collider2D>().enabled = false;
-        
-        SoundManager.Inst.Play("RushMonsterBreath");
+
+        if (myType.Value == EEliteType.Rush)
+            SoundManager.Inst.Play("RushMonsterBreath");
     }
 
     private void EndOfNode(Blackboard blackboard)
@@ -116,6 +118,7 @@ public class EliteAttackReadyNode : INode
         myTransform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         myTransform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         myTransform.GetComponent<Collider2D>().enabled = true;
+        
     }
 
     public INode Execute(Blackboard blackboard)
@@ -239,7 +242,6 @@ public class EliteRushAttackNode : INode
         var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
         var specialAttackCooldown = blackboard.GetData<ReferenceValueT<float>>("specialAttackCooldown");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
-        var isEffectOn = blackboard.GetData<ReferenceValueT<bool>>("isEffectOn");
         
         var myPos = myTransform.position;
         var dir = (playerTransform.position - myPos).normalized;
@@ -249,14 +251,11 @@ public class EliteRushAttackNode : INode
         canSpecialAttackReady.Value = false;
         hasRemainAttackTime.Value = true;
         myTransform.position = myPos;
-        isEffectOn.Value = false;
         
         sequence.SetDelay(specialAttackCooldown.Value).OnComplete(() =>
         {
             hasRemainAttackTime.Value = false;
         }).SetId(this);
-
-        
         
     }
 
@@ -281,28 +280,6 @@ public class EliteRushAttackNode : INode
         }
 
         Vector3 pos = Camera.main.WorldToViewportPoint(myTransform.position);
-
-        if (!blackboard.GetData<ReferenceValueT<bool>>("isEffectOn").Value)
-        {
-            var dir = (playerTransform.position - myTransform.position).normalized;
-            blackboard.GetData<ReferenceValueT<bool>>("isEffectOn").Value = true;
-            
-            var ePos = new Vector3(myTransform.position.x, myTransform.position.y, 0);
-            ePos.y -= 0.5f;
-
-            if (dir.x < 0)
-            {
-                ePos.x += 1.5f;
-                // right
-                EffectController.Inst.PlayEffect(ePos, "RushSpecialAttack", false, myTransform);
-            }
-            else
-            {
-                ePos.x -= 1.5f;
-                // left
-                EffectController.Inst.PlayEffect(ePos, "RushSpecialAttack", true, myTransform);
-            }
-        }
 
         if (rushDirection)
         {
