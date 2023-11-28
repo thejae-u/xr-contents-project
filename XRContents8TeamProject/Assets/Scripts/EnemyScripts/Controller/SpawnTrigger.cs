@@ -18,7 +18,7 @@ public class SpawnTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.transform.CompareTag("Player"))
+        if (other.transform.CompareTag("Player") || other.gameObject.layer == LayerMask.NameToLayer("PlayerInvincibility"))
         {
             GameManager.Inst.EnemySpawn(stageCount, SectorCount);
             Destroy(gameObject);

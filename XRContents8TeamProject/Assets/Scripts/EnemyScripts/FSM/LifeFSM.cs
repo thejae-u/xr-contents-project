@@ -8,6 +8,28 @@ public class AliveNode : INode
     public INode Execute(Blackboard blackboard)
     {
         var myHp = blackboard.GetData<ReferenceValueT<float>>("myHp");
+        var myType = blackboard.GetData<ReferenceValueT<EEliteType>>("myType");
+        var myTransform = blackboard.GetData<Transform>("myTransform");
+
+        if (myHp.Value > 0.0f)
+            return Fsm.GuardNullNode(this, this);
+
+        switch (myType.Value)
+        {
+            case EEliteType.None:
+                LogPrintSystem.SystemLogPrint(myTransform, $"NORMAL DEAD", ELogType.EnemyAI);
+                SoundManager.Inst.Play("NormalMonsterDead");
+                break;
+            case EEliteType.Rush:
+                SoundManager.Inst.Play("RushMonsterDead");
+                break;
+            case EEliteType.Bomb:
+                SoundManager.Inst.Play("BombMonsterDead");
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
         return Fsm.GuardNullNode(this, myHp.Value > 0.0f ? this : dead);
     }
 }

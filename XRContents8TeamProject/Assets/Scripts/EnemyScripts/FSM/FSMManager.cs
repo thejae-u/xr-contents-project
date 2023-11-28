@@ -121,17 +121,27 @@ public class WaitNode : INode
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
         var isGround = blackboard.GetData<ReferenceValueT<bool>>("isGround");
         var myNode = blackboard.GetData<ReferenceValueT<ENode>>("myNode");
+        var isNowAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
+        var myRd = myTransform.GetComponent<Rigidbody2D>();
 
         myNode.Value = ENode.Idle;
-        LogPrintSystem.SystemLogPrint(myTransform, "Cur Node is Wait", ELogType.EnemyAI);
+        
         
         if (!isGround.Value) return Fsm.GuardNullNode(this, this);
+        
+        myRd.constraints = RigidbodyConstraints2D.FreezePositionX;
         
         float d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
         float d2 = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
 
         float distance = (myTransform.position - playerTransform.position).magnitude;
 
+        if (isNowAttack.Value)
+            return Fsm.GuardNullNode(this, this);
+
+        myRd.constraints = RigidbodyConstraints2D.None;
+        myRd.constraints = RigidbodyConstraints2D.FreezeRotation;
+        
         return Fsm.GuardNullNode(this, d1 + d2 >= distance ? enterPlayer : this);
     }
 }
@@ -168,7 +178,6 @@ public abstract class TraceNode : INode
         var isJumping = blackboard.GetData<ReferenceValueT<bool>>("isJumping");
         if (isJumping.Value)
         {
-            LogPrintSystem.SystemLogPrint(myTransform, $"{isJumping} isJumping", ELogType.EnemyAI);
             return ETraceState.PlayerTrace;
         }
 
@@ -191,10 +200,8 @@ public abstract class TraceNode : INode
         // Trace Logic
         if (myType != EEliteType.Rush)
         {
-            LogPrintSystem.SystemLogPrint(myTransform, "Trace Normal Monster", ELogType.EnemyAI);
-            LogPrintSystem.SystemLogPrint(myTransform, $"{playerRange + myAttackRange >= distance}", ELogType.EnemyAI);
             // Check Attack Range
-            return playerRange + myAttackRange >= distance ? ETraceState.PlayerEnter : ETraceState.PlayerTrace;
+            return playerRange + myAttackRange >= distance ? ETraceState.PlayerEnter : ETraceState.PlayerTrace; 
         }
 
         // Rush Monster Normal Attack Range Check
@@ -221,14 +228,17 @@ public abstract class TraceNode : INode
                 // Enable Rush Attack
                 if (!isOverRush.Value)
                 {
-                    return ETraceState.PlayerEnterRush;
+                    var camPos = Camera.main.WorldToViewportPoint(myTransform.position);
+                    if (camPos.x < 0.9f && camPos.x > 0.1f)
+                        return ETraceState.PlayerEnterRush;
+                    return ETraceState.PlayerTrace;
                 }
             }
         }
 
         // Rush Attack in Cooldown
         // Check Attack Range for Rush Monster
-        return playerRange + myAttackRange >= distance ? ETraceState.PlayerEnter : ETraceState.PlayerTrace;
+        return ETraceState.PlayerTrace;
     }
 
     public abstract INode Execute(Blackboard blackboard);
@@ -261,8 +271,6 @@ public class JumpNode : INode
         {
             isJumping.Value = false;
         });
-
-        LogPrintSystem.SystemLogPrint(myTransform, "Jump Execute", ELogType.EnemyAI);
 
         return Fsm.GuardNullNode(this, endJump);
     }

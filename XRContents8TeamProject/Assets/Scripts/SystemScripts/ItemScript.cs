@@ -61,6 +61,7 @@ public class ItemScript : MonoBehaviour
                 case EMyType.Bomb:
                     // Play Effect
                     EffectController.Inst.PlayEffect(transform.position, "Bomb");
+                    SoundManager.Inst.PlayBombSound();
                     CheckRange();
                     break;
                 default:
@@ -77,6 +78,7 @@ public class ItemScript : MonoBehaviour
                     break;
                 case EMyType.Bomb:
                     EffectController.Inst.PlayEffect(transform.position, "Bomb");
+                    SoundManager.Inst.PlayBombSound();
                     CheckRange();
                     break;
                 default:
@@ -91,7 +93,6 @@ public class ItemScript : MonoBehaviour
     {
         if (other.transform.CompareTag("Bullet"))
         {
-
             switch (type)
             {
                 case EMyType.Apple:
@@ -99,6 +100,7 @@ public class ItemScript : MonoBehaviour
                 case EMyType.Bomb:
                     // Play Effect
                     EffectController.Inst.PlayEffect(transform.position, "Bomb");
+                    SoundManager.Inst.PlayBombSound();
                     
                     // Check Player & Enemy
                     CheckRange();

@@ -4,6 +4,8 @@ using DG.Tweening;
 using Spine;
 using Spine.Unity;
 using UnityEngine.UI;
+using System;
+using Random = UnityEngine.Random;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -36,6 +38,7 @@ public class PlayerManager : MonoBehaviour
     [Header("플레이어 피격 시 넉백 거리")]
     [SerializeField] private float playerKnockbackDistance = 3.0f;
 
+    private bool isMoving = false;
     private bool isJumping = false;
     private bool canJump = true;
     private bool isKnockback = false;
@@ -43,16 +46,18 @@ public class PlayerManager : MonoBehaviour
     private bool isHit = false;
     private bool isDodge = false;
     private bool isPlayerDead = false;
+    private bool isFinishGame = false;
+    private bool isLanding = false;
 
     // Player dodge(evasion) related
     [Header("플레이어 회피 거리")]
-    [SerializeField] private float dodgeDistance = 4.0f;
+    [SerializeField] private float dodgeDistance = 8.0f;
 
     [Header("플레이어 회피 쿨타임")]
     [SerializeField] private float dodgeCoolTime = 3.0f;
 
     [Header("플레이어 회피 사용 시 무적 시간(지속 시간) 조정")]
-    [SerializeField] private float dodgeInvincibilityDuration = 1.5f;
+    [SerializeField] private float dodgeInvincibilityDuration = 1.0f;
 
     private bool canDodge = true;
     private bool isPlayerDirRight; // 플레이어가 현재 바라보는 방향
@@ -78,7 +83,9 @@ public class PlayerManager : MonoBehaviour
     [Header("플레이어 애니메이션")]
     public SkeletonAnimation skeletonAnimation;
 
-    [SpineEvent] public string eventName;
+    /// <summary>
+    /// [SpineEvent] public string eventName;
+    /// </summary>
     public AnimationReferenceAsset Idle;
     public AnimationReferenceAsset Move;
     public AnimationReferenceAsset Jump;
@@ -112,7 +119,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     private void Start()
-    {
+    { 
         playerHp = playerMaxHp;
         playerRigidbody.gravityScale = playerGravityForce;
         Cursor.visible = false;
@@ -132,6 +139,7 @@ public class PlayerManager : MonoBehaviour
             float moveDir = Input.GetAxis("Horizontal");
             if (moveDir == 0)
             {
+                isMoving = false;
                 if (isJumping) return;
                 if(isDodge) return;
                 if(isHit) return;
@@ -175,9 +183,12 @@ public class PlayerManager : MonoBehaviour
             {
                 PlayerJump();
             }
-
-            PlayerMoveLimit();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        PlayerMoveLimit();
     }
 
     public static PlayerManager Instance
@@ -192,6 +203,10 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public bool GetIsMoving()
+    {
+        return isMoving;
+    }
     public float GetPlayerHp()
     {
         return playerHp;
@@ -204,10 +219,19 @@ public class PlayerManager : MonoBehaviour
     {
         return isPlayerDead;
     }
+    public bool GetIsFinishGame()
+    {
+        return isFinishGame;
+    }
 
     #region MOVEMENT
     void PlayerMove(float moveDir)
     {
+        if(isMoving == false)
+        {
+            isMoving = true;
+            SoundManager.Inst.Play("PlayerFoot");
+        }
         CurrentAnimation(0, Move, true);
 
         Vector2 playerMove = new Vector2(moveDir * playerMoveSpeed, playerRigidbody.velocity.y);
@@ -224,6 +248,7 @@ public class PlayerManager : MonoBehaviour
             isJumping=true;
             canJump = false;
 
+            SoundManager.Inst.Play("PlayerJump");
             CurrentAnimation(0, Jump, false);
 
             playerRigidbody.AddForce(Vector2.up * playerJumpForce, ForceMode2D.Impulse);
@@ -231,6 +256,7 @@ public class PlayerManager : MonoBehaviour
             playerJumpSequence.SetDelay(0.5f).OnComplete(() =>
             {
                 canJump = true;
+                isLanding = false;
             });
         }
     }
@@ -239,6 +265,11 @@ public class PlayerManager : MonoBehaviour
     {
         if (canJump)
         {
+            if(!isLanding)
+            {
+                isLanding = true;
+                SoundManager.Inst.Play("PlayerLanding");
+            }
             isJumping = false;
         }
     }
@@ -250,7 +281,25 @@ public class PlayerManager : MonoBehaviour
         {
             playerHp -= damage;
 
-            playerHpUI.GetComponent<hpUIController>().Sethp(damage);
+            // 사운드 재생
+            int randNum = 0;
+            randNum = Random.Range(0, 2);
+            switch(randNum)
+            {
+                case 0:
+                    SoundManager.Inst.Play("PlayerHit1");
+                    break;
+                case 1:
+                    SoundManager.Inst.Play("PlayerHit2");
+                    break;
+                case 2:
+                    SoundManager.Inst.Play("PlayerHit3");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            playerHpUI.GetComponent<hpUIController>().SetDiscountHp(damage);
 
             LogPrintSystem.SystemLogPrint(transform, $"{damage}From Enemy -> Remain PlayerHP{playerHp}", ELogType.Player);
             if (playerHp > 0)
@@ -281,12 +330,14 @@ public class PlayerManager : MonoBehaviour
 
                 if (playerXPos > enemyXPos) // 플레이어가 오른쪽에 있다면
                 {
-                    transform.DOMoveX(transform.position.x + playerKnockbackDistance, playerHitInvincibilityDuration);
+                    playerRigidbody.velocity = new Vector2(playerKnockbackDistance, playerRigidbody.velocity.y);
+                    playerRigidbody.AddForce(Vector2.right * playerMoveSpeed, ForceMode2D.Impulse);
                     LogPrintSystem.SystemLogPrint(transform, $"넉백 시 플레이어와 적위치 : {playerXPos},{enemyXPos}", ELogType.Player);
                 }
                 else if (playerXPos < enemyXPos)
                 {
-                    transform.DOMoveX(transform.position.x - playerKnockbackDistance, playerHitInvincibilityDuration);
+                    playerRigidbody.velocity = new Vector2(-playerKnockbackDistance, playerRigidbody.velocity.y);
+                    playerRigidbody.AddForce(Vector2.left * playerMoveSpeed, ForceMode2D.Impulse);
                     LogPrintSystem.SystemLogPrint(transform, $"넉백 시 플레이어와 적위치 : {playerXPos},{enemyXPos}", ELogType.Player);
                 }
             }
@@ -324,23 +375,21 @@ public class PlayerManager : MonoBehaviour
             LogPrintSystem.SystemLogPrint(transform, "회피 사용", ELogType.Player);
 
             canDodge = false;
-            Vector3 playerPos = transform.position;
 
             PlayerInvincibility(dodgeInvincibilityDuration);
 
             // 이동 실행
             if (dodgeDirRight)
-            { 
-                transform.DOMoveX(playerPos.x + dodgeDistance, 1.0f);
-                LogPrintSystem.SystemLogPrint(transform, "DOMoveX Right 실행", ELogType.Player);
+            {
+                playerRigidbody.velocity = new Vector2(dodgeDistance, playerRigidbody.velocity.y);
+                playerRigidbody.AddForce(Vector2.right * playerMoveSpeed, ForceMode2D.Impulse);
             }
             else
             {
-                transform.DOMoveX(playerPos.x - dodgeDistance, 1.0f);
-                LogPrintSystem.SystemLogPrint(transform, "DOMoveX Left 실행", ELogType.Player);
+                playerRigidbody.velocity = new Vector2(-dodgeDistance, playerRigidbody.velocity.y);
+                playerRigidbody.AddForce(Vector2.left * playerMoveSpeed, ForceMode2D.Impulse);
             }
  
-            // 애니메이션 역재생
             if (isAnimationBackwards)
             {
                 skeletonAnimation.ClearState();
@@ -373,8 +422,10 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            playerHp = playerMaxHp;
+            playerHp = playerMaxHp; // 회복 후 최대 체력이 오버되면 최대 체력으로 변경
         }
+        
+        playerHpUI.GetComponent<hpUIController>().SetRecoveryHP(amount);
     }
 
     private void PlayerDeath()
@@ -382,6 +433,14 @@ public class PlayerManager : MonoBehaviour
         isPlayerDead = true;
         skeletonAnimation.ClearState();
         CurrentAnimation(0, Dead, false);
+
+        SoundManager.Inst.Play("PlayerDead");
+
+        Sequence sequence = DOTween.Sequence();
+        sequence.SetDelay(2.5f).OnComplete(() =>
+        {
+            isFinishGame = true;
+        });
     }
 
     void PlayerViewMousePoint()
@@ -409,7 +468,7 @@ public class PlayerManager : MonoBehaviour
         if (worldpos.x < 0f)
         {
             canMove = false;
-            worldpos.x = 0f;
+            worldpos.x = 0.02f;
         }
 
         if (worldpos.x < 1f && worldpos.x > 0f)
@@ -420,7 +479,12 @@ public class PlayerManager : MonoBehaviour
         if (worldpos.x > 1f)
         {
             canMove = false;
-            worldpos.x = 1f;
+            worldpos.x = 0.98f;
+        }
+
+        if(worldpos.y < 1f)
+        {
+
         }
 
         this.transform.position = Camera.main.ViewportToWorldPoint(worldpos);

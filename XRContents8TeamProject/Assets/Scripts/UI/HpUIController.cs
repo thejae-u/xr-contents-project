@@ -38,7 +38,7 @@ public class hpUIController : MonoBehaviour
         }
     }
 
-    public void Sethp(float damage)
+    public void SetDiscountHp(float damage)
     {
         damage /= 20;
         hp -= damage;
@@ -57,6 +57,25 @@ public class hpUIController : MonoBehaviour
 
             if ((int)hp == i)
                 heart[i].fillAmount = hp - (int)hp; // 소수점만 남게 처리
+        }
+    }
+
+    public void SetRecoveryHP(float amount)
+    {
+        amount /= 20;
+        hp += amount;
+
+        hp = Mathf.Clamp(hp, 0, hpMax);
+
+        for (int i = 0; i < heart.Length; i++) // 각각의 하트를 확인
+        {
+            heart[i].fillAmount = 0;
+
+            if ((int)hp > i)
+                heart[i].fillAmount = 1;
+
+            if ((int)hp == i)
+                heart[i].fillAmount = hp % 1;
         }
     }
 }

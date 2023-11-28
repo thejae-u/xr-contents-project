@@ -17,11 +17,13 @@ public class AimUIController : MonoBehaviour
     {
         fillMax = GameObject.Find("Player").GetComponent<PlayerManager>().maxGauge;
     }
+
     private void Start()
     {
         fillGauge = fillMax / 100;
         Gauge.fillAmount = 0;
     }
+
     void Update()
     {
         Vector3 mousePosition = Input.mousePosition;
@@ -40,7 +42,7 @@ public class AimUIController : MonoBehaviour
         }
     }
 
-    // ÃÑ¾Ë ¾øÀ» ½Ã »¡°£»öÀ¸·Î º¯°æ
+    // ì´ì•Œ ì—†ì„ ì‹œ ë¹¨ê°„ìƒ‰ìœ¼ë¡œ ë³€ê²½
     public void SetWarningGauge()
     {
         if (!isReadyWarningGauge)

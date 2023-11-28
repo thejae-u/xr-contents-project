@@ -4,6 +4,7 @@ using DG.Tweening;
 using EnemyScripts;
 using Spine.Unity;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class NormalTraceNode : TraceNode
 {
@@ -27,6 +28,7 @@ public class NormalTraceNode : TraceNode
         var waitTime = blackboard.GetData<ReferenceValueT<float>>("waitTime");
         var isTimerWait = blackboard.GetData<ReferenceValueT<bool>>("isTimerWait");
         var myPosToCamera = Camera.main.WorldToViewportPoint(myPos);
+        var myRd = myTransform.GetComponent<Rigidbody2D>();
 
         if (myPosToCamera.x > 0.1f && myPosToCamera.x < 0.9f)
         {
@@ -34,6 +36,8 @@ public class NormalTraceNode : TraceNode
             {
                 myNode.Value = ENode.SpecialAttackReady;
 
+                myRd.constraints = RigidbodyConstraints2D.FreezePositionX;
+                
                 if (!isTimerEnded.Value)
                 {
                     var timer = myTransform.GetComponentInChildren<WeakTimeController>(true);
@@ -53,35 +57,29 @@ public class NormalTraceNode : TraceNode
                         isTimerEnded.Value = true;
                     }
 
-                    // timer.IsAttacked ? do Something : do SomeThing
-
                     timer.Checked();
                 }
             }
         }
 
+        myRd.constraints = RigidbodyConstraints2D.None;
+        myRd.constraints = RigidbodyConstraints2D.FreezeRotation;
+        
         myNode.Value = ENode.Trace;
 
-        Vector2 rayCastPos = myPos;
-        float rayDistance = 1.5f;
-        Vector2 dir = (playerPos - myPos).normalized;
+        var moveDir = (playerPos - myPos).normalized;
         
-        rayCastPos.y -= 0.55f;
-        int layerMask = LayerMask.GetMask("Background");
-
-        RaycastHit2D hit = Physics2D.Raycast(rayCastPos, Vector2.right * dir.x, rayDistance, layerMask);
-        Debug.DrawRay(rayCastPos, Vector2.right * (dir.x * rayDistance));
-
-        if (hit.collider != null)
+        if (moveDir.x > 0f)
         {
-            var myRd = myTransform.GetComponent<Rigidbody2D>();
-            myRd.velocity += Vector2.up * myMoveSpeed;
+            moveDir.x = 1.0f;
+            var movePos = new Vector2(moveDir.x * myMoveSpeed.Value, myRd.velocity.y);
+            myRd.velocity = movePos;
         }
         else
         {
-            myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x,
-                    playerPos.x, myMoveSpeed.Value * Time.deltaTime),
-                myPos.y, myPos.z);
+            moveDir.x = -1.0f;
+            var movePos = new Vector2(moveDir.x * myMoveSpeed, myRd.velocity.y);
+            myRd.velocity = movePos;
         }
 
         switch (type)
@@ -113,17 +111,16 @@ public class NormalAttackNode : INode
 
         var anim = blackboard.GetData<Transform>("myTransform").GetComponent<SkeletonAnimation>();
 
-        if (isNowAttack.Value)
-            return Fsm.GuardNullNode(this, this);
-
         // Attack On
         var myTransform = blackboard.GetData<Transform>("myTransform");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
 
+        var myPos = myTransform.position;
+
         // 거리 계산을 위한 변수
         var d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
         var d2 = blackboard.GetData<ReferenceValueT<float>>("myAttackRange").Value;
-        var distance = (myTransform.position - playerTransform.position).magnitude;
+        var distance = (myPos - playerTransform.position).magnitude;
 
         var player = playerTransform.GetComponent<PlayerManager>();
 
@@ -138,19 +135,48 @@ public class NormalAttackNode : INode
 
         isNowAttack.Value = true;
 
-        LogPrintSystem.SystemLogPrint(myTransform, $"Player Invincibility : {player.isInvincibility}",
-            ELogType.EnemyAI);
-        
+        if (myType == EEliteType.None)
+        {
+            switch (Random.Range(0, 3))
+            {
+                case 0:
+                    SoundManager.Inst.Play("NormalMonsterAtk1");
+                    break;
+                case 1:
+                    SoundManager.Inst.Play("NormalMonsterAtk2");
+                    break;
+                case 2:
+                    SoundManager.Inst.Play("NormalMonsterAtk3");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+        else
+        {
+            switch (Random.Range(0, 3))
+            {
+                case 0:
+                    SoundManager.Inst.Play("RushMonsterAtk1");
+                    break;
+                case 1:
+                    SoundManager.Inst.Play("RushMonsterAtk2");
+                    break;
+                case 2:
+                    SoundManager.Inst.Play("RushMonsterAtk3");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         if (!player.isInvincibility)
         {
-            player.PlayerDiscountHp(attackDamage, myTransform.position.x);
-            GameManager.Inst.HitPlayer();
+            LogPrintSystem.SystemLogPrint(myTransform, $"{attackDamage} Damage to Player!!", ELogType.EnemyAI);
         }
 
         sequence.SetDelay(1.5f).OnComplete(() => { isNowAttack.Value = false; }).SetId(this);
 
-
-        LogPrintSystem.SystemLogPrint(myTransform, $"{attackDamage} Damage to Player!!", ELogType.EnemyAI);
-        return Fsm.GuardNullNode(this, this);
+        return Fsm.GuardNullNode(this, outOfAttackRange);
     }
 }

@@ -16,12 +16,19 @@ public class PlayScript : MonoBehaviour
     private void Awake()
     {
         source = transform.GetComponent<AudioSource>();
-        Debug.Log(source);
         isPlaying = false;
     }
 
     private void Update()
     {
+        if (mySound.soundName == "PlayerFoot")
+        {
+            if (!PlayerManager.Instance.GetIsMoving())
+            {
+                SoundManager.Inst.DeleteSound(gameObject);
+            }
+        }
+        
         if (isPlaying)
         {
             switch (mySound.playType)
@@ -42,6 +49,16 @@ public class PlayScript : MonoBehaviour
 
     public void Play()
     {
+        if (mySound.playType == EPlayType.Loop)
+        {
+            source.clip = mySound.soundData;
+            source.Play();
+            isPlaying = true;
+            return;
+        }
+
+        if (source.clip != null) return;
+        
         source.clip = mySound.soundData;
         source.Play();
         isPlaying = true;

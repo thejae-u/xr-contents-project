@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Spine.Unity;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class InteractableObjectController : MonoBehaviour
@@ -32,6 +34,11 @@ public class InteractableObjectController : MonoBehaviour
 
     private void Update()
     {
+        MainLogic();
+    }
+
+    private void MainLogic()
+    {
         if (!isTimerStarted)
         {
             myCameraPos = Camera.main.WorldToViewportPoint(myPos);
@@ -52,18 +59,51 @@ public class InteractableObjectController : MonoBehaviour
 
             if (timer.IsAttacked)
             {
+                var newPos = new Vector3(0, 0, 0);
+                switch (SceneManager.GetActiveScene().name)
+                {
+                    case "Stage1":
+                        newPos.x = transform.position.x;
+                        newPos.y = transform.position.y + 3f;
+                        EffectController.Inst.PlayEffect(newPos, "Reaf1", transform);
+                        break;
+                    case "Stage2":
+                        newPos.x = transform.position.x - 1f;
+                        newPos.y = transform.position.y + 5f;
+                        EffectController.Inst.PlayEffect(newPos, "Reaf2", transform);
+                        break;
+                    case "Stage3":
+                        newPos.x = transform.position.x + 3f;
+                        newPos.y = transform.position.y + 2f;
+                        EffectController.Inst.PlayEffect(newPos, "Reaf3", transform);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                
+                gameObject.GetComponent<SkeletonAnimation>().AnimationState.SetAnimation(0, "animation", false);
+                newPos = myPos;
+                newPos.y = myPos.y + 3.0f;
+                
                 if (GameManager.Inst.IsNight)
                 {
-                    Instantiate(isInteractable ? item[2].gameObject : item[3].gameObject, transform.position,
+                    Instantiate(isInteractable ? item[2].gameObject : item[3].gameObject, newPos,
                         Quaternion.identity);
                     transform.GetComponent<InteractableObjectController>().enabled = false;
 
                 }
                 else
                 {
-                    Instantiate(isInteractable ? item[0].gameObject : item[1].gameObject, transform.position,
+                    Instantiate(isInteractable ? item[0].gameObject : item[1].gameObject, newPos,
                         Quaternion.identity);
                     transform.GetComponent<InteractableObjectController>().enabled = false;
+                }
+            }
+            else
+            {
+                foreach (var timer in timers)
+                {
+                    timer.SetActive(false);
                 }
             }
 

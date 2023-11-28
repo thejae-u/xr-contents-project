@@ -8,6 +8,7 @@ public class PlayerShot : MonoBehaviour
     private PlayerManager playerManager;
     private AimUIController aimUIController;
     private BalletUIController bulletUIController;
+    private CameraShake cameraShake;
 
     Sequence sequenceBoltAction;
     Sequence sequenceBackforward;
@@ -25,6 +26,10 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private float reverseDelay = 0.3f;
     [SerializeField] private float reloadingDelay = 0.3f;
     [SerializeField] private float forwardDelay = 0.3f;
+
+    [Header("사격 시 카메라 강도")]
+    [SerializeField] private float hit = 0.5f;
+    [SerializeField] private float hitStrong = 2.0f;
 
     [Header("플레이어 사격 애니메이션")]
     public SkeletonAnimation skeletonAnimation;
@@ -51,6 +56,7 @@ public class PlayerShot : MonoBehaviour
         playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
         aimUIController = GameObject.Find("PlayerAim").GetComponent<AimUIController>();
         bulletUIController = GameObject.Find("PlayerAim").GetComponent<BalletUIController>();
+        cameraShake = GameObject.Find("PlayerFollowCamera").GetComponent<CameraShake>();
     }
 
     private void Start()
@@ -112,6 +118,12 @@ public class PlayerShot : MonoBehaviour
                 // StateBackforward -> Reloading -> StateForward
                 StateBackforward();
                 LogPrintSystem.SystemLogPrint(transform, "장전 실행", ELogType.Player);
+            }            
+            if(Input.GetMouseButtonDown(1)  && !isReloading)
+            {
+                // StateBackforward -> Reloading -> StateForward
+                StateBackforward();
+                LogPrintSystem.SystemLogPrint(transform, "장전 실행", ELogType.Player);
             }
         }
     }
@@ -133,11 +145,15 @@ public class PlayerShot : MonoBehaviour
             {
                 EffectController.Inst.PlayEffect(Camera.main.ScreenToWorldPoint(mousePosition), "HitStrong");
                 curDamage = PlayerManager.Instance.playerMaxAtk;
+
+                cameraShake.CameraShakeForTime(0.05f, hitStrong);
             }
             else
             {
                 EffectController.Inst.PlayEffect(Camera.main.ScreenToWorldPoint(mousePosition), "Hit");
                 curDamage = PlayerManager.Instance.playerNormalAtk;
+
+                cameraShake.CameraShakeForTime(0.05f, hit);
             }
 
             aimUIController.isPlayerCheckMaxGauge = false;
@@ -145,6 +161,8 @@ public class PlayerShot : MonoBehaviour
 
             lastFireTime = Time.time;
             curAmmo--;
+
+            SoundManager.Inst.Play("GunShot");
 
             /* UI */
             isDiscountBullet = true;
@@ -199,6 +217,8 @@ public class PlayerShot : MonoBehaviour
     {
         if (isReloading)
         {
+            SoundManager.Inst.Play("GunReload");
+
             state = EShotState.Reloading;
 
             sequenceReloading = DOTween.Sequence();
@@ -232,6 +252,7 @@ public class PlayerShot : MonoBehaviour
                 isReloading = false;
                 state = EShotState.None;
                 LogPrintSystem.SystemLogPrint(transform, $"Reload Requset Complete => Current : {curAmmo} -> ReloadTime : {reverseDelay + reloadingDelay + forwardDelay}", ELogType.Player);
+                aimUIController.InitGauge();
             });
         }
     }

@@ -112,12 +112,28 @@ public class EnemyAnimationController : MonoBehaviour
             case EEliteType.None when anim.AnimationName == "Monster_Idle":
                 break;
             case EEliteType.None:
-                anim.AnimationState.SetAnimation(0, "Monster_Idle", true);
+                if (anim.AnimationName == "Monster_Atk")
+                {
+                    if (anim.AnimationState.GetCurrent(0).IsComplete)
+                    {
+                        anim.timeScale = 1.0f;
+                        anim.AnimationState.SetAnimation(0, "Monster_Idle", true);
+                    }
+                }
+                else
+                        anim.AnimationState.SetAnimation(0, "Monster_Idle", true);
                 break;
             case EEliteType.Rush when anim.AnimationName == "Rush_Idle":
                 break;
             case EEliteType.Rush:
-                anim.AnimationState.SetAnimation(0, "Rush_Idle", true);
+                if (anim.AnimationName == "Rush_ATK")
+                {
+                    if (anim.AnimationState.GetCurrent(0).IsComplete)
+                        anim.AnimationState.SetAnimation(0, "Rush_Idle", true);
+                }
+                else
+                    anim.AnimationState.SetAnimation(0, "Rush_Idle", true);
+                    
                 break;
             case EEliteType.Bomb when anim.AnimationName == "Throw_Idle":
                 break;
@@ -175,21 +191,9 @@ public class EnemyAnimationController : MonoBehaviour
     {
         switch (myType)
         {
-            case EEliteType.None when anim.AnimationName == "Monster_Atk":
-                if (anim.AnimationState.GetCurrent(0).IsComplete)
-                {
-                    anim.timeScale = 1.0f;
-                    instNormal.Data().GetData<ReferenceValueT<ENode>>("myNode").Value = ENode.Idle;
-                }
-
-                break;
             case EEliteType.None:
                 anim.timeScale = 2.0f;
                 anim.AnimationState.SetAnimation(0, "Monster_Atk", false);
-                break;
-            case EEliteType.Rush when anim.AnimationName == "Rush_ATK":
-                if (anim.AnimationState.GetCurrent(0).IsComplete)
-                    anim.AnimationState.SetAnimation(0, "Rush_ATK", false);
                 break;
             case EEliteType.Rush:
                 anim.AnimationState.SetAnimation(0, "Rush_ATK", false);

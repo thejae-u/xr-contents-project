@@ -1,0 +1,13 @@
+
+Background_chocolatedrops01_Dessert.png
+size: 31,44
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+초코방울
+  rotate: false
+  xy: 2, 2
+  size: 27, 40
+  orig: 254, 407
+  offset: 111, 229
+  index: -1

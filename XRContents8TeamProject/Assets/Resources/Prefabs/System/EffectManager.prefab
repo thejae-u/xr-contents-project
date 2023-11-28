@@ -55,3 +55,15 @@ MonoBehaviour:
     effectObj: {fileID: 6351957493536859454, guid: 5e04525df60b90342976b29a20749817, type: 3}
   - effectName: Hit
     effectObj: {fileID: 1472122938329839181, guid: e7dfadb183c6bbf458eff02dd69fbc93, type: 3}
+  - effectName: NormalMonsterAttack
+    effectObj: {fileID: 626248282685444866, guid: 6abfa1a9b0c42854fa7aef6a4ce1389e, type: 3}
+  - effectName: RushSpecialAttack
+    effectObj: {fileID: 2641617079368083704, guid: 790fe952195a5984bbcc0b51a5a09d1b, type: 3}
+  - effectName: PlayerMove
+    effectObj: {fileID: 8195281004616893980, guid: cb3d7090843466d419a8ca4285a32acb, type: 3}
+  - effectName: Reaf1
+    effectObj: {fileID: 1969787185377906453, guid: 8822d22b47e4c91478d1552bf3a5eccc, type: 3}
+  - effectName: Reaf2
+    effectObj: {fileID: 1899290424344651869, guid: d0dfa2a114c4c8b4d8d6e5ccba366fe3, type: 3}
+  - effectName: Reaf3
+    effectObj: {fileID: 1027041590462067877, guid: 2f5a2b3b11b64b14686eff063e493fd1, type: 3}
