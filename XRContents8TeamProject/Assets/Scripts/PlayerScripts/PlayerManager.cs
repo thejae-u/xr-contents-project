@@ -183,9 +183,12 @@ public class PlayerManager : MonoBehaviour
             {
                 PlayerJump();
             }
-
-            PlayerMoveLimit();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        PlayerMoveLimit();
     }
 
     public static PlayerManager Instance
@@ -465,7 +468,7 @@ public class PlayerManager : MonoBehaviour
         if (worldpos.x < 0f)
         {
             canMove = false;
-            worldpos.x = 0f;
+            worldpos.x = 0.02f;
         }
 
         if (worldpos.x < 1f && worldpos.x > 0f)
@@ -476,7 +479,12 @@ public class PlayerManager : MonoBehaviour
         if (worldpos.x > 1f)
         {
             canMove = false;
-            worldpos.x = 1f;
+            worldpos.x = 0.98f;
+        }
+
+        if(worldpos.y < 1f)
+        {
+
         }
 
         this.transform.position = Camera.main.ViewportToWorldPoint(worldpos);
