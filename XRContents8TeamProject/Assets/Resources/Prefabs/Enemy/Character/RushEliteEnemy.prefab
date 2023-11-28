@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myHp:
-    Value: 50
+    Value: 70
   myMoveSpeed:
     Value: 3
   myAttackDamage:
@@ -185,8 +185,6 @@ MonoBehaviour:
   rushDirection:
     Value: 0
   isOverRush:
-    Value: 0
-  isEffectOn:
     Value: 0
   isJumping:
     Value: 0
