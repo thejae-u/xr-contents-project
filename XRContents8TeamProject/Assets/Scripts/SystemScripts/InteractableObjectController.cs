@@ -59,8 +59,7 @@ public class InteractableObjectController : MonoBehaviour
 
             if (timer.IsAttacked)
             {
-                var newPos = new Vector3(transform.position.x, transform.position.y + 3.5f, 0);
-                Debug.Log("CALL EFFECT");
+                var newPos = new Vector3(transform.position.x, transform.position.y + 2.5f, 0);
                 switch (SceneManager.GetActiveScene().name)
                 {
                     case "Stage1":
@@ -70,7 +69,8 @@ public class InteractableObjectController : MonoBehaviour
                         EffectController.Inst.PlayEffect(newPos, "Reaf2");
                         break;
                     case "Stage3":
-                        newPos.y = transform.position.y + 1f;
+                        newPos.x = transform.position.x + 3f;
+                        newPos.y = transform.position.y + 1.9f;
                         EffectController.Inst.PlayEffect(newPos, "Reaf3");
                         break;
                     default:
