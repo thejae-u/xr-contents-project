@@ -62,19 +62,19 @@ public class NormalTraceNode : TraceNode
         myNode.Value = ENode.Trace;
 
         var myRd = myTransform.GetComponent<Rigidbody2D>();
-        var moveDir = (myTransform.position - playerPos).normalized;
+        var moveDir = (playerPos - myPos).normalized;
         
         if (moveDir.x > 0f)
         {
-            moveDir.x = -1.0f;
+            moveDir.x = 1.0f;
             var movePos = new Vector2(moveDir.x * myMoveSpeed.Value, myRd.velocity.y);
-            myTransform.GetComponent<Rigidbody2D>().velocity = movePos;
+            myRd.velocity = movePos;
         }
         else
         {
-            moveDir.x = 1.0f;
+            moveDir.x = -1.0f;
             var movePos = new Vector2(moveDir.x * myMoveSpeed, myRd.velocity.y);
-            myTransform.GetComponent<Rigidbody2D>().velocity = movePos;
+            myRd.velocity = movePos;
         }
 
         switch (type)

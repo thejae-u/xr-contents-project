@@ -38,15 +38,15 @@ public class EliteTraceNode : TraceNode
 
             if (moveDir.x > 0f)
             {
-                moveDir.x = -1.0f;
-                Vector2 movePos = new Vector2(moveDir.x * myMoveSpeed, myRd.velocity.y);
+                moveDir.x = 1.0f;
+                Vector2 movePos = new Vector2(moveDir.x * myMoveSpeed.Value, myRd.velocity.y);
                 myRd.velocity = movePos;
             }
             else
             {
-                moveDir.x = 1.0f;
-                Vector2 movePos = new Vector2(moveDir.x * myMoveSpeed, myRd.velocity.y);
-               myRd.velocity = movePos;
+                moveDir.x = -1.0f;
+                Vector2 movePos = new Vector2(moveDir.x * myMoveSpeed.Value, myRd.velocity.y);
+                myRd.velocity = movePos;
             }
         }
         
