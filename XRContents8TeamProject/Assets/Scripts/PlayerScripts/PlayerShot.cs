@@ -252,6 +252,7 @@ public class PlayerShot : MonoBehaviour
                 isReloading = false;
                 state = EShotState.None;
                 LogPrintSystem.SystemLogPrint(transform, $"Reload Requset Complete => Current : {curAmmo} -> ReloadTime : {reverseDelay + reloadingDelay + forwardDelay}", ELogType.Player);
+                aimUIController.InitGauge();
             });
         }
     }
