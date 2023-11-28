@@ -52,7 +52,7 @@ MonoBehaviour:
   sounds:
   - soundVolume: 0
     soundName: Bgm1
-    soundData: {fileID: 8300000, guid: d322eb65dfc6d234c876479db41df77d, type: 3}
+    soundData: {fileID: 8300000, guid: d5cddd472b5341b4983841c18b944548, type: 3}
     playType: 1
     soundType: 0
   - soundVolume: 0
