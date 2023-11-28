@@ -45,9 +45,8 @@ public class EliteTraceNode : TraceNode
 
             if (hit.collider != null)
             {
-                Debug.Log("CALL VELOCITY");
                 var myRd = myTransform.GetComponent<Rigidbody2D>();
-                myRd.velocity += Vector2.up * (myMoveSpeed);
+                myRd.velocity += Vector2.up * (myMoveSpeed * 0.5f);
             }
             else
             {
