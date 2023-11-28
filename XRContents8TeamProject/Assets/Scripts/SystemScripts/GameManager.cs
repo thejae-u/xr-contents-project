@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F10))
         {
             SoundManager.Inst.DeleteAllSound();
+            DOTween.KillAll();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
@@ -99,6 +100,7 @@ public class GameManager : MonoBehaviour
         {
             CutSceneCounter.Inst.SettingGameOver();
             SoundManager.Inst.DeleteAllSound();
+            DOTween.KillAll();
             SceneManager.LoadScene("MenuAndCutScene");
         }
     }

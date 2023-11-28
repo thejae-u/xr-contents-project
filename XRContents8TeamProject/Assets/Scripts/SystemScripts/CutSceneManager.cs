@@ -81,6 +81,7 @@ public class CutSceneManager : MonoBehaviour
         {
             CutSceneCounter.Inst.SettingGameOver();
             SoundManager.Inst.DeleteAllSound();
+            DOTween.KillAll();
             SceneManager.LoadScene("MenuAndCutScene");
         }
     }

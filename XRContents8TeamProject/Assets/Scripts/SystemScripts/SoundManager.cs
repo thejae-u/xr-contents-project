@@ -104,7 +104,6 @@ public class SoundManager : MonoBehaviour
 
     public void DeleteSound(GameObject obj)
     {
-        Debug.Log($"{obj}");
         for (int i = createdObjs.Count - 1; i >= 0; i--)
         {
             if (obj == null || createdObjs[i] == null) return;
