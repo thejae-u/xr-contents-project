@@ -52,22 +52,22 @@ MonoBehaviour:
   sounds:
   - soundVolume: 0
     soundName: Bgm1
-    soundData: {fileID: 8300000, guid: 0dad9e6cc320f094aaebcd9ce70fa9e2, type: 3}
+    soundData: {fileID: 8300000, guid: d322eb65dfc6d234c876479db41df77d, type: 3}
     playType: 1
     soundType: 0
   - soundVolume: 0
     soundName: Bgm2
-    soundData: {fileID: 8300000, guid: 9ad16133e1217294d871a0009ec75a87, type: 3}
+    soundData: {fileID: 8300000, guid: e89c8b255f8a8c84cbfc51fde435c17c, type: 3}
     playType: 1
     soundType: 0
   - soundVolume: 0
     soundName: Bgm3
-    soundData: {fileID: 8300000, guid: fd222eb1eda1acf4cbaa1e3e01bdae2f, type: 3}
+    soundData: {fileID: 8300000, guid: d955289681d06c94aa149b80fca6285b, type: 3}
     playType: 1
     soundType: 0
   - soundVolume: 0
     soundName: BgmMenu
-    soundData: {fileID: 8300000, guid: 84e11a8e100649d4ba711cf2571d37b0, type: 3}
+    soundData: {fileID: 8300000, guid: 3fc188062f711d3479bc0b247a9d4534, type: 3}
     playType: 1
     soundType: 0
   - soundVolume: 0
