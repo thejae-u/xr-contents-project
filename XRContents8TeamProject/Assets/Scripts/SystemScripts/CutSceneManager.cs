@@ -34,6 +34,8 @@ public class CutSceneManager : MonoBehaviour
 
     private int soundCount;
 
+    private bool isDelayed;
+
     private readonly string[] names =
     {
         "Start",
@@ -62,16 +64,13 @@ public class CutSceneManager : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-    }
-
     private void Start()
     {
+        
         anim = gameObject.GetComponent<SkeletonAnimation>();
         DeleteMixAnimation();
-        SoundManager.Inst.Play("BgmMenu");
         AnimationCall();
+        SoundManager.Inst.Play("BgmMenu");
         Cursor.visible = true;
     }
 

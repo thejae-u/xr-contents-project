@@ -76,6 +76,9 @@ namespace EnemyScripts
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isTimerEnded;
             
         [HideInInspector] [SerializeField] private ReferenceValueT<ENode> myNode;
+
+        [HideInInspector] [SerializeField] private Transform playerTransform;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isHitPlayer;
         
         
         private Blackboard b;
@@ -149,10 +152,14 @@ namespace EnemyScripts
 
             // Ground Check
             b.AddData("isGround", isGround);
+            
+            b.AddData("isHitPlayer", isHitPlayer);
         }
 
         void Start()
         {
+            isHitPlayer.Value = false;
+            
             isCoroutineOn = false;
             
             isAlive.Value = true;
@@ -241,7 +248,19 @@ namespace EnemyScripts
             {
                 StartCoroutine(GuardNonDestroy());
             }
-            
+
+            if (isNowAttack)
+            {
+                if (anim.AnimationState.GetCurrent(0).IsComplete && !PlayerManager.Instance.isInvincibility &&
+                    !isHitPlayer.Value)
+                {
+                    isHitPlayer.Value = false;
+                    PlayerManager.Instance.PlayerDiscountHp(myAttackDamage, transform.position.x);
+                    GameManager.Inst.HitPlayer();
+                }
+            }
+
+
             if (!isAlive.Value)
             {
                 if (DOTween.IsTweening(this))
