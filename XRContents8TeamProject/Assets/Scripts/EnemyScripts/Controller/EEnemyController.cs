@@ -65,6 +65,7 @@ namespace EnemyScripts
 
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> rushDirection;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isOverRush;
+        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isEffectOn;
 
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isJumping;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> canJumpNextNode;
@@ -138,7 +139,8 @@ namespace EnemyScripts
             b.AddData("rushDirection", rushDirection);
             b.AddData("myRushSpeed", myRushSpeed);
             b.AddData("isOverRush", isOverRush);
-
+            b.AddData("isEffectOn", isEffectOn);
+            
             // Jump
             b.AddData("isJumping", isJumping);
             b.AddData("canJumpNextNode", canJumpNextNode);
@@ -158,6 +160,7 @@ namespace EnemyScripts
             isOverRush.Value = false;
             isTimerWait.Value = false;
             isTimerEnded.Value = false;
+            isEffectOn.Value = false;
 
             myNode.Value = ENode.Idle;
             

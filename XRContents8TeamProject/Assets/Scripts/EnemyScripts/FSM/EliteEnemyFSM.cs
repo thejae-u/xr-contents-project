@@ -37,7 +37,7 @@ public class EliteTraceNode : TraceNode
             float rayDistance = 1.5f;
             Vector2 dir = (playerPos - myPos).normalized;
 
-            rayCastPos.y -= 0.6f;
+            rayCastPos.y -= 0.3f;
             int layerMask = LayerMask.GetMask("Background");
 
             RaycastHit2D hit = Physics2D.Raycast(rayCastPos, Vector2.right * dir.x, rayDistance, layerMask);
@@ -45,12 +45,12 @@ public class EliteTraceNode : TraceNode
 
             if (hit.collider != null)
             {
+                Debug.Log("CALL VELOCITY");
                 var myRd = myTransform.GetComponent<Rigidbody2D>();
-                myRd.velocity += Vector2.up * (myMoveSpeed / 1.5f);
+                myRd.velocity += Vector2.up * (myMoveSpeed);
             }
             else
             {
-                LogPrintSystem.SystemLogPrint(myTransform, "Move", ELogType.EnemyAI);
                 myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x, 
                         playerPos.x, myMoveSpeed.Value * Time.deltaTime),
                     myPos.y, myPos.z);
@@ -246,6 +246,7 @@ public class EliteRushAttackNode : INode
         var hasRemainAttackTime = blackboard.GetData<ReferenceValueT<bool>>("hasRemainAttackTime");
         var specialAttackCooldown = blackboard.GetData<ReferenceValueT<float>>("specialAttackCooldown");
         var playerTransform = blackboard.GetData<Transform>("playerTransform");
+        var isEffectOn = blackboard.GetData<ReferenceValueT<bool>>("isEffectOn");
         
         var myPos = myTransform.position;
         var dir = (playerTransform.position - myPos).normalized;
@@ -255,6 +256,7 @@ public class EliteRushAttackNode : INode
         canSpecialAttackReady.Value = false;
         hasRemainAttackTime.Value = true;
         myTransform.position = myPos;
+        isEffectOn.Value = false;
         
         sequence.SetDelay(specialAttackCooldown.Value).OnComplete(() =>
         {
@@ -263,8 +265,6 @@ public class EliteRushAttackNode : INode
 
         
         
-        var effectPos = new Vector3(dir.x > 0 ? myPos.x - 0.5f : myPos.x + 0.5f, myPos.y - 1f , 0);
-        EffectController.Inst.PlayEffect(effectPos, "RushSpecialAttack");
     }
 
     public INode Execute(Blackboard blackboard)
@@ -289,16 +289,47 @@ public class EliteRushAttackNode : INode
 
         Vector3 pos = Camera.main.WorldToViewportPoint(myTransform.position);
 
+        if (!blackboard.GetData<ReferenceValueT<bool>>("isEffectOn").Value)
+        {
+            var dir = (playerTransform.position - myTransform.position).normalized;
+            blackboard.GetData<ReferenceValueT<bool>>("isEffectOn").Value = true;
+            
+            var ePos = new Vector3(myTransform.position.x, myTransform.position.y, 0);
+            ePos.y -= 0.5f;
+
+            if (dir.x < 0)
+            {
+                ePos.x += 1.5f;
+                // right
+                EffectController.Inst.PlayEffect(ePos, "RushSpecialAttack", false, myTransform);
+            }
+            else
+            {
+                ePos.x -= 1.5f;
+                // left
+                EffectController.Inst.PlayEffect(ePos, "RushSpecialAttack", true, myTransform);
+            }
+        }
+
         if (rushDirection)
         {
             if (pos.x < 1.0f)
             {
                 pos = new Vector3(Mathf.MoveTowards(pos.x, 1.0f,
                     myRushSpeed.Value * Time.deltaTime), pos.y, 10.0f);
+                
                 if (CheckPlayer(blackboard))
                 {
                     InitSetting(blackboard);
                     Physics2D.IgnoreLayerCollision(enemyLayer, enemyLayer, false);
+
+                    if (pos.x >= 1.0f)
+                    {
+                        pos.x = 0.99f;
+                        var sPos = Camera.main.ViewportToWorldPoint(pos);
+                        myTransform.position = sPos;
+                    }
+                        
                     return Fsm.GuardNullNode(this, endAttack);
                 }
             }
@@ -306,7 +337,6 @@ public class EliteRushAttackNode : INode
             {
                 InitSetting(blackboard);
                 CameraController.Inst.ShakeCamera();
-                LogPrintSystem.SystemLogPrint(myTransform, $"Hit camera", ELogType.EnemyAI);
                 Physics2D.IgnoreLayerCollision(enemyLayer, enemyLayer, false);
                 return Fsm.GuardNullNode(this, endAttack);
             }
@@ -319,17 +349,25 @@ public class EliteRushAttackNode : INode
             {
                 pos = new Vector3(Mathf.MoveTowards(pos.x, 0.0f,
                     myRushSpeed.Value * Time.deltaTime), pos.y, 10.0f);
+                
                 if (CheckPlayer(blackboard))
                 {
                     InitSetting(blackboard);
                     Physics2D.IgnoreLayerCollision(enemyLayer, enemyLayer, false);
+
+                    if (pos.x <= 0.0f)
+                    {
+                        pos.x = 0.01f;
+                        var sPos = Camera.main.ViewportToWorldPoint(pos);
+                        myTransform.position = sPos;
+                    }
+
                     return Fsm.GuardNullNode(this, endAttack);
                 }
             }
             else
             {
                 InitSetting(blackboard);
-                LogPrintSystem.SystemLogPrint(myTransform, $"Hit camera", ELogType.EnemyAI);
                 CameraController.Inst.ShakeCamera();
                 Physics2D.IgnoreLayerCollision(enemyLayer, enemyLayer, false);
                 return Fsm.GuardNullNode(this, endAttack);
