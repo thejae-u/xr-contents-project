@@ -208,7 +208,8 @@ public class GameManager : MonoBehaviour
             Debug.Log("CALL STAGE END");
             isFadeOut = true;
             CutSceneCounter.Inst.SettingEndingScene();
-            FadeOut("MenuAndCutScene");
+            FadeOut("MenuAndCutScene");   
+            Cursor.visible = true;
             SoundManager.Inst.DeleteAllSound();
         }
     }
