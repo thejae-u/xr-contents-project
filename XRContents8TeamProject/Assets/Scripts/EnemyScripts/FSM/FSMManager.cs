@@ -122,10 +122,14 @@ public class WaitNode : INode
         var isGround = blackboard.GetData<ReferenceValueT<bool>>("isGround");
         var myNode = blackboard.GetData<ReferenceValueT<ENode>>("myNode");
         var isNowAttack = blackboard.GetData<ReferenceValueT<bool>>("isNowAttack");
+        var myRd = myTransform.GetComponent<Rigidbody2D>();
 
         myNode.Value = ENode.Idle;
         
+        
         if (!isGround.Value) return Fsm.GuardNullNode(this, this);
+        
+        myRd.constraints = RigidbodyConstraints2D.FreezePositionX;
         
         float d1 = playerTransform.GetComponent<PlayerManager>().MyRadius;
         float d2 = blackboard.GetData<ReferenceValueT<float>>("myTraceRange").Value;
@@ -134,6 +138,9 @@ public class WaitNode : INode
 
         if (isNowAttack.Value)
             return Fsm.GuardNullNode(this, this);
+
+        myRd.constraints = RigidbodyConstraints2D.None;
+        myRd.constraints = RigidbodyConstraints2D.FreezeRotation;
         
         return Fsm.GuardNullNode(this, d1 + d2 >= distance ? enterPlayer : this);
     }

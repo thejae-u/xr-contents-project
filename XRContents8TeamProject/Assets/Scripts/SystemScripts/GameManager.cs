@@ -74,15 +74,25 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            FadeOut("Stage2");
-            SoundManager.Inst.DeleteAllSound();
+            CutSceneCounter.Inst.CurState = 7;
+            foreach (var stage in stages)
+            {
+                foreach (var sector in stage.sectors)
+                {
+                    sector.SetActive(true);
+                    for (int i = 0; i < sector.transform.childCount; i++)
+                    {
+                        Destroy(sector.transform.GetChild(i).gameObject);
+                    }
+                }
+            }
         }
         
         if (PlayerManager.Instance.GetIsPlayerDead())
         {
-            // plyaer Animation IsComplete -> Change Scene to GameOverScene
             if (PlayerManager.Instance.GetIsFinishGame())
             {
+                SoundManager.Inst.DeleteAllSound();
                 SceneManager.LoadScene("GameoverScene");
             }
                 
@@ -195,6 +205,7 @@ public class GameManager : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "Stage3" && !isFadeOut)
         {
+            Debug.Log("CALL STAGE END");
             isFadeOut = true;
             CutSceneCounter.Inst.SettingEndingScene();
             FadeOut("MenuAndCutScene");
