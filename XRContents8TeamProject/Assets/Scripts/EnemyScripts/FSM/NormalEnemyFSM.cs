@@ -170,11 +170,6 @@ public class NormalAttackNode : INode
             }
         }
 
-        if (!player.isInvincibility)
-        {
-            LogPrintSystem.SystemLogPrint(myTransform, $"{attackDamage} Damage to Player!!", ELogType.EnemyAI);
-        }
-
         sequence.SetDelay(1.5f).OnComplete(() => { isNowAttack.Value = false; }).SetId(this);
 
         return Fsm.GuardNullNode(this, outOfAttackRange);
