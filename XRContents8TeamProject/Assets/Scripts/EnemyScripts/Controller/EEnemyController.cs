@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -65,7 +66,6 @@ namespace EnemyScripts
 
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> rushDirection;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isOverRush;
-        [HideInInspector] [SerializeField] private ReferenceValueT<bool> isEffectOn;
 
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> isJumping;
         [HideInInspector] [SerializeField] private ReferenceValueT<bool> canJumpNextNode;
@@ -84,11 +84,14 @@ namespace EnemyScripts
         private SkeletonAnimation anim;
         [SerializeField] private List<GameObject> timers;
 
+        private bool isCoroutineOn;
+
         private void Awake()
         {
             fsm = new Fsm();
             b = new Blackboard();
             anim = gameObject.GetComponent<SkeletonAnimation>();
+
             
             // First Node State Store
             b.AddData("myNode", myNode);
@@ -139,7 +142,6 @@ namespace EnemyScripts
             b.AddData("rushDirection", rushDirection);
             b.AddData("myRushSpeed", myRushSpeed);
             b.AddData("isOverRush", isOverRush);
-            b.AddData("isEffectOn", isEffectOn);
             
             // Jump
             b.AddData("isJumping", isJumping);
@@ -151,6 +153,8 @@ namespace EnemyScripts
 
         void Start()
         {
+            isCoroutineOn = false;
+            
             isAlive.Value = true;
             isGroggy.Value = false;
             isInGroggy.Value = false;
@@ -160,7 +164,6 @@ namespace EnemyScripts
             isOverRush.Value = false;
             isTimerWait.Value = false;
             isTimerEnded.Value = false;
-            isEffectOn.Value = false;
 
             myNode.Value = ENode.Idle;
             
@@ -223,9 +226,21 @@ namespace EnemyScripts
             fsmLife.Init(b, alive);
         }
 
+        private IEnumerator GuardNonDestroy()
+        {
+            isCoroutineOn = true;
+            yield return new WaitForSeconds(2.0f);
+            Destroy(gameObject);
+        }
+
         private void Update()
         {
             if (CameraController.Inst.IsNowCutScene) return;
+
+            if (myHp.Value <= 0 && !isCoroutineOn)
+            {
+                StartCoroutine(GuardNonDestroy());
+            }
             
             if (!isAlive.Value)
             {

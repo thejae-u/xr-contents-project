@@ -42,12 +42,14 @@ public class GameoverUIScript : MonoBehaviour
 
     public void OnRestartButtonClick()
     {
+        SoundManager.Inst.Play("ButtonClick");
         CutSceneCounter.Inst.SettingRestartScene();
-        SceneManager.LoadScene("Stage1");
+        SceneManager.LoadScene(CutSceneCounter.Inst.SceneName == null ? "Stage1" : CutSceneCounter.Inst.SceneName);
     }
 
     public void OnMenuButtonClick()
     {
+        SoundManager.Inst.Play("ButtonClick");
         CutSceneCounter.Inst.SettingGameOver();
         SceneManager.LoadScene("MenuAndCutScene");
     }

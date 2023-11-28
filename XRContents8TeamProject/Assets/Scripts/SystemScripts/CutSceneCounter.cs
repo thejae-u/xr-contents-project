@@ -13,6 +13,8 @@ public class CutSceneCounter : MonoBehaviour
     public bool IsFade { get; set; }
     
     public bool IsEndingOn { get; set; }
+    
+    public string SceneName { get; set; }
 
     private static CutSceneCounter inst;
 
@@ -63,5 +65,10 @@ public class CutSceneCounter : MonoBehaviour
         IsEndFirstAnim = false;
         IsEndSecondAnim = false;
         IsEndingOn = true;
+    }
+
+    public void SettingSceneName()
+    {
+        
     }
 }

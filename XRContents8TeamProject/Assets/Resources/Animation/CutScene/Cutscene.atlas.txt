@@ -1,12 +1,12 @@
 
 Cutscene.png
-size: 2017,1691
+size: 2017,1692
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 1
   rotate: false
-  xy: 1302, 1070
+  xy: 1302, 1071
   size: 478, 332
   orig: 502, 355
   offset: 5, 8
@@ -20,35 +20,35 @@ repeat: none
   index: -1
 2
   rotate: true
-  xy: 834, 823
+  xy: 834, 824
   size: 482, 351
   orig: 541, 367
   offset: 30, 1
   index: -1
 3
   rotate: false
-  xy: 1187, 735
+  xy: 1187, 736
   size: 566, 333
   orig: 644, 397
   offset: 75, 49
   index: -1
 4
   rotate: true
-  xy: 2, 694
+  xy: 2, 695
   size: 482, 356
   orig: 645, 397
   offset: 134, 26
   index: -1
 5
   rotate: true
-  xy: 360, 555
+  xy: 360, 556
   size: 482, 360
   orig: 541, 376
   offset: 30, 1
   index: -1
 6
   rotate: false
-  xy: 2, 203
+  xy: 2, 204
   size: 581, 350
   orig: 585, 366
   offset: 1, 1
@@ -56,97 +56,97 @@ repeat: none
 7
   rotate: false
   xy: 1300, 385
-  size: 484, 348
+  size: 484, 349
   orig: 541, 365
-  offset: 28, 2
+  offset: 28, 1
   index: -1
 8
   rotate: false
-  xy: 585, 25
+  xy: 585, 24
   size: 524, 363
   orig: 752, 406
   offset: 125, 30
   index: -1
 9
   rotate: false
-  xy: 722, 390
-  size: 576, 343
+  xy: 722, 389
+  size: 576, 345
   orig: 580, 360
   offset: 1, 2
   index: -1
 book_B
   rotate: false
-  xy: 2, 1660
+  xy: 2, 1661
   size: 355, 29
   orig: 355, 36
   offset: 0, 4
   index: -1
 book_B_2
   rotate: false
-  xy: 359, 1660
+  xy: 359, 1661
   size: 117, 29
   orig: 119, 33
   offset: 1, 3
   index: -1
 book_F
   rotate: true
-  xy: 2, 1178
+  xy: 2, 1179
   size: 353, 465
   orig: 363, 470
   offset: 3, 0
   index: -1
 book_F copy
   rotate: false
-  xy: 469, 1039
+  xy: 469, 1040
   size: 363, 470
   orig: 363, 470
   offset: 0, 0
   index: -1
 book_R
   rotate: true
-  xy: 478, 1660
+  xy: 478, 1661
   size: 29, 464
   orig: 35, 465
   offset: 5, 0
   index: -1
 paper1
   rotate: true
-  xy: 928, 1307
+  xy: 928, 1308
   size: 288, 372
   orig: 293, 373
   offset: 2, 0
   index: -1
 paper_B
   rotate: false
-  xy: 944, 1597
+  xy: 944, 1598
   size: 299, 92
   orig: 302, 202
   offset: 1, 6
   index: -1
 paper_R
   rotate: true
-  xy: 1245, 1597
+  xy: 1245, 1598
   size: 92, 372
   orig: 111, 373
   offset: 9, 0
   index: -1
 paper_clean
   rotate: true
-  xy: 1619, 1404
+  xy: 1619, 1405
   size: 285, 396
   orig: 285, 396
   offset: 0, 0
   index: -1
 shadow1
   rotate: true
-  xy: 2, 1533
+  xy: 2, 1534
   size: 125, 467
   orig: 125, 467
   offset: 0, 0
   index: -1
 shadow2
   rotate: true
-  xy: 471, 1511
+  xy: 471, 1512
   size: 147, 455
   orig: 147, 455
   offset: 0, 0

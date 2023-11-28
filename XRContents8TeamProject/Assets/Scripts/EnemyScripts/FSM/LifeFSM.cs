@@ -17,6 +17,7 @@ public class AliveNode : INode
         switch (myType.Value)
         {
             case EEliteType.None:
+                LogPrintSystem.SystemLogPrint(myTransform, $"NORMAL DEAD", ELogType.EnemyAI);
                 SoundManager.Inst.Play("NormalMonsterDead");
                 break;
             case EEliteType.Rush:
