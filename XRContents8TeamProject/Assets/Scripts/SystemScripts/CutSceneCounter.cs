@@ -47,6 +47,14 @@ public class CutSceneCounter : MonoBehaviour
         IsEndSecondAnim = true;
     }
 
+    public void SettingRestartScene()
+    {
+        IsStart = true;
+        IsFade = false;
+        IsEndFirstAnim = true;
+        IsEndSecondAnim = true;
+    }
+
     public void SettingGameOver()
     {
         CurState = -1;
