@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     
     private void Awake()
     {
+        SoundManager.Inst.DeleteAllSound();
         if (inst == null)
         {
             inst = this;
