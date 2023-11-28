@@ -4,7 +4,8 @@ using DG.Tweening;
 using Spine;
 using Spine.Unity;
 using UnityEngine.UI;
-using System.Security.Cryptography;
+using System;
+using Random = UnityEngine.Random;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -46,6 +47,7 @@ public class PlayerManager : MonoBehaviour
     private bool isDodge = false;
     private bool isPlayerDead = false;
     private bool isFinishGame = false;
+    private bool isLanding = false;
 
     // Player dodge(evasion) related
     [Header("플레이어 회피 거리")]
@@ -251,7 +253,7 @@ public class PlayerManager : MonoBehaviour
             playerJumpSequence.SetDelay(0.5f).OnComplete(() =>
             {
                 canJump = true;
-                SoundManager.Inst.Play("PlayerLanding");
+                isLanding = false;
             });
         }
     }
@@ -260,6 +262,11 @@ public class PlayerManager : MonoBehaviour
     {
         if (canJump)
         {
+            if(!isLanding)
+            {
+                isLanding = true;
+                SoundManager.Inst.Play("PlayerLanding");
+            }
             isJumping = false;
         }
     }
@@ -285,6 +292,8 @@ public class PlayerManager : MonoBehaviour
                 case 2:
                     SoundManager.Inst.Play("PlayerHit3");
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             playerHpUI.GetComponent<hpUIController>().SetDiscountHp(damage);
@@ -429,7 +438,6 @@ public class PlayerManager : MonoBehaviour
         {
             isFinishGame = true;
         });
-
     }
 
     void PlayerViewMousePoint()
