@@ -186,6 +186,8 @@ MonoBehaviour:
     Value: 0
   isOverRush:
     Value: 0
+  isEffectOn:
+    Value: 0
   isJumping:
     Value: 0
   canJumpNextNode:
@@ -274,7 +276,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 5
+  m_Constraints: 4
 --- !u!1 &5236796773765321090
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,26 +33,20 @@ public class EliteTraceNode : TraceNode
 
         if (myType.Value == EEliteType.Rush)
         {
-            Vector2 rayCastPos = myPos;
-            float rayDistance = 1.5f;
-            Vector2 dir = (playerPos - myPos).normalized;
+            var myRd = myTransform.GetComponent<Rigidbody2D>();
+            var moveDir = (playerPos - myPos).normalized;
 
-            rayCastPos.y -= 0.3f;
-            int layerMask = LayerMask.GetMask("Background");
-
-            RaycastHit2D hit = Physics2D.Raycast(rayCastPos, Vector2.right * dir.x, rayDistance, layerMask);
-            Debug.DrawRay(rayCastPos, Vector2.right * (dir.x * rayDistance));
-
-            if (hit.collider != null)
+            if (moveDir.x > 0f)
             {
-                var myRd = myTransform.GetComponent<Rigidbody2D>();
-                myRd.velocity += Vector2.up * (myMoveSpeed * 0.5f);
+                moveDir.x = -1.0f;
+                Vector2 movePos = new Vector2(moveDir.x * myMoveSpeed, myRd.velocity.y);
+                myRd.velocity = movePos;
             }
             else
             {
-                myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x, 
-                        playerPos.x, myMoveSpeed.Value * Time.deltaTime),
-                    myPos.y, myPos.z);
+                moveDir.x = 1.0f;
+                Vector2 movePos = new Vector2(moveDir.x * myMoveSpeed, myRd.velocity.y);
+               myRd.velocity = movePos;
             }
         }
         

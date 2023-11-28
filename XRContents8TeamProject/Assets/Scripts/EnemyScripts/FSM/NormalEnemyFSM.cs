@@ -61,26 +61,20 @@ public class NormalTraceNode : TraceNode
 
         myNode.Value = ENode.Trace;
 
-        Vector2 rayCastPos = myPos;
-        float rayDistance = 1.5f;
-        Vector2 dir = (playerPos - myPos).normalized;
+        var myRd = myTransform.GetComponent<Rigidbody2D>();
+        var moveDir = (myTransform.position - playerPos).normalized;
         
-        rayCastPos.y -= 0.55f;
-        int layerMask = LayerMask.GetMask("Background");
-
-        RaycastHit2D hit = Physics2D.Raycast(rayCastPos, Vector2.right * dir.x, rayDistance, layerMask);
-        Debug.DrawRay(rayCastPos, Vector2.right * (dir.x * rayDistance));
-
-        if (hit.collider != null)
+        if (moveDir.x > 0f)
         {
-            var myRd = myTransform.GetComponent<Rigidbody2D>();
-            myRd.velocity += Vector2.up * myMoveSpeed;
+            moveDir.x = -1.0f;
+            var movePos = new Vector2(moveDir.x * myMoveSpeed.Value, myRd.velocity.y);
+            myTransform.GetComponent<Rigidbody2D>().velocity = movePos;
         }
         else
         {
-            myTransform.position = new Vector3(Mathf.MoveTowards(myPos.x,
-                    playerPos.x, myMoveSpeed.Value * Time.deltaTime),
-                myPos.y, myPos.z);
+            moveDir.x = 1.0f;
+            var movePos = new Vector2(moveDir.x * myMoveSpeed, myRd.velocity.y);
+            myTransform.GetComponent<Rigidbody2D>().velocity = movePos;
         }
 
         switch (type)

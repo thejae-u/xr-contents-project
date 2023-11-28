@@ -49,7 +49,7 @@ public class PlayScript : MonoBehaviour
 
     public void Play()
     {
-        if (mySound.soundName == "PlayerFoot")
+        if (mySound.playType == EPlayType.Loop)
         {
             source.clip = mySound.soundData;
             source.Play();

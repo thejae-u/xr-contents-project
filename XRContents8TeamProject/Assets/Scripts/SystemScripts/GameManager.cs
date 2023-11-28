@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            FadeOut("Stage3");
+            FadeOut("Stage2");
             SoundManager.Inst.DeleteAllSound();
         }
         
@@ -153,7 +153,6 @@ public class GameManager : MonoBehaviour
         sequence.OnComplete(() =>
         {
             SceneManager.LoadScene(nextScene);
-            isFadeOut = false;
         });
     }
 
@@ -176,6 +175,8 @@ public class GameManager : MonoBehaviour
                 SoundManager.Inst.Play("Bgm3");
                 break;
         }
+
+        isFadeIn = true;
     }
 
     private void ChangeScene()
