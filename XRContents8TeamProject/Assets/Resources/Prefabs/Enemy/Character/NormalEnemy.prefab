@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myHp:
-    Value: 15
+    Value: 20
   myAttackDamage:
     Value: 5
   myTraceRange:
@@ -257,6 +257,9 @@ MonoBehaviour:
   isHitOn:
     Value: 0
   playerDamage:
+    Value: 0
+  playerTransform: {fileID: 0}
+  isHitPlayer:
     Value: 0
   timers:
   - {fileID: 1667139795051391010}
