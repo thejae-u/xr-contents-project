@@ -27,8 +27,8 @@ public class CutSceneManager : MonoBehaviour
 
     public GameObject globalLight;
     public GameObject spotLight;
-    
-    private CutSceneCounter Inst = CutSceneCounter.Inst;
+
+    private CutSceneCounter Inst;
 
     private SkeletonAnimation anim;
 
@@ -66,7 +66,7 @@ public class CutSceneManager : MonoBehaviour
 
     private void Start()
     {
-        
+        Inst = CutSceneCounter.Inst;
         anim = gameObject.GetComponent<SkeletonAnimation>();
         DeleteMixAnimation();
         AnimationCall();
