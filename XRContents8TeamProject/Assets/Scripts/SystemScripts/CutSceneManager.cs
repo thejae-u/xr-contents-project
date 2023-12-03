@@ -27,12 +27,14 @@ public class CutSceneManager : MonoBehaviour
 
     public GameObject globalLight;
     public GameObject spotLight;
-    
-    private CutSceneCounter Inst = CutSceneCounter.Inst;
+
+    private CutSceneCounter Inst;
 
     private SkeletonAnimation anim;
 
     private int soundCount;
+
+    private bool isDelayed;
 
     private readonly string[] names =
     {
@@ -62,16 +64,13 @@ public class CutSceneManager : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-    }
-
     private void Start()
     {
+        Inst = CutSceneCounter.Inst;
         anim = gameObject.GetComponent<SkeletonAnimation>();
         DeleteMixAnimation();
-        SoundManager.Inst.Play("BgmMenu");
         AnimationCall();
+        SoundManager.Inst.Play("BgmMenu");
         Cursor.visible = true;
     }
 
