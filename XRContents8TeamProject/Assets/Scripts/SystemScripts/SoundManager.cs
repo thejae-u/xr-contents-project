@@ -21,7 +21,6 @@ public enum ESoundType
 [Serializable]
 public class Sound
 {
-    [HideInInspector] public float soundVolume;
     public string soundName;
     public AudioClip soundData;
     public EPlayType playType;
